@@ -13,15 +13,10 @@ class Admin extends CI_Controller {
 	public function index()
 	{
 		$this->cek_login();
-
-		$data['data'] = $this->admin_model->get_all('t_member');
-
-		$this->template->admin('admin/home', $data);
-	}
-
-	public function admin()
-	{
-		$this->cek_login();
+		if ($this->session->userdata('level')=='admin')
+		{
+			redirect('admin/droppoint/');
+		}
 
 		$data['data'] = $this->admin_model->get_all('t_admin');
 
@@ -66,6 +61,11 @@ class Admin extends CI_Controller {
 	public function add_admin()
 	{
 		$this->cek_login();
+
+		if ($this->session->userdata('level')=='admin')
+		{
+			redirect('admin/droppoint/');
+		}
 
 		if ($this->input->post('submit', TRUE) == 'Submit')
 		{
@@ -160,9 +160,46 @@ class Admin extends CI_Controller {
 		$this->template->admin('admin/add_kurir', $data);
 	}
 
+	public function add_user()
+	{
+		$this->cek_login();
+
+		if ($this->input->post('submit', TRUE) == 'Submit')
+		{
+			//validasi
+			$this->form_validation->set_rules('username','Username','required');
+			$this->form_validation->set_rules('email','Email','required|valid_email');
+			$this->form_validation->set_rules('pass1','Password','required');
+			$this->form_validation->set_rules('pass2','Ketik Ulang Password','required|matches[pass1]');
+
+			if ($this->form_validation->run() == TRUE)
+			{
+				$data = array(
+				'username' => $this->input->post('username', TRUE), 
+				'email' => $this->input->post('email', TRUE), 
+				'password' => password_hash($this->input->post('pass1', TRUE), PASSWORD_DEFAULT, ['cost' => 10]),
+				'status' => 2
+				);
+
+				$this->admin_model->insert('t_user', $data);
+				
+				redirect('index.php/admin/user/');
+			} 
+		}
+
+		$data['active_user'] = 'active';
+		$data['header'] = 'Add User';	
+		$this->template->admin('admin/add_user', $data);
+	}
+
 	public function edit_admin()
 	{
 		$this->cek_login();
+
+		if ($this->session->userdata('level')=='admin')
+		{
+			redirect('admin/droppoint/');
+		}
 
 		$id_dp = $this->uri->segment(3);
 
@@ -285,6 +322,67 @@ class Admin extends CI_Controller {
 		$this->template->admin('admin/edit_kurir', $data);
 	}
 
+	public function edit_user()
+	{
+		$this->cek_login();
+
+		$id_user = $this->uri->segment(3);
+
+		if ($this->input->post('submit') == 'Submit') 
+		{
+			$this->form_validation->set_rules('username', 'Username', "required");
+			$this->form_validation->set_rules('email', 'Email', "required|valid_email");
+			$this->form_validation->set_rules('status', 'Status', "required|numeric");
+
+			if ($this->form_validation->run() == TRUE)
+			{
+				
+				$data = array(
+					'username' => $this->input->post('username', TRUE),
+					'email' => $this->input->post('email', TRUE),
+					'status' => $this->input->post('status', TRUE)
+				);
+				
+				$this->admin_model->update('t_user', $data, array('id_user' => $id_user));
+				$this->session->set_flashdata('success','Data berhasil disimpan !');
+
+				//redirect('admin');
+				
+			}
+		}
+
+		$user = $this->admin_model->get_where('t_user', array('id_user' => $id_user));
+
+		foreach ($user->result() as $key) {
+			
+			$data['id_user'] = $key->id_user;
+			$data['username'] = $key->username;
+			$data['email'] = $key->email;
+			$data['status'] = $key->status;
+
+		}
+
+		$data['active_user'] = 'active';
+		$data['header'] = 'Manage User';
+		$this->template->admin('admin/edit_user', $data);
+	}
+
+	public function del_admin()
+	{
+		$this->cek_login();
+
+		if ($this->session->userdata('level')=='admin')
+		{
+			redirect('admin/droppoint/');
+		}
+
+		$cond['id_admin'] = $this->uri->segment(3);
+
+		$this->admin_model->delete('t_admin', $cond);
+
+		redirect('index.php/admin/admin/');
+	}
+
 	public function del_dp()
 	{
 		$this->cek_login();
@@ -307,22 +405,20 @@ class Admin extends CI_Controller {
 		redirect('index.php/admin/kurir/');
 	}
 
-	public function status_user()
+	public function del_user()
 	{
 		$this->cek_login();
 
-		if (!is_numeric($this->uri->segment(3)) || !is_numeric($this->uri->segment(4))) 
-		{
-			redirect('index.php/admin/user/');
-		}
-		$this->admin_model->update('t_user', ['status' => $this->uri->segment(3)], ['id_user' => $this->uri->segment(4)]);
-		
+		$cond['id_user'] = $this->uri->segment(3);
+
+		$this->admin_model->delete('t_user', $cond);
+
 		redirect('index.php/admin/user/');
 	}
 
 	function cek_login()
 	{
-		if (!$this->session->userdata('logged_in'))
+		if (!$this->session->userdata('login_admin'))
 		{
 			redirect('index.php/login/login_admin/');
 		} 

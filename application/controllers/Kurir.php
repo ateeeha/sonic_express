@@ -23,7 +23,7 @@ class Kurir extends CI_Controller {
 
 	function cek_login()
 	{
-		if (!$this->session->userdata('logged_in')) 
+		if (!$this->session->userdata('login_kurir')) 
 		{
 			redirect('index.php/login/login_kurir/');
 		} 

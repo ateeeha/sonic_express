@@ -44,7 +44,10 @@
                       <?php } ?> 
                     </td>
                     <td>
+                    <?php if ($key->level=='admin'): ?>                     
                         <a href="<?= base_url(); ?>index.php/admin/del_admin/<?= $key->id_admin; ?>" class="btn btn-danger btn-xs" onclick="return confirm('Anda Yakin ?');"><i class="fa fa-trash"></i> Hapus</a>
+                    <?php endif ?>
+
                         <a href="<?= base_url(); ?>index.php/admin/edit_admin/<?= $key->id_admin; ?>" class="btn btn-warning btn-xs" onclick="return confirm('Anda Yakin ?');"><i class="fa fa-edit"></i> Edit</a>
                     </td>
                   </tr>

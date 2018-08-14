@@ -33,6 +33,16 @@
             <i class="fa fa-cube"></i> <span>MANAGE DROP POINT</span>
           </a>
         </li>
+        <li class="<?php if(isset($active_kurir)){echo $active_kurir;}?>">
+          <a href="<?= base_url(); ?>index.php/admin/kurir/">
+            <i class="fa fa-truck"></i> <span>MANAGE KURIR</span>
+          </a>
+        </li>
+       <li class="<?php if(isset($active_user)){echo $active_user;}?>">
+          <a href="<?= base_url(); ?>index.php/admin/user/">
+            <i class="fa fa-user"></i> <span>MANAGE USER</span>
+          </a>
+        </li>
       </ul>
        <?php } ?>
     </section>

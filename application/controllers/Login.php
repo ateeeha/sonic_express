@@ -12,11 +12,7 @@ class Login extends CI_Controller {
 
 	public function index()
 	{
-		$this->cek_login();
-
-		$data['data'] = $this->admin_model->get_all('t_member');
-
-		$this->template->admin('admin/home', $data);
+		
 	}
 
 	public function login_admin()
@@ -39,7 +35,7 @@ class Login extends CI_Controller {
 						'username' => $data->username, 
 						'email' => $data->email, 
 						'level' => $data->level,
-						'logged_in' => TRUE
+						'login_admin' => TRUE
 					);
 
 					$this->session->set_userdata($datauser);
@@ -80,7 +76,7 @@ class Login extends CI_Controller {
 						'id_dp' => $data->id_dp,
 						'username' => $data->username, 
 						'email' => $data->email, 
-						'logged_in' => TRUE
+						'login_dp' => TRUE
 					);
 
 					$this->session->set_userdata($datauser);
@@ -121,7 +117,7 @@ class Login extends CI_Controller {
 						'id_kurir' => $data->id_kurir,
 						'username' => $data->username, 
 						'email' => $data->email, 
-						'logged_in' => TRUE
+						'login_kurir' => TRUE
 					);
 
 					$this->session->set_userdata($datauser);
@@ -159,10 +155,10 @@ class Login extends CI_Controller {
 				if (password_verify($pass, $data->password)) 
 				{
 					$datauser = array(
-						'user' => $data->id_user,
+						'id_user' => $data->id_user,
 						'username' => $data->username, 
 						'email' => $data->email, 
-						'logged_in' => TRUE
+						'login_user' => TRUE
 					);
 
 					$this->session->set_userdata($datauser);
@@ -210,14 +206,6 @@ class Login extends CI_Controller {
 		$this->session->sess_destroy();
 
 		redirect('index.php/login/login_user');
-	}
-
-	function cek_login()
-	{
-		if (!$this->session->userdata('logged_in'))
-		{
-			redirect('index.php/login/login_user/');
-		} 
 	}
 
 }

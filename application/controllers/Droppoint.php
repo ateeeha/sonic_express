@@ -77,7 +77,7 @@ class Droppoint extends CI_Controller {
 
 	function cek_login()
 	{
-		if (!$this->session->userdata('logged_in')) 
+		if (!$this->session->userdata('login_dp')) 
 		{
 			redirect('index.php/login/login_dp/');
 		} 
