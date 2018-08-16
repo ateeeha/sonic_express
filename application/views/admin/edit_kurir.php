@@ -46,13 +46,37 @@
                     <input type="text" class="form-control col-md-7 col-xs-12" name="email" value="<?= $email; ?>">
                   </div>
                 </div>
+
+                <div class="form-group">
+                  <label class="col-md-2 col-sm-2 col-xs-12 control-label">Provinsi</label>
+                  <div class="col-md-4 col-sm-6 col-xs-12">
+                    <select class="province" name="provinsi" required id="provinsi" class="col-md-6">
+                      <option value="">--Pilih Provinsi--</option>
+                      <option selected value="<?= $provinsi; ?>"><?= $provinsi; ?></option>
+                      <?php foreach ($data->result() as $key): ?>
+                      <option value="<?= $key->nama_provinsi; ?>"><?= $key->nama_provinsi; ?></option>
+                      <?php endforeach ?>
+                    </select>
+                  </div>
+                </div>
+                
+                <div class="form-group">
+                  <label class="col-md-2 col-sm-2 col-xs-12 control-label">Kabupaten</label>
+                  <div class="col-md-4 col-sm-6 col-xs-12">
+                  <select class="city" name="kabupaten" required id="kabupaten" class="col-md-6">
+                    <option value="">--Pilih Kabupaten--</option>
+                    <option selected value="<?= $kabupaten; ?>"><?= $kabupaten; ?></option>
+                  </select>
+                  </div>
+                </div>
+
                 <div class="form-group">
                   <label class="col-md-2 col-sm-2 col-xs-12 control-label">Status</label>
                   <div class="col-md-4 col-sm-6">
                     <select name="status" class="form-control">
                         <option value=""disabled selected>--Pilih Status--</option>
-                        <option value="1" <?php if ($status == 1) { echo "selected";} ?>>Tidak Aktif</option>
-                        <option value="2" <?php if ($status == 2) { echo "selected";} ?>>Aktif</option>
+                        <option value="1" <?php if ($status_kurir == 1) { echo "selected";} ?>>Tidak Aktif</option>
+                        <option value="2" <?php if ($status_kurir == 2) { echo "selected";} ?>>Aktif</option>
                     </select>
                   </div>
                 </div>

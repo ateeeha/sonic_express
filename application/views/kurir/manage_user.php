@@ -10,6 +10,12 @@
       <div class="row">
         <div class="col-xs-12">
           <div class="box box-primary">
+          <div class="box-header with-border">
+                <div style="float:right">
+                  <a href="<?= base_url(); ?>index.php/kurir/add_user" class="btn btn-primary"><i class="fa fa-plus"></i> Tambah User</a>            
+                </div>
+                <div class="clearfix"></div>
+            </div>
             <!-- /.box-header -->
             <div class="box-body table-responsive">
               <table class="table table-bordered table-hover dt-responsive nowrap" id="datatable">

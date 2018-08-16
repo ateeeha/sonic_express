@@ -40,7 +40,7 @@
                     <td style="text-align: center"><?= $key->no_tlp; ?></td>
                     
                     <td>
-                    <a href="<?= base_url(); ?>index.php/kurir/ambil_transaksi/<?= $key->no_resi; ?>/<?= $key->status_transaksi; ?>" class="btn btn-warning btn-xs" onclick="return confirm('Anda Yakin ?');"><i class="fa fa-plus"></i> Ambil</a>
+                    <a href="<?= base_url(); ?>index.php/kurir/ambil_paket/<?= $key->no_resi; ?>/<?= $key->status_transaksi; ?>" class="btn btn-warning btn-xs" onclick="return confirm('Anda Yakin ?');"><i class="fa fa-plus"></i> Ambil</a>
                     </td>
                     <td>
                       <?= $key->status_transaksi; ?>

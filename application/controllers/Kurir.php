@@ -20,8 +20,61 @@ class Kurir extends CI_Controller {
 		$data['header'] = 'Manage User';
 		$this->template->kurir('kurir/manage_user', $data);
 	}
+	
+	function transaksi()
+	{
+		$this->cek_login();
 
-	public function transaksi()
+		$data['active_transaksi'] = 'active';
+		$data['header'] = 'Transaksi';
+		$this->template->kurir('kurir/form_transaksi', $data);
+	}
+
+	function transaksi_simpan()
+	{
+		if ($this->input->post('submit', TRUE) == 'Submit')
+		{
+			//validasi
+			$this->form_validation->set_rules('nama','Nama','required');
+			$this->form_validation->set_rules('alamat','Alamat','required');
+			$this->form_validation->set_rules('kode_pos','Kode Pos','required|numeric');
+			$this->form_validation->set_rules('no_tlp','Nomor Telepon','required|numeric');
+			$this->form_validation->set_rules('email','Email','required|valid_email');
+
+
+			if ($this->form_validation->run() == TRUE)
+			{
+				$email = $this->input->post('email', TRUE);
+				$cek = $this->kurir_model->get_where('t_user', array('email' => $email));
+
+				if ($cek->num_rows() > 0)
+				{
+					$data = $cek->row();
+				
+					$data = array(
+					'nama' => $this->input->post('nama', TRUE), 
+					'alamat' => $this->input->post('alamat', TRUE), 
+					'kode_pos' => $this->input->post('kode_pos', TRUE), 
+					'no_tlp' => $this->input->post('no_tlp', TRUE), 
+					'tgl_pengiriman' => date("Y-m-d"), 
+					'id_user' => $this->session->userdata('id_user'), 
+					'no_resi' => 'RES'.date("dmYgis").$data->id_user, 
+					'kurir_penjemput' => $this->session->userdata('id_kurir'),
+					'status_transaksi' => 'Diterima'
+					);
+
+					$this->kurir_model->insert('t_transaksi', $data);
+					$this->session->set_flashdata('success','Data berhasil disimpan !');
+				}else{
+					$this->session->set_flashdata('alert','email tidak terdaftar !');
+				}
+			
+			} 
+		}
+		redirect('kurir/transaksi/');
+	}
+
+	public function paket()
 	{
 		$this->cek_login();
 		$join = 't_transaksi t JOIN t_user u ON (t.id_user = u.id_user)';
@@ -33,12 +86,12 @@ class Kurir extends CI_Controller {
 
 		// $data['data'] = $this->kurir_model->get_all('t_transaksi');
 
-		$data['active_transaksi'] = 'active';
-		$data['header'] = 'Manage Transaksi';
-		$this->template->kurir('kurir/transaksi_menunggu', $data);
+		$data['active_paket'] = 'active';
+		$data['header'] = 'Manage Paket';
+		$this->template->kurir('kurir/paket_menunggu', $data);
 	}
 
-	public function transaksi_dijemput()
+	public function paket_dijemput()
 	{
 		$this->cek_login();
 		$join = 't_transaksi t JOIN t_user u ON (t.id_user = u.id_user)';
@@ -53,10 +106,10 @@ class Kurir extends CI_Controller {
 
 		$data['active_dijemput'] = 'active';
 		$data['header'] = 'Manage Transaksi';
-		$this->template->kurir('kurir/transaksi_dijemput', $data);
+		$this->template->kurir('kurir/paket_dijemput', $data);
 	}
 
-	public function transaksi_diterima()
+	public function paket_diterima()
 	{
 		$this->cek_login();
 		$join = 't_transaksi t JOIN t_user u ON (t.id_user = u.id_user)';
@@ -70,20 +123,20 @@ class Kurir extends CI_Controller {
 
 		$data['active_diterima'] = 'active';
 		$data['header'] = 'Manage Transaksi';
-		$this->template->kurir('kurir/transaksi_diterima', $data);
+		$this->template->kurir('kurir/paket_diterima', $data);
 	}
 
-	public function ambil_transaksi()
+	public function ambil_paket()
 	{
 		$this->cek_login();
 
 		$no_resi = $this->uri->segment(3);
-		$status = 'dijemput';
+		$status = 'Dijemput';
 
 		$data = array(
 			'no_resi' => $no_resi, 
 			'tanggal' => date("Y-m-d"), 
-			'status' => 'kurir1'
+			'status_tracking' => 'Dijemput Kurir'
 		);
 
 		$this->kurir_model->insert('t_tracking', $data);
@@ -94,8 +147,78 @@ class Kurir extends CI_Controller {
 			);
 		$this->kurir_model->update('t_transaksi', ['status_transaksi' => $status], ['no_resi' => $this->uri->segment(3)]);
 
-		redirect('kurir/transaksi/');
+		redirect('kurir/paket/');
 
+	}
+
+	public function terima_paket()
+	{
+		$this->cek_login();
+
+		$no_resi = $this->uri->segment(3);
+		$status = 'Diterima';
+
+		$data = array(
+			'no_resi' => $no_resi, 
+			'tanggal' => date("Y-m-d"), 
+			'status_tracking' => 'Diterima Kurir'
+		);
+
+		$this->kurir_model->insert('t_tracking', $data);
+		$this->kurir_model->update('t_transaksi', ['status_transaksi' => $status], ['no_resi' => $this->uri->segment(3)]);
+
+		redirect('kurir/paket_dijemput/');
+
+	}
+
+	public function tolak_paket()
+	{
+		$this->cek_login();
+
+		$no_resi = $this->uri->segment(3);
+		$status = 'Ditolak';
+
+		$this->kurir_model->update('t_transaksi', ['status_transaksi' => $status], ['no_resi' => $this->uri->segment(3)]);
+
+		redirect('kurir/paket_dijemput/');
+
+	}
+
+	public function add_user()
+	{
+		$this->cek_login();
+
+		if ($this->input->post('submit', TRUE) == 'Submit')
+		{
+			//validasi
+			$this->form_validation->set_rules('username','Username','required');
+			$this->form_validation->set_rules('email','Email','required|valid_email');
+			$this->form_validation->set_rules('provinsi','Provinsi','required');
+			$this->form_validation->set_rules('kabupaten','Kabupaten','required');
+			$this->form_validation->set_rules('pass1','Password','required');
+			$this->form_validation->set_rules('pass2','Ketik Ulang Password','required|matches[pass1]');
+
+			if ($this->form_validation->run() == TRUE)
+			{
+				$data = array(
+				'username' => $this->input->post('username', TRUE), 
+				'email' => $this->input->post('email', TRUE), 
+				'provinsi' => $this->input->post('provinsi', TRUE), 
+				'kabupaten' => $this->input->post('kabupaten', TRUE),
+				'password' => password_hash($this->input->post('pass1', TRUE), PASSWORD_DEFAULT, ['cost' => 10]),
+				'status_user' => 2
+				);
+
+				$this->kurir_model->insert('t_user', $data);
+				
+				redirect('index.php/admin/user/');
+			} 
+		}
+		$data['data'] = $this->kurir_model->get_all('t_provinsi');
+
+		$data['active_user'] = 'active';
+		$data['header'] = 'Add User';	
+		$this->template->kurir('kurir/add_user', $data);
 	}
 
 	function cek_login()

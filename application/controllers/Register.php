@@ -30,7 +30,7 @@ class Register extends CI_Controller {
 				'provinsi' => $this->input->post('provinsi', TRUE), 
 				'kabupaten' => $this->input->post('kabupaten', TRUE), 
 				'password' => password_hash($this->input->post('pass1', TRUE), PASSWORD_DEFAULT, ['cost' => 10]),
-				'status' => 1
+				'status_user' => 1
 				);
 
 				$this->user_model->insert('t_user', $data);
@@ -41,6 +41,18 @@ class Register extends CI_Controller {
 		$data['data'] = $this->user_model->get_all('t_provinsi');
 
 		$this->template->page('register/register', $data);
+	}
+
+	public function getcity()
+	{
+		$pro = $this->input->get('sts');
+		$getprovinsiid = $this->user_model->get_where('t_provinsi',array('nama_provinsi'=> $pro))->row();
+		$getcity = $this->user_model->get_where('t_kota',array('id_provinsi'=> $getprovinsiid->id_provinsi))->result();
+
+		echo "<option value=''>--Pilih Kabupaten--</option>";
+		foreach($getcity as $gc){
+			echo "<option value='$gc->nama_kota'>$gc->nama_kota</option>";
+		}
 	}
 
 }

@@ -19,16 +19,22 @@
                  echo "<div class='alert alert-success alert-message'>";
                  echo $this->session->flashdata('success');
                  echo "</div>";
-               } ?>                
+               } ?>
+             <?php if($this->session->flashdata('alert'))
+             {
+               echo "<div class='alert alert-danger alert-message'>";
+               echo $this->session->flashdata('alert');
+               echo "</div>";
+             } ?>                 
             </div>
             <!-- /.box-header -->
-            <form class="form-horizontal" action="" method="post" enctype="multipart/form-data">
+            <form class="form-horizontal" action="<?php echo site_url('kurir/transaksi_simpan'); ?>" method="post" enctype="multipart/form-data">
               <div class="box-body">
 
                 <div class="form-group">
                 <div class="col-md-6">Tarif</div>
                 <div class="col-md-6">Data Penerima</div>
-            <?php echo $this->session->userdata('id_kurir'); ?>
+            <?php echo $this->session->userdata('id_user'); ?>
                 </div>
 
                 <div class="form-group">
@@ -83,6 +89,10 @@
                   <label class="col-md-2 col-sm-2 col-xs-12 control-label">Panjang</label>
                   <div class="col-md-3 col-sm-6 col-xs-12">
                     <input type="text" class="form-control col-md-7 col-xs-12" name="panjang" value="">
+                  </div>
+                  <label class="col-md-2 col-sm-2 col-xs-12 control-label">Email Pengirim</label>
+                  <div class="col-md-3 col-sm-6 col-xs-12">
+                    <input type="text" class="form-control col-md-7 col-xs-12" name="email" value="">
                   </div>
                 </div>
 

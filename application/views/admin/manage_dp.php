@@ -34,7 +34,7 @@
                     <td style="text-align: left;"><?= $key->username; ?></td>
                     <td style="text-align: left;"><?= $key->email; ?></td>
                     <td style="text-align: center">
-                    <?php if ($key->status == 2) { ?>
+                    <?php if ($key->status_dp == 2) { ?>
                           <a class="btn btn-primary btn-xs">Aktif</a>
                       <?php } else { ?>
                           <a class="btn btn-danger btn-xs">Tidak Aktif</a>

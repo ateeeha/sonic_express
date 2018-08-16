@@ -59,7 +59,7 @@
                     <td><?= $key->id_tracking; ?></td>
                     <td><?= $key->no_resi; ?></td>
                     <td><?= $key->tanggal; ?></td>
-                    <td><?= $key->status; ?></td>
+                    <td><?= $key->status_tracking; ?></td>
                   </tr>
                   <?php } ?>
                 </tbody>

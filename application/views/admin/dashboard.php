@@ -100,6 +100,15 @@
 <!-- ckeditor -->
 <script src="<?php echo base_url(); ?>assets/ckeditor/ckeditor.js"></script>
 <script type="text/javascript">
+
+   $(".province").change(function(){
+      $( ".city" ).html("<option>Loading...</option>");
+      var data = $(this).val();
+      $.get( "<?php echo site_url('admin/getcity');?>", { sts: data }, function( data ) {
+        $( ".city" ).html( data );
+      });
+    });
+
   $(document).ready(function(){
       $('#datatable').DataTable();
   });

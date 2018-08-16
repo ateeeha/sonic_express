@@ -38,13 +38,7 @@
                     <td style="text-align: center"><?= $key->nama; ?></td>
                     <td style="text-align: center"><?= $key->kode_pos; ?></td>
                     <td style="text-align: center"><?= $key->no_tlp; ?></td>
-                    <td>
-                    <a href="" class="btn btn-primary btn-xs" onclick="return confirm('Anda Yakin ?');"><i class="fa fa-check"></i> Diterima</a>
-                    <a href="" class="btn btn-danger btn-xs" onclick="return confirm('Anda Yakin ?');"><i class="fa fa-trash"></i> Ditolak</a>
-                    </td>
-                    <td>
-                    <?= $key->status_transaksi; ?>
-                    </td>
+                    <td style="text-align: center"><?= $key->status_transaksi; ?></td>
                   </tr>
                   <?php endforeach ?>
                 </  >

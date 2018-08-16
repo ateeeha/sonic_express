@@ -80,6 +80,7 @@ class User extends CI_Controller {
 				'tgl_pengiriman' => date("Y-m-d"), 
 				'id_user' => $this->session->userdata('id_user'), 
 				'no_resi' => 'RES'.date("dmYgis").$this->session->userdata('id_user'), 
+				'status_transaksi' => 'Menunggu'
 				);
 
 				$this->user_model->insert('t_transaksi', $data);
@@ -91,6 +92,21 @@ class User extends CI_Controller {
 		$data['active_transaksi'] = 'active';
 		$data['header'] = 'Transaksi';
 		$this->template->user('user/form_transaksi', $data);
+	}
+
+	public function list_transaksi()
+	{
+		$this->cek_login();
+
+		$join = 't_transaksi t JOIN t_user u ON (t.id_user = u.id_user)';
+		$data['data'] = $this->kurir_model->get_where($join, 
+			array(
+				'email' => $this->session->userdata('email_user'),
+				));
+
+		$data['active_list'] = 'active';
+		$data['header'] = 'Manage Transaksi';
+		$this->template->user('user/list_transaksi', $data);
 	}
 
 	function cek_login()

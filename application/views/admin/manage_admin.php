@@ -36,7 +36,7 @@
                     <td style="text-align: left;"><?= $key->email; ?></td>
                     <td style="text-align: left;"><?= $key->level; ?></td>
                     <td style="text-align: center">
-                    <?php if ($key->status == 2) { ?>
+                    <?php if ($key->status_admin == 2) { ?>
                           <a class="btn btn-primary btn-xs">Aktif</a>
                       <?php } else { ?>
                           <a class="btn btn-danger btn-xs">Tidak Aktif</a>

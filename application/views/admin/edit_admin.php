@@ -51,8 +51,8 @@
                   <div class="col-md-4 col-sm-6">
                     <select name="status" class="form-control">
                         <option value=""disabled selected>--Pilih Status--</option>
-                        <option value="1" <?php if ($status == 1) { echo "selected";} ?>>Tidak Aktif</option>
-                        <option value="2" <?php if ($status == 2) { echo "selected";} ?>>Aktif</option>
+                        <option value="1" <?php if ($status_admin == 1) { echo "selected";} ?>>Tidak Aktif</option>
+                        <option value="2" <?php if ($status_admin == 2) { echo "selected";} ?>>Aktif</option>
                     </select>
                   </div>
                 </div>
