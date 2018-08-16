@@ -32,7 +32,7 @@
       <!-- mini logo for sidebar mini 50x50 pixels -->
       <span class="logo-mini"><b>IA</b></span>
       <!-- logo for regular state and mobile devices -->
-      <span class="logo-lg"><b><?= ucfirst($this->session->userdata('level')); ?></b></span>
+      <span class="logo-lg"><b><?= ucfirst($this->session->userdata('username_admin')); ?></b></span>
     </a>
 
     <!-- Header Navbar: style can be found in header.less -->
@@ -103,6 +103,7 @@
   $(document).ready(function(){
       $('#datatable').DataTable();
   });
+
   $('.alert-message').alert().delay(3000).slideUp('slow');
 </script>
 </body>

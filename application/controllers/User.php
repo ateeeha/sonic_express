@@ -26,6 +26,38 @@ class User extends CI_Controller {
 		$this->template->user('user/form_cekongkir', $data);
 	}
 
+	public function cek_resi()
+	{
+		$this->cek_login();
+		
+		if ($this->input->post('submit') == 'Submit')
+		{
+			$no_resi = $this->input->post('no_resi', TRUE);
+
+			$cek = $this->user_model->get_where('t_tracking', array('no_resi' => $no_resi));
+			$data['cek'] = $cek;
+			// if ($cek->num_rows() > 0) 
+			// {				
+			// 	// foreach ($cek->result() as $key) {
+					
+			// 	// 	$data['id_tracking'] = $key->id_tracking;
+			// 	// 	$data['no_resi'] = $key->no_resi;
+			// 	// 	$data['tanggal'] = $key->tanggal;
+			// 	// 	$data['status'] = $key->status;
+			// 	// }
+
+			// } else {
+			// 	$this->session->set_flashdata('alert', "Kode Resi Tidak Ada !");
+			// }
+		}else {
+			$data['cek'] = '';
+		}
+
+		$data['active_cekresi'] = 'active';
+		$data['header'] = 'Cek Resi';
+		$this->template->user('user/form_cekresi', $data);
+	}
+
 	function transaksi()
 	{
 		$this->cek_login();
@@ -47,7 +79,7 @@ class User extends CI_Controller {
 				'no_tlp' => $this->input->post('no_tlp', TRUE), 
 				'tgl_pengiriman' => date("Y-m-d"), 
 				'id_user' => $this->session->userdata('id_user'), 
-				'no_resi' => 'RES'.date("dmY").$this->session->userdata('id_user'), 
+				'no_resi' => 'RES'.date("dmYgis").$this->session->userdata('id_user'), 
 				);
 
 				$this->user_model->insert('t_transaksi', $data);

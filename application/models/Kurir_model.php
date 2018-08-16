@@ -39,6 +39,16 @@ class Kurir_model extends CI_Model {
 		return $this->db->get();
 	}
 
+	function select_where($select, $table, $where)
+	{
+		
+		$this->db->select($select);
+		$this->db->from($table);
+		$this->db->where($where);
+
+		return $this->db->get();
+	}
+
 	function update($table = null, $data = null, $where = null)
 	{
 		$this->db->update($table, $data, $where);		

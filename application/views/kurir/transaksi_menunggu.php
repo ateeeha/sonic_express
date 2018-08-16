@@ -16,9 +16,12 @@
                 <thead>
                   <tr>
                     <th style="text-align: center">#</th>
-                    <th style="text-align: center">Username</th>
-                    <th style="text-align: center">Email</th>
-                    <th style="text-align: center">Status</th>
+                    <th style="text-align: center">ID User</th>
+                    <th style="text-align: center">Tanggal</th>
+                    <th style="text-align: center">No Resi</th>
+                    <th style="text-align: center">Penerima</th>
+                    <th style="text-align: center">Kode Pos</th>
+                    <th style="text-align: center">No Penerima</th>
                     <th style="text-align: center" width="10%;">Opsi</th>
                   </tr>
                 </thead>
@@ -29,18 +32,18 @@
                   ?>
                   <tr>
                     <td style="text-align: center"><?= $i++; ?></td>
-                    <td style="text-align: center"><?= $key->username; ?></td>
-                    <td style="text-align: center"><?= $key->email; ?></td>
-                    <td style="text-align: center">
-                    <?php if ($key->status_user == 2) { ?>
-                          <a href="" class="btn btn-primary btn-xs">Aktif</a>
-                      <?php } else { ?>
-                          <a href="" class="btn btn-danger btn-xs">Tidak Aktif</a>
-
-                      <?php } ?> 
+                    <td style="text-align: center"><?= $key->id_user; ?></td>
+                    <td style="text-align: center"><?= $key->tgl_pengiriman; ?></td>
+                    <td style="text-align: center"><?= $key->no_resi; ?></td>
+                    <td style="text-align: center"><?= $key->nama; ?></td>
+                    <td style="text-align: center"><?= $key->kode_pos; ?></td>
+                    <td style="text-align: center"><?= $key->no_tlp; ?></td>
+                    
+                    <td>
+                    <a href="<?= base_url(); ?>index.php/kurir/ambil_transaksi/<?= $key->no_resi; ?>/<?= $key->status_transaksi; ?>" class="btn btn-warning btn-xs" onclick="return confirm('Anda Yakin ?');"><i class="fa fa-plus"></i> Ambil</a>
                     </td>
                     <td>
-                        <a href="<?= base_url(); ?>index.php/admin/del_dp/<?= $key->id_user; ?>" class="btn btn-danger btn-xs" onclick="return confirm('Anda Yakin ?');"><i class="fa fa-trash"></i> Hapus</a>
+                      <?= $key->status_transaksi; ?>
                     </td>
                   </tr>
                   <?php endforeach ?>
@@ -48,7 +51,6 @@
               </table>
                 </div>
               <div class="box-footer with-border">
-                <p class="help-text">* Button <label class="label label-primary" style="padding:3px 5px;">Aktif</label> untuk menonaktifkan member, button <label class="label label-danger" style="padding:3px 5px;">Tidak Aktif</label> untuk mengaktifkan member</p>
               </div>
           </div>
           <!-- /.box -->

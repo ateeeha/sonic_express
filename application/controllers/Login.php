@@ -32,8 +32,8 @@ class Login extends CI_Controller {
 				{
 					$datauser = array(
 						'id_admin' => $data->id_admin,
-						'username' => $data->username, 
-						'email' => $data->email, 
+						'username_admin' => $data->username, 
+						'email_admin' => $data->email, 
 						'level' => $data->level,
 						'login_admin' => TRUE
 					);
@@ -74,8 +74,8 @@ class Login extends CI_Controller {
 				{
 					$datauser = array(
 						'id_dp' => $data->id_dp,
-						'username' => $data->username, 
-						'email' => $data->email, 
+						'username_dp' => $data->username, 
+						'email_dp' => $data->email, 
 						'login_dp' => TRUE
 					);
 
@@ -115,8 +115,9 @@ class Login extends CI_Controller {
 				{
 					$datauser = array(
 						'id_kurir' => $data->id_kurir,
-						'username' => $data->username, 
-						'email' => $data->email, 
+						'username_kurir' => $data->username, 
+						'email_kurir' => $data->email, 
+						'kabupaten_kurir' => $data->kabupaten, 
 						'login_kurir' => TRUE
 					);
 
@@ -156,8 +157,8 @@ class Login extends CI_Controller {
 				{
 					$datauser = array(
 						'id_user' => $data->id_user,
-						'username' => $data->username, 
-						'email' => $data->email, 
+						'username_user' => $data->username, 
+						'email_user' => $data->email, 
 						'login_user' => TRUE
 					);
 

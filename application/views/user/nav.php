@@ -12,6 +12,11 @@
             <i class="fa fa-money"></i> <span>TRANSAKSI</span>
           </a>
         </li>
+        <li class="<?php if(isset($active_cekresi)){echo $active_cekresi;}?>">
+          <a href="<?= base_url(); ?>index.php/user/cek_resi/">
+            <i class="fa fa-money"></i> <span>CEK RESI</span>
+          </a>
+        </li>
       </ul>
       
     </section>

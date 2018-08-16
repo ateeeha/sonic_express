@@ -17,6 +17,8 @@ class Register extends CI_Controller {
 			//validasi
 			$this->form_validation->set_rules('username','Username','required');
 			$this->form_validation->set_rules('email','Email','required|valid_email');
+			$this->form_validation->set_rules('provinsi','Provinsi','required');
+			$this->form_validation->set_rules('kabupaten','Kabupaten','required');
 			$this->form_validation->set_rules('pass1','Password','required');
 			$this->form_validation->set_rules('pass2','Ketik Ulang Password','required|matches[pass1]');
 
@@ -25,6 +27,8 @@ class Register extends CI_Controller {
 				$data = array(
 				'username' => $this->input->post('username', TRUE), 
 				'email' => $this->input->post('email', TRUE), 
+				'provinsi' => $this->input->post('provinsi', TRUE), 
+				'kabupaten' => $this->input->post('kabupaten', TRUE), 
 				'password' => password_hash($this->input->post('pass1', TRUE), PASSWORD_DEFAULT, ['cost' => 10]),
 				'status' => 1
 				);
@@ -34,7 +38,9 @@ class Register extends CI_Controller {
 				redirect('index.php/login/login_user/');
 			} 
 		}
-		$this->template->page('register/register');
+		$data['data'] = $this->user_model->get_all('t_provinsi');
+
+		$this->template->page('register/register', $data);
 	}
 
 }
