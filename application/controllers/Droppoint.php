@@ -59,7 +59,7 @@ class Droppoint extends CI_Controller {
 			} 
 		}
 
-		$data['active_mkurir'] = 'active';
+		$data['active_kurir'] = 'active';
 		$data['header'] = 'Add Kurir';	
 		$this->template->dp('droppoint/add_kurir', $data);
 	}
@@ -73,6 +73,63 @@ class Droppoint extends CI_Controller {
 		$this->dp_model->delete('t_kurir', $cond);
 
 		redirect('index.php/droppoint/kurir/');
+	}
+
+	public function paket()
+	{
+		$this->cek_login();
+		$join = 't_transaksi t JOIN t_user u ON (t.id_user = u.id_user)';
+		$data['data'] = $this->dp_model->get_where($join, 
+			array(
+				'kabupaten' => $this->session->userdata('kabupaten_dp'),
+				'dp_asal' => '',
+				'status_transaksi' => 'diterima'
+				));
+
+		// $data['data'] = $this->kurir_model->get_all('t_transaksi');
+
+		$data['active_paket'] = 'active';
+		$data['header'] = 'Manage Paket';
+		$this->template->dp('droppoint/paket', $data);
+	}
+
+	public function paket_diterima()
+	{
+		$this->cek_login();
+		$join = 't_transaksi t JOIN t_user u ON (t.id_user = u.id_user)';
+		$data['data'] = $this->dp_model->get_where($join, 
+			array(
+				'kabupaten' => $this->session->userdata('kabupaten_dp'),
+				'dp_asal' => $this->session->userdata('id_dp'),
+				));
+
+		// $data['data'] = $this->kurir_model->get_all('t_transaksi');
+
+		$data['active_paketditerima'] = 'active';
+		$data['header'] = 'Manage Paket Diterima';
+		$this->template->dp('droppoint/paket_diterima', $data);
+	}
+
+	public function terima_paket()
+	{
+		$this->cek_login();
+
+		$no_resi = $this->uri->segment(3);
+
+		$data = array(
+			'no_resi' => $no_resi, 
+			'tanggal' => date("Y-m-d"), 
+			'status_tracking' => 'Diterima Drop Point Kota Asal'
+		);
+
+		$this->kurir_model->insert('t_tracking', $data);
+		$this->kurir_model->update(
+			't_transaksi', 
+			['dp_asal' => $this->session->userdata('id_dp')],
+			['no_resi' => $this->uri->segment(3)]
+			);
+
+		redirect('droppoint/paket/');
 	}
 
 	function cek_login()

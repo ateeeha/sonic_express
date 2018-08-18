@@ -34,7 +34,7 @@
                     <td style="text-align: center"><?= $key->username; ?></td>
                     <td style="text-align: center"><?= $key->email; ?></td>
                     <td style="text-align: center">
-                    <?php if ($key->status == 2) { ?>
+                    <?php if ($key->status_kurir == 2) { ?>
                           <a href="<?= base_url(); ?>index.php/droppoint/status/2/<?= $key->id_kurir ?>" class="btn btn-primary btn-xs">Aktif</a>
                       <?php } else { ?>
                           <a href="<?= base_url(); ?>index.php/droppoint/status/1/<?= $key->id_kurir ?>" class="btn btn-danger btn-xs">Tidak Aktif</a>
