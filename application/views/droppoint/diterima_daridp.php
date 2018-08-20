@@ -10,6 +10,12 @@
       <div class="row">
         <div class="col-xs-12">
           <div class="box box-primary">
+          <div class="box-header with-border">
+                <div style="float:right">
+                  <a href="<?= base_url(); ?>index.php/admin/add_dp" class="btn btn-primary"><i class="fa fa-plane"></i> Kirim</a>            
+                </div>
+                <div class="clearfix"></div>
+            </div>
             <!-- /.box-header -->
             <div class="box-body table-responsive">
               <table class="table table-bordered table-hover dt-responsive nowrap" id="datatable">
@@ -32,7 +38,7 @@
                   foreach ($data->result() as $key) :
                   ?>
                   <tr>
-                    <td><input type="checkbox"></td>
+                    <td><input name="<?= $key->id_transaksi; ?>" type="checkbox"></td>
                     <td style="text-align: center"><?= $i++; ?></td>
                     <td style="text-align: center"><?= $key->id_user; ?></td>
                     <td style="text-align: center"><?= $key->tgl_pengiriman; ?></td>

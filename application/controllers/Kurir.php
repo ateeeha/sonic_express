@@ -201,7 +201,7 @@ class Kurir extends CI_Controller {
 			);
 		$this->kurir_model->update('t_transaksi', ['status_transaksi' => $status], ['no_resi' => $this->uri->segment(3)]);
 
-		redirect('kurir/paket/');
+		redirect('kurir/paket_user/');
 
 	}
 

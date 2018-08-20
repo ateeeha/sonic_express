@@ -101,6 +101,7 @@ class Droppoint extends CI_Controller {
 			array(
 				'kabupaten_tujuan' => $this->session->userdata('kabupaten_dp'),
 				'status_transaksi' => 'diterima',
+				'status_dp' => 'Sudah Dikirim',
 				'dp_tujuan' => ''
 				));
 
@@ -180,6 +181,11 @@ class Droppoint extends CI_Controller {
 		);
 
 		$this->kurir_model->insert('t_tracking', $data);
+		$this->kurir_model->update(
+			't_transaksi', 
+			['status_dp' => 'Sudah Dikirim'],
+			['no_resi' => $this->uri->segment(3)]
+			);
 
 		redirect('droppoint/diterima_darikurir/');
 	}

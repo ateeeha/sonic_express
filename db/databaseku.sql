@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: 20 Agu 2018 pada 11.40
+-- Generation Time: 20 Agu 2018 pada 14.55
 -- Versi Server: 5.6.20
 -- PHP Version: 5.5.15
 
@@ -657,7 +657,7 @@ CREATE TABLE IF NOT EXISTS `t_tracking` (
   `no_resi` varchar(255) NOT NULL,
   `tanggal` date NOT NULL,
   `status_tracking` enum('Dijemput Kurir','Diterima Kurir','Diterima Drop Point Kota Asal','Dikirim ke Drop Point Kota Tujuan','Diterima Drop Point Kota Tujuan','Diantar Kurir Ke Alamat Tujuan','Paket Diterima') NOT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=20 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=28 ;
 
 --
 -- Dumping data untuk tabel `t_tracking`
@@ -677,7 +677,14 @@ INSERT INTO `t_tracking` (`id_tracking`, `no_resi`, `tanggal`, `status_tracking`
 (15, 'RES20082018905544', '2018-08-20', 'Dikirim ke Drop Point Kota Tujuan'),
 (17, 'RES20082018905544', '2018-08-20', 'Diterima Drop Point Kota Tujuan'),
 (18, 'RES20082018905544', '2018-08-20', 'Diantar Kurir Ke Alamat Tujuan'),
-(19, 'RES20082018905544', '2018-08-20', 'Paket Diterima');
+(19, 'RES20082018905544', '2018-08-20', 'Paket Diterima'),
+(20, 'RES20082018231514', '2018-08-20', 'Dijemput Kurir'),
+(21, 'RES20082018231514', '2018-08-20', 'Diterima Kurir'),
+(22, 'RES20082018231514', '2018-08-20', 'Diterima Drop Point Kota Asal'),
+(24, 'RES20082018231514', '2018-08-20', 'Dikirim ke Drop Point Kota Tujuan'),
+(25, 'RES20082018231514', '2018-08-20', 'Diterima Drop Point Kota Tujuan'),
+(26, 'RES20082018231514', '2018-08-20', 'Diantar Kurir Ke Alamat Tujuan'),
+(27, 'RES20082018231514', '2018-08-20', 'Paket Diterima');
 
 -- --------------------------------------------------------
 
@@ -702,7 +709,7 @@ CREATE TABLE IF NOT EXISTS `t_transaksi` (
   `no_tlp` varchar(35) NOT NULL,
   `status_transaksi` enum('Menunggu','Dijemput','Diterima','Ditolak','Selesai') NOT NULL,
   `status_dp` enum('Belum Dikirim','Sudah Dikirim') NOT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=10 ;
 
 --
 -- Dumping data untuk tabel `t_transaksi`
@@ -714,7 +721,8 @@ INSERT INTO `t_transaksi` (`id_transaksi`, `id_user`, `kurir_penjemput`, `kurir_
 (5, 4, 2, 0, 0, 0, '2018-08-16', 'RES16082018249444', 'Sodiq', '', '', 'jrakah kaliurang srumbung magelang', 55283, '08995413121', 'Menunggu', 'Sudah Dikirim'),
 (6, 4, 2, 0, 1, 0, '2018-08-16', 'RES16082018254494', 'Anton her', '', '', 'jrakah kaliurang sumbung magelang', 55283, '08995413121', 'Diterima', 'Sudah Dikirim'),
 (7, 4, 2, 0, 0, 0, '2018-08-16', 'RES16082018317424', 'Dino', '', '', 'jrakah kaliurang sumbung', 55283, '08995413121', 'Selesai', 'Sudah Dikirim'),
-(8, 4, 2, 3, 1, 3, '2018-08-20', 'RES20082018905544', 'Jono', 'DI Yogyakarta', 'Yogyakarta', 'test', 55283, '0899541311', 'Selesai', 'Sudah Dikirim');
+(8, 4, 2, 3, 1, 3, '2018-08-20', 'RES20082018905544', 'Jono', 'DI Yogyakarta', 'Yogyakarta', 'test', 55283, '0899541311', 'Selesai', 'Sudah Dikirim'),
+(9, 4, 2, 3, 1, 3, '2018-08-20', 'RES20082018231514', 'Haqi', 'DI Yogyakarta', 'Yogyakarta', 'test', 55283, '0899541311', 'Selesai', 'Sudah Dikirim');
 
 -- --------------------------------------------------------
 
@@ -820,12 +828,12 @@ MODIFY `id_kurir` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=6;
 -- AUTO_INCREMENT for table `t_tracking`
 --
 ALTER TABLE `t_tracking`
-MODIFY `id_tracking` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=20;
+MODIFY `id_tracking` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=28;
 --
 -- AUTO_INCREMENT for table `t_transaksi`
 --
 ALTER TABLE `t_transaksi`
-MODIFY `id_transaksi` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=9;
+MODIFY `id_transaksi` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=10;
 --
 -- AUTO_INCREMENT for table `t_user`
 --
