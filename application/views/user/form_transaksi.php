@@ -40,16 +40,21 @@
                   <div class="col-md-3 col-sm-6 col-xs-12">
                     <input type="text" class="form-control col-md-7 col-xs-12" name="nama" value="">
                   </div>
-                </div>
+                </div>              
 
                 <div class="form-group">
                   <label class="col-md-2 col-sm-2 col-xs-12 control-label">Tujuan</label>
                   <div class="col-md-3 col-sm-6 col-xs-12">
                     <input type="text" class="form-control col-md-7 col-xs-12" name="tujuan" value="">
                   </div>
-                  <label class="col-md-2 col-sm-2 col-xs-12 control-label">Alamat</label>
-                  <div class="col-md-3 col-sm-6 col-xs-12">
-                  <textarea class="form-control" name="alamat"></textarea>
+                  <label class="col-md-2 col-sm-2 col-xs-12 control-label">Provinsi</label>
+                  <div class="col-md-4 col-sm-6 col-xs-12">
+                    <select class="province" name="provinsi" required id="provinsi" class="col-md-6">
+                      <option value="">--Pilih Provinsi--</option>
+                      <?php foreach ($data->result() as $key): ?>
+                      <option value="<?= $key->nama_provinsi; ?>"><?= $key->nama_provinsi; ?></option>
+                      <?php endforeach ?>
+                    </select>
                   </div>
                 </div>
 
@@ -58,9 +63,11 @@
                   <div class="col-md-3 col-sm-6 col-xs-12">
                     <input type="text" class="form-control col-md-7 col-xs-12" name="berat" value="">
                   </div>
-                  <label class="col-md-2 col-sm-2 col-xs-12 control-label">Kode Pos</label>
-                  <div class="col-md-3 col-sm-6 col-xs-12">
-                    <input type="text" class="form-control col-md-7 col-xs-12" name="kode_pos" value="">
+                  <label class="col-md-2 col-sm-2 col-xs-12 control-label">Kabupaten</label>
+                  <div class="col-md-4 col-sm-6 col-xs-12">
+                  <select class="city" name="kabupaten" required id="kabupaten" class="col-md-6">
+                    <option value="">--Pilih Kabupaten--</option>
+                  </select>
                   </div>
                 </div>
 
@@ -73,9 +80,9 @@
                         <option>pilihan2</option>
                     </select>
                   </div>
-                  <label class="col-md-2 col-sm-2 col-xs-12 control-label">No Telepon</label>
+                  <label class="col-md-2 col-sm-2 col-xs-12 control-label">Alamat</label>
                   <div class="col-md-3 col-sm-6 col-xs-12">
-                    <input type="text" class="form-control col-md-7 col-xs-12" name="no_tlp" value="">
+                  <textarea class="form-control" name="alamat"></textarea>
                   </div>
                 </div>
 
@@ -84,12 +91,20 @@
                   <div class="col-md-3 col-sm-6 col-xs-12">
                     <input type="text" class="form-control col-md-7 col-xs-12" name="panjang" value="">
                   </div>
+                  <label class="col-md-2 col-sm-2 col-xs-12 control-label">Kode Pos</label>
+                  <div class="col-md-3 col-sm-6 col-xs-12">
+                    <input type="text" class="form-control col-md-7 col-xs-12" name="kode_pos" value="">
+                  </div>
                 </div>
 
                 <div class="form-group">
                   <label class="col-md-2 col-sm-2 col-xs-12 control-label">Lebar</label>
                   <div class="col-md-3 col-sm-6 col-xs-12">
                     <input type="text" class="form-control col-md-7 col-xs-12" name="lebar" value="">
+                  </div>
+                  <label class="col-md-2 col-sm-2 col-xs-12 control-label">No Telepon</label>
+                  <div class="col-md-3 col-sm-6 col-xs-12">
+                    <input type="text" class="form-control col-md-7 col-xs-12" name="no_tlp" value="">
                   </div>
                 </div>
 

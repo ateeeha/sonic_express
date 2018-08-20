@@ -16,6 +16,7 @@
                 <thead>
                   <tr>
                     <th style="text-align: center">#</th>
+                    <th style="text-align: center">#</th>
                     <th style="text-align: center">ID User</th>
                     <th style="text-align: center">Tanggal</th>
                     <th style="text-align: center">No Resi</th>
@@ -31,6 +32,7 @@
                   foreach ($data->result() as $key) :
                   ?>
                   <tr>
+                    <td><input type="checkbox"></td>
                     <td style="text-align: center"><?= $i++; ?></td>
                     <td style="text-align: center"><?= $key->id_user; ?></td>
                     <td style="text-align: center"><?= $key->tgl_pengiriman; ?></td>
@@ -39,7 +41,11 @@
                     <td style="text-align: center"><?= $key->kode_pos; ?></td>
                     <td style="text-align: center"><?= $key->no_tlp; ?></td>
                     <td>
+                    <?php if ($key->status_dp == 'Belum Dikirim'): ?>
                     <a href="" class="btn btn-success btn-xs" onclick="return confirm('Anda Yakin ?');"><i class="fa fa-check"></i> Kirim</a>
+                    <?php else: ?>
+                    <a href="" class="btn btn-default btn-xs" onclick="return confirm('Anda Yakin ?');"><i class="fa fa-check"></i> Selesai</a>
+                    <?php endif ?>
                     </td>
                     <td>
                     <?= $key->status_transaksi; ?>

@@ -99,6 +99,15 @@
 <script src="<?php echo base_url(); ?>assets/user/js/jquery.slimscroll.min.js"></script>
 <!-- ckeditor -->
 <script type="text/javascript">
+
+  $(".province").change(function(){
+      $( ".city" ).html("<option>Loading...</option>");
+      var data = $(this).val();
+      $.get( "<?php echo site_url('user/getcity');?>", { sts: data }, function( data ) {
+        $( ".city" ).html( data );
+      });
+  });
+
   $(document).ready(function(){
       $('#datatable').DataTable();
   });

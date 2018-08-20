@@ -66,6 +66,8 @@ class User extends CI_Controller {
 		{
 			//validasi
 			$this->form_validation->set_rules('nama','Nama','required');
+			$this->form_validation->set_rules('provinsi','Provinsi','required');
+			$this->form_validation->set_rules('kabupaten','Kabupaten','required');
 			$this->form_validation->set_rules('alamat','Alamat','required');
 			$this->form_validation->set_rules('kode_pos','Kode Pos','required|numeric');
 			$this->form_validation->set_rules('no_tlp','Nomor Telepon','required|numeric');
@@ -74,6 +76,8 @@ class User extends CI_Controller {
 			{
 				$data = array(
 				'nama' => $this->input->post('nama', TRUE), 
+				'provinsi_tujuan' => $this->input->post('provinsi', TRUE), 
+				'kabupaten_tujuan' => $this->input->post('kabupaten', TRUE), 
 				'alamat' => $this->input->post('alamat', TRUE), 
 				'kode_pos' => $this->input->post('kode_pos', TRUE), 
 				'no_tlp' => $this->input->post('no_tlp', TRUE), 
@@ -88,6 +92,7 @@ class User extends CI_Controller {
 			
 			} 
 		}
+		$data['data'] = $this->user_model->get_all('t_provinsi');
 
 		$data['active_transaksi'] = 'active';
 		$data['header'] = 'Transaksi';
@@ -108,6 +113,19 @@ class User extends CI_Controller {
 		$data['header'] = 'Manage Transaksi';
 		$this->template->user('user/list_transaksi', $data);
 	}
+
+	public function getcity()
+	{
+		$pro = $this->input->get('sts');
+		$getprovinsiid = $this->user_model->get_where('t_provinsi',array('nama_provinsi'=> $pro))->row();
+		$getcity = $this->user_model->get_where('t_kota',array('id_provinsi'=> $getprovinsiid->id_provinsi))->result();
+
+		echo "<option value=''>--Pilih Kabupaten--</option>";
+		foreach($getcity as $gc){
+			echo "<option value='$gc->nama_kota'>$gc->nama_kota</option>";
+		}
+	}
+
 
 	function cek_login()
 	{ 

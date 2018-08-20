@@ -74,7 +74,7 @@ class Kurir extends CI_Controller {
 		redirect('kurir/transaksi/');
 	}
 
-	public function paket()
+	public function paket_user()
 	{
 		$this->cek_login();
 		$join = 't_transaksi t JOIN t_user u ON (t.id_user = u.id_user)';
@@ -86,9 +86,27 @@ class Kurir extends CI_Controller {
 
 		// $data['data'] = $this->kurir_model->get_all('t_transaksi');
 
-		$data['active_paket'] = 'active';
+		$data['active_paketuser'] = 'active';
 		$data['header'] = 'Manage Paket';
 		$this->template->kurir('kurir/paket_menunggu', $data);
+	}
+
+	public function paket_dp()
+	{
+		$this->cek_login();
+		$join = 't_transaksi t JOIN t_user u ON (t.id_user = u.id_user)';
+		$data['data'] = $this->kurir_model->get_where($join, 
+			array(
+				'kabupaten_tujuan' => $this->session->userdata('kabupaten_kurir'),
+				'status_transaksi' => 'diterima',
+				'kurir_pengantar' => ''
+				));
+
+		// $data['data'] = $this->kurir_model->get_all('t_transaksi');
+
+		$data['active_paketdp'] = 'active';
+		$data['header'] = 'Manage Paket';
+		$this->template->kurir('kurir/paket_dp', $data);
 	}
 
 	public function paket_dijemput()
@@ -124,6 +142,42 @@ class Kurir extends CI_Controller {
 		$data['active_diterima'] = 'active';
 		$data['header'] = 'Manage Transaksi';
 		$this->template->kurir('kurir/paket_diterima', $data);
+	}
+
+	public function paket_diantar()
+	{
+		$this->cek_login();
+		$join = 't_transaksi t JOIN t_user u ON (t.id_user = u.id_user)';
+		$data['data'] = $this->kurir_model->get_where($join, 
+			array(
+				'kabupaten_tujuan' => $this->session->userdata('kabupaten_kurir'),
+				'status_transaksi' => 'diterima',
+				'kurir_pengantar' => $this->session->userdata('id_kurir')
+				));
+
+		// $data['data'] = $this->kurir_model->get_all('t_transaksi');
+
+		$data['active_diantar'] = 'active';
+		$data['header'] = 'Manage Transaksi';
+		$this->template->kurir('kurir/paket_diantar', $data);
+	}
+
+	public function paket_selesai()
+	{
+		$this->cek_login();
+		$join = 't_transaksi t JOIN t_user u ON (t.id_user = u.id_user)';
+		$data['data'] = $this->kurir_model->get_where($join, 
+			array(
+				'kabupaten_tujuan' => $this->session->userdata('kabupaten_kurir'),
+				'status_transaksi' => 'selesai',
+				'kurir_pengantar' => $this->session->userdata('id_kurir')
+				));
+
+		// $data['data'] = $this->kurir_model->get_all('t_transaksi');
+
+		$data['active_selesai'] = 'active';
+		$data['header'] = 'Manage Transaksi';
+		$this->template->kurir('kurir/paket_selesai', $data);
 	}
 
 	public function ambil_paket()
@@ -168,6 +222,52 @@ class Kurir extends CI_Controller {
 		$this->kurir_model->update('t_transaksi', ['status_transaksi' => $status], ['no_resi' => $this->uri->segment(3)]);
 
 		redirect('kurir/paket_dijemput/');
+
+	}
+
+	public function kirim_paket()
+	{
+		$this->cek_login();
+
+		$no_resi = $this->uri->segment(3);
+
+		$data = array(
+			'no_resi' => $no_resi, 
+			'tanggal' => date("Y-m-d"), 
+			'status_tracking' => 'Diantar Kurir ke Alamat Tujuan'
+		);
+
+		$this->kurir_model->insert('t_tracking', $data);
+		$this->kurir_model->update(
+			't_transaksi', 
+			['kurir_pengantar' => $this->session->userdata('id_kurir')],
+			['no_resi' => $this->uri->segment(3)]
+			);
+
+		redirect('kurir/paket_dp/');
+
+	}
+
+	public function konfirmasi_paket()
+	{
+		$this->cek_login();
+
+		$no_resi = $this->uri->segment(3);
+		$status = 'selesai';
+		$data = array(
+			'no_resi' => $no_resi, 
+			'tanggal' => date("Y-m-d"), 
+			'status_tracking' => 'Paket Diterima'
+		);
+
+		$this->kurir_model->insert('t_tracking', $data);
+		$this->kurir_model->update(
+			't_transaksi', 
+			['status_transaksi' => $status],
+			['no_resi' => $this->uri->segment(3)]
+			);
+
+		redirect('kurir/paket_dp/');
 
 	}
 
