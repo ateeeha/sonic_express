@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: 20 Agu 2018 pada 14.55
+-- Generation Time: 21 Agu 2018 pada 13.51
 -- Versi Server: 5.6.20
 -- PHP Version: 5.5.15
 
@@ -708,19 +708,19 @@ CREATE TABLE IF NOT EXISTS `t_transaksi` (
   `kode_pos` int(5) NOT NULL,
   `no_tlp` varchar(35) NOT NULL,
   `status_transaksi` enum('Menunggu','Dijemput','Diterima','Ditolak','Selesai') NOT NULL,
-  `status_dp` enum('Belum Dikirim','Sudah Dikirim') NOT NULL
+  `dp_kirim` enum('Belum Dikirim','Sudah Dikirim') NOT NULL
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=10 ;
 
 --
 -- Dumping data untuk tabel `t_transaksi`
 --
 
-INSERT INTO `t_transaksi` (`id_transaksi`, `id_user`, `kurir_penjemput`, `kurir_pengantar`, `dp_asal`, `dp_tujuan`, `tgl_pengiriman`, `no_resi`, `nama`, `provinsi_tujuan`, `kabupaten_tujuan`, `alamat`, `kode_pos`, `no_tlp`, `status_transaksi`, `status_dp`) VALUES
-(2, 4, 2, 0, 3, 0, '2018-08-16', 'RES160820181218494', 'Wahyu', '', '', 'Jrakah Kaliurang Srumbung', 55283, '08995413121', 'Diterima', 'Sudah Dikirim'),
-(4, 4, 2, 0, 0, 0, '2018-08-16', 'RES16082018248154', 'Sodiq', '', '', 'jrakah kaliurang srumbung magelang', 55283, '08995413121', 'Ditolak', 'Sudah Dikirim'),
-(5, 4, 2, 0, 0, 0, '2018-08-16', 'RES16082018249444', 'Sodiq', '', '', 'jrakah kaliurang srumbung magelang', 55283, '08995413121', 'Menunggu', 'Sudah Dikirim'),
+INSERT INTO `t_transaksi` (`id_transaksi`, `id_user`, `kurir_penjemput`, `kurir_pengantar`, `dp_asal`, `dp_tujuan`, `tgl_pengiriman`, `no_resi`, `nama`, `provinsi_tujuan`, `kabupaten_tujuan`, `alamat`, `kode_pos`, `no_tlp`, `status_transaksi`, `dp_kirim`) VALUES
+(2, 4, 2, 0, 3, 0, '2018-08-16', 'RES160820181218494', 'Wahyu', '', '', 'Jrakah Kaliurang Srumbung', 55283, '08995413121', 'Diterima', 'Belum Dikirim'),
+(4, 4, 2, 0, 0, 0, '2018-08-16', 'RES16082018248154', 'Sodiq', '', '', 'jrakah kaliurang srumbung magelang', 55283, '08995413121', 'Ditolak', 'Belum Dikirim'),
+(5, 4, 2, 0, 0, 0, '2018-08-16', 'RES16082018249444', 'Sodiq', '', '', 'jrakah kaliurang srumbung magelang', 55283, '08995413121', 'Menunggu', 'Belum Dikirim'),
 (6, 4, 2, 0, 1, 0, '2018-08-16', 'RES16082018254494', 'Anton her', '', '', 'jrakah kaliurang sumbung magelang', 55283, '08995413121', 'Diterima', 'Sudah Dikirim'),
-(7, 4, 2, 0, 0, 0, '2018-08-16', 'RES16082018317424', 'Dino', '', '', 'jrakah kaliurang sumbung', 55283, '08995413121', 'Selesai', 'Sudah Dikirim'),
+(7, 4, 2, 0, 0, 0, '2018-08-16', 'RES16082018317424', 'Dino', '', '', 'jrakah kaliurang sumbung', 55283, '08995413121', 'Selesai', 'Belum Dikirim'),
 (8, 4, 2, 3, 1, 3, '2018-08-20', 'RES20082018905544', 'Jono', 'DI Yogyakarta', 'Yogyakarta', 'test', 55283, '0899541311', 'Selesai', 'Sudah Dikirim'),
 (9, 4, 2, 3, 1, 3, '2018-08-20', 'RES20082018231514', 'Haqi', 'DI Yogyakarta', 'Yogyakarta', 'test', 55283, '0899541311', 'Selesai', 'Sudah Dikirim');
 

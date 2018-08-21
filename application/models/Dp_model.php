@@ -44,6 +44,15 @@ class Dp_model extends CI_Model {
 		$this->db->update($table, $data, $where);		
 	}
 
+	function update_multiple($table = null, $data = null, $where = null)
+	{
+
+    	foreach ($where as $key){ 
+	        $this->db->where('id_transaksi', $key);
+	        $this->db->update($table, $data);               
+    	}		
+	}
+
 	function delete($table = null, $where = null)
 	{
 		$this->db->where($where);	

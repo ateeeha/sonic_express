@@ -464,6 +464,24 @@ class Admin extends CI_Controller {
 		}
 	}
 
+	public function status_user()
+	{
+		
+		if (isset($_POST['submit']))
+		{
+	     // $where = implode(",", $this->input->post('id_user'));
+	      	
+	         $this->admin_model->update_multiple(
+	         	't_user', 
+	         	['status_user'=>1], 
+	         	$this->input->post('id_user')
+	         );
+
+	      }
+			
+		redirect('admin/user/');
+	}
+
 	function cek_login()
 	{
 		if (!$this->session->userdata('login_admin'))

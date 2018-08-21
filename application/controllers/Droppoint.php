@@ -190,6 +190,44 @@ class Droppoint extends CI_Controller {
 		redirect('droppoint/diterima_darikurir/');
 	}
 
+	public function kirim_banyakdarikurir()
+	{
+		$this->cek_login();
+		
+		if (isset($_POST['submit']))
+		{
+	     // $where = implode(",", $this->input->post('id_user'));
+	      	
+	         $this->dp_model->update_multiple(
+	         	't_transaksi', 
+	         	['dp_kirim'=> 'Sudah Dikirim'], 
+	         	$this->input->post('id_transaksi')
+	         );
+
+	      }
+			
+		redirect('droppoint/diterima_darikurir/');
+	}
+
+	public function kirim_banyakdaridp()
+	{
+		$this->cek_login();
+		
+		if (isset($_POST['submit']))
+		{
+	     // $where = implode(",", $this->input->post('id_user'));
+	      	
+	         $this->dp_model->update_multiple(
+	         	't_transaksi', 
+	         	['dp_kirim'=> 'Sudah Dikirim'], 
+	         	$this->input->post('id_transaksi')
+	         );
+
+	      }
+			
+		redirect('droppoint/diterima_daridp/');
+	}
+
 	public function terima_paketdp()
 	{
 		$this->cek_login();

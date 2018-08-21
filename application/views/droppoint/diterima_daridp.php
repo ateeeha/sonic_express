@@ -10,18 +10,18 @@
       <div class="row">
         <div class="col-xs-12">
           <div class="box box-primary">
-          <div class="box-header with-border">
-                <div style="float:right">
-                  <a href="<?= base_url(); ?>index.php/admin/add_dp" class="btn btn-primary"><i class="fa fa-plane"></i> Kirim</a>            
-                </div>
-                <div class="clearfix"></div>
-            </div>
             <!-- /.box-header -->
+            <form method="post" action="<?php echo site_url('droppoint/kirim_banyakdaridp'); ?>">
+            <div class="box-header with-border">
+                <div style="float:right">
+                  <input class="btn btn-success" type="submit" name="submit" value="Kirim">
+                </div>
+            </div>
             <div class="box-body table-responsive">
               <table class="table table-bordered table-hover dt-responsive nowrap" id="datatable">
                 <thead>
                   <tr>
-                    <th style="text-align: center">#</th>
+                    <th><input id="check-all" type="checkbox"></th>
                     <th style="text-align: center">#</th>
                     <th style="text-align: center">ID User</th>
                     <th style="text-align: center">Tanggal</th>
@@ -38,7 +38,7 @@
                   foreach ($data->result() as $key) :
                   ?>
                   <tr>
-                    <td><input name="<?= $key->id_transaksi; ?>" type="checkbox"></td>
+                    <th><input class="check-item" type="checkbox" name="id_transaksi[<?= $key->id_transaksi; ?>]" value="<?= $key->id_transaksi; ?>"></th>
                     <td style="text-align: center"><?= $i++; ?></td>
                     <td style="text-align: center"><?= $key->id_user; ?></td>
                     <td style="text-align: center"><?= $key->tgl_pengiriman; ?></td>
@@ -61,6 +61,7 @@
                 </  >
               </table>
                 </div>
+              </form>
               <div class="box-footer with-border">
               </div>
           </div>
