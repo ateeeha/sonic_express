@@ -101,7 +101,7 @@ class Droppoint extends CI_Controller {
 			array(
 				'kabupaten_tujuan' => $this->session->userdata('kabupaten_dp'),
 				'status_transaksi' => 'diterima',
-				'status_dp' => 'Sudah Dikirim',
+				'dp_kirim' => 'Sudah Dikirim',
 				'dp_tujuan' => ''
 				));
 
@@ -146,28 +146,6 @@ class Droppoint extends CI_Controller {
 		$this->template->dp('droppoint/diterima_daridp', $data);
 	}
 
-	public function terima_paket()
-	{
-		$this->cek_login();
-
-		$no_resi = $this->uri->segment(3);
-
-		$data = array(
-			'no_resi' => $no_resi, 
-			'tanggal' => date("Y-m-d"), 
-			'status_tracking' => 'Diterima Drop Point Kota Asal'
-		);
-
-		$this->kurir_model->insert('t_tracking', $data);
-		$this->kurir_model->update(
-			't_transaksi', 
-			['dp_asal' => $this->session->userdata('id_dp')],
-			['no_resi' => $this->uri->segment(3)]
-			);
-
-		redirect('droppoint/paket_kurir/');
-	}
-
 	public function kirim_paket()
 	{
 		$this->cek_login();
@@ -180,10 +158,10 @@ class Droppoint extends CI_Controller {
 			'status_tracking' => 'Dikirim ke Drop Point Kota Tujuan'
 		);
 
-		$this->kurir_model->insert('t_tracking', $data);
-		$this->kurir_model->update(
+		$this->dp_model->insert('t_tracking', $data);
+		$this->dp_model->update(
 			't_transaksi', 
-			['status_dp' => 'Sudah Dikirim'],
+			['dp_kirim' => 'Sudah Dikirim'],
 			['no_resi' => $this->uri->segment(3)]
 			);
 
@@ -194,38 +172,53 @@ class Droppoint extends CI_Controller {
 	{
 		$this->cek_login();
 		
+		$resi = $this->input->post('no_resi');
+
 		if (isset($_POST['submit']))
 		{
-	     // $where = implode(",", $this->input->post('id_user'));
-	      	
-	         $this->dp_model->update_multiple(
-	         	't_transaksi', 
-	         	['dp_kirim'=> 'Sudah Dikirim'], 
-	         	$this->input->post('id_transaksi')
-	         );
 
-	      }
+			foreach ($resi as $res)
+			{ 
+		        
+				$data = array(
+					'no_resi' => $res, 
+					'tanggal' => date("Y-m-d"), 
+					'status_tracking' => 'Dikirim ke Drop Point Kota Tujuan'
+				);
+
+				$this->dp_model->insert('t_tracking', $data);
+				$this->dp_model->update(
+					't_transaksi', 
+					['dp_kirim' => 'Sudah Dikirim'],
+					['no_resi' => $res]
+					);              
+    		}
+
+	    }
 			
 		redirect('droppoint/diterima_darikurir/');
 	}
 
-	public function kirim_banyakdaridp()
+	public function terima_paketkurir()
 	{
 		$this->cek_login();
-		
-		if (isset($_POST['submit']))
-		{
-	     // $where = implode(",", $this->input->post('id_user'));
-	      	
-	         $this->dp_model->update_multiple(
-	         	't_transaksi', 
-	         	['dp_kirim'=> 'Sudah Dikirim'], 
-	         	$this->input->post('id_transaksi')
-	         );
 
-	      }
-			
-		redirect('droppoint/diterima_daridp/');
+		$no_resi = $this->uri->segment(3);
+
+		$data = array(
+			'no_resi' => $no_resi, 
+			'tanggal' => date("Y-m-d"), 
+			'status_tracking' => 'Diterima Drop Point Kota Asal'
+		);
+
+		$this->dp_model->insert('t_tracking', $data);
+		$this->dp_model->update(
+			't_transaksi', 
+			['dp_asal' => $this->session->userdata('id_dp')],
+			['no_resi' => $this->uri->segment(3)]
+			);
+
+		redirect('droppoint/paket_kurir/');
 	}
 
 	public function terima_paketdp()
@@ -240,13 +233,75 @@ class Droppoint extends CI_Controller {
 			'status_tracking' => 'Diterima Drop Point Kota Tujuan'
 		);
 
-		$this->kurir_model->insert('t_tracking', $data);
-		$this->kurir_model->update(
+		$this->dp_model->insert('t_tracking', $data);
+		$this->dp_model->update(
 			't_transaksi', 
 			['dp_tujuan' => $this->session->userdata('id_dp')],
 			['no_resi' => $this->uri->segment(3)]
 			);
 
+		redirect('droppoint/paket_dp/');
+	}
+
+	public function terima_banyakdarikurir()
+	{
+		$this->cek_login();
+
+		$resi = $this->input->post('no_resi');
+
+		if (isset($_POST['submit']))
+		{
+
+			foreach ($resi as $res)
+			{ 
+		        
+				$data = array(
+					'no_resi' => $res, 
+					'tanggal' => date("Y-m-d"), 
+					'status_tracking' => 'Diterima Drop Point Kota Asal'
+				);
+
+				$this->dp_model->insert('t_tracking', $data);
+				$this->dp_model->update(
+					't_transaksi', 
+					['dp_asal' => $this->session->userdata('id_dp')],
+					['no_resi' => $res]
+					);              
+    		}
+
+	    }
+			
+		redirect('droppoint/paket_kurir/');
+	}
+
+	public function terima_banyakdaridp()
+	{
+		$this->cek_login();
+
+		$resi = $this->input->post('no_resi');
+
+		if (isset($_POST['submit']))
+		{
+
+			foreach ($resi as $res)
+			{ 
+		        
+				$data = array(
+					'no_resi' => $res, 
+					'tanggal' => date("Y-m-d"), 
+					'status_tracking' => 'Diterima Drop Point Kota Tujuan'
+				);
+
+				$this->dp_model->insert('t_tracking', $data);
+				$this->dp_model->update(
+					't_transaksi', 
+					['dp_tujuan' => $this->session->userdata('id_dp')],
+					['no_resi' => $res]
+					);              
+    		}
+
+	    }
+			
 		redirect('droppoint/paket_dp/');
 	}
 

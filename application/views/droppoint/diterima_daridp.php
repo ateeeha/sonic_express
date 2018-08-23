@@ -21,7 +21,6 @@
               <table class="table table-bordered table-hover dt-responsive nowrap" id="datatable">
                 <thead>
                   <tr>
-                    <th><input id="check-all" type="checkbox"></th>
                     <th style="text-align: center">#</th>
                     <th style="text-align: center">ID User</th>
                     <th style="text-align: center">Tanggal</th>
@@ -38,7 +37,6 @@
                   foreach ($data->result() as $key) :
                   ?>
                   <tr>
-                    <th><input class="check-item" type="checkbox" name="id_transaksi[<?= $key->id_transaksi; ?>]" value="<?= $key->id_transaksi; ?>"></th>
                     <td style="text-align: center"><?= $i++; ?></td>
                     <td style="text-align: center"><?= $key->id_user; ?></td>
                     <td style="text-align: center"><?= $key->tgl_pengiriman; ?></td>
@@ -47,7 +45,7 @@
                     <td style="text-align: center"><?= $key->kode_pos; ?></td>
                     <td style="text-align: center"><?= $key->no_tlp; ?></td>
                     <td>
-                    <?php if ($key->status_dp == 'Belum Dikirim'): ?>
+                    <?php if ($key->dp_kirim == 'Belum Dikirim'): ?>
                     <a href="" class="btn btn-success btn-xs" onclick="return confirm('Anda Yakin ?');"><i class="fa fa-check"></i> Kirim</a>
                     <?php else: ?>
                     <a href="" class="btn btn-default btn-xs" onclick="return confirm('Anda Yakin ?');"><i class="fa fa-check"></i> Selesai</a>

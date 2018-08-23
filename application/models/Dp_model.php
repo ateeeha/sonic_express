@@ -13,6 +13,14 @@ class Dp_model extends CI_Model {
 	{
 		$this->db->insert($table,$data);
 	}
+
+	function insert_multiple($table = null, $data = null)
+	{
+
+    	foreach ($where as $key){ 
+	        $this->db->insert($table,$key);              
+    	}		
+	}
 		
 	function get_all($table)
 	{

@@ -22,14 +22,8 @@
                } ?>                
             </div>
             <!-- /.box-header -->
-            <form class="form-horizontal" action="" method="post" enctype="multipart/form-data">
+            <form class="form-horizontal" action="<?php echo site_url('user/transaksi_simpan'); ?>" method="post" enctype="multipart/form-data">
               <div class="box-body">
-
-                <div class="form-group">
-                <div class="col-md-6">Tarif</div>
-                <div class="col-md-6">Data Penerima</div>
-            <?php echo $this->session->userdata('id_kurir'); ?>
-                </div>
 
                 <div class="form-group">
                   <label class="col-md-2 col-sm-2 col-xs-12 control-label">Asal</label>

@@ -5,7 +5,7 @@
       
       <ul class="sidebar-menu" data-widget="tree">
        <li class="<?php if(isset($active_admin)){echo $active_admin;}?>">
-          <a href="<?= base_url(); ?>index.php/admin/admin/">
+          <a href="<?= base_url(); ?>index.php/admin/">
             <i class="fa fa-user"></i> <span>MANAGE ADMIN</span>
           </a>
         </li>

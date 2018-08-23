@@ -62,6 +62,16 @@ class User extends CI_Controller {
 	{
 		$this->cek_login();
 
+		
+		$data['data'] = $this->user_model->get_all('t_provinsi');
+
+		$data['active_transaksi'] = 'active';
+		$data['header'] = 'Transaksi';
+		$this->template->user('user/form_transaksi', $data);
+	}
+
+	function transaksi_simpan()
+	{
 		if ($this->input->post('submit', TRUE) == 'Submit')
 		{
 			//validasi
@@ -92,11 +102,7 @@ class User extends CI_Controller {
 			
 			} 
 		}
-		$data['data'] = $this->user_model->get_all('t_provinsi');
-
-		$data['active_transaksi'] = 'active';
-		$data['header'] = 'Transaksi';
-		$this->template->user('user/form_transaksi', $data);
+		redirect('user/transaksi/');
 	}
 
 	public function list_transaksi()

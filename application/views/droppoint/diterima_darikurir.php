@@ -13,7 +13,7 @@
             <!-- /.box-header -->
             <form method="post" action="<?php echo site_url('droppoint/kirim_banyakdarikurir'); ?>">
             <div class="box-header with-border">
-                <div style="float:right">
+                <div style="float:left">
                   <input class="btn btn-success" type="submit" name="submit" value="Kirim">
                 </div>
             </div>
@@ -38,7 +38,7 @@
                   foreach ($data->result() as $key) :
                   ?>
                   <tr>
-                    <th><input class="check-item" type="checkbox" name="id_transaksi[<?= $key->id_transaksi; ?>]" value="<?= $key->id_transaksi; ?>"></th>                
+                    <th><input class="check-item" type="checkbox" name="no_resi[<?= $key->no_resi; ?>]" value="<?= $key->no_resi; ?>"></th>                 
                     <td style="text-align: center"><?= $i++; ?></td>
                     <td style="text-align: center"><?= $key->id_user; ?></td>
                     <td style="text-align: center"><?= $key->tgl_pengiriman; ?></td>

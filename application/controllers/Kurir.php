@@ -267,7 +267,7 @@ class Kurir extends CI_Controller {
 			['no_resi' => $this->uri->segment(3)]
 			);
 
-		redirect('kurir/paket_dp/');
+		redirect('kurir/paket_diantar/');
 
 	}
 
