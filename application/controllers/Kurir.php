@@ -311,7 +311,7 @@ class Kurir extends CI_Controller {
 
 				$this->kurir_model->insert('t_user', $data);
 				
-				redirect('index.php/admin/user/');
+				redirect('index.php/kurir/');
 			} 
 		}
 		$data['data'] = $this->kurir_model->get_all('t_provinsi');
@@ -319,6 +319,58 @@ class Kurir extends CI_Controller {
 		$data['active_user'] = 'active';
 		$data['header'] = 'Add User';	
 		$this->template->kurir('kurir/add_user', $data);
+	}
+
+	public function edit_user()
+	{
+		$this->cek_login();
+
+		$id_user = $this->uri->segment(3);
+
+		if ($this->input->post('submit') == 'Submit') 
+		{
+			$this->form_validation->set_rules('username', 'Username', "required");
+			$this->form_validation->set_rules('email', 'Email', "required|valid_email");
+			$this->form_validation->set_rules('provinsi','Provinsi','required');
+			$this->form_validation->set_rules('kabupaten','Kabupaten','required');
+			$this->form_validation->set_rules('status', 'Status', "required|numeric");
+
+			if ($this->form_validation->run() == TRUE)
+			{
+				
+				$data = array(
+					'username' => $this->input->post('username', TRUE),
+					'email' => $this->input->post('email', TRUE),
+					'provinsi' => $this->input->post('provinsi', TRUE), 
+					'kabupaten' => $this->input->post('kabupaten', TRUE),
+					'status_user' => $this->input->post('status', TRUE)
+				);
+				
+				$this->kurir_model->update('t_user', $data, array('id_user' => $id_user));
+				$this->session->set_flashdata('success','Data berhasil disimpan !');
+
+				//redirect('admin');
+				
+			}
+		}
+
+		$user = $this->kurir_model->get_where('t_user', array('id_user' => $id_user));
+
+		foreach ($user->result() as $key) {
+			
+			$data['id_user'] = $key->id_user;
+			$data['username'] = $key->username;
+			$data['email'] = $key->email;
+			$data['provinsi'] = $key->provinsi;
+			$data['kabupaten'] = $key->kabupaten;
+			$data['status_user'] = $key->status_user;
+
+		}
+		$data['data'] = $this->kurir_model->get_all('t_provinsi');
+
+		$data['active_user'] = 'active';
+		$data['header'] = 'Manage User';
+		$this->template->kurir('kurir/edit_user', $data);
 	}
 
 	function cek_login()

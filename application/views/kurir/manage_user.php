@@ -25,7 +25,7 @@
                     <th style="text-align: center">Username</th>
                     <th style="text-align: center">Email</th>
                     <th style="text-align: center">Status</th>
-                    <th style="text-align: center" width="10%;">Opsi</th>
+                    <th style="text-align: center" width="15%;">Opsi</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -46,7 +46,8 @@
                       <?php } ?> 
                     </td>
                     <td>
-                        <a href="<?= base_url(); ?>index.php/admin/del_dp/<?= $key->id_user; ?>" class="btn btn-danger btn-xs" onclick="return confirm('Anda Yakin ?');"><i class="fa fa-trash"></i> Hapus</a>
+                        <a href="<?= base_url(); ?>index.php/kurir/del_user/<?= $key->id_user; ?>" class="btn btn-danger btn-xs" onclick="return confirm('Anda Yakin ?');"><i class="fa fa-trash"></i> Hapus</a>
+                        <a href="<?= base_url(); ?>index.php/kurir/edit_user/<?= $key->id_user; ?>" class="btn btn-warning btn-xs" onclick="return confirm('Anda Yakin ?');"><i class="fa fa-edit"></i> Edit</a>
                     </td>
                   </tr>
                   <?php endforeach ?>

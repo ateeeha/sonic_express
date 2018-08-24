@@ -50,6 +50,27 @@
                   </div>
                 </div>
 
+                 <div class="form-group">
+                  <label class="col-md-2 col-sm-2 col-xs-12 control-label">Provinsi</label>
+                  <div class="col-md-4 col-sm-6 col-xs-12">
+                    <select class="province" name="provinsi" required id="provinsi" class="col-md-6">
+                      <option value="">--Pilih Provinsi--</option>
+                      <?php foreach ($data->result() as $key): ?>
+                      <option value="<?= $key->nama_provinsi; ?>"><?= $key->nama_provinsi; ?></option>
+                      <?php endforeach ?>
+                    </select>
+                  </div>
+                </div>
+                
+                <div class="form-group">
+                  <label class="col-md-2 col-sm-2 col-xs-12 control-label">Kabupaten</label>
+                  <div class="col-md-4 col-sm-6 col-xs-12">
+                  <select class="city" name="kabupaten" required id="kabupaten" class="col-md-6">
+                    <option value="">--Pilih Kabupaten--</option>
+                  </select>
+                  </div>
+                </div>
+                
                 <div class="form-group">
                   <label class="col-md-2 col-sm-2 col-xs-12 control-label">Password</label>
                   <div class="col-md-7 col-sm-6 col-xs-12">

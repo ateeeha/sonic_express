@@ -368,6 +368,8 @@ class Admin extends CI_Controller {
 		{
 			$this->form_validation->set_rules('username', 'Username', "required");
 			$this->form_validation->set_rules('email', 'Email', "required|valid_email");
+			$this->form_validation->set_rules('provinsi','Provinsi','required');
+			$this->form_validation->set_rules('kabupaten','Kabupaten','required');
 			$this->form_validation->set_rules('status', 'Status', "required|numeric");
 
 			if ($this->form_validation->run() == TRUE)
@@ -376,6 +378,8 @@ class Admin extends CI_Controller {
 				$data = array(
 					'username' => $this->input->post('username', TRUE),
 					'email' => $this->input->post('email', TRUE),
+					'provinsi' => $this->input->post('provinsi', TRUE), 
+					'kabupaten' => $this->input->post('kabupaten', TRUE),
 					'status_user' => $this->input->post('status', TRUE)
 				);
 				
@@ -394,9 +398,12 @@ class Admin extends CI_Controller {
 			$data['id_user'] = $key->id_user;
 			$data['username'] = $key->username;
 			$data['email'] = $key->email;
+			$data['provinsi'] = $key->provinsi;
+			$data['kabupaten'] = $key->kabupaten;
 			$data['status_user'] = $key->status_user;
 
 		}
+		$data['data'] = $this->admin_model->get_all('t_provinsi');
 
 		$data['active_user'] = 'active';
 		$data['header'] = 'Manage User';

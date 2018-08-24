@@ -20,7 +20,6 @@
               <table class="table table-bordered table-hover dt-responsive nowrap" id="datatable">
                 <thead>
                   <tr>
-                    <th width="5%"><input type="checkbox" id="check-all"></th>
                     <th style="text-align: center" width="5%">#</th>
                     <th style="text-align: left;">Username</th>
                     <th style="text-align: left">E-Mail</th>
@@ -34,7 +33,6 @@
                   foreach ($data->result() as $key) :
                   ?>
                   <tr>
-                    <td><input type="checkbox" class="check-item" name="id_user[<?= $key->id_user; ?>]" value="<?= $key->id_user; ?>"></td>
                     <td style="text-align: center"><?= $i++; ?></td>
                     <td style="text-align: left"><?= $key->username; ?></td>
                     <td style="text-align: left"><?= $key->email; ?></td>

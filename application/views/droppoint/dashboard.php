@@ -122,6 +122,14 @@
       }
   });
   
+  $(".province").change(function(){
+      $( ".city" ).html("<option>Loading...</option>");
+      var data = $(this).val();
+      $.get( "<?php echo site_url('admin/getcity');?>", { sts: data }, function( data ) {
+        $( ".city" ).html( data );
+      });
+    });
+  
   $('.alert-message').alert().delay(3000).slideUp('slow');
 </script>
 </body>

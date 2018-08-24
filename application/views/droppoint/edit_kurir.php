@@ -1,5 +1,5 @@
     <section class="content-header">
-      <h1>Edit User</h1>
+      <h1>Edit Kurir</h1>
     </section>
     <section class="content">
           <!-- Horizontal Form -->
@@ -31,7 +31,7 @@
                 <div class="form-group">
                   <label class="col-md-2 col-sm-2 col-xs-12 control-label">ID</label>
                   <div class="col-md-4 col-sm-6 col-xs-12">
-                    <input type="text" class="form-control col-md-7 col-xs-12" name="username" readonly value="<?= $id_user; ?>">
+                    <input type="text" class="form-control col-md-7 col-xs-12" name="username" readonly value="<?= $id_kurir; ?>">
                   </div>
                 </div>
                 <div class="form-group">
@@ -69,14 +69,14 @@
                   </select>
                   </div>
                 </div>
-                
+
                 <div class="form-group">
                   <label class="col-md-2 col-sm-2 col-xs-12 control-label">Status</label>
                   <div class="col-md-4 col-sm-6">
                     <select name="status" class="form-control">
                         <option value=""disabled selected>--Pilih Status--</option>
-                        <option value="1" <?php if ($status_user == 1) { echo "selected";} ?>>Tidak Aktif</option>
-                        <option value="2" <?php if ($status_user == 2) { echo "selected";} ?>>Aktif</option>
+                        <option value="1" <?php if ($status_kurir == 1) { echo "selected";} ?>>Tidak Aktif</option>
+                        <option value="2" <?php if ($status_kurir == 2) { echo "selected";} ?>>Aktif</option>
                     </select>
                   </div>
                 </div>
