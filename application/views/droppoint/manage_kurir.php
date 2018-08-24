@@ -8,7 +8,7 @@
           <div class="box box-primary">
             <div class="box-header with-border">
                 <div style="float:right">
-                  <a href="<?= base_url(); ?>index.php/droppoint/add_kurir" class="btn btn-primary"><i class="fa fa-plus"></i> Tambah Kurir</a>            
+                  <a href="<?= base_url(); ?>droppoint/add_kurir" class="btn btn-primary"><i class="fa fa-plus"></i> Tambah Kurir</a>            
                 </div>
                 <div class="clearfix"></div>
             </div>

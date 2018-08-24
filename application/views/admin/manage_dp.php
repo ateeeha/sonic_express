@@ -8,7 +8,7 @@
           <div class="box box-primary">
             <div class="box-header with-border">
                 <div style="float:right">
-                  <a href="<?= base_url(); ?>index.php/admin/add_dp" class="btn btn-primary"><i class="fa fa-plus"></i> Tambah Drop Point</a>            
+                  <a href="<?= base_url(); ?>admin/add_dp" class="btn btn-primary"><i class="fa fa-plus"></i> Tambah Drop Point</a>            
                 </div>
                 <div class="clearfix"></div>
             </div>
@@ -42,8 +42,8 @@
                       <?php } ?> 
                     </td>
                     <td>
-                        <a href="<?= base_url(); ?>index.php/admin/del_dp/<?= $key->id_dp; ?>" class="btn btn-danger btn-xs" onclick="return confirm('Anda Yakin ?');"><i class="fa fa-trash"></i> Hapus</a>
-                        <a href="<?= base_url(); ?>index.php/admin/edit_dp/<?= $key->id_dp; ?>" class="btn btn-warning btn-xs" onclick="return confirm('Anda Yakin ?');"><i class="fa fa-edit"></i> Edit</a>
+                        <a href="<?= base_url(); ?>admin/del_dp/<?= $key->id_dp; ?>" class="btn btn-danger btn-xs" onclick="return confirm('Anda Yakin ?');"><i class="fa fa-trash"></i> Hapus</a>
+                        <a href="<?= base_url(); ?>admin/edit_dp/<?= $key->id_dp; ?>" class="btn btn-warning btn-xs" onclick="return confirm('Anda Yakin ?');"><i class="fa fa-edit"></i> Edit</a>
                     </td>
                   </tr>
                   <?php endforeach ?>

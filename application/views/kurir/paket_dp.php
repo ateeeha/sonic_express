@@ -40,7 +40,7 @@
                     <td style="text-align: center"><?= $key->no_tlp; ?></td>
                     
                     <td>
-                    <a href="<?= base_url(); ?>index.php/kurir/kirim_paket/<?= $key->no_resi; ?>/" class="btn btn-warning btn-xs" onclick="return confirm('Anda Yakin ?');"><i class="fa fa-plus"></i> Kirim</a>
+                    <a href="<?= base_url(); ?>kurir/kirim_paket/<?= $key->no_resi; ?>/" class="btn btn-warning btn-xs" onclick="return confirm('Anda Yakin ?');"><i class="fa fa-plus"></i> Kirim</a>
                     </td>
                     <td>
                       <?= $key->status_transaksi; ?>

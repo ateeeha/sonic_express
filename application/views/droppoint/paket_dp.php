@@ -47,7 +47,7 @@
                     <td style="text-align: center"><?= $key->kode_pos; ?></td>
                     <td style="text-align: center"><?= $key->no_tlp; ?></td>
                     <td>
-                    <a href="<?= base_url(); ?>index.php/droppoint/terima_paketdp/<?= $key->no_resi ?>/" class="btn btn-success btn-xs" onclick="return confirm('Anda Yakin ?');"><i class="fa fa-check"></i> Konfirmasi</a>
+                    <a href="<?= base_url(); ?>droppoint/terima_paketdp/<?= $key->no_resi ?>/" class="btn btn-success btn-xs" onclick="return confirm('Anda Yakin ?');"><i class="fa fa-check"></i> Konfirmasi</a>
                     </td>
                     <td>
                     <?= $key->status_transaksi; ?>

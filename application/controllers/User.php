@@ -110,7 +110,7 @@ class User extends CI_Controller {
 		$this->cek_login();
 
 		$join = 't_transaksi t JOIN t_user u ON (t.id_user = u.id_user)';
-		$data['data'] = $this->kurir_model->get_where($join, 
+		$data['data'] = $this->user_model->get_where($join, 
 			array(
 				'email' => $this->session->userdata('email_user'),
 				));
@@ -137,7 +137,7 @@ class User extends CI_Controller {
 	{ 
 		if (!$this->session->userdata('login_user'))
 		{
-			redirect('index.php/login/login_user/');
+			redirect('login/login_user/');
 		} 
 	}
 

@@ -56,7 +56,7 @@
       </div>
     </form>
     <br/>
-    <p>* Daftar member? <a href="<?= base_url(); ?>index.php/register/">disini</a>.</p>
+    <p>* Daftar member? <a href="<?= base_url(); ?>register/">disini</a>.</p>
   </div>
 </div>
   <!-- /.login-box-body -->

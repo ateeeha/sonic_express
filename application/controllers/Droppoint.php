@@ -59,7 +59,7 @@ class Droppoint extends CI_Controller {
 
 				$this->dp_model->insert('t_kurir', $data);
 				
-				redirect('index.php/droppoint/kurir/');
+				redirect('droppoint/kurir/');
 			} 
 		}
 		$data['data'] = $this->dp_model->get_all('t_provinsi');
@@ -130,7 +130,7 @@ class Droppoint extends CI_Controller {
 
 		$this->dp_model->delete('t_kurir', $cond);
 
-		redirect('index.php/droppoint/kurir/');
+		redirect('droppoint/kurir/');
 	}
 
 	public function paket_kurir()
@@ -367,7 +367,7 @@ class Droppoint extends CI_Controller {
 	{
 		if (!$this->session->userdata('login_dp')) 
 		{
-			redirect('index.php/login/login_dp/');
+			redirect('login/login_dp/');
 		} 
 	}
 }

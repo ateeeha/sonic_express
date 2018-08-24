@@ -39,8 +39,8 @@
                     <td style="text-align: center"><?= $key->kode_pos; ?></td>
                     <td style="text-align: center"><?= $key->no_tlp; ?></td>
                     <td>
-                    <a href="<?= base_url(); ?>index.php/kurir/terima_paket/<?= $key->no_resi; ?>/<?= $key->status_transaksi; ?>" class="btn btn-primary btn-xs" onclick="return confirm('Anda Yakin ?');"><i class="fa fa-check"></i> Diterima</a>
-                    <a href="<?= base_url(); ?>index.php/kurir/tolak_paket/<?= $key->no_resi; ?>/<?= $key->status_transaksi; ?>" class="btn btn-danger btn-xs" onclick="return confirm('Anda Yakin ?');"><i class="fa fa-trash"></i> Ditolak</a>
+                    <a href="<?= base_url(); ?>kurir/terima_paket/<?= $key->no_resi; ?>/<?= $key->status_transaksi; ?>" class="btn btn-primary btn-xs" onclick="return confirm('Anda Yakin ?');"><i class="fa fa-check"></i> Diterima</a>
+                    <a href="<?= base_url(); ?>kurir/tolak_paket/<?= $key->no_resi; ?>/<?= $key->status_transaksi; ?>" class="btn btn-danger btn-xs" onclick="return confirm('Anda Yakin ?');"><i class="fa fa-trash"></i> Ditolak</a>
                     </td>
                     <td>
                     <?= $key->status_transaksi; ?>

@@ -12,7 +12,7 @@
           <div class="box box-primary">
           <div class="box-header with-border">
                 <div style="float:right">
-                  <a href="<?= base_url(); ?>index.php/kurir/add_user" class="btn btn-primary"><i class="fa fa-plus"></i> Tambah User</a>            
+                  <a href="<?= base_url(); ?>kurir/add_user" class="btn btn-primary"><i class="fa fa-plus"></i> Tambah User</a>            
                 </div>
                 <div class="clearfix"></div>
             </div>
@@ -46,8 +46,8 @@
                       <?php } ?> 
                     </td>
                     <td>
-                        <a href="<?= base_url(); ?>index.php/kurir/del_user/<?= $key->id_user; ?>" class="btn btn-danger btn-xs" onclick="return confirm('Anda Yakin ?');"><i class="fa fa-trash"></i> Hapus</a>
-                        <a href="<?= base_url(); ?>index.php/kurir/edit_user/<?= $key->id_user; ?>" class="btn btn-warning btn-xs" onclick="return confirm('Anda Yakin ?');"><i class="fa fa-edit"></i> Edit</a>
+                        <a href="<?= base_url(); ?>kurir/del_user/<?= $key->id_user; ?>" class="btn btn-danger btn-xs" onclick="return confirm('Anda Yakin ?');"><i class="fa fa-trash"></i> Hapus</a>
+                        <a href="<?= base_url(); ?>kurir/edit_user/<?= $key->id_user; ?>" class="btn btn-warning btn-xs" onclick="return confirm('Anda Yakin ?');"><i class="fa fa-edit"></i> Edit</a>
                     </td>
                   </tr>
                   <?php endforeach ?>

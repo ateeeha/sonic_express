@@ -51,7 +51,7 @@
             </a>
             <ul class="dropdown-menu">
               <li class="divider"></li>
-              <li><a href="<?= base_url(); ?>index.php/login/logout_kurir/" class="fa fa-sign-out"> Keluar</a></li>
+              <li><a href="<?= base_url(); ?>login/logout_kurir/" class="fa fa-sign-out"> Keluar</a></li>
             </ul>
           </li>
         </ul>

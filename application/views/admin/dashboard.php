@@ -10,8 +10,6 @@
   <link rel="stylesheet" href="<?php echo base_url(); ?>assets/admin/css/bootstrap.min.css">
   <!-- Font Awesome -->
   <link rel="stylesheet" href="<?php echo base_url(); ?>assets/font-awesome/css/font-awesome.min.css">
-  <!-- Ionicons -->
-  <link rel="stylesheet" href="<?php echo base_url(); ?>assets/admin/css/ionicons.min.css">
   <!-- Data Tables -->
   <link rel="stylesheet" href="<?php echo base_url(); ?>assets/admin/css/dataTables.bootstrap.min.css">
   <link rel="stylesheet" href="<?php echo base_url(); ?>assets/admin/css/responsive.bootstrap.min.css">  
@@ -51,7 +49,7 @@
             </a>
             <ul class="dropdown-menu">
               <li class="divider"></li>
-              <li><a href="<?= base_url(); ?>index.php/login/logout_admin/" class="fa fa-sign-out"> Keluar</a></li>
+              <li><a href="<?= base_url(); ?>login/logout_admin/" class="fa fa-sign-out"> Keluar</a></li>
             </ul>
           </li>
         </ul>

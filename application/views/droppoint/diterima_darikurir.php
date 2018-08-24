@@ -49,7 +49,7 @@
                     <td>
                     
                     <?php if ($key->dp_kirim == 'Belum Dikirim'): ?>
-                    <a href="<?= base_url(); ?>index.php/droppoint/kirim_paket/<?= $key->no_resi ?>/" class="btn btn-success btn-xs" onclick="return confirm('Anda Yakin ?');"><i class="fa fa-check"></i> Kirim</a>
+                    <a href="<?= base_url(); ?>droppoint/kirim_paket/<?= $key->no_resi ?>/" class="btn btn-success btn-xs" onclick="return confirm('Anda Yakin ?');"><i class="fa fa-check"></i> Kirim</a>
                     <?php else: ?>
                     <a href="" class="btn btn-default btn-xs"><i class="fa fa-check"></i> Selesai</a>
                     <?php endif ?>

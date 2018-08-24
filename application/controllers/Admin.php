@@ -87,7 +87,7 @@ class Admin extends CI_Controller {
 
 				$this->admin_model->insert('t_admin', $data);
 				
-				redirect('index.php/admin/admin/');
+				redirect('admin/admin/');
 			} 
 		}
 
@@ -123,7 +123,7 @@ class Admin extends CI_Controller {
 
 				$this->admin_model->insert('t_dp', $data);
 				
-				redirect('index.php/admin/droppoint/');
+				redirect('admin/droppoint/');
 			} 
 		}
 		$data['data'] = $this->admin_model->get_all('t_provinsi');
@@ -160,7 +160,7 @@ class Admin extends CI_Controller {
 
 				$this->admin_model->insert('t_kurir', $data);
 				
-				redirect('index.php/admin/kurir/');
+				redirect('admin/kurir/');
 			} 
 		}
 		$data['data'] = $this->admin_model->get_all('t_provinsi');
@@ -197,7 +197,7 @@ class Admin extends CI_Controller {
 
 				$this->admin_model->insert('t_user', $data);
 				
-				redirect('index.php/admin/user/');
+				redirect('admin/user/');
 			} 
 		}
 		$data['data'] = $this->admin_model->get_all('t_provinsi');
@@ -423,7 +423,7 @@ class Admin extends CI_Controller {
 
 		$this->admin_model->delete('t_admin', $cond);
 
-		redirect('index.php/admin/admin/');
+		redirect('admin/admin/');
 	}
 
 	public function del_dp()
@@ -434,7 +434,7 @@ class Admin extends CI_Controller {
 
 		$this->admin_model->delete('t_dp', $cond);
 
-		redirect('index.php/admin/droppoint/');
+		redirect('admin/droppoint/');
 	}
 
 	public function del_kurir()
@@ -445,7 +445,7 @@ class Admin extends CI_Controller {
 
 		$this->admin_model->delete('t_kurir', $cond);
 
-		redirect('index.php/admin/kurir/');
+		redirect('admin/kurir/');
 	}
 
 	public function del_user()
@@ -456,7 +456,7 @@ class Admin extends CI_Controller {
 
 		$this->admin_model->delete('t_user', $cond);
 
-		redirect('index.php/admin/user/');
+		redirect('admin/user/');
 	}
 
 	public function getcity()
@@ -493,7 +493,7 @@ class Admin extends CI_Controller {
 	{
 		if (!$this->session->userdata('login_admin'))
 		{
-			redirect('index.php/login/login_admin/');
+			redirect('login/login_admin/');
 		} 
 	}
 

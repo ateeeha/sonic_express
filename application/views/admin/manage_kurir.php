@@ -8,7 +8,7 @@
           <div class="box box-primary">
             <div class="box-header with-border">
                 <div style="float:right">
-                  <a href="<?= base_url(); ?>index.php/admin/add_kurir" class="btn btn-primary"><i class="fa fa-plus"></i> Tambah Kurir</a>            
+                  <a href="<?= base_url(); ?>admin/add_kurir" class="btn btn-primary"><i class="fa fa-plus"></i> Tambah Kurir</a>            
                 </div>
                 <div class="clearfix"></div>
             </div>
@@ -42,8 +42,8 @@
                       <?php } ?> 
                     </td>
                     <td>
-                        <a href="<?= base_url(); ?>index.php/admin/del_kurir/<?= $key->id_kurir; ?>" class="btn btn-danger btn-xs" onclick="return confirm('Anda Yakin ?');"><i class="fa fa-trash"></i> Hapus</a>
-                        <a href="<?= base_url(); ?>index.php/admin/edit_kurir/<?= $key->id_kurir; ?>" class="btn btn-warning btn-xs" onclick="return confirm('Anda Yakin ?');"><i class="fa fa-edit"></i> Edit</a>
+                        <a href="<?= base_url(); ?>admin/del_kurir/<?= $key->id_kurir; ?>" class="btn btn-danger btn-xs" onclick="return confirm('Anda Yakin ?');"><i class="fa fa-trash"></i> Hapus</a>
+                        <a href="<?= base_url(); ?>admin/edit_kurir/<?= $key->id_kurir; ?>" class="btn btn-warning btn-xs" onclick="return confirm('Anda Yakin ?');"><i class="fa fa-edit"></i> Edit</a>
                     </td>
                   </tr>
                   <?php endforeach ?>

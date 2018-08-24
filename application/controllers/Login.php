@@ -40,7 +40,7 @@ class Login extends CI_Controller {
 
 					$this->session->set_userdata($datauser);
 
-					redirect('index.php/admin');
+					redirect('admin');
 
 				} else {
 					$this->session->set_flashdata('alert', "Password yang anda masukkan salah !");
@@ -52,7 +52,7 @@ class Login extends CI_Controller {
 		}
 		if ($this->session->userdata('logged_in') == TRUE) 
 		{
-			redirect('index.php/admin');
+			redirect('admin');
 		}
 		$this->load->view('admin/login_admin');
 	}
@@ -82,7 +82,7 @@ class Login extends CI_Controller {
 
 					$this->session->set_userdata($datauser);
 
-					redirect('index.php/droppoint/');
+					redirect('droppoint/');
 
 				} else {
 					$this->session->set_flashdata('alert', "Password yang anda masukkan salah !");
@@ -94,7 +94,7 @@ class Login extends CI_Controller {
 		}
 		if ($this->session->userdata('logged_in') == TRUE) 
 		{
-			redirect('index.php/droppoint');
+			redirect('droppoint');
 		}
 		$this->load->view('droppoint/login_dp');
 	}
@@ -124,7 +124,7 @@ class Login extends CI_Controller {
 
 					$this->session->set_userdata($datauser);
 
-					redirect('index.php/kurir');
+					redirect('kurir');
 
 				} else {
 					$this->session->set_flashdata('alert', "Password yang anda masukkan salah !");
@@ -136,7 +136,7 @@ class Login extends CI_Controller {
 		}
 		if ($this->session->userdata('logged_in') == TRUE) 
 		{
-			redirect('index.php/kurir');
+			redirect('kurir');
 		}
 		$this->load->view('kurir/login_kurir');
 	}
@@ -165,7 +165,7 @@ class Login extends CI_Controller {
 
 					$this->session->set_userdata($datauser);
 
-					redirect('index.php/user');
+					redirect('user');
 
 				} else {
 					$this->session->set_flashdata('alert', "Password yang anda masukkan salah !");
@@ -177,7 +177,7 @@ class Login extends CI_Controller {
 		}
 		if ($this->session->userdata('logged_in') == TRUE) 
 		{
-			redirect('index.php/user');
+			redirect('user');
 		}
 		$this->load->view('user/login_user');
 	}
@@ -186,28 +186,28 @@ class Login extends CI_Controller {
 	{
 		$this->session->sess_destroy();
 
-		redirect('index.php/login/login_admin');
+		redirect('login/login_admin');
 	}
 
 	public function logout_dp()
 	{
 		$this->session->sess_destroy();
 
-		redirect('index.php/login/login_dp');
+		redirect('login/login_dp');
 	}
 
 	public function logout_kurir()
 	{
 		$this->session->sess_destroy();
 
-		redirect('index.php/login/login_kurir');
+		redirect('login/login_kurir');
 	}
 
 	public function logout_user()
 	{
 		$this->session->sess_destroy();
 
-		redirect('index.php/login/login_user');
+		redirect('login/login_user');
 	}
 
 }

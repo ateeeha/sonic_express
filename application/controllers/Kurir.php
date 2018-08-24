@@ -311,7 +311,7 @@ class Kurir extends CI_Controller {
 
 				$this->kurir_model->insert('t_user', $data);
 				
-				redirect('index.php/kurir/');
+				redirect('kurir/');
 			} 
 		}
 		$data['data'] = $this->kurir_model->get_all('t_provinsi');
@@ -377,7 +377,7 @@ class Kurir extends CI_Controller {
 	{
 		if (!$this->session->userdata('login_kurir')) 
 		{
-			redirect('index.php/login/login_kurir/');
+			redirect('login/login_kurir/');
 		} 
 	}
 }

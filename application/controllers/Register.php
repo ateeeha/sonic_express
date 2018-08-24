@@ -35,7 +35,7 @@ class Register extends CI_Controller {
 
 				$this->user_model->insert('t_user', $data);
 				
-				redirect('index.php/login/login_user/');
+				redirect('login/login_user/');
 			} 
 		}
 		$data['data'] = $this->user_model->get_all('t_provinsi');
