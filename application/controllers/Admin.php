@@ -25,6 +25,17 @@ class Admin extends CI_Controller {
 		$this->template->admin('admin/manage_admin', $data);
 	}
 
+	public function ongkir()
+	{
+		$this->cek_login();
+
+		$data['data'] = $this->admin_model->get_all('t_ongkir');
+
+		$data['active_ongkir'] = 'active';
+		$data['header'] = 'Manage Ongkir';
+		$this->template->admin('admin/manage_ongkir', $data);
+	}
+
 	public function droppoint()
 	{
 		$this->cek_login();

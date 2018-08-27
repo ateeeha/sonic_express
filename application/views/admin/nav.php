@@ -4,7 +4,12 @@
         
       
       <ul class="sidebar-menu" data-widget="tree">
-       <li class="<?php if(isset($active_admin)){echo $active_admin;}?>">
+       <li class="<?php if(isset($active_ongkir)){echo $active_ongkir;}?>">
+          <a href="<?= base_url(); ?>admin/ongkir">
+            <i class="fa fa-user"></i> <span>MANAGE ONGKIR</span>
+          </a>
+        </li>
+        <li class="<?php if(isset($active_admin)){echo $active_admin;}?>">
           <a href="<?= base_url(); ?>admin/">
             <i class="fa fa-user"></i> <span>MANAGE ADMIN</span>
           </a>

@@ -262,11 +262,18 @@ class Droppoint extends CI_Controller {
 	{
 		$this->cek_login();
 		
-		$resi = $this->input->post('no_resi');
-		$dp_tujuan = $this->input->post('dp_tujuan');
+		$resi 		= $this->input->post('no_resi');
+		$dp_tujuan	= $this->input->post('dp_tujuan');
 
 		if (isset($_POST['submit']))
 		{
+			$transaksidp = array(
+				'dp_asal' => $this->session->userdata('id_dp'), 
+				'dp_tujuan' => $dp_tujuan,
+				'tgl_kirim' =>  date("Y-m-d"),
+				'tgl_sampai' => ''
+			);
+			$id_transaksidp = $this->dp_model->insert_id('t_transaksidp', $transaksidp);
 
 			foreach ($resi as $res)
 			{ 
@@ -277,25 +284,24 @@ class Droppoint extends CI_Controller {
 					'status_tracking' => 'Dikirim ke Drop Point Kota Tujuan'
 				);
 
-				$transaksidp = array(
-					'dp_asal' => $this->session->userdata('id_dp'), 
-					'dp_tujuan' => $dp_tujuan,
-					'tgl_kirim' =>  date("Y-m-d"),
-					'tgl_sampai' => ''
-				);
-
 				$transaksi = array(
 					'dp_tujuan' => $dp_tujuan,
 					'dp_kirim' => 'Sudah Dikirim' 
 				);
 
 				$this->dp_model->insert('t_tracking', $tracking);
-				$this->dp_model->insert('t_transaksidp', $transaksidp);
 				$this->dp_model->update('t_transaksi', $transaksi, ['no_resi' => $res]);              
+				
+
+				$transaksidpdetail = array(
+					'no_resi' => $res, 
+					'id_transaksidp' => $id_transaksidp 
+				);
+
+				$this->dp_model->insert('t_transaksidpdetail', $transaksidpdetail);
     		}
 
 	    }
-			
 		redirect('droppoint/diterima_darikurir/');
 	}
 
