@@ -14,7 +14,15 @@
             <form method="post" action="<?php echo site_url('droppoint/kirim_banyakdarikurir'); ?>">
             <div class="box-header with-border">
                 <div style="float:left">
-                  <input class="btn btn-success" type="submit" name="submit" value="Kirim">
+                  <input class="btn btn-primary" type="submit" name="submit" value="Kirim">
+
+                  <label>Drop Point Tujuan :</label>
+                  <select name="dp_tujuan" required> 
+                      <option value="" disabled selected>--Pilih Droppoint--</option>
+                      <?php foreach ($droppoint->result() as $dp): ?>
+                      <option value="<?= $dp->id_dp; ?>"><?= $dp->username; ?></option>
+                      <?php endforeach ?>
+                  </select>
                 </div>
             </div>
             <div class="box-body table-responsive">
@@ -56,6 +64,9 @@
                     </td>
                     <td>
                     <?= $key->status_transaksi; ?>
+                    </td>
+                    <td>
+                    <a href="<?= base_url(); ?>droppoint/manage_paket/<?= $key->no_resi ?>/" class="btn btn-primary btn-xs" onclick="return confirm('Anda Yakin ?');"><i class="fa fa-gear"></i> Manage</a>
                     </td>
                   </tr>
                   <?php endforeach ?>

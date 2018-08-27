@@ -10,8 +10,6 @@
   <link rel="stylesheet" href="<?php echo base_url(); ?>assets/user/css/bootstrap.min.css">
   <!-- Font Awesome -->
   <link rel="stylesheet" href="<?php echo base_url(); ?>assets/font-awesome/css/font-awesome.min.css">
-  <!-- Ionicons -->
-  <link rel="stylesheet" href="<?php echo base_url(); ?>assets/user/css/ionicons.min.css">
   <!-- Data Tables -->
   <link rel="stylesheet" href="<?php echo base_url(); ?>assets/user/css/dataTables.bootstrap.min.css">
   <link rel="stylesheet" href="<?php echo base_url(); ?>assets/user/css/responsive.bootstrap.min.css">  

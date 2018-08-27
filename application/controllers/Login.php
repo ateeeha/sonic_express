@@ -92,7 +92,7 @@ class Login extends CI_Controller {
 				$this->session->set_flashdata('alert', "Username Ditolak !");
 			}
 		}
-		if ($this->session->userdata('logged_in') == TRUE) 
+		if ($this->session->userdata('login_dp') == TRUE) 
 		{
 			redirect('droppoint');
 		}

@@ -160,7 +160,7 @@ class Droppoint extends CI_Controller {
 				'kabupaten_tujuan' => $this->session->userdata('kabupaten_dp'),
 				'status_transaksi' => 'diterima',
 				'dp_kirim' => 'Sudah Dikirim',
-				'dp_tujuan' => ''
+				'dp_tujuan' => $this->session->userdata('id_dp')
 				));
 
 		// $data['data'] = $this->kurir_model->get_all('t_transaksi');
@@ -179,8 +179,9 @@ class Droppoint extends CI_Controller {
 				'kabupaten' => $this->session->userdata('kabupaten_dp'),
 				'dp_asal' => $this->session->userdata('id_dp'),
 				));
+		$dp_tujuan = $this->session->userdata('id_dp');
+		$data['droppoint'] = $this->dp_model->get_where('t_dp',['id_dp !='=> $dp_tujuan]);
 
-		// $data['data'] = $this->kurir_model->get_all('t_transaksi');
 
 		$data['active_terimakurir'] = 'active';
 		$data['header'] = 'Manage Paket Diterima';
@@ -204,26 +205,57 @@ class Droppoint extends CI_Controller {
 		$this->template->dp('droppoint/diterima_daridp', $data);
 	}
 
+	/**
+	 * function kirim_paket belum fix
+	 */
 	public function kirim_paket()
 	{
 		$this->cek_login();
 
-		$no_resi = $this->uri->segment(3);
+		$no_resi = $this->input->post('no_resi');
+		$dp_tujuan = $this->input->post('dp_tujuan');
+	
+		if ($this->input->post('submit') == 'Submit')
+		{
+		//validasi
+			$this->form_validation->set_rules('dp_tujuan','Dp Tujuan','required');
 
-		$data = array(
-			'no_resi' => $no_resi, 
-			'tanggal' => date("Y-m-d"), 
-			'status_tracking' => 'Dikirim ke Drop Point Kota Tujuan'
-		);
+			if ($this->form_validation->run() == TRUE)
+			{
+				$transaksi = array(
+					'dp_tujuan' => $dp_tujuan,
+					'dp_kirim' => 'Sudah Dikirim' 
+				);
 
-		$this->dp_model->insert('t_tracking', $data);
-		$this->dp_model->update(
-			't_transaksi', 
-			['dp_kirim' => 'Sudah Dikirim'],
-			['no_resi' => $this->uri->segment(3)]
-			);
+				$tracking = array(
+					'no_resi' => $no_resi, 
+					'tanggal' => date("Y-m-d"), 
+					'status_tracking' => 'Dikirim ke Drop Point Kota Tujuan'
+				);
 
-		redirect('droppoint/diterima_darikurir/');
+				$transaksidp = array(
+					'dp_asal' => $this->session->userdata('id_dp'), 
+					'dp_tujuan' => $dp_tujuan,
+					'tgl_kirim' =>  date("Y-m-d"),
+					'tgl_sampai' => ''
+				);
+
+
+				$this->dp_model->update('t_transaksi', $transaksi, ['no_resi'=>$no_resi]);
+
+				$this->dp_model->insert('t_tracking', $tracking);
+
+				$this->dp_model->insert('t_transaksidp', $transaksidp);
+
+				
+
+				redirect('droppoint/diterima_darikurir/');
+			} 
+
+		redirect('droppoint/kurir/');
+		}
+		redirect('droppoint/paket_dp/');
+
 	}
 
 	public function kirim_banyakdarikurir()
@@ -231,6 +263,7 @@ class Droppoint extends CI_Controller {
 		$this->cek_login();
 		
 		$resi = $this->input->post('no_resi');
+		$dp_tujuan = $this->input->post('dp_tujuan');
 
 		if (isset($_POST['submit']))
 		{
@@ -238,18 +271,27 @@ class Droppoint extends CI_Controller {
 			foreach ($resi as $res)
 			{ 
 		        
-				$data = array(
+				$tracking = array(
 					'no_resi' => $res, 
 					'tanggal' => date("Y-m-d"), 
 					'status_tracking' => 'Dikirim ke Drop Point Kota Tujuan'
 				);
 
-				$this->dp_model->insert('t_tracking', $data);
-				$this->dp_model->update(
-					't_transaksi', 
-					['dp_kirim' => 'Sudah Dikirim'],
-					['no_resi' => $res]
-					);              
+				$transaksidp = array(
+					'dp_asal' => $this->session->userdata('id_dp'), 
+					'dp_tujuan' => $dp_tujuan,
+					'tgl_kirim' =>  date("Y-m-d"),
+					'tgl_sampai' => ''
+				);
+
+				$transaksi = array(
+					'dp_tujuan' => $dp_tujuan,
+					'dp_kirim' => 'Sudah Dikirim' 
+				);
+
+				$this->dp_model->insert('t_tracking', $tracking);
+				$this->dp_model->insert('t_transaksidp', $transaksidp);
+				$this->dp_model->update('t_transaksi', $transaksi, ['no_resi' => $res]);              
     		}
 
 	    }
@@ -361,6 +403,27 @@ class Droppoint extends CI_Controller {
 	    }
 			
 		redirect('droppoint/paket_dp/');
+	}
+
+	public function manage_paket()
+	{
+		$this->cek_login();
+		$no_resi = $this->uri->segment(3);
+
+		$join = 't_transaksi t JOIN t_user u ON (t.id_user = u.id_user)';
+		$data['data'] = $this->dp_model->get_where($join, 
+			array(
+				'no_resi' => $no_resi
+				));
+
+
+		// $data['data'] = $this->dp_model->get_all('t_dp');
+
+		$data['droppoint'] = $this->dp_model->get_all('t_dp');
+
+		$data['active_terimakurir'] = 'active';
+		$data['header'] = 'Manage Paket';
+		$this->template->dp('droppoint/manage_paket', $data);
 	}
 
 	function cek_login()

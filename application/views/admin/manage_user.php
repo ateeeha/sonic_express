@@ -52,20 +52,7 @@
                   </tr>
                   <?php endforeach ?>
                 </tbody>
-              </table>
-              <input class="btn btn-warning" type="submit" name="submit" value="Cek">  
-              <?php
-              if (isset($_POST['submit'])) {
-                echo '<h1>Hasil Input</h1>';
-                foreach($_POST['id_user'] as $id)
-                  {
-                  echo $id;
-
-                  }
-                  echo "<br />";  
-                  print_r($_POST['id_user']);
-
-              }?>
+              </table>           
                 </div>
               </form>
             <!-- /.box-body -->
