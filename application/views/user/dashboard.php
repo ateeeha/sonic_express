@@ -106,6 +106,22 @@
       });
   });
 
+  $(".province_asal").change(function(){
+      $( ".city_asal" ).html("<option>Loading...</option>");
+      var data = $(this).val();
+      $.get( "<?php echo site_url('user/getcity');?>", { sts: data }, function( data ) {
+        $( ".city_asal" ).html( data );
+      });
+    });
+
+   $(".province_tujuan").change(function(){
+      $( ".city_tujuan" ).html("<option>Loading...</option>");
+      var data = $(this).val();
+      $.get( "<?php echo site_url('user/getcity');?>", { sts: data }, function( data ) {
+        $( ".city_tujuan" ).html( data );
+      });
+    });
+
   $(document).ready(function(){
       $('#datatable').DataTable();
   });

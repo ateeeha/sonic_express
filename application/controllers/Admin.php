@@ -69,6 +69,46 @@ class Admin extends CI_Controller {
 		$this->template->admin('admin/manage_user', $data);
 	}
 
+	public function add_ongkir()
+	{
+		$this->cek_login();		
+
+		
+		$data['data'] = $this->admin_model->get_all('t_provinsi');
+
+		$data['active_ongkir'] = 'active';
+		$data['header'] = 'Add Ongkir';	
+		$this->template->admin('admin/add_ongkir', $data);
+	}
+
+	public function save_ongkir()
+	{
+		if ($this->input->post('submit', TRUE) == 'Submit')
+		{
+			//validasi
+			$this->form_validation->set_rules('kabupaten_asal','kabupaten Asal','required');
+			$this->form_validation->set_rules('kabupaten_tujuan','kabupaten Tujuan','required');
+			$this->form_validation->set_rules('berat','Berat','required|numeric');
+			$this->form_validation->set_rules('reg','Reguler','required|numeric');
+			$this->form_validation->set_rules('e_reg','Estimasi Reguler','required');
+
+			if ($this->form_validation->run() == TRUE)
+			{
+				$data = array(
+				'origin' => $this->input->post('kabupaten_asal', TRUE), 
+				'kota' => $this->input->post('kabupaten_tujuan', TRUE), 
+				'berat' => $this->input->post('berat', TRUE), 
+				'reg' => $this->input->post('reg', TRUE), 
+				'estimasi_reg' => $this->input->post('e_reg', TRUE), 
+				);
+
+				$this->admin_model->insert('t_ongkir', $data);
+				
+				redirect('admin/add_ongkir/');
+			} 
+		}
+	}
+
 	public function add_admin()
 	{
 		$this->cek_login();

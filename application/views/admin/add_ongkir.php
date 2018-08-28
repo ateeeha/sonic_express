@@ -1,9 +1,9 @@
     <section class="content-header">
-      <h1>Cek Ongkir</h1>
+      <h1>Add Ongkir</h1>
       <ol class="breadcrumb">
         <li><a href="<?= base_url(); ?>admin/"><i class="fa fa-home"></i> Dashboard</a></li>
-        <li><a href="<?= base_url(); ?>produk/">Cek Ongkir</a></li>
-        <li class="active"><?= $header; ?></li>
+        <li><a href="<?= base_url(); ?>produk/">Add Ongkir</a></li>
+        <li class="active"><?= $header ?></li>
       </ol>
     </section>
     <section class="content">
@@ -33,39 +33,7 @@
             </div>
             <!-- /.box-header -->
             <!-- form start -->
-            <div class="box-body table-responsive">
-            <?php if ($cek=='') {
-                    
-                    }
-                  else { ?>
-              <table class="table table-bordered table-hover dt-responsive nowrap">
-                <thead>
-                  <tr>
-                    <th style="text-align: center">Paket Reg</th>
-                    <th style="text-align: center">Berat(Kg)</th>
-                    <th style="text-align: center">Estimasi Reg</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <?php 
-
-                    $i = 1;
-                    foreach ($cek->result() as $key) {
-                  ?>
-                  <tr>
-                    <td style="text-align: center"><?= $key->reg; ?></td>
-                    <td style="text-align: center"><?= $key->berat; ?></td>
-                    <td style="text-align: center"><?= $key->estimasi_reg; ?></td>
-                  </tr>
-                  <?php } ?>
-                </tbody>
-                  <!--  -->
-              </table>
-              <?php } ?>
-                </div>
-              <hr>
-
-            <form class="form-horizontal" action="" method="post" enctype="multipart/form-data">
+            <form class="form-horizontal" action="<?= site_url('admin/save_ongkir'); ?>" method="post" enctype="multipart/form-data">
               <div class="box-body">
 
               <legend>Asal</legend>
@@ -119,43 +87,41 @@
                 </div>
 
                 <div class="form-group">
-                  <label class="col-md-2 col-sm-2 col-xs-12 control-label">Jenis Kiriman</label>
-                  <div class="col-md-4 col-sm-6 col-xs-12">
-                    <select class="col-md-6">
-                      <option value="">--Pilih Kiriman--</option>
-                    </select>
-                  </div>
-                </div> 
-
-                <div class="form-group">
-                  <label class="col-md-2 col-sm-2 col-xs-12 control-label">Panjang</label>
+                  <label class="col-md-2 col-sm-2 col-xs-12 control-label">Reg</label>
                   <div class="col-md-3 col-sm-6 col-xs-12">
-                    <input type="text" class="form-control col-md-7 col-xs-12" name="panjang" value="">
+                    <input type="text" class="form-control col-md-7 col-xs-12" name="reg" value="">
+                  </div>
+                  <label class="col-md-2 col-sm-2 col-xs-12 control-label">Estimasi Reg</label>
+                  <div class="col-md-3 col-sm-6 col-xs-12">
+                    <input type="text" class="form-control col-md-7 col-xs-12" name="e_reg" value="">
                   </div>
                 </div>
-                <div class="form-group">
-                  <label class="col-md-2 col-sm-2 col-xs-12 control-label">Lebar</label>
-                  <div class="col-md-3 col-sm-6 col-xs-12">
-                    <input type="text" class="form-control col-md-7 col-xs-12" name="lebar" value="">
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label class="col-md-2 col-sm-2 col-xs-12 control-label">Tinggi</label>
-                  <div class="col-md-3 col-sm-6 col-xs-12">
-                    <input type="text" class="form-control col-md-7 col-xs-12" name="tinggi" value="">
-                  </div>
-                </div>      
 
                 <div class="form-group">
-                  <label class="col-md-2 col-sm-2 col-xs-12 control-label">Nilai Barang</label>
+                  <label class="col-md-2 col-sm-2 col-xs-12 control-label">Oke</label>
                   <div class="col-md-3 col-sm-6 col-xs-12">
-                    <input type="text" class="form-control col-md-7 col-xs-12" name="nilai_barang" value="">
+                    <input type="text" class="form-control col-md-7 col-xs-12" name="oke" value="">
                   </div>
-                </div>                 
+                  <label class="col-md-2 col-sm-2 col-xs-12 control-label">Estimasi Oke</label>
+                  <div class="col-md-3 col-sm-6 col-xs-12">
+                    <input type="text" class="form-control col-md-7 col-xs-12" name="e_oke" value="">
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label class="col-md-2 col-sm-2 col-xs-12 control-label">Yes</label>
+                  <div class="col-md-3 col-sm-6 col-xs-12">
+                    <input type="text" class="form-control col-md-7 col-xs-12" name="yes" value="">
+                  </div>
+                  <label class="col-md-2 col-sm-2 col-xs-12 control-label">Estimasi Yes</label>
+                  <div class="col-md-3 col-sm-6 col-xs-12">
+                    <input type="text" class="form-control col-md-7 col-xs-12" name="e_yes" value="">
+                  </div>
+                </div>                   
 
                 <div class="form-group">
                   <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-2">
-                    <button type="submit" class="btn btn-success" name="submit" value="Submit"><i class="fa fa-check "></i> Cek</button>                   
+                    <button type="submit" class="btn btn-success" name="submit" value="Submit"><i class="fa fa-save "></i> Simpan</button>                   
                   </div>
                 </div>
 
