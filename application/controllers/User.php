@@ -178,11 +178,18 @@ class User extends CI_Controller {
 				'kota' => $kab
 				);
 
-		$getongkir = $this->user_model->get_where('t_ongkir', $ongkir)->result();
-		foreach($getongkir as $go){
+		$getongkir = $this->user_model->get_where('t_ongkir', $ongkir);
+		if ($getongkir->num_rows() > 0){
+
+			foreach($getongkir->result() as $go){
 			echo "<td style='text-align:center'>$go->reg</td>";
 			echo "<td style='text-align:center'>$go->estimasi_reg</td>";
+			}
+		}else{
+
+			echo "<td colspan='2' style='text-align:center'>Data Belum Tersedia!</td>";
 		}
+		
 	}
 
 
