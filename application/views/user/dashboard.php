@@ -122,6 +122,14 @@
       });
     });
 
+   $(".city_tujuan").change(function(){
+      $( ".ongkir_detail" ).html("<td colspan='2' style='text-align:center'>loading...<td/>");
+      var data = $(this).val();
+      $.get( "<?php echo site_url('user/getongkir');?>", { kab: data }, function( data ) {
+        $( ".ongkir_detail" ).html( data );
+      });
+    });
+
   $(document).ready(function(){
       $('#datatable').DataTable();
   });

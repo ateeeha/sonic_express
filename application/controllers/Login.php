@@ -160,6 +160,7 @@ class Login extends CI_Controller {
 						'id_user' => $data->id_user,
 						'username_user' => $data->username, 
 						'email_user' => $data->email, 
+						'kabupaten_user' => $data->kabupaten,
 						'login_user' => TRUE
 					);
 

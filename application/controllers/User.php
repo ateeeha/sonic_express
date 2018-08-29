@@ -24,17 +24,16 @@ class User extends CI_Controller {
 		{
 			$this->form_validation->set_rules('kabupaten_asal','kabupaten Asal','required');
 			$this->form_validation->set_rules('kabupaten_tujuan','kabupaten Tujuan','required');
-			$this->form_validation->set_rules('berat','Berat','required|numeric');
 
 				if ($this->form_validation->run() == TRUE)
 				{
 					$ongkir = array(
 						'origin' => $this->input->post('kabupaten_asal', TRUE),
 						'kota' => $this->input->post('kabupaten_tujuan', TRUE),
-						'berat' => $this->input->post('berat', TRUE)
 					);
 
 					$cek = $this->user_model->get_where('t_ongkir', $ongkir);
+					
 					$data['cek'] = $cek;
 					// if ($cek->num_rows() > 0) 
 					// {				
@@ -165,6 +164,24 @@ class User extends CI_Controller {
 		echo "<option value=''>--Pilih Kabupaten--</option>";
 		foreach($getcity as $gc){
 			echo "<option value='$gc->nama_kota'>$gc->nama_kota</option>";
+		}
+	}
+
+	public function getongkir()
+	{
+		$this->cek_login();
+
+		$kab = $this->input->get('kab');		
+
+		$ongkir = array(
+				'origin' => $this->session->userdata('kabupaten_user'),
+				'kota' => $kab
+				);
+
+		$getongkir = $this->user_model->get_where('t_ongkir', $ongkir)->result();
+		foreach($getongkir as $go){
+			echo "<td style='text-align:center'>$go->reg</td>";
+			echo "<td style='text-align:center'>$go->estimasi_reg</td>";
 		}
 	}
 
