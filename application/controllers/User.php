@@ -182,12 +182,28 @@ class User extends CI_Controller {
 		if ($getongkir->num_rows() > 0){
 
 			foreach($getongkir->result() as $go){
-			echo "<td style='text-align:center'>$go->reg</td>";
+			echo "<tr>";
+			echo "<td style='text-align:center'><input value='' name='item' type='radio'></input></td>";
+			echo "<td style='text-align:center'>REG</input></td>";
+			echo "<td style='text-align:center'>$go->reg</input></td>";
 			echo "<td style='text-align:center'>$go->estimasi_reg</td>";
+			echo "</tr>";
+			echo "<tr>";
+			echo "<td style='text-align:center'><input name='item' type='radio'></input></td>";
+			echo "<td style='text-align:center'>OKE</input></td>";
+			echo "<td style='text-align:center'>$go->oke</input></td>";
+			echo "<td style='text-align:center'>$go->estimasi_oke</td>";
+			echo "</tr>";
+			echo "<tr>";
+			echo "<td style='text-align:center'><input name='item' type='radio'></input></td>";
+			echo "<td style='text-align:center'>YES</input></td>";
+			echo "<td style='text-align:center'>$go->yes</input></td>";
+			echo "<td style='text-align:center'>$go->estimasi_yes</td>";
+			echo "</tr>";
 			}
 		}else{
 
-			echo "<td colspan='2' style='text-align:center'>Data Belum Tersedia!</td>";
+			echo "<td colspan='4' style='text-align:center'>Data Belum Tersedia!</td>";
 		}
 		
 	}

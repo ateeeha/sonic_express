@@ -94,14 +94,19 @@
                 </div>
                 <hr>
               <table id="ongkir" class="table table-bordered table-hover dt-responsive nowrap">
-                <tr>
-                  <th style="text-align: center" width="50%">Reg</th>
-                  <th style="text-align: center" width="50%">Estimasi Reg</th>
+                <thead>
+                  <tr>
+                  <th style="text-align: center" width="20%">#</th>
+                  <th style="text-align: center" width="20%">Paket</th>
+                  <th style="text-align: center" width="30%">Harga</th>
+                  <th style="text-align: center" width="30%">Estimasi</th>
                 </tr>
-                <tr class="ongkir_detail" id="ongkir_detail">
+                </thead>
+                <tfoot class="ongkir_detail" id="ongkir_detail">
                   
-                </tr>
+                </tfoot>                
               </table>
+              <input class="ongkir_value" type="hidden" value="">
                 <hr>
                 <div class="form-group">              
                   <label class="col-md-2 col-sm-2 col-xs-12 control-label">Nama Penerima</label>

@@ -127,6 +127,7 @@
       var data = $(this).val();
       $.get( "<?php echo site_url('user/getongkir');?>", { kab: data }, function( data ) {
         $( ".ongkir_detail" ).html( data );
+        $( ".ongkir_pilih" ).val( data );
       });
     });
 
