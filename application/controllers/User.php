@@ -14,6 +14,46 @@ class User extends CI_Controller {
 	{
 		$this->cek_login();
 
+		if ($this->input->post('submit') == 'Submit')
+		{
+			$this->form_validation->set_rules('kabupaten_asal','kabupaten Asal','required');
+			$this->form_validation->set_rules('kabupaten_tujuan','kabupaten Tujuan','required');
+
+				if ($this->form_validation->run() == TRUE)
+				{
+					$ongkir = array(
+						'origin' => $this->input->post('kabupaten_asal', TRUE),
+						'kota' => $this->input->post('kabupaten_tujuan', TRUE),
+					);
+
+					$cek = $this->user_model->get_where('t_ongkir', $ongkir);
+					
+					$data['cek'] = $cek;
+					// if ($cek->num_rows() > 0) 
+					// {				
+					// 	// foreach ($cek->result() as $key) {
+							
+					// 	// 	$data['id_tracking'] = $key->id_tracking;
+					// 	// 	$data['no_resi'] = $key->no_resi;
+					// 	// 	$data['tanggal'] = $key->tanggal;
+					// 	// 	$data['status'] = $key->status;
+					// 	// }
+
+					// } else {
+					// 	$this->session->set_flashdata('alert', "Kode Resi Tidak Ada !");
+					// }
+				}
+		}else 
+		{
+			$data['cek'] = '';
+		}
+
+		$data['data'] = $this->user_model->get_all('t_provinsi');
+		
+		$data['active_cekongkir'] = 'active';
+		$data['header'] = 'Cek Ongkir';
+		$this->template->user('user/form_cekongkir', $data);
+
 	}
 
 	public function cek_ongkir()
@@ -120,6 +160,23 @@ class User extends CI_Controller {
 
 			if ($this->form_validation->run() == TRUE)
 			{
+				$ongkir = $this->input->post('ongkir');
+				$berat = $this->input->post('berat');
+				$p = $this->input->post('panjang');
+				$l= $this->input->post('lebar');
+				$t = $this->input->post('tinggi');
+
+				if (($p * $l * $t) < 18000) {
+
+					$total_biaya = $berat * $ongkir;
+
+				}else if (($p * $l * $t) >= 18000) {
+
+					$berat = $p * $l * $t / 6000;
+
+					$total_biaya = $berat * $ongkir;
+				}
+
 				$data = array(
 				'id_user' => $this->session->userdata('id_user'), 
 				'tgl_pengiriman' => date("Y-m-d"), 
@@ -130,7 +187,7 @@ class User extends CI_Controller {
 				'lebar' => $this->input->post('lebar'),
 				'tinggi' => $this->input->post('tinggi'),
 				'ongkir' => $this->input->post('ongkir'),
-				'total_biaya' => 0,
+				'total_biaya' => $total_biaya,
 
 				'nama' => $this->input->post('nama'), 
 				'provinsi_tujuan' => $this->input->post('provinsi_tujuan'), 
