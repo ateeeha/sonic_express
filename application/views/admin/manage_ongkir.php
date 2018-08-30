@@ -18,11 +18,12 @@
                 <thead>
                   <tr>
                     <th style="text-align: center" width="5%;">#</th>
+                    <th style="text-align: left;">Origin</th>
                     <th style="text-align: left;">Kota</th>
                     <th style="text-align: left;">Kecamatan</th>
-                    <th style="text-align: left;">REG</th>
-                    <th style="text-align: left;">Estimasi REG</th>
-                    <th style="text-align: left;">Origin</th>
+                    <th style="text-align: left;">Jenis Kiriman</th>
+                    <th style="text-align: left;">Harga</th>
+                    <th style="text-align: left;">Estimasi</th>
                     <th style="text-align: left;" width="15%;">Opsi</th>
                   </tr>
                 </thead>
@@ -33,11 +34,12 @@
                   ?>
                   <tr>
                     <td style="text-align: center;"><?= $i++; ?></td>
+                    <td style="text-align: left;"><?= $key->origin; ?></td>
                     <td style="text-align: left;"><?= $key->kota; ?></td>
                     <td style="text-align: left;"><?= $key->kecamatan; ?></td>
-                    <td style="text-align: left;"><?= $key->reg; ?></td>
-                    <td style="text-align: left;"><?= $key->estimasi_reg; ?></td>
-                    <td style="text-align: left;"><?= $key->origin; ?></td>
+                    <td style="text-align: left;"><?= $key->jenis_layanan; ?></td>
+                    <td style="text-align: left;"><?= $key->harga; ?></td>
+                    <td style="text-align: left;"><?= $key->estimasi; ?></td>
                     <td>
                         <a href="<?= base_url(); ?>admin/del_ongkir/<?= $key->id_ongkir; ?>" class="btn btn-danger btn-xs" onclick="return confirm('Anda Yakin ?');"><i class="fa fa-trash"></i> Hapus</a>
                         <a href="<?= base_url(); ?>admin/edit_ongkir/<?= $key->id_ongkir; ?>" class="btn btn-warning btn-xs" onclick="return confirm('Anda Yakin ?');"><i class="fa fa-edit"></i> Edit</a>

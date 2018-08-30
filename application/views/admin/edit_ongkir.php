@@ -33,15 +33,15 @@
             </div>
             <!-- /.box-header -->
             <!-- form start -->
-            <form class="form-horizontal" action="<?= site_url('admin/save_ongkir'); ?>" method="post" enctype="multipart/form-data">
+            <form class="form-horizontal" action="" method="post" enctype="multipart/form-data">
               <div class="box-body">
 
               <legend>Asal</legend>
                   <div class="form-group">
                     <label class="col-md-2 col-sm-2 col-xs-12 control-label">Provinsi</label>
                     <div class="col-md-4 col-sm-6 col-xs-12">
-                      <select class="province_asal" name="provinsi_asal" required id="provinsi_asal" class="col-md-6">
-                        <option value="">--Pilih Provinsi--</option>
+                      <select class="province_asal" name="provinsi_asal" id="provinsi_asal" class="col-md-6">
+                        <option value="">--Pilih Provinsi--</option>                        
                         <?php foreach ($data->result() as $key): ?>
                         <option value="<?= $key->nama_provinsi; ?>"><?= $key->nama_provinsi; ?></option>
                         <?php endforeach ?>
@@ -52,6 +52,7 @@
                     <label class="col-md-2 col-sm-2 col-xs-12 control-label">Kabupaten</label>
                     <div class="col-md-4 col-sm-6 col-xs-12">
                     <select class="city_asal" name="kabupaten_asal" required id="kabupaten_asal" class="col-md-6">
+                      <option selected value="<?= $origin; ?>"><?= $origin; ?></option>
                       <option value="">--Pilih Kota/Kabupaten--</option>
                     </select>
                     </div>
@@ -62,7 +63,7 @@
                   <div class="form-group">
                     <label class="col-md-2 col-sm-2 col-xs-12 control-label">Provinsi</label>
                     <div class="col-md-4 col-sm-6 col-xs-12">
-                      <select class="province_tujuan" name="provinsi_tujuan" required id="provinsi_tujuan" class="col-md-6">
+                      <select class="province_tujuan" name="provinsi_tujuan" id="provinsi_tujuan" class="col-md-6">
                         <option value="">--Pilih Provinsi--</option>
                         <?php foreach ($data->result() as $key): ?>
                         <option value="<?= $key->nama_provinsi; ?>"><?= $key->nama_provinsi; ?></option>
@@ -74,6 +75,7 @@
                     <label class="col-md-2 col-sm-2 col-xs-12 control-label">Kabupaten</label>
                     <div class="col-md-4 col-sm-6 col-xs-12">
                     <select class="city_tujuan" name="kabupaten_tujuan" required id="kabupaten_tujuan" class="col-md-6">
+                      <option selected value="<?= $kota; ?>"><?= $kota; ?></option>
                       <option value="">--Pilih Kota/Kabupaten--</option>
                     </select>
                     </div>
@@ -82,28 +84,28 @@
                 <div class="form-group">
                   <label class="col-md-2 col-sm-2 col-xs-12 control-label">Jenis Layanan</label>
                   <div class="col-md-3 col-sm-6 col-xs-12">
-                    <input type="text" class="form-control col-md-7 col-xs-12" name="jenis_layanan" value="">
+                    <input type="text" class="form-control col-md-7 col-xs-12" name="jenis_layanan" value="<?= $jenis_layanan; ?>">
                   </div>
                 </div>
 
                 <div class="form-group">
                   <label class="col-md-2 col-sm-2 col-xs-12 control-label">Berat</label>
                   <div class="col-md-3 col-sm-6 col-xs-12">
-                    <input type="text" class="form-control col-md-7 col-xs-12" name="berat" value="">
+                    <input type="text" class="form-control col-md-7 col-xs-12" name="berat" value="<?= $berat; ?>">
                   </div>
                 </div>
 
                 <div class="form-group">
                   <label class="col-md-2 col-sm-2 col-xs-12 control-label">Harga Ongkir</label>
                   <div class="col-md-3 col-sm-6 col-xs-12">
-                    <input type="text" class="form-control col-md-7 col-xs-12" name="ongkir" value="">
+                    <input type="text" class="form-control col-md-7 col-xs-12" name="harga" value="<?= $harga; ?>">
                   </div>
                 </div>
 
                 <div class="form-group">
                   <label class="col-md-2 col-sm-2 col-xs-12 control-label">Estimasi</label>
                   <div class="col-md-3 col-sm-6 col-xs-12">
-                    <input type="text" class="form-control col-md-7 col-xs-12" name="ongkir" value="">
+                    <input type="text" class="form-control col-md-7 col-xs-12" name="estimasi" value="<?= $estimasi; ?>">
                   </div>
                 </div>
 

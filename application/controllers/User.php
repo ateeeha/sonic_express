@@ -200,9 +200,10 @@ class User extends CI_Controller {
 				);
 
 				$this->user_model->insert('t_transaksi', $data);
-				$this->session->set_flashdata('success','Data berhasil disimpan !');
+				$this->session->set_flashdata('success','Data berhasil Disimpan !');
 			
 			} 
+			$this->session->set_flashdata('alert','Data Gagal disimpan !');
 		}
 		redirect('user/transaksi/');
 	}
@@ -251,7 +252,7 @@ class User extends CI_Controller {
 			foreach($getongkir->result() as $go){
 			echo "<tr>";
 			echo "<td style='text-align:center'><input value='$go->harga' name='ongkir' type='radio'></input></td>";
-			echo "<td style='text-align:center'>$go->jenis_kiriman</input></td>";
+			echo "<td style='text-align:center'>$go->jenis_layanan</input></td>";
 			echo "<td style='text-align:center'>$go->harga</input></td>";
 			echo "<td style='text-align:center'>$go->estimasi</td>";
 			echo "</tr>";

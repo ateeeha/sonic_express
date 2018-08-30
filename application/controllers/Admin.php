@@ -258,6 +258,59 @@ class Admin extends CI_Controller {
 		$this->template->admin('admin/add_user', $data);
 	}
 
+	public function edit_ongkir()
+	{
+		$this->cek_login();
+
+		$id_ongkir = $this->uri->segment(3);
+
+		if ($this->input->post('submit') == 'Submit') 
+		{
+			$this->form_validation->set_rules('kabupaten_asal', 'Kabupaten Asal', "required");
+			$this->form_validation->set_rules('kabupaten_tujuan', 'Kabupaten Tujuan', "required");
+			$this->form_validation->set_rules('berat', 'Berat', "required|numeric");
+			$this->form_validation->set_rules('harga', 'Harga', "required|numeric");
+			$this->form_validation->set_rules('jenis_layanan', 'Jenis Layanan', "required");
+			$this->form_validation->set_rules('estimasi', 'Estimasi', "required");
+
+			if ($this->form_validation->run() == TRUE)
+			{
+				
+				$data = array(
+					'origin' => $this->input->post('kabupaten_asal', TRUE),
+					'kota' => $this->input->post('kabupaten_tujuan', TRUE),
+					'berat' => $this->input->post('berat', TRUE),
+					'harga' => $this->input->post('harga', TRUE),
+					'jenis_layanan' => $this->input->post('jenis_layanan', TRUE),
+					'estimasi' => $this->input->post('estimasi', TRUE)
+				);			
+				$this->admin_model->update('t_ongkir', $data, array('id_ongkir' => $id_ongkir));
+				$this->session->set_flashdata('success','Data berhasil disimpan !');
+
+				redirect('admin/ongkir');				
+			}
+		}
+
+		$ongkir = $this->admin_model->get_where('t_ongkir', array('id_ongkir' => $id_ongkir));
+
+		foreach ($ongkir->result() as $key) {
+			
+			$data['origin'] = $key->origin;
+			$data['kota'] = $key->kota;
+			$data['jenis_layanan'] = $key->jenis_layanan;
+			$data['berat'] = $key->berat;
+			$data['estimasi'] = $key->estimasi;
+			$data['harga'] = $key->harga;
+
+		}
+		$data['data'] = $this->admin_model->get_all('t_provinsi');
+
+		$data['active_admin'] = 'active';
+		$data['header'] = 'Manage Admin';
+
+		$this->template->admin('admin/edit_ongkir', $data);
+	}
+
 	public function edit_admin()
 	{
 		$this->cek_login();

@@ -19,7 +19,13 @@
                  echo "<div class='alert alert-success alert-message'>";
                  echo $this->session->flashdata('success');
                  echo "</div>";
-               } ?>                
+               } ?>  
+            <?php if($this->session->flashdata('alert'))
+               {
+                 echo "<div class='alert alert-warning alert-message'>";
+                 echo $this->session->flashdata('alert');
+                 echo "</div>";
+               } ?>               
             </div>
             <!-- /.box-header -->
             <form class="form-horizontal" action="<?php echo site_url('user/transaksi_simpan'); ?>" method="post" enctype="multipart/form-data">
