@@ -86,26 +86,29 @@ class Admin extends CI_Controller {
 		if ($this->input->post('submit', TRUE) == 'Submit')
 		{
 			//validasi
-			$this->form_validation->set_rules('kabupaten_asal','kabupaten Asal','required');
-			$this->form_validation->set_rules('kabupaten_tujuan','kabupaten Tujuan','required');
+			$this->form_validation->set_rules('kabupaten_asal','Kabupaten Asal','required');
+			$this->form_validation->set_rules('kabupaten_tujuan','Kabupaten Tujuan','required');
+			$this->form_validation->set_rules('jenis_layanan','Jenis Layanan','required');
 			$this->form_validation->set_rules('berat','Berat','required|numeric');
-			$this->form_validation->set_rules('reg','Reguler','required|numeric');
-			$this->form_validation->set_rules('e_reg','Estimasi Reguler','required');
+			$this->form_validation->set_rules('harga','Harga','required|numeric');
+			$this->form_validation->set_rules('estimasi','Estimasi','required');
 
 			if ($this->form_validation->run() == TRUE)
 			{
 				$data = array(
 				'origin' => $this->input->post('kabupaten_asal', TRUE), 
 				'kota' => $this->input->post('kabupaten_tujuan', TRUE), 
+				'jenis_layanan' => $this->input->post('jenis_layanan', TRUE), 
 				'berat' => $this->input->post('berat', TRUE), 
-				'reg' => $this->input->post('reg', TRUE), 
-				'estimasi_reg' => $this->input->post('e_reg', TRUE), 
+				'harga' => $this->input->post('harga', TRUE), 
+				'estimasi' => $this->input->post('estimasi', TRUE)
 				);
 
 				$this->admin_model->insert('t_ongkir', $data);
 				
-				redirect('admin/add_ongkir/');
+				redirect('admin/ongkir/');
 			} 
+			redirect('admin/add_ongkir/');
 		}
 	}
 

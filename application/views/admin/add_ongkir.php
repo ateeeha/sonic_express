@@ -96,14 +96,14 @@
                 <div class="form-group">
                   <label class="col-md-2 col-sm-2 col-xs-12 control-label">Harga Ongkir</label>
                   <div class="col-md-3 col-sm-6 col-xs-12">
-                    <input type="text" class="form-control col-md-7 col-xs-12" name="ongkir" value="">
+                    <input type="text" class="form-control col-md-7 col-xs-12" name="harga" value="">
                   </div>
                 </div>
 
                 <div class="form-group">
                   <label class="col-md-2 col-sm-2 col-xs-12 control-label">Estimasi</label>
                   <div class="col-md-3 col-sm-6 col-xs-12">
-                    <input type="text" class="form-control col-md-7 col-xs-12" name="ongkir" value="">
+                    <input type="text" class="form-control col-md-7 col-xs-12" name="estimasi" value="">
                   </div>
                 </div>
 
