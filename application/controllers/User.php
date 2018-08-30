@@ -111,8 +111,9 @@ class User extends CI_Controller {
 		{
 			//validasi
 			$this->form_validation->set_rules('nama','Nama','required');
-			$this->form_validation->set_rules('provinsi','Provinsi','required');
-			$this->form_validation->set_rules('kabupaten','Kabupaten','required');
+			$this->form_validation->set_rules('berat','Berat','required|numeric');
+			$this->form_validation->set_rules('provinsi_tujuan','Provinsi','required');
+			$this->form_validation->set_rules('kabupaten_tujuan','Kabupaten','required');
 			$this->form_validation->set_rules('alamat','Alamat','required');
 			$this->form_validation->set_rules('kode_pos','Kode Pos','required|numeric');
 			$this->form_validation->set_rules('no_tlp','Nomor Telepon','required|numeric');
@@ -120,16 +121,25 @@ class User extends CI_Controller {
 			if ($this->form_validation->run() == TRUE)
 			{
 				$data = array(
-				'nama' => $this->input->post('nama', TRUE), 
-				'provinsi_tujuan' => $this->input->post('provinsi', TRUE), 
-				'kabupaten_tujuan' => $this->input->post('kabupaten', TRUE), 
-				'alamat' => $this->input->post('alamat', TRUE), 
-				'kode_pos' => $this->input->post('kode_pos', TRUE), 
-				'no_tlp' => $this->input->post('no_tlp', TRUE), 
-				'tgl_pengiriman' => date("Y-m-d"), 
 				'id_user' => $this->session->userdata('id_user'), 
+				'tgl_pengiriman' => date("Y-m-d"), 
 				'no_resi' => 'RES'.date("dmYgis").$this->session->userdata('id_user'), 
-				'status_transaksi' => 'Menunggu'
+
+				'berat' => $this->input->post('berat'),
+				'panjang' => $this->input->post('panjang'),
+				'lebar' => $this->input->post('lebar'),
+				'tinggi' => $this->input->post('tinggi'),
+				'ongkir' => $this->input->post('ongkir'),
+				'total_biaya' => 0,
+
+				'nama' => $this->input->post('nama'), 
+				'provinsi_tujuan' => $this->input->post('provinsi_tujuan'), 
+				'kabupaten_tujuan' => $this->input->post('kabupaten_tujuan'), 
+				'alamat' => $this->input->post('alamat'), 
+				'kode_pos' => $this->input->post('kode_pos'), 
+				'no_tlp' => $this->input->post('no_tlp'), 
+				'status_transaksi' => 'Menunggu',
+				'dp_kirim' => 'Belum Dikirim'
 				);
 
 				$this->user_model->insert('t_transaksi', $data);
@@ -183,22 +193,10 @@ class User extends CI_Controller {
 
 			foreach($getongkir->result() as $go){
 			echo "<tr>";
-			echo "<td style='text-align:center'><input value='' name='item' type='radio'></input></td>";
-			echo "<td style='text-align:center'>REG</input></td>";
-			echo "<td style='text-align:center'>$go->reg</input></td>";
-			echo "<td style='text-align:center'>$go->estimasi_reg</td>";
-			echo "</tr>";
-			echo "<tr>";
-			echo "<td style='text-align:center'><input name='item' type='radio'></input></td>";
-			echo "<td style='text-align:center'>OKE</input></td>";
-			echo "<td style='text-align:center'>$go->oke</input></td>";
-			echo "<td style='text-align:center'>$go->estimasi_oke</td>";
-			echo "</tr>";
-			echo "<tr>";
-			echo "<td style='text-align:center'><input name='item' type='radio'></input></td>";
-			echo "<td style='text-align:center'>YES</input></td>";
-			echo "<td style='text-align:center'>$go->yes</input></td>";
-			echo "<td style='text-align:center'>$go->estimasi_yes</td>";
+			echo "<td style='text-align:center'><input value='$go->harga' name='ongkir' type='radio'></input></td>";
+			echo "<td style='text-align:center'>$go->jenis_kiriman</input></td>";
+			echo "<td style='text-align:center'>$go->harga</input></td>";
+			echo "<td style='text-align:center'>$go->estimasi</td>";
 			echo "</tr>";
 			}
 		}else{

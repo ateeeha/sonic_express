@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: 27 Agu 2018 pada 16.02
+-- Generation Time: 30 Agu 2018 pada 09.21
 -- Versi Server: 5.6.20
 -- PHP Version: 5.5.15
 
@@ -606,18 +606,23 @@ CREATE TABLE IF NOT EXISTS `t_ongkir` (
 `id_ongkir` int(11) NOT NULL,
   `kota` varchar(255) NOT NULL,
   `kecamatan` varchar(255) NOT NULL,
-  `reg` varchar(255) NOT NULL,
-  `estimasi_reg` varchar(255) NOT NULL,
+  `jenis_kiriman` varchar(255) NOT NULL,
+  `harga` varchar(255) NOT NULL,
+  `estimasi` varchar(255) NOT NULL,
+  `berat` varchar(35) NOT NULL,
   `origin` varchar(255) NOT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=129 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
 
 --
 -- Dumping data untuk tabel `t_ongkir`
 --
 
-INSERT INTO `t_ongkir` (`id_ongkir`, `kota`, `kecamatan`, `reg`, `estimasi_reg`, `origin`) VALUES
-(1, 'Bantul', 'Imogiri', '8000', '1 - 2', 'DI Yogyakarta'),
-(2, 'Yogyakarta', 'Gondomanan', '4000', '1 - 2\r\n', 'DI Yogyakarta');
+INSERT INTO `t_ongkir` (`id_ongkir`, `kota`, `kecamatan`, `jenis_kiriman`, `harga`, `estimasi`, `berat`, `origin`) VALUES
+(1, 'Bantul', 'Imogiri', 'REG', '8000', '1 - 2', '1', 'Yogyakarta'),
+(2, 'Yogyakarta', 'Gondomanan', 'REG', '7000', '2 - 3', '1', 'Yogyakarta'),
+(3, 'Sleman', '', 'REG', '4000', '2 - 3', '1', 'Yogyakarta'),
+(4, 'Yogyakarta', 'Gondomanan', 'OKE', '9000', '1 - 2\r\n', '1', 'Yogyakarta'),
+(5, 'Yogyakarta', 'Gondomanan', 'YES', '20000', '1', '1', 'Yogyakarta');
 
 -- --------------------------------------------------------
 
@@ -737,6 +742,12 @@ CREATE TABLE IF NOT EXISTS `t_transaksi` (
   `dp_tujuan` int(11) NOT NULL,
   `tgl_pengiriman` date NOT NULL,
   `no_resi` varchar(255) NOT NULL,
+  `berat` int(11) NOT NULL,
+  `panjang` int(11) NOT NULL,
+  `lebar` int(11) NOT NULL,
+  `tinggi` int(11) NOT NULL,
+  `ongkir` int(11) NOT NULL,
+  `total_biaya` int(11) NOT NULL,
   `nama` varchar(35) NOT NULL,
   `provinsi_tujuan` varchar(35) NOT NULL,
   `kabupaten_tujuan` varchar(35) NOT NULL,
@@ -745,18 +756,18 @@ CREATE TABLE IF NOT EXISTS `t_transaksi` (
   `no_tlp` varchar(35) NOT NULL,
   `status_transaksi` enum('Menunggu','Dijemput','Diterima','Ditolak','Selesai') NOT NULL,
   `dp_kirim` enum('Belum Dikirim','Sudah Dikirim') NOT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=18 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=19 ;
 
 --
 -- Dumping data untuk tabel `t_transaksi`
 --
 
-INSERT INTO `t_transaksi` (`id_transaksi`, `id_user`, `kurir_penjemput`, `kurir_pengantar`, `dp_asal`, `dp_tujuan`, `tgl_pengiriman`, `no_resi`, `nama`, `provinsi_tujuan`, `kabupaten_tujuan`, `alamat`, `kode_pos`, `no_tlp`, `status_transaksi`, `dp_kirim`) VALUES
-(13, 5, 3, 0, 3, 0, '2018-08-23', 'RES23082018837395', 'Indri', 'DI Yogyakarta', 'Bantul', 'Banguntapan', 55283, '08995413121', 'Diterima', 'Belum Dikirim'),
-(14, 4, 2, 3, 1, 3, '2018-08-23', 'RES230820181056184', 'Joni', 'DI Yogyakarta', 'Yogyakarta', 'test', 56483, '08995413121', 'Selesai', 'Sudah Dikirim'),
-(15, 4, 2, 3, 1, 3, '2018-08-23', 'RES230820181056464', 'jino', 'DI Yogyakarta', 'Yogyakarta', 'test', 56483, '08995413121', 'Selesai', 'Sudah Dikirim'),
-(16, 4, 2, 3, 0, 0, '2018-08-23', 'RES230820181057084', 'jinu', 'DI Yogyakarta', 'Yogyakarta', 'test', 55283, '08995413121', 'Selesai', 'Belum Dikirim'),
-(17, 0, 0, 0, 0, 3, '0000-00-00', '', '', '', '', '', 0, '', 'Menunggu', 'Sudah Dikirim');
+INSERT INTO `t_transaksi` (`id_transaksi`, `id_user`, `kurir_penjemput`, `kurir_pengantar`, `dp_asal`, `dp_tujuan`, `tgl_pengiriman`, `no_resi`, `berat`, `panjang`, `lebar`, `tinggi`, `ongkir`, `total_biaya`, `nama`, `provinsi_tujuan`, `kabupaten_tujuan`, `alamat`, `kode_pos`, `no_tlp`, `status_transaksi`, `dp_kirim`) VALUES
+(13, 5, 3, 0, 3, 0, '2018-08-23', 'RES23082018837395', 0, 0, 0, 0, 0, 0, 'Indri', 'DI Yogyakarta', 'Bantul', 'Banguntapan', 55283, '08995413121', 'Diterima', 'Belum Dikirim'),
+(14, 4, 2, 3, 1, 3, '2018-08-23', 'RES230820181056184', 0, 0, 0, 0, 0, 0, 'Joni', 'DI Yogyakarta', 'Yogyakarta', 'test', 56483, '08995413121', 'Selesai', 'Sudah Dikirim'),
+(15, 4, 2, 3, 1, 3, '2018-08-23', 'RES230820181056464', 0, 0, 0, 0, 0, 0, 'jino', 'DI Yogyakarta', 'Yogyakarta', 'test', 56483, '08995413121', 'Selesai', 'Sudah Dikirim'),
+(16, 4, 2, 3, 0, 0, '2018-08-23', 'RES230820181057084', 0, 0, 0, 0, 0, 0, 'jinu', 'DI Yogyakarta', 'Yogyakarta', 'test', 55283, '08995413121', 'Selesai', 'Belum Dikirim'),
+(18, 5, 0, 0, 0, 0, '2018-08-30', 'RES30082018918315', 1, 1, 1, 1, 4000, 0, 'Khoirul', 'DI Yogyakarta', 'Sleman', 'Sleman', 55283, '08995413121', 'Menunggu', 'Belum Dikirim');
 
 -- --------------------------------------------------------
 
@@ -930,7 +941,7 @@ MODIFY `id_kurir` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=6;
 -- AUTO_INCREMENT for table `t_ongkir`
 --
 ALTER TABLE `t_ongkir`
-MODIFY `id_ongkir` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=129;
+MODIFY `id_ongkir` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT for table `t_tracking`
 --
@@ -940,7 +951,7 @@ MODIFY `id_tracking` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=62;
 -- AUTO_INCREMENT for table `t_transaksi`
 --
 ALTER TABLE `t_transaksi`
-MODIFY `id_transaksi` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=18;
+MODIFY `id_transaksi` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=19;
 --
 -- AUTO_INCREMENT for table `t_transaksidp`
 --

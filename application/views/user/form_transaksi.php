@@ -49,7 +49,7 @@
                 <div class="form-group">
                   <label class="col-md-2 col-sm-2 col-xs-12 control-label">Berat</label>
                   <div class="col-md-3 col-sm-6 col-xs-12">
-                    <input type="text" class="form-control col-md-7 col-xs-12" name="berat" value="">
+                    <input type="number" class="form-control col-md-7 col-xs-12" name="berat" value="">
                   </div>                  
                 </div>
 
@@ -68,21 +68,21 @@
                 <div class="form-group">
                   <label class="col-md-2 col-sm-2 col-xs-12 control-label">Panjang</label>
                   <div class="col-md-3 col-sm-6 col-xs-12">
-                    <input type="text" class="form-control col-md-7 col-xs-12" name="panjang" value="">
+                    <input type="number" class="form-control col-md-7 col-xs-12" name="panjang" value="">
                   </div>                  
                 </div>
 
                 <div class="form-group">
                   <label class="col-md-2 col-sm-2 col-xs-12 control-label">Lebar</label>
                   <div class="col-md-3 col-sm-6 col-xs-12">
-                    <input type="text" class="form-control col-md-7 col-xs-12" name="lebar" value="">
+                    <input type="number" class="form-control col-md-7 col-xs-12" name="lebar" value="">
                   </div>
                 </div>
 
                 <div class="form-group">
                   <label class="col-md-2 col-sm-2 col-xs-12 control-label">Tinggi</label>
                   <div class="col-md-3 col-sm-6 col-xs-12">
-                    <input type="text" class="form-control col-md-7 col-xs-12" name="tinggi" value="">
+                    <input type="number" class="form-control col-md-7 col-xs-12" name="tinggi" value="">
                   </div>
                 </div>
 
@@ -103,10 +103,8 @@
                 </tr>
                 </thead>
                 <tfoot class="ongkir_detail" id="ongkir_detail">
-                  
                 </tfoot>                
               </table>
-              <input class="ongkir_value" type="hidden" value="">
                 <hr>
                 <div class="form-group">              
                   <label class="col-md-2 col-sm-2 col-xs-12 control-label">Nama Penerima</label>
@@ -133,6 +131,13 @@
                   <label class="col-md-2 col-sm-2 col-xs-12 control-label">No Telepon</label>
                   <div class="col-md-3 col-sm-6 col-xs-12">
                     <input type="text" class="form-control col-md-7 col-xs-12" name="no_tlp" value="">
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label class="col-md-2 col-sm-2 col-xs-12 control-label">Total Harga</label>
+                  <div class="col-md-3 col-sm-6 col-xs-12">
+                    <input type="text" class="form-control col-md-7 col-xs-12" name="total_harga" value="">
                   </div>
                 </div>
 
