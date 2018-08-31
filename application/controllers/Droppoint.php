@@ -154,20 +154,49 @@ class Droppoint extends CI_Controller {
 	public function paket_dp()
 	{
 		$this->cek_login();
-		$join = 't_transaksi t JOIN t_user u ON (t.id_user = u.id_user)';
-		$data['data'] = $this->dp_model->get_where($join, 
-			array(
-				'kabupaten_tujuan' => $this->session->userdata('kabupaten_dp'),
-				'status_transaksi' => 'diterima',
-				'dp_kirim' => 'Sudah Dikirim',
-				'dp_tujuan' => $this->session->userdata('id_dp')
-				));
+		$tabel = 't_transaksi t JOIN t_user u 
+					ON (t.id_user = u.id_user) 
+				JOIN t_transaksidpdetail tdpdetail 
+					ON (t.no_resi = tdpdetail.no_resi)
+				JOIN t_transaksidp tdp 
+					ON (tdpdetail.id_transaksidp = tdp.id_transaksidp)';
+
+		$where = array(
+				// 'kabupaten_tujuan' => $this->session->userdata('kabupaten_dp'),
+				// 'status_transaksi' => 'diterima',
+				// 'dp_kirim' => 'Sudah Dikirim',
+				'tujuan' => $this->session->userdata('id_dp')
+				);
+
+		$data['data'] = $this->dp_model->get_where('t_transaksidp', $where);
 
 		// $data['data'] = $this->kurir_model->get_all('t_transaksi');
 
 		$data['active_paketdp'] = 'active';
 		$data['header'] = 'Manage Paket';
 		$this->template->dp('droppoint/paket_dp', $data);
+	}
+
+	public function detail_paketdp()
+	{
+		$this->cek_login();
+
+		$tabel = 't_transaksi t JOIN t_user u 
+					ON (t.id_user = u.id_user) 
+				JOIN t_transaksidpdetail tdpdetail 
+					ON (t.no_resi = tdpdetail.no_resi)
+				JOIN t_transaksidp tdp 
+					ON (tdpdetail.id_transaksidp = tdp.id_transaksidp)';
+
+		$id_transaksidp['tdp.id_transaksidp'] = $this->uri->segment(3);
+
+		$data['data'] = $this->dp_model->get_where($tabel, $id_transaksidp);
+
+		// $data['data'] = $this->kurir_model->get_all('t_transaksi');
+
+		$data['active_paketdp'] = 'active';
+		$data['header'] = 'Manage Paket';
+		$this->template->dp('droppoint/detail_paketdp', $data);
 	}
 
 	public function diterima_darikurir()
@@ -271,7 +300,8 @@ class Droppoint extends CI_Controller {
 				'dp_asal' => $this->session->userdata('id_dp'), 
 				'dp_tujuan' => $dp_tujuan,
 				'tgl_kirim' =>  date("Y-m-d"),
-				'tgl_sampai' => ''
+				'tgl_sampai' => '',
+				'status_tdp' => 'proses'
 			);
 			$id_transaksidp = $this->dp_model->insert_id('t_transaksidp', $transaksidp);
 
@@ -385,26 +415,29 @@ class Droppoint extends CI_Controller {
 		$this->cek_login();
 
 		$resi = $this->input->post('no_resi');
+		$id_transaksidp = $this->input->post('id_transaksidp');
 
 		if (isset($_POST['submit']))
 		{
 
+			$transaksidp = array(
+					'tgl_sampai' => date("Y-m-d"),
+					'status_tdp' => 'selesai'
+			);
+			$this->dp_model->update('t_transaksidp', $transaksidp, ['id_transaksidp' => $id_transaksidp]); 
+
 			foreach ($resi as $res)
 			{ 
 		        
-				$data = array(
+				$tracking = array(
 					'no_resi' => $res, 
 					'tanggal' => date("Y-m-d"), 
 					'status_tracking' => 'Diterima Drop Point Kota Tujuan'
 				);
 
-				$this->dp_model->insert('t_tracking', $data);
-				$this->dp_model->update(
-					't_transaksi', 
-					['dp_tujuan' => $this->session->userdata('id_dp')],
-					['no_resi' => $res]
-					);              
-    		}
+				$this->dp_model->insert('t_tracking', $tracking);
+			
+			}
 
 	    }
 			
