@@ -123,7 +123,7 @@
     });
 
    $(".city_tujuan").change(function(){
-      $( ".ongkir_detail" ).html("<td colspan='4' style='text-align:center'>loading...<td/>");
+      $( ".ongkir_detail" ).html("<td colspan='5' style='text-align:center'>loading...<td/>");
       var data = $(this).val();
       $.get( "<?php echo site_url('user/getongkir');?>", { kab: data }, function( data ) {
         $( ".ongkir_detail" ).html( data );

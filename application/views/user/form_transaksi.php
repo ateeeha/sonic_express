@@ -103,9 +103,10 @@
                 <thead>
                   <tr>
                   <th style="text-align: center" width="20%">#</th>
+                  <th style="text-align: center" width="20%">Kecamatan</th>
                   <th style="text-align: center" width="20%">Paket</th>
-                  <th style="text-align: center" width="30%">Harga</th>
-                  <th style="text-align: center" width="30%">Estimasi</th>
+                  <th style="text-align: center" width="20%">Harga</th>
+                  <th style="text-align: center" width="20%">Estimasi</th>
                 </tr>
                 </thead>
                 <tfoot class="ongkir_detail" id="ongkir_detail">

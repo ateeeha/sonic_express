@@ -252,6 +252,7 @@ class User extends CI_Controller {
 			foreach($getongkir->result() as $go){
 			echo "<tr>";
 			echo "<td style='text-align:center'><input value='$go->harga' name='ongkir' type='radio'></input></td>";
+			echo "<td style='text-align:center'>$go->kecamatan</input></td>";
 			echo "<td style='text-align:center'>$go->jenis_layanan</input></td>";
 			echo "<td style='text-align:center'>$go->harga</input></td>";
 			echo "<td style='text-align:center'>$go->estimasi</td>";
@@ -259,7 +260,7 @@ class User extends CI_Controller {
 			}
 		}else{
 
-			echo "<td colspan='4' style='text-align:center'>Data Belum Tersedia!</td>";
+			echo "<td colspan='5' style='text-align:center'>Data Belum Tersedia!</td>";
 		}
 		
 	}

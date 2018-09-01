@@ -41,9 +41,11 @@
               <table class="table table-bordered table-hover dt-responsive nowrap">
                 <thead>
                   <tr>
-                    <th style="text-align: center">Paket Reg</th>
+                    <th style="text-align: center">Origin</th>
+                    <th style="text-align: center">Tujuan</th>
+                    <th style="text-align: center">Harga</th>
                     <th style="text-align: center">Berat(Kg)</th>
-                    <th style="text-align: center">Estimasi Reg</th>
+                    <th style="text-align: center">Estimasi</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -53,9 +55,11 @@
                     foreach ($cek->result() as $key) {
                   ?>
                   <tr>
-                    <td style="text-align: center"><?= $key->reg; ?></td>
+                    <td style="text-align: center"><?= $key->origin; ?></td>
+                    <td style="text-align: center"><?= $key->kota; ?>, <?= $key->kecamatan; ?></td>
+                    <td style="text-align: center"><?= $key->harga; ?></td>
                     <td style="text-align: center"><?= $key->berat; ?></td>
-                    <td style="text-align: center"><?= $key->estimasi_reg; ?></td>
+                    <td style="text-align: center"><?= $key->estimasi; ?></td>
                   </tr>
                   <?php } ?>
                 </tbody>
