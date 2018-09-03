@@ -50,7 +50,7 @@ class Login extends CI_Controller {
 				$this->session->set_flashdata('alert', "Username Ditolak !");
 			}
 		}
-		if ($this->session->userdata('logged_in') == TRUE) 
+		if ($this->session->userdata('login_admin') == TRUE) 
 		{
 			redirect('admin');
 		}
@@ -99,6 +99,46 @@ class Login extends CI_Controller {
 		$this->load->view('droppoint/login_dp');
 	}
 
+	public function login_agen()
+	{
+		if ($this->input->post('submit') == 'Submit')
+		{
+			$email = $this->input->post('email', TRUE);
+			$pass = $this->input->post('password', TRUE);
+
+			$cek = $this->admin_model->get_where('t_agen', array('email' => $email));
+
+			if ($cek->num_rows() > 0) {
+				$data = $cek->row();
+
+				if (password_verify($pass, $data->password)) 
+				{
+					$datauser = array(
+						'id_agen' => $data->id_agen,
+						'username_agen' => $data->username, 
+						'email_agen' => $data->email, 
+						'login_agen' => TRUE
+					);
+
+					$this->session->set_userdata($datauser);
+
+					redirect('agen');
+
+				} else {
+					$this->session->set_flashdata('alert', "Password yang anda masukkan salah !");
+				}	
+
+			} else {
+				$this->session->set_flashdata('alert', "Username Ditolak !");
+			}
+		}
+		if ($this->session->userdata('login_agen') == TRUE) 
+		{
+			redirect('agen');
+		}
+		$this->load->view('agen/login_agen');
+	}
+
 	public function login_kurir()
 	{
 		//echo password_hash('admin', PASSWORD_DEFAULT, ['cost' => 10]);
@@ -134,7 +174,7 @@ class Login extends CI_Controller {
 				$this->session->set_flashdata('alert', "Username Ditolak !");
 			}
 		}
-		if ($this->session->userdata('logged_in') == TRUE) 
+		if ($this->session->userdata('login_kurir') == TRUE) 
 		{
 			redirect('kurir');
 		}
@@ -176,7 +216,7 @@ class Login extends CI_Controller {
 				$this->session->set_flashdata('alert', "Username Ditolak !");
 			}
 		}
-		if ($this->session->userdata('logged_in') == TRUE) 
+		if ($this->session->userdata('login_user') == TRUE) 
 		{
 			redirect('user');
 		}
@@ -188,6 +228,13 @@ class Login extends CI_Controller {
 		$this->session->sess_destroy();
 
 		redirect('login/login_admin');
+	}
+
+	public function logout_agen()
+	{
+		$this->session->sess_destroy();
+
+		redirect('login/login_agen');
 	}
 
 	public function logout_dp()

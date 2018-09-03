@@ -50,6 +50,20 @@ class Template
 
 		$this->ci->load->view('droppoint/dashboard', $data);
 	}
+
+	function agen($template, $data='')
+	{
+		//$this->ci->load->model('admin_model');
+
+		//$data['transaksi_baru'] = $this->ci->admin_model->count_where('t_order', ['read' => 0]);
+		//$data['belum'] = $this->ci->admin_model->count_where('t_order', ['status' => 'belum']);
+		//$data['konfirmasi_baru'] = $this->ci->admin_model->count_where('t_konfirmasi', ['read' => 0]);
+
+		$data['content'] = $this->ci->load->view($template, $data, TRUE);
+		$data['nav'] = $this->ci->load->view('agen/nav', $data, TRUE);
+
+		$this->ci->load->view('agen/dashboard', $data);
+	}
 	
 	function kurir($template, $data='')
 	{

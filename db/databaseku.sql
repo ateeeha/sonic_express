@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: 01 Sep 2018 pada 10.16
+-- Generation Time: 03 Sep 2018 pada 11.02
 -- Versi Server: 5.6.20
 -- PHP Version: 5.5.15
 
@@ -46,6 +46,29 @@ INSERT INTO `t_admin` (`id_admin`, `username`, `password`, `level`, `email`, `st
 (3, 'admin2', '$2y$10$a3BBnM31xGvr7E81asQBY.V8KosNm9giM3WchPF1iw4LNKM.J5Fca', 'admin', 'admin2@gmail.com', '1', '1'),
 (4, 'admin3', '$2y$10$a3BBnM31xGvr7E81asQBY.V8KosNm9giM3WchPF1iw4LNKM.J5Fca', 'admin', 'admin3@gmail.com', '1', '2'),
 (5, 'admin4', '$2y$10$a3BBnM31xGvr7E81asQBY.V8KosNm9giM3WchPF1iw4LNKM.J5Fca', 'admin', 'admin4@gmail.com', '1', '2');
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `t_agen`
+--
+
+CREATE TABLE IF NOT EXISTS `t_agen` (
+`id_agen` int(11) NOT NULL,
+  `username` varchar(35) NOT NULL,
+  `email` varchar(100) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `provinsi` varchar(35) NOT NULL,
+  `kabupaten` varchar(35) NOT NULL,
+  `status_agen` enum('1','2') NOT NULL
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+
+--
+-- Dumping data untuk tabel `t_agen`
+--
+
+INSERT INTO `t_agen` (`id_agen`, `username`, `email`, `password`, `provinsi`, `kabupaten`, `status_agen`) VALUES
+(1, 'Agen Bntul', 'a_bantul@gmail.com', '$2y$10$a3BBnM31xGvr7E81asQBY.V8KosNm9giM3WchPF1iw4LNKM.J5Fca', 'DI Yogyakarta', 'Bantul', '1');
 
 -- --------------------------------------------------------
 
@@ -715,7 +738,7 @@ CREATE TABLE IF NOT EXISTS `t_tracking` (
   `no_resi` varchar(255) NOT NULL,
   `tanggal` date NOT NULL,
   `status_tracking` enum('Dijemput Kurir','Diterima Kurir','Diterima Drop Point Kota Asal','Dikirim ke Drop Point Kota Tujuan','Diterima Drop Point Kota Tujuan','Diantar Kurir Ke Alamat Tujuan','Paket Diterima') NOT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=81 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=83 ;
 
 --
 -- Dumping data untuk tabel `t_tracking`
@@ -773,7 +796,9 @@ INSERT INTO `t_tracking` (`id_tracking`, `no_resi`, `tanggal`, `status_tracking`
 (77, 'RES230820181056184', '2018-08-31', 'Diterima Drop Point Kota Tujuan'),
 (78, 'RES230820181056464', '2018-08-31', 'Diterima Drop Point Kota Tujuan'),
 (79, 'RES230820181056184', '2018-08-31', 'Diterima Drop Point Kota Tujuan'),
-(80, 'RES230820181056464', '2018-08-31', 'Diterima Drop Point Kota Tujuan');
+(80, 'RES230820181056464', '2018-08-31', 'Diterima Drop Point Kota Tujuan'),
+(81, 'RES300820181033045', '2018-09-01', 'Dijemput Kurir'),
+(82, 'RES300820181033045', '2018-09-01', 'Diterima Kurir');
 
 -- --------------------------------------------------------
 
@@ -817,7 +842,7 @@ INSERT INTO `t_transaksi` (`id_transaksi`, `id_user`, `kurir_penjemput`, `kurir_
 (16, 4, 2, 3, 0, 0, '2018-08-23', 'RES230820181057084', 0, 0, 0, 0, 0, 0, 'jinu', 'DI Yogyakarta', 'Yogyakarta', 'test', 55283, '08995413121', 'Selesai', 'Belum Dikirim'),
 (18, 5, 3, 2, 3, 1, '2018-08-30', 'RES30082018918315', 1, 1, 1, 1, 4000, 0, 'Khoirul', 'DI Yogyakarta', 'Bantul', 'Sleman', 55283, '08995413121', 'Selesai', 'Sudah Dikirim'),
 (19, 5, 0, 0, 0, 0, '2018-08-30', 'RES300820181031255', 2, 20, 20, 20, 4000, 8000, 'Fatoni', 'DI Yogyakarta', 'Sleman', 'Yogya', 56483, '0899541311', 'Menunggu', 'Belum Dikirim'),
-(20, 5, 0, 0, 0, 0, '2018-08-30', 'RES300820181033045', 2, 40, 30, 30, 4000, 24000, 'Andrian', 'DI Yogyakarta', 'Sleman', 'Yogya', 55283, '0899541311', 'Menunggu', 'Belum Dikirim');
+(20, 5, 3, 0, 0, 0, '2018-08-30', 'RES300820181033045', 2, 40, 30, 30, 4000, 24000, 'Andrian', 'DI Yogyakarta', 'Sleman', 'Yogya', 55283, '0899541311', 'Diterima', 'Belum Dikirim');
 
 -- --------------------------------------------------------
 
@@ -908,6 +933,12 @@ ALTER TABLE `t_admin`
  ADD PRIMARY KEY (`id_admin`);
 
 --
+-- Indexes for table `t_agen`
+--
+ALTER TABLE `t_agen`
+ ADD PRIMARY KEY (`id_agen`);
+
+--
 -- Indexes for table `t_dp`
 --
 ALTER TABLE `t_dp`
@@ -977,6 +1008,11 @@ ALTER TABLE `t_user`
 ALTER TABLE `t_admin`
 MODIFY `id_admin` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=6;
 --
+-- AUTO_INCREMENT for table `t_agen`
+--
+ALTER TABLE `t_agen`
+MODIFY `id_agen` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
+--
 -- AUTO_INCREMENT for table `t_dp`
 --
 ALTER TABLE `t_dp`
@@ -1000,7 +1036,7 @@ MODIFY `id_ongkir` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=35;
 -- AUTO_INCREMENT for table `t_tracking`
 --
 ALTER TABLE `t_tracking`
-MODIFY `id_tracking` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=81;
+MODIFY `id_tracking` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=83;
 --
 -- AUTO_INCREMENT for table `t_transaksi`
 --

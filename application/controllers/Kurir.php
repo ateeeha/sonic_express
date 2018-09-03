@@ -30,12 +30,15 @@ class Kurir extends CI_Controller {
 		$this->template->kurir('kurir/form_transaksi', $data);
 	}
 
-	function transaksi_simpan()
+	function transaksi_simpan() //belum fix
 	{
 		if ($this->input->post('submit', TRUE) == 'Submit')
 		{
 			//validasi
 			$this->form_validation->set_rules('nama','Nama','required');
+			$this->form_validation->set_rules('berat','Berat','required|numeric');
+			$this->form_validation->set_rules('provinsi_tujuan','Provinsi','required');
+			$this->form_validation->set_rules('kabupaten_tujuan','Kabupaten','required');
 			$this->form_validation->set_rules('alamat','Alamat','required');
 			$this->form_validation->set_rules('kode_pos','Kode Pos','required|numeric');
 			$this->form_validation->set_rules('no_tlp','Nomor Telepon','required|numeric');
@@ -49,16 +52,41 @@ class Kurir extends CI_Controller {
 
 				if ($cek->num_rows() > 0)
 				{
-					$data = $cek->row();
+					$user = $cek->row();
+
+					$ongkir = $this->input->post('ongkir');
+					$berat = $this->input->post('berat');
+					$p = $this->input->post('panjang');
+					$l= $this->input->post('lebar');
+					$t = $this->input->post('tinggi');
+
+					if (($p * $l * $t) < 18000) {
+
+						$total_biaya = $berat * $ongkir;
+
+					}else if (($p * $l * $t) >= 18000) {
+
+						$berat = $p * $l * $t / 6000;
+
+						$total_biaya = $berat * $ongkir;
+					}
 				
 					$data = array(
+					'tgl_pengiriman' => date("Y-m-d"), 
+					'id_user' => $user->id_user, 
+					'no_resi' => 'RES'.date("dmYgis").$user->id_user, 
+
+					'berat' => $this->input->post('berat'),
+					'panjang' => $this->input->post('panjang'),
+					'lebar' => $this->input->post('lebar'),
+					'tinggi' => $this->input->post('tinggi'),
+					'ongkir' => $this->input->post('ongkir'),
+					'total_biaya' => $total_biaya,
+
 					'nama' => $this->input->post('nama', TRUE), 
 					'alamat' => $this->input->post('alamat', TRUE), 
 					'kode_pos' => $this->input->post('kode_pos', TRUE), 
 					'no_tlp' => $this->input->post('no_tlp', TRUE), 
-					'tgl_pengiriman' => date("Y-m-d"), 
-					'id_user' => $this->session->userdata('id_user'), 
-					'no_resi' => 'RES'.date("dmYgis").$data->id_user, 
 					'kurir_penjemput' => $this->session->userdata('id_kurir'),
 					'status_transaksi' => 'Diterima'
 					);
