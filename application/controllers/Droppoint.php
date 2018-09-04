@@ -133,7 +133,7 @@ class Droppoint extends CI_Controller {
 		redirect('droppoint/kurir/');
 	}
 
-	public function paket_kurir()
+	public function paket_kurir()//fitur dipindah ke agen
 	{
 		$this->cek_login();
 		$join = 't_transaksi t JOIN t_user u ON (t.id_user = u.id_user)';
@@ -199,7 +199,7 @@ class Droppoint extends CI_Controller {
 		$this->template->dp('droppoint/detail_paketdp', $data);
 	}
 
-	public function diterima_darikurir()
+	public function diterima_darikurir()//fitur pindah ke agen
 	{
 		$this->cek_login();
 		$join = 't_transaksi t JOIN t_user u ON (t.id_user = u.id_user)';
@@ -335,7 +335,7 @@ class Droppoint extends CI_Controller {
 		redirect('droppoint/diterima_darikurir/');
 	}
 
-	public function terima_paketkurir()
+	public function terima_paketkurir()//fitur pindah ke agen
 	{
 		$this->cek_login();
 

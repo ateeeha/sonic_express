@@ -119,7 +119,7 @@ class Kurir extends CI_Controller {
 		$this->template->kurir('kurir/paket_menunggu', $data);
 	}
 
-	public function paket_dp()
+	public function paket_dp()//fitur pindah ke agen 
 	{
 		$this->cek_login();
 		$join = 't_transaksi t JOIN t_user u ON (t.id_user = u.id_user)';
