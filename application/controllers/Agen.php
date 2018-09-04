@@ -76,6 +76,45 @@ class Agen extends CI_Controller {
 		$this->template->agen('agen/diterima_darikurir', $data);
 	}
 
+	public function jemput_paket()//belum fix
+	{
+		$this->cek_login();
+		
+		$resi 		= $this->input->post('no_resi');
+		$dp_tujuan	= $this->input->post('dp_tujuan');
+
+		if (isset($_POST['submit']))
+		{
+			$transaksiagen = array(
+				'id_dp' => $dp_tujuan,
+				'status_tagen' => 'baru'
+			);
+			$id_transaksiagen = $this->agen_model->insert_id('t_transaksiagen', $transaksiagen);
+
+			foreach ($resi as $res)
+			{ 
+		        
+				$tracking = array(
+					'no_resi' => $res, 
+					'tanggal' => date("Y-m-d"), 
+					'status_tracking' => 'Diproses Agen Kota Asal'
+				);
+
+			
+				$this->agen_model->insert('t_tracking', $tracking);				
+
+				$transaksiagendetail = array(
+					'no_resi' => $res, 
+					'id_transaksiagen' => $id_transaksiagen 
+				);
+
+				$this->agen_model->insert('t_transaksiagendetail', $transaksiagendetail);
+    		}
+
+	    }
+		redirect('agen/diterima_darikurir/');
+	}
+
 	public function paket_dp() //fitur dari kurir
 	{
 		$this->cek_login();

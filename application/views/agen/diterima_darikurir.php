@@ -11,7 +11,7 @@
         <div class="col-xs-12">
           <div class="box box-primary">
             <!-- /.box-header -->
-            <form method="post" action="<?php echo site_url('droppoint/kirim_banyakdarikurir'); ?>">
+            <form method="post" action="<?php echo site_url('agen/jemput_paket'); ?>">
             <div class="box-header with-border">
                 <div style="float:left">
                   <input class="btn btn-primary" type="submit" name="submit" value="Jemput">
