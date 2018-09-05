@@ -34,7 +34,7 @@
                 <div class="form-group">
                 <div class="col-md-6">Tarif</div>
                 <div class="col-md-6">Data Penerima</div>
-            <?php echo $this->session->userdata('id_user'); ?>
+                <?php echo $this->session->userdata('id_user'); ?>
                 </div>
 
                 <div class="form-group">

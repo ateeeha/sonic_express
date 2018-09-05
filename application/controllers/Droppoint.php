@@ -14,31 +14,30 @@ class Droppoint extends CI_Controller {
 	{
 		$this->cek_login();
 
-		$data['data'] = $this->dp_model->get_all('t_kurir');
-
-		$data['active_kurir'] = 'active';
-		$data['header'] = 'Manage Kurir';
-		$this->template->dp('droppoint/manage_kurir', $data);
+		$data['active_home'] = 'active';
+		$data['header'] = 'Dashboard';
+		$this->template->dp('droppoint/home', $data);
 	}
 
-	public function kurir()
+	public function agen()
 	{
 		$this->cek_login();
 
-		$data['data'] = $this->dp_model->get_all('t_kurir');
+		$data['data'] = $this->dp_model->get_all('t_agen');
 
-		$data['active_kurir'] = 'active';
-		$data['header'] = 'Manage Kurir';
-		$this->template->dp('droppoint/manage_kurir', $data);
+		$data['active_agen'] = 'active';
+		$data['header'] = 'Manage Agen';
+		$this->template->dp('droppoint/manage_agen', $data);
 	}
 
-	public function add_kurir()
+	public function add_agen()
 	{
 		$this->cek_login();
 
 		if ($this->input->post('submit', TRUE) == 'Submit')
 		{
 			//validasi
+			$this->form_validation->set_rules('id_dp','Id Droppoint','required');
 			$this->form_validation->set_rules('username','Username','required');
 			$this->form_validation->set_rules('email','Email','required|valid_email');
 			$this->form_validation->set_rules('provinsi','Provinsi','required');
@@ -49,31 +48,33 @@ class Droppoint extends CI_Controller {
 			if ($this->form_validation->run() == TRUE)
 			{
 				$data = array(
+				'id_dp' => $this->input->post('id_dp', TRUE), 
 				'username' => $this->input->post('username', TRUE), 
 				'email' => $this->input->post('email', TRUE), 
 				'provinsi' => $this->input->post('provinsi', TRUE), 
 					'kabupaten' => $this->input->post('kabupaten', TRUE),
 				'password' => password_hash($this->input->post('pass1', TRUE), PASSWORD_DEFAULT, ['cost' => 10]),
-				'status' => 2
+				'status_agen' => 1
 				);
 
-				$this->dp_model->insert('t_kurir', $data);
+				$this->dp_model->insert('t_agen', $data);
 				
-				redirect('droppoint/kurir/');
+				redirect('droppoint/agen/');
 			} 
 		}
-		$data['data'] = $this->dp_model->get_all('t_provinsi');
+		$data['provinsi'] = $this->dp_model->get_all('t_provinsi');
+		$data['id_dp'] = $this->session->userdata('id_dp');
 
 		$data['active_kurir'] = 'active';
 		$data['header'] = 'Add Kurir';	
-		$this->template->dp('droppoint/add_kurir', $data);
+		$this->template->dp('droppoint/add_agen', $data);
 	}
 
-	public function edit_kurir()
+	public function edit_agen()
 	{
 		$this->cek_login();
 
-		$id_kurir = $this->uri->segment(3);
+		$id_agen = $this->uri->segment(3);
 
 		if ($this->input->post('submit') == 'Submit') 
 		{
@@ -81,7 +82,7 @@ class Droppoint extends CI_Controller {
 			$this->form_validation->set_rules('email', 'Email', "required|valid_email");
 			$this->form_validation->set_rules('provinsi','Provinsi','required');
 			$this->form_validation->set_rules('kabupaten','Kabupaten','required');
-			$this->form_validation->set_rules('status', 'Status', "required|numeric");
+			$this->form_validation->set_rules('status_agen', 'Status Agen', "required|numeric");
 
 			if ($this->form_validation->run() == TRUE)
 			{
@@ -91,35 +92,35 @@ class Droppoint extends CI_Controller {
 					'email' => $this->input->post('email', TRUE),
 					'provinsi' => $this->input->post('provinsi', TRUE), 
 					'kabupaten' => $this->input->post('kabupaten', TRUE),
-					'status_kurir' => $this->input->post('status', TRUE)
+					'status_agen' => $this->input->post('status_agen', TRUE)
 				);
 				
-				$this->dp_model->update('t_kurir', $data, array('id_kurir' => $id_kurir));
+				$this->dp_model->update('t_agen', $data, array('id_agen' => $id_agen));
 				$this->session->set_flashdata('success','Data berhasil disimpan !');
 
-				//redirect('admin');
+				redirect('droppoint/agen');
 				
 			}
 		}
 
-		$kurir = $this->dp_model->get_where('t_kurir', array('id_kurir' => $id_kurir));
+		$kurir = $this->dp_model->get_where('t_agen', array('id_agen' => $id_agen));
 
 		foreach ($kurir->result() as $key) {
 			
-			$data['id_kurir'] = $key->id_kurir;
+			$data['id_agenr'] = $key->id_agen;
 			$data['username'] = $key->username;
 			$data['email'] = $key->email;
 			$data['provinsi'] = $key->provinsi;
 			$data['kabupaten'] = $key->kabupaten;
-			$data['status_kurir'] = $key->status_kurir;
+			$data['status_agen'] = $key->status_agen;
 
 		}
 		$data['data'] = $this->dp_model->get_all('t_provinsi');
 
-		$data['active_kurir'] = 'active';
-		$data['header'] = 'Manage Kurir';
+		$data['active_agen'] = 'active';
+		$data['header'] = 'Manage Agen';
 
-		$this->template->dp('droppoint/edit_kurir', $data);
+		$this->template->dp('droppoint/edit_agen', $data);
 	}
 
 	public function del_kurir()
@@ -133,22 +134,20 @@ class Droppoint extends CI_Controller {
 		redirect('droppoint/kurir/');
 	}
 
-	public function paket_kurir()//fitur dipindah ke agen
+	public function paket_agen()
 	{
 		$this->cek_login();
-		$join = 't_transaksi t JOIN t_user u ON (t.id_user = u.id_user)';
+		$join = 't_transaksiagen ta JOIN t_transaksiagendetail tad ON (ta.id_transaksiagen = tad.id_transaksiagen)';
 		$data['data'] = $this->dp_model->get_where($join, 
 			array(
-				'kabupaten' => $this->session->userdata('kabupaten_dp'),
-				'dp_asal' => '',
-				'status_transaksi' => 'diterima'
+				'id_dp' => $this->session->userdata('id_dp'),
 				));
 
 		// $data['data'] = $this->kurir_model->get_all('t_transaksi');
 
-		$data['active_paketkurir'] = 'active';
-		$data['header'] = 'Manage Paket';
-		$this->template->dp('droppoint/paket_kurir', $data);
+		$data['active_paketagen'] = 'active';
+		$data['header'] = 'Jemput Paket';
+		$this->template->dp('droppoint/paket_agen', $data);
 	}
 
 	public function paket_dp()

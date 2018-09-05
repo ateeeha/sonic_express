@@ -16,13 +16,7 @@
                 <div style="float:left">
                   <input class="btn btn-primary" type="submit" name="submit" value="Jemput">
 
-                  <label>Drop Point Tujuan :</label>
-                  <select name="dp_tujuan" required> 
-                      <option value="" disabled selected>--Pilih Droppoint--</option>
-                      <?php foreach ($droppoint->result() as $dp): ?>
-                      <option value="<?= $dp->id_dp; ?>"><?= $dp->username; ?></option>
-                      <?php endforeach ?>
-                  </select>
+                  <input type="hidden" name="id_dp" value="<?= $droppoint->id_dp; ?>">
                 </div>
             </div>
             <div class="box-body table-responsive">

@@ -68,7 +68,7 @@ class Agen extends CI_Controller {
 				'agen_asal' => $this->session->userdata('id_agen'),
 				));
 		
-		$data['droppoint'] = $this->agen_model->get_all('t_dp');
+		$data['droppoint'] = $this->agen_model->get_where('t_dp',['id_dp'=>$this->session->userdata('id_dp')])->row();
 
 
 		$data['active_terimakurir'] = 'active';
@@ -81,26 +81,24 @@ class Agen extends CI_Controller {
 		$this->cek_login();
 		
 		$resi 		= $this->input->post('no_resi');
-		$dp_tujuan	= $this->input->post('dp_tujuan');
+		$id_dp	= $this->input->post('id_dp');
 
 		if (isset($_POST['submit']))
 		{
 			$transaksiagen = array(
-				'id_dp' => $dp_tujuan,
+				'id_dp' => $id_dp,
 				'status_tagen' => 'baru'
 			);
 			$id_transaksiagen = $this->agen_model->insert_id('t_transaksiagen', $transaksiagen);
 
 			foreach ($resi as $res)
-			{ 
-		        
+			{ 		        
 				$tracking = array(
 					'no_resi' => $res, 
 					'tanggal' => date("Y-m-d"), 
 					'status_tracking' => 'Diproses Agen Kota Asal'
 				);
 
-			
 				$this->agen_model->insert('t_tracking', $tracking);				
 
 				$transaksiagendetail = array(

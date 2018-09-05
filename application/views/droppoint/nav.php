@@ -2,14 +2,14 @@
       <!-- sidebar menu: : style can be found in sidebar.less -->
        
       <ul class="sidebar-menu" data-widget="tree">
-        <li class="<?php if(isset($active_kurir)){echo $active_kurir;}?>">
-          <a href="<?= base_url(); ?>droppoint/kurir/">
-            <i class="fa fa-cube"></i> <span>MANAGE KURIR</span>
+        <li class="<?php if(isset($active_agen)){echo $active_agen;}?>">
+          <a href="<?= base_url(); ?>droppoint/agen/">
+            <i class="fa fa-cube"></i> <span>MANAGE AGEN</span>
           </a>
         </li>
-       <li class="<?php if(isset($active_paketkurir)){echo $active_paketkurir;}?>">
-          <a href="<?= base_url(); ?>droppoint/paket_kurir/">
-            <i class="fa fa-cube"></i> <span>PAKET KURIR</span>
+       <li class="<?php if(isset($active_paketagen)){echo $active_paketagen;}?>">
+          <a href="<?= base_url(); ?>droppoint/paket_agen/">
+            <i class="fa fa-cube"></i> <span>PAKET AGEN</span>
           </a>
         </li>
         <li class="<?php if(isset($active_paketdp)){echo $active_paketdp;}?>">

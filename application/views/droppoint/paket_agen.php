@@ -23,12 +23,8 @@
                   <tr>
                     <th><input id="check-all" type="checkbox"></th>
                     <th style="text-align: center">#</th>
-                    <th style="text-align: center">ID User</th>
-                    <th style="text-align: center">Tanggal</th>
                     <th style="text-align: center">No Resi</th>
-                    <th style="text-align: center">Penerima</th>
-                    <th style="text-align: center">Kode Pos</th>
-                    <th style="text-align: center">No Penerima</th>
+                    <th style="text-align: center">Status</th>
                     <th style="text-align: center" width="10%;">Opsi</th>
                   </tr>
                 </thead>
@@ -40,17 +36,12 @@
                   <tr>
                     <th><input class="check-item" type="checkbox" name="no_resi[<?= $key->no_resi; ?>]" value="<?= $key->no_resi; ?>"></th> 
                     <td style="text-align: center"><?= $i++; ?></td>
-                    <td style="text-align: center"><?= $key->id_user; ?></td>
-                    <td style="text-align: center"><?= $key->tgl_pengiriman; ?></td>
                     <td style="text-align: center"><?= $key->no_resi; ?></td>
-                    <td style="text-align: center"><?= $key->nama; ?></td>
-                    <td style="text-align: center"><?= $key->kode_pos; ?></td>
-                    <td style="text-align: center"><?= $key->no_tlp; ?></td>
+                    <td style="text-align: center"><?= $key->status_tagen; ?></td>
                     <td>
                     <a href="<?= base_url(); ?>droppoint/terima_paketkurir/<?= $key->no_resi ?>/" class="btn btn-success btn-xs" onclick="return confirm('Anda Yakin ?');"><i class="fa fa-check"></i> Konfirmasi</a>
                     </td>
                     <td>
-                    <?= $key->status_transaksi; ?>
                     </td>
                   </tr>
                   <?php endforeach ?>

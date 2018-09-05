@@ -8,8 +8,31 @@
           <div class="box box-primary">
             <div class="box-header with-border">
                 <div style="float:right">
-                  <a href="<?= base_url(); ?>droppoint/add_kurir" class="btn btn-primary"><i class="fa fa-plus"></i> Tambah Kurir</a>            
+                  <a href="<?= base_url(); ?>droppoint/add_agen" class="btn btn-primary"><i class="fa fa-plus"></i> Tambah Agen</a>            
                 </div>
+                <br />
+                <div style="float:left">
+                    <?php if(validation_errors())
+                     {
+                       echo "<div class='alert alert-warning alert-message'>";
+                       echo validation_errors();
+                       echo "</div>";
+                     } ?> 
+                     <?php if ($this->session->flashdata('alert')) 
+                     {
+                       echo "<div class='alert alert-warning alert-message'>";
+                       echo $this->session->flashdata('alert');
+                       echo "</div>";
+                     }
+                     ?>
+                      <?php if ($this->session->flashdata('success')) 
+                     {
+                       echo "<div class='alert alert-success alert-message'>";
+                       echo $this->session->flashdata('success');
+                       echo "</div>";
+                     }               
+                     ?>
+                 </div>
                 <div class="clearfix"></div>
             </div>
             <!-- /.box-header -->
@@ -33,17 +56,9 @@
                     <td style="text-align: center"><?= $i++; ?></td>
                     <td style="text-align: center"><?= $key->username; ?></td>
                     <td style="text-align: center"><?= $key->email; ?></td>
-                    <td style="text-align: center">
-                    <?php if ($key->status_kurir == 2) { ?>
-                          <a href="<?= base_url(); ?>index.php/droppoint/status/2/<?= $key->id_kurir ?>" class="btn btn-primary btn-xs">Aktif</a>
-                      <?php } else { ?>
-                          <a href="<?= base_url(); ?>index.php/droppoint/status/1/<?= $key->id_kurir ?>" class="btn btn-danger btn-xs">Tidak Aktif</a>
-
-                      <?php } ?> 
-                    </td>
+                    <td style="text-align: center"><?= $key->status_agen; ?></td>
                     <td>
-                        <a href="<?= base_url(); ?>index.php/droppoint/del_kurir/<?= $key->id_kurir; ?>" class="btn btn-danger btn-xs" onclick="return confirm('Anda Yakin ?');"><i class="fa fa-trash"></i> Hapus</a>
-                        <a href="<?= base_url(); ?>index.php/droppoint/edit_kurir/<?= $key->id_kurir; ?>" class="btn btn-warning btn-xs" onclick="return confirm('Anda Yakin ?');"><i class="fa fa-edit"></i> Edit</a>
+                        <a href="<?= base_url(); ?>/droppoint/edit_agen/<?= $key->id_agen; ?>" class="btn btn-warning btn-xs" onclick="return confirm('Anda Yakin ?');"><i class="fa fa-edit"></i> Edit</a>
                     </td>
                   </tr>
                   <?php endforeach ?>
@@ -52,7 +67,6 @@
                 </div>
             <!-- /.box-body -->
               <div class="box-footer with-border">
-                <p class="help-text">* Button <label class="label label-primary" style="padding:3px 5px;">Aktif</label> untuk menonaktifkan member, button <label class="label label-danger" style="padding:3px 5px;">Tidak Aktif</label> untuk mengaktifkan member</p>
               </div>
           </div>
           <!-- /.box -->
