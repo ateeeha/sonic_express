@@ -36,7 +36,7 @@ class Agen extends CI_Controller {
 		$this->template->agen('agen/paket_kurir', $data);
 	}
 
-	public function terima_paketkurir()//fitur dari dp
+	public function terima_paket_kurir()//fitur dari dp
 	{
 		$this->cek_login();
 
@@ -58,35 +58,67 @@ class Agen extends CI_Controller {
 		redirect('agen/paket_kurir/');
 	}
 
-	public function diterima_darikurir()//fitur dari dp
+	public function terima_banyakdarikurir()//blm fix
+	{
+		$this->cek_login();
+
+		$resi = $this->input->post('no_resi');
+
+		if (isset($_POST['submit']))
+		{
+
+			foreach ($resi as $res)
+			{ 
+		        
+				$data = array(
+					'no_resi' => $res, 
+					'tanggal' => date("Y-m-d"), 
+					'status_tracking' => 'Diterima Drop Point Kota Asal'
+				);
+
+				$this->dp_model->insert('t_tracking', $data);
+				$this->dp_model->update(
+					't_transaksi', 
+					['dp_asal' => $this->session->userdata('id_dp')],
+					['no_resi' => $res]
+					);              
+    		}
+
+	    }
+			
+		redirect('droppoint/paket_kurir/');
+	}
+
+	public function list_paket_kurir()
 	{
 		$this->cek_login();
 		$join = 't_transaksi t JOIN t_user u ON (t.id_user = u.id_user)';
 		$data['data'] = $this->agen_model->get_where($join, 
 			array(
-
-				'agen_asal' => $this->session->userdata('id_agen'),
+				'dp_jemput' => 'belum',
+				'agen_asal' => $this->session->userdata('id_agen')
 				));
 		
 		$data['droppoint'] = $this->agen_model->get_where('t_dp',['id_dp'=>$this->session->userdata('id_dp')])->row();
 
 
-		$data['active_terimakurir'] = 'active';
+		$data['active_list_paket_kurir'] = 'active';
 		$data['header'] = 'Manage Paket Diterima';
-		$this->template->agen('agen/diterima_darikurir', $data);
+		$this->template->agen('agen/list_paket_kurir', $data);
 	}
 
-	public function jemput_paket()//belum fix
+	public function minta_jemput_paket()//belum fix
 	{
 		$this->cek_login();
 		
-		$resi 		= $this->input->post('no_resi');
+		$resi 	= $this->input->post('no_resi');
 		$id_dp	= $this->input->post('id_dp');
 
 		if (isset($_POST['submit']))
 		{
 			$transaksiagen = array(
 				'id_dp' => $id_dp,
+				'id_agen' => $this->session->userdata('id_agen'),
 				'status_tagen' => 'baru'
 			);
 			$id_transaksiagen = $this->agen_model->insert_id('t_transaksiagen', $transaksiagen);
@@ -99,6 +131,12 @@ class Agen extends CI_Controller {
 					'status_tracking' => 'Diproses Agen Kota Asal'
 				);
 
+				$transaksi = array(
+					'dp_jemput' => 'proses' 
+				);
+
+				$this->agen_model->update('t_transaksi', $transaksi, ['no_resi' => $res]);
+
 				$this->agen_model->insert('t_tracking', $tracking);				
 
 				$transaksiagendetail = array(
@@ -110,7 +148,24 @@ class Agen extends CI_Controller {
     		}
 
 	    }
-		redirect('agen/diterima_darikurir/');
+		redirect('agen/list_paket_kurir/');
+	}
+
+	public function list_jemput_paket()
+	{
+		$this->cek_login();
+
+		$join = 't_transaksiagen ta JOIN t_transaksiagendetail tad ON (ta.id_transaksiagen = tad.id_transaksiagen)';
+		$data['data'] = $this->agen_model->get_where($join, 
+			array(
+				'id_agen' => $this->session->userdata('id_agen'),
+				));
+
+		// $data['data'] = $this->kurir_model->get_all('t_transaksi');
+
+		$data['active_list_jemput_paket'] = 'active';
+		$data['header'] = 'Manage List Jemput Paket';
+		$this->template->agen('agen/list_jemput_paket', $data);
 	}
 
 	public function paket_dp() //fitur dari kurir

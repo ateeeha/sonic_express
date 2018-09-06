@@ -30,6 +30,151 @@ class Droppoint extends CI_Controller {
 		$this->template->dp('droppoint/manage_agen', $data);
 	}
 
+	public function paket_agen()
+	{
+		$this->cek_login();
+		$join = 't_transaksiagen ta JOIN t_transaksiagendetail tad ON (ta.id_transaksiagen = tad.id_transaksiagen)';
+		$data['data'] = $this->dp_model->get_where($join, 
+			array(
+				'status_tagen' => 'baru',
+				'id_dp' => $this->session->userdata('id_dp'),
+				));
+
+		// $data['data'] = $this->kurir_model->get_all('t_transaksi');
+
+		$data['active_paket_agen'] = 'active';
+		$data['header'] = 'Paket agen';
+		$this->template->dp('droppoint/paket_agen', $data);
+	}
+
+	public function list_penjemputan()
+	{
+		$this->cek_login();
+		$join = 't_transaksiagen ta JOIN t_transaksiagendetail tad ON (ta.id_transaksiagen = tad.id_transaksiagen)';
+		$data['data'] = $this->dp_model->get_where($join, 
+			array(
+				'id_dp' => $this->session->userdata('id_dp'),
+				'status_tagen' => 'proses'
+				));
+
+		// $data['data'] = $this->kurir_model->get_all('t_transaksi');
+
+		$data['active_list_penjemputan'] = 'active';
+		$data['header'] = 'List Penjemputan';
+		$this->template->dp('droppoint/list_penjemputan', $data);
+	}
+
+	public function proses_penjemputan()
+	{
+		$this->cek_login();
+
+		$no_resi = $this->uri->segment(3);
+
+		$tabel = 't_transaksiagen ta JOIN t_transaksiagendetail tad ON (ta.id_transaksiagen = tad.id_transaksiagen)';
+
+		$this->dp_model->update(
+			$tabel, 
+			['status_tagen' => 'proses'],
+			['no_resi' => $this->uri->segment(3)]
+			);
+
+		redirect('droppoint/paket_agen/');
+	}
+
+	public function multi_proses_penjemputan()
+	{
+		$this->cek_login();
+
+		$resi = $this->input->post('no_resi');
+
+		$tabel = 't_transaksiagen ta JOIN t_transaksiagendetail tad ON (ta.id_transaksiagen = tad.id_transaksiagen)';
+
+		if (isset($_POST['submit']))
+		{
+
+			foreach ($resi as $res)
+			{ 
+		        
+		        $this->dp_model->update($tabel, 
+					['status_tagen' => 'proses'],
+					['no_resi' => $res]
+				);
+
+				// $data = array(
+				// 	'no_resi' => $res, 
+				// 	'tanggal' => date("Y-m-d"), 
+				// 	'status_tracking' => 'Diterima Drop Point Kota Asal'
+				// );
+
+				// $this->dp_model->insert('t_tracking', $data);
+				// $this->dp_model->update(
+				// 	't_transaksi', 
+				// 	['dp_asal' => $this->session->userdata('id_dp')],
+				// 	['no_resi' => $res]
+				// 	);              
+    		}
+
+	    }
+			
+		redirect('droppoint/paket_agen/');
+	}
+
+	public function konfirmasi_penjemputan()
+	{
+		$this->cek_login();
+
+		$resi = $this->input->post('no_resi');
+		$id_transaksiagen['id_transaksiagen'] = $this->input->post('id_transaksiagen');
+
+		if (isset($_POST['submit']))
+		{
+			
+			$this->dp_model->update('t_transaksiagen', ['status_tagen' => 'selesai'], $id_transaksiagen); 
+
+			foreach ($resi as $res)
+			{ 
+		        
+				$tracking = array(
+					'no_resi' => $res, 
+					'tanggal' => date("Y-m-d"), 
+					'status_tracking' => 'Diterima Drop Point Kota Asal'
+				);
+
+				$transaksi = array(
+					'dp_asal' => $this->session->userdata('id_dp'),
+					'dp_jemput' => selesai 
+				);
+
+				$this->dp_model->insert('t_tracking', $tracking);
+		        $this->dp_model->update('t_transaksi', $transaksi, ['no_resi' => $res]); 
+    		}
+
+	    }
+			
+		redirect('droppoint/detail_penjemputan/'.$id_transaksiagen.'/');
+	}
+
+	public function detail_penjemputan()
+	{
+		$this->cek_login();
+
+		$tabel = 't_transaksiagen ta 
+				JOIN t_transaksiagendetail tad 
+					ON (ta.id_transaksiagen = tad.id_transaksiagen)
+				JOIN t_transaksi t 
+					ON (tad.no_resi = t.no_resi)';
+
+		$id_transaksiagen['ta.id_transaksiagen'] = $this->uri->segment(3);
+
+		$data['data'] = $this->dp_model->get_where($tabel, $id_transaksiagen);
+
+		// $data['data'] = $this->kurir_model->get_all('t_transaksi');
+
+		$data['active_list_penjemputan'] = 'active';
+		$data['header'] = 'Manage List Penjemputan';
+		$this->template->dp('droppoint/detail_penjemputan', $data);
+	}
+
 	public function add_agen()
 	{
 		$this->cek_login();
@@ -123,6 +268,8 @@ class Droppoint extends CI_Controller {
 		$this->template->dp('droppoint/edit_agen', $data);
 	}
 
+
+
 	public function del_kurir()
 	{
 		$this->cek_login();
@@ -132,23 +279,7 @@ class Droppoint extends CI_Controller {
 		$this->dp_model->delete('t_kurir', $cond);
 
 		redirect('droppoint/kurir/');
-	}
-
-	public function paket_agen()
-	{
-		$this->cek_login();
-		$join = 't_transaksiagen ta JOIN t_transaksiagendetail tad ON (ta.id_transaksiagen = tad.id_transaksiagen)';
-		$data['data'] = $this->dp_model->get_where($join, 
-			array(
-				'id_dp' => $this->session->userdata('id_dp'),
-				));
-
-		// $data['data'] = $this->kurir_model->get_all('t_transaksi');
-
-		$data['active_paketagen'] = 'active';
-		$data['header'] = 'Jemput Paket';
-		$this->template->dp('droppoint/paket_agen', $data);
-	}
+	}	
 
 	public function paket_dp()
 	{
@@ -176,7 +307,7 @@ class Droppoint extends CI_Controller {
 		$this->template->dp('droppoint/paket_dp', $data);
 	}
 
-	public function detail_paketdp()
+	public function detail_paket_dp()
 	{
 		$this->cek_login();
 
@@ -334,28 +465,6 @@ class Droppoint extends CI_Controller {
 		redirect('droppoint/diterima_darikurir/');
 	}
 
-	public function terima_paketkurir()//fitur pindah ke agen
-	{
-		$this->cek_login();
-
-		$no_resi = $this->uri->segment(3);
-
-		$data = array(
-			'no_resi' => $no_resi, 
-			'tanggal' => date("Y-m-d"), 
-			'status_tracking' => 'Diterima Drop Point Kota Asal'
-		);
-
-		$this->dp_model->insert('t_tracking', $data);
-		$this->dp_model->update(
-			't_transaksi', 
-			['dp_asal' => $this->session->userdata('id_dp')],
-			['no_resi' => $this->uri->segment(3)]
-			);
-
-		redirect('droppoint/paket_kurir/');
-	}
-
 	public function terima_paketdp()
 	{
 		$this->cek_login();
@@ -376,38 +485,7 @@ class Droppoint extends CI_Controller {
 			);
 
 		redirect('droppoint/paket_dp/');
-	}
-
-	public function terima_banyakdarikurir()
-	{
-		$this->cek_login();
-
-		$resi = $this->input->post('no_resi');
-
-		if (isset($_POST['submit']))
-		{
-
-			foreach ($resi as $res)
-			{ 
-		        
-				$data = array(
-					'no_resi' => $res, 
-					'tanggal' => date("Y-m-d"), 
-					'status_tracking' => 'Diterima Drop Point Kota Asal'
-				);
-
-				$this->dp_model->insert('t_tracking', $data);
-				$this->dp_model->update(
-					't_transaksi', 
-					['dp_asal' => $this->session->userdata('id_dp')],
-					['no_resi' => $res]
-					);              
-    		}
-
-	    }
-			
-		redirect('droppoint/paket_kurir/');
-	}
+	}	
 
 	public function terima_banyakdaridp()
 	{

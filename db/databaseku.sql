@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: 05 Sep 2018 pada 13.36
+-- Generation Time: 06 Sep 2018 pada 11.21
 -- Versi Server: 5.6.20
 -- PHP Version: 5.5.15
 
@@ -741,7 +741,7 @@ CREATE TABLE IF NOT EXISTS `t_tracking` (
   `no_resi` varchar(255) NOT NULL,
   `tanggal` date NOT NULL,
   `status_tracking` enum('Dijemput Kurir','Diterima Kurir','Diterima Agen Kota Asal','Diproses Agen Kota Asal','Diterima Drop Point Kota Asal','Dikirim ke Drop Point Kota Tujuan','Diterima Drop Point Kota Tujuan','Diantar Kurir Ke Alamat Tujuan','Diterima Agen Kota Tujuan','Diantar Kurir Ke Alamat Tujuan','Paket Diterima') NOT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=87 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=99 ;
 
 --
 -- Dumping data untuk tabel `t_tracking`
@@ -805,7 +805,19 @@ INSERT INTO `t_tracking` (`id_tracking`, `no_resi`, `tanggal`, `status_tracking`
 (83, 'RES300820181033045', '2018-09-04', 'Diterima Agen Kota Asal'),
 (84, 'RES300820181033045', '2018-09-04', 'Diproses Agen Kota Asal'),
 (85, 'RES300820181033045', '2018-09-04', 'Diproses Agen Kota Asal'),
-(86, 'RES300820181033045', '2018-09-05', 'Diproses Agen Kota Asal');
+(86, 'RES300820181033045', '2018-09-05', 'Diproses Agen Kota Asal'),
+(87, 'RES300820181033045', '2018-09-06', 'Diproses Agen Kota Asal'),
+(88, 'RES300820181033045', '2018-09-06', 'Diproses Agen Kota Asal'),
+(89, 'RES300820181033045', '2018-09-06', 'Diproses Agen Kota Asal'),
+(90, 'RES300820181033045', '2018-09-06', 'Diproses Agen Kota Asal'),
+(91, 'RES300820181033045', '2018-09-06', 'Diproses Agen Kota Asal'),
+(92, 'RES300820181033045', '2018-09-06', 'Diproses Agen Kota Asal'),
+(93, 'RES300820181033045', '2018-09-06', 'Diterima Drop Point Kota Tujuan'),
+(94, 'RES300820181033045', '2018-09-06', 'Diterima Drop Point Kota Asal'),
+(95, 'RES300820181033045', '2018-09-06', 'Diterima Drop Point Kota Asal'),
+(96, 'RES300820181033045', '2018-09-06', 'Diterima Drop Point Kota Asal'),
+(97, 'RES300820181033045', '2018-09-06', 'Diterima Drop Point Kota Asal'),
+(98, 'RES300820181033045', '2018-09-06', 'Diterima Drop Point Kota Asal');
 
 -- --------------------------------------------------------
 
@@ -837,21 +849,22 @@ CREATE TABLE IF NOT EXISTS `t_transaksi` (
   `kode_pos` int(5) NOT NULL,
   `no_tlp` varchar(35) NOT NULL,
   `status_transaksi` enum('Menunggu','Dijemput','Diterima','Ditolak','Selesai') NOT NULL,
-  `dp_kirim` enum('Belum Dikirim','Sudah Dikirim') NOT NULL
+  `dp_kirim` enum('Belum Dikirim','Sudah Dikirim') NOT NULL,
+  `dp_jemput` enum('belum','proses','selesai') NOT NULL
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=21 ;
 
 --
 -- Dumping data untuk tabel `t_transaksi`
 --
 
-INSERT INTO `t_transaksi` (`id_transaksi`, `id_user`, `kurir_penjemput`, `kurir_pengantar`, `agen_asal`, `agen_tujuan`, `dp_asal`, `dp_tujuan`, `tgl_pengiriman`, `no_resi`, `berat`, `panjang`, `lebar`, `tinggi`, `ongkir`, `total_biaya`, `nama`, `provinsi_tujuan`, `kabupaten_tujuan`, `alamat`, `kode_pos`, `no_tlp`, `status_transaksi`, `dp_kirim`) VALUES
-(13, 5, 3, 2, 0, 0, 3, 1, '2018-08-23', 'RES23082018837395', 0, 0, 0, 0, 0, 0, 'Indri', 'DI Yogyakarta', 'Bantul', 'Banguntapan', 55283, '08995413121', 'Selesai', 'Sudah Dikirim'),
-(14, 4, 2, 3, 0, 0, 1, 3, '2018-08-23', 'RES230820181056184', 0, 0, 0, 0, 0, 0, 'Joni', 'DI Yogyakarta', 'Yogyakarta', 'test', 56483, '08995413121', 'Selesai', 'Sudah Dikirim'),
-(15, 4, 2, 3, 0, 0, 1, 3, '2018-08-23', 'RES230820181056464', 0, 0, 0, 0, 0, 0, 'jino', 'DI Yogyakarta', 'Yogyakarta', 'test', 56483, '08995413121', 'Selesai', 'Sudah Dikirim'),
-(16, 4, 2, 3, 0, 0, 0, 0, '2018-08-23', 'RES230820181057084', 0, 0, 0, 0, 0, 0, 'jinu', 'DI Yogyakarta', 'Yogyakarta', 'test', 55283, '08995413121', 'Selesai', 'Belum Dikirim'),
-(18, 5, 3, 2, 0, 0, 3, 1, '2018-08-30', 'RES30082018918315', 1, 1, 1, 1, 4000, 0, 'Khoirul', 'DI Yogyakarta', 'Bantul', 'Sleman', 55283, '08995413121', 'Selesai', 'Sudah Dikirim'),
-(19, 5, 0, 0, 0, 0, 0, 0, '2018-08-30', 'RES300820181031255', 2, 20, 20, 20, 4000, 8000, 'Fatoni', 'DI Yogyakarta', 'Sleman', 'Yogya', 56483, '0899541311', 'Menunggu', 'Belum Dikirim'),
-(20, 5, 3, 0, 1, 0, 0, 0, '2018-08-30', 'RES300820181033045', 2, 40, 30, 30, 4000, 24000, 'Andrian', 'DI Yogyakarta', 'Sleman', 'Yogya', 55283, '0899541311', 'Diterima', 'Belum Dikirim');
+INSERT INTO `t_transaksi` (`id_transaksi`, `id_user`, `kurir_penjemput`, `kurir_pengantar`, `agen_asal`, `agen_tujuan`, `dp_asal`, `dp_tujuan`, `tgl_pengiriman`, `no_resi`, `berat`, `panjang`, `lebar`, `tinggi`, `ongkir`, `total_biaya`, `nama`, `provinsi_tujuan`, `kabupaten_tujuan`, `alamat`, `kode_pos`, `no_tlp`, `status_transaksi`, `dp_kirim`, `dp_jemput`) VALUES
+(13, 5, 3, 2, 0, 0, 3, 1, '2018-08-23', 'RES23082018837395', 0, 0, 0, 0, 0, 0, 'Indri', 'DI Yogyakarta', 'Bantul', 'Banguntapan', 55283, '08995413121', 'Selesai', 'Sudah Dikirim', 'belum'),
+(14, 4, 2, 3, 0, 0, 1, 3, '2018-08-23', 'RES230820181056184', 0, 0, 0, 0, 0, 0, 'Joni', 'DI Yogyakarta', 'Yogyakarta', 'test', 56483, '08995413121', 'Selesai', 'Sudah Dikirim', 'belum'),
+(15, 4, 2, 3, 0, 0, 1, 3, '2018-08-23', 'RES230820181056464', 0, 0, 0, 0, 0, 0, 'jino', 'DI Yogyakarta', 'Yogyakarta', 'test', 56483, '08995413121', 'Selesai', 'Sudah Dikirim', 'belum'),
+(16, 4, 2, 3, 0, 0, 0, 0, '2018-08-23', 'RES230820181057084', 0, 0, 0, 0, 0, 0, 'jinu', 'DI Yogyakarta', 'Yogyakarta', 'test', 55283, '08995413121', 'Selesai', 'Belum Dikirim', 'belum'),
+(18, 5, 3, 2, 0, 0, 3, 1, '2018-08-30', 'RES30082018918315', 1, 1, 1, 1, 4000, 0, 'Khoirul', 'DI Yogyakarta', 'Bantul', 'Sleman', 55283, '08995413121', 'Selesai', 'Sudah Dikirim', 'belum'),
+(19, 5, 0, 0, 0, 0, 0, 0, '2018-08-30', 'RES300820181031255', 2, 20, 20, 20, 4000, 8000, 'Fatoni', 'DI Yogyakarta', 'Sleman', 'Yogya', 56483, '0899541311', 'Menunggu', 'Belum Dikirim', 'belum'),
+(20, 5, 3, 0, 0, 0, 3, 0, '2018-08-30', 'RES300820181033045', 2, 40, 30, 30, 4000, 24000, 'Andrian', 'DI Yogyakarta', 'Sleman', 'Yogya', 55283, '0899541311', 'Diterima', 'Belum Dikirim', 'selesai');
 
 -- --------------------------------------------------------
 
@@ -862,17 +875,16 @@ INSERT INTO `t_transaksi` (`id_transaksi`, `id_user`, `kurir_penjemput`, `kurir_
 CREATE TABLE IF NOT EXISTS `t_transaksiagen` (
 `id_transaksiagen` int(11) NOT NULL,
   `id_dp` int(11) NOT NULL,
+  `id_agen` int(11) NOT NULL,
   `status_tagen` enum('baru','proses','selesai') NOT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=11 ;
 
 --
 -- Dumping data untuk tabel `t_transaksiagen`
 --
 
-INSERT INTO `t_transaksiagen` (`id_transaksiagen`, `id_dp`, `status_tagen`) VALUES
-(2, 3, 'baru'),
-(3, 3, 'baru'),
-(4, 3, 'baru');
+INSERT INTO `t_transaksiagen` (`id_transaksiagen`, `id_dp`, `id_agen`, `status_tagen`) VALUES
+(5, 3, 1, 'selesai');
 
 -- --------------------------------------------------------
 
@@ -884,16 +896,14 @@ CREATE TABLE IF NOT EXISTS `t_transaksiagendetail` (
 `id_transaksiagendetail` int(11) NOT NULL,
   `no_resi` varchar(255) NOT NULL,
   `id_transaksiagen` int(11) NOT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=10 ;
 
 --
 -- Dumping data untuk tabel `t_transaksiagendetail`
 --
 
 INSERT INTO `t_transaksiagendetail` (`id_transaksiagendetail`, `no_resi`, `id_transaksiagen`) VALUES
-(1, 'RES300820181033045', 2),
-(2, 'RES300820181033045', 3),
-(3, 'RES300820181033045', 4);
+(4, 'RES300820181033045', 5);
 
 -- --------------------------------------------------------
 
@@ -1099,7 +1109,7 @@ MODIFY `id_ongkir` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=35;
 -- AUTO_INCREMENT for table `t_tracking`
 --
 ALTER TABLE `t_tracking`
-MODIFY `id_tracking` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=87;
+MODIFY `id_tracking` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=99;
 --
 -- AUTO_INCREMENT for table `t_transaksi`
 --
@@ -1109,12 +1119,12 @@ MODIFY `id_transaksi` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=21;
 -- AUTO_INCREMENT for table `t_transaksiagen`
 --
 ALTER TABLE `t_transaksiagen`
-MODIFY `id_transaksiagen` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
+MODIFY `id_transaksiagen` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=11;
 --
 -- AUTO_INCREMENT for table `t_transaksiagendetail`
 --
 ALTER TABLE `t_transaksiagendetail`
-MODIFY `id_transaksiagendetail` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
+MODIFY `id_transaksiagendetail` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=10;
 --
 -- AUTO_INCREMENT for table `t_transaksidp`
 --

@@ -11,10 +11,11 @@
         <div class="col-xs-12">
           <div class="box box-primary">
             <!-- /.box-header -->
-            <form method="post" action="<?php echo site_url('droppoint/multi_proses_penjemputan'); ?>">
+            <form method="post" action="<?php echo site_url('droppoint/konfirmasi_penjemputan'); ?>">
             <div class="box-header with-border">
                 <div style="float:left">
-                  <input class="btn btn-success" type="submit" name="submit" value="Proses">
+                  <input class="btn btn-success" type="submit" name="submit" value="Konfirmasi">
+                  <input type="hidden" name="id_transaksiagen" value="<?= $this->uri->segment('3');  ?>">
                 </div>
             </div>
             <div class="box-body table-responsive">
@@ -23,10 +24,9 @@
                   <tr>
                     <th><input id="check-all" type="checkbox"></th>
                     <th style="text-align: center">#</th>
-                    <th style="text-align: center">Id Agen</th>
-                    <th style="text-align: center">No Resi</th>
+                    <th style="text-align: center">ID TRANSAKSI AGEN</th>
+                    <th style="text-align: center">NO RESI</th>
                     <th style="text-align: center">Status</th>
-                    <th style="text-align: center" width="20%;">Opsi</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -37,22 +37,15 @@
                   <tr>
                     <th><input class="check-item" type="checkbox" name="no_resi[<?= $key->no_resi; ?>]" value="<?= $key->no_resi; ?>"></th> 
                     <td style="text-align: center"><?= $i++; ?></td>
-                    <td style="text-align: center"><?= $key->id_agen; ?></td>
+                    <td style="text-align: center"><?= $key->id_transaksiagen; ?></td>
                     <td style="text-align: center"><?= $key->no_resi; ?></td>
-                    <td style="text-align: center"><?= $key->status_tagen; ?></td>
-                    <td>
-                    <a href="<?= base_url(); ?>droppoint/detail_penjemputan/<?= $key->no_resi ?>/" class="btn btn-primary btn-xs" onclick="return confirm('Anda Yakin ?');"><i class="fa fa-search"></i> Detail</a>
-
-                    <a href="<?= base_url(); ?>droppoint/proses_penjemputan/<?= $key->no_resi ?>/" class="btn btn-success btn-xs" onclick="return confirm('Anda Yakin ?');"><i class="fa fa-check"></i> Proses</a>
-                    </td>
-                    <td>
-                    </td>
+                    <td style="text-align: center"><?= $key->dp_jemput; ?></td>
                   </tr>
                   <?php endforeach ?>
                 </  >
               </table>
                 </div>
-                </form>
+              </form>
               <div class="box-footer with-border">
               </div>
           </div>

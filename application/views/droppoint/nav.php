@@ -7,24 +7,29 @@
             <i class="fa fa-cube"></i> <span>MANAGE AGEN</span>
           </a>
         </li>
-       <li class="<?php if(isset($active_paketagen)){echo $active_paketagen;}?>">
+       <li class="<?php if(isset($active_paket_agen)){echo $active_paket_agen;}?>">
           <a href="<?= base_url(); ?>droppoint/paket_agen/">
-            <i class="fa fa-cube"></i> <span>PAKET AGEN</span>
+            <i class="fa fa-cube"></i> <span>PAKET (Agen)</span>
           </a>
         </li>
-        <li class="<?php if(isset($active_paketdp)){echo $active_paketdp;}?>">
+        <li class="<?php if(isset($active_paket_dp)){echo $active_paket_dp;}?>">
           <a href="<?= base_url(); ?>droppoint/paket_dp/">
-            <i class="fa fa-cube"></i> <span>PAKET DROPPOINT</span>
+            <i class="fa fa-cube"></i> <span>PAKET (Droppoint)</span>
           </a>
         </li>
-        <li class="<?php if(isset($active_terimakurir)){echo $active_terimakurir;}?>">
-          <a href="<?= base_url(); ?>droppoint/diterima_darikurir/">
-            <i class="fa fa-cube"></i> <span>TERIMA KURIR</span>
+        <li class="<?php if(isset($active_list_penjemputan)){echo $active_list_penjemputan;}?>">
+          <a href="<?= base_url(); ?>droppoint/list_penjemputan/">
+            <i class="fa fa-cube"></i> <span>LIST PENJEMPUTAN</span>
           </a>
         </li>
-        <li class="<?php if(isset($active_terimadp)){echo $active_terimadp;}?>">
-          <a href="<?= base_url(); ?>droppoint/diterima_daridp/">
-            <i class="fa fa-cube"></i> <span>TERIMA DROPPOINT</span>
+        <li class="<?php if(isset($active_list_paket_agen)){echo $active_list_paket_agen;}?>">
+          <a href="<?= base_url(); ?>droppoint/list_paket_agen/">
+            <i class="fa fa-cube"></i> <span>LIST PAKET (Agen)</span>
+          </a>
+        </li>
+        <li class="<?php if(isset($active_list_paket_dp)){echo $active_list_paket_dp;}?>">
+          <a href="<?= base_url(); ?>droppoint/list_paket_dp/">
+            <i class="fa fa-cube"></i> <span>LIST PAKET (Droppoint)</span>
           </a>
         </li>
       </ul>

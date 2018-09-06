@@ -7,24 +7,29 @@
             <i class="fa fa-cube"></i> <span>HOME</span>
           </a>
         </li>
-       <li class="<?php if(isset($active_paketkurir)){echo $active_paketkurir;}?>">
+       <li class="<?php if(isset($active_paket_kurir)){echo $active_paket_kurir;}?>">
           <a href="<?= base_url(); ?>agen/paket_kurir/">
             <i class="fa fa-cube"></i> <span>PAKET KURIR</span>
           </a>
         </li>
-        <li class="<?php if(isset($active_paketdp)){echo $active_paketdp;}?>">
+        <li class="<?php if(isset($active_paket_dp)){echo $active_paket_dp;}?>">
           <a href="<?= base_url(); ?>agen/paket_dp/">
             <i class="fa fa-cube"></i> <span>PAKET DROPPOINT</span>
           </a>
         </li>
-        <li class="<?php if(isset($active_terimakurir)){echo $active_terimakurir;}?>">
-          <a href="<?= base_url(); ?>agen/diterima_darikurir/">
-            <i class="fa fa-cube"></i> <span>TERIMA KURIR</span>
+        <li class="<?php if(isset($active_list_paket_kurir)){echo $active_list_paket_kurir;}?>">
+          <a href="<?= base_url(); ?>agen/list_paket_kurir/">
+            <i class="fa fa-cube"></i> <span>LIST PAKET (KURIR)</span>
           </a>
         </li>
-        <li class="<?php if(isset($active_terimadp)){echo $active_terimadp;}?>">
-          <a href="<?= base_url(); ?>droppoint/diterima_daridp/">
-            <i class="fa fa-cube"></i> <span>TERIMA DROPPOINT</span>
+        <li class="<?php if(isset($active_list_paket_dp)){echo $active_list_paket_dp;}?>">
+          <a href="<?= base_url(); ?>agen/list_paket_dp/">
+            <i class="fa fa-cube"></i> <span>LIST PAKET (DROPPOINT)</span>
+          </a>
+        </li>
+        <li class="<?php if(isset($active_list_jemput_paket)){echo $active_list_jemput_paket;}?>">
+          <a href="<?= base_url(); ?>agen/list_jemput_paket/">
+            <i class="fa fa-cube"></i> <span>LIST PENJEMPUTAN</span>
           </a>
         </li>
       </ul>
