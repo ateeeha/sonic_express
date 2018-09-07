@@ -11,17 +11,21 @@
         <div class="col-xs-12">
           <div class="box box-primary">
             <!-- /.box-header -->
-            <form method="post" action="<?php echo site_url('droppoint/multi_proses_penjemputan'); ?>">
+            <form method="post" action="">
             <div class="box-header with-border">
+                
             </div>
             <div class="box-body table-responsive">
               <table class="table table-bordered table-hover dt-responsive nowrap" id="datatable">
                 <thead>
                   <tr>
                     <th style="text-align: center">#</th>
-                    <th style="text-align: center">Agen Asal</th>
-                    <th style="text-align: center">Dp Asal</th>
-                    <th style="text-align: center">Status</th>
+                    <th style="text-align: center">ID TRANSAKSI DP</th>
+                    <th style="text-align: center">ASAL</th>
+                    <th style="text-align: center">TUJUAN</th>
+                    <th style="text-align: center">TGL KIRIM</th>
+                    <th style="text-align: center">TGL SAMPAI</th>
+                    <th style="text-align: center">STATUS</th>
                     <th style="text-align: center" width="10%;">Opsi</th>
                   </tr>
                 </thead>
@@ -32,21 +36,21 @@
                   ?>
                   <tr>
                     <td style="text-align: center"><?= $i++; ?></td>
-                    <td style="text-align: center"><?= $key->id_agen; ?></td>
-                    <td style="text-align: center"><?= $key->id_dp; ?></td>
-                    <td style="text-align: center"><?= $key->status_tagen; ?></td>
+                    <td style="text-align: center"><?= $key->id_transaksidp; ?></td>
+                    <td style="text-align: center"><?= $key->asal; ?></td>
+                    <td style="text-align: center"><?= $key->tujuan; ?></td>
+                    <td style="text-align: center"><?= $key->tgl_kirim; ?></td>
+                    <td style="text-align: center"><?= $key->tgl_sampai; ?></td>
+                    <td style="text-align: center"><?= $key->status_tdp; ?></td>
                     <td>
-                    <a href="<?= base_url(); ?>droppoint/detail_penjemputan/<?= $key->id_transaksiagen ?>/" class="btn btn-primary btn-xs" onclick="return confirm('Anda Yakin ?');"><i class="fa fa-search"></i> Detail</a>
-
-                    </td>
-                    <td>
+                    <a href="<?= base_url(); ?>droppoint/detail_paketdp/<?= $key->id_transaksidp; ?>/" class="btn btn-warning btn-xs" onclick="return confirm('Anda Yakin ?');"><i class="fa fa-check"></i> Detail</a>
                     </td>
                   </tr>
                   <?php endforeach ?>
                 </  >
               </table>
                 </div>
-                </form>
+              </form>
               <div class="box-footer with-border">
               </div>
           </div>

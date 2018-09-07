@@ -11,26 +11,17 @@
         <div class="col-xs-12">
           <div class="box box-primary">
             <!-- /.box-header -->
-            <form method="post" action="<?php echo site_url('agen/minta_jemput_paket'); ?>">
+            <form method="post" action="<?php echo site_url('droppoint/multi_proses_penjemputan'); ?>">
             <div class="box-header with-border">
-                <div style="float:left">
-                  <input class="btn btn-primary" type="submit" name="submit" value="Jemput">
-
-                  <input type="hidden" name="id_dp" value="<?= $this->session->userdata('droppoint'); ?>">
-                </div>
             </div>
             <div class="box-body table-responsive">
               <table class="table table-bordered table-hover dt-responsive nowrap" id="datatable">
                 <thead>
                   <tr>
-                    <th><input id="check-all" type="checkbox"></th>
                     <th style="text-align: center">#</th>
-                    <th style="text-align: center">Tanggal</th>
+                    <th style="text-align: center">Id Agen</th>
                     <th style="text-align: center">No Resi</th>
-                    <th style="text-align: center">Penerima</th>
-                    <th style="text-align: center">Kabupaten Tujuan</th>
-                    <th style="text-align: center">No Penerima</th>
-                    <th style="text-align: center">Dp Jemput</th>
+                    <th style="text-align: center">Status</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -39,20 +30,19 @@
                   foreach ($data->result() as $key) :
                   ?>
                   <tr>
-                    <th><input class="check-item" type="checkbox" name="no_resi[<?= $key->no_resi; ?>]" value="<?= $key->no_resi; ?>"></th>                 
                     <td style="text-align: center"><?= $i++; ?></td>
-                    <td style="text-align: center"><?= $key->tgl_pengiriman; ?></td>
+                    <td style="text-align: center"><?= $key->id_agen; ?></td>
                     <td style="text-align: center"><?= $key->no_resi; ?></td>
-                    <td style="text-align: center"><?= $key->nama; ?></td>
-                    <td style="text-align: center"><?= $key->kabupaten_tujuan; ?></td>
-                    <td style="text-align: center"><?= $key->no_tlp; ?></td>
-                    <td style="text-align: center"><?= $key->dp_jemput; ?></td>
+                    <td style="text-align: center"><?= $key->status_tagen; ?></td>
+                    
+                    <td>
+                    </td>
                   </tr>
                   <?php endforeach ?>
                 </  >
               </table>
                 </div>
-              </form>
+                </form>
               <div class="box-footer with-border">
               </div>
           </div>

@@ -115,6 +115,7 @@ class Login extends CI_Controller {
 				{
 					$datauser = array(
 						'id_agen' => $data->id_agen,
+						'droppoint' => $data->id_dp, 
 						'username_agen' => $data->username, 
 						'email_agen' => $data->email, 
 						'login_agen' => TRUE

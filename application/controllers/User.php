@@ -202,8 +202,10 @@ class User extends CI_Controller {
 				$this->user_model->insert('t_transaksi', $data);
 				$this->session->set_flashdata('success','Data berhasil Disimpan !');
 			
+			}else{
+
+				$this->session->set_flashdata('alert','Data Gagal disimpan !');
 			} 
-			$this->session->set_flashdata('alert','Data Gagal disimpan !');
 		}
 		redirect('user/transaksi/');
 	}

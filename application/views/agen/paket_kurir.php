@@ -11,7 +11,7 @@
         <div class="col-xs-12">
           <div class="box box-primary">
             <!-- /.box-header -->
-            <form method="post" action="<?php echo site_url('droppoint/terima_banyakdarikurir'); ?>">
+            <form method="post" action="<?php echo site_url('droppoint/multi_terima_paket_kurir'); ?>">
             <div class="box-header with-border">
                 <div style="float:left">
                   <input class="btn btn-success" type="submit" name="submit" value="Konfirmasi">
@@ -47,7 +47,7 @@
                     <td style="text-align: center"><?= $key->kode_pos; ?></td>
                     <td style="text-align: center"><?= $key->no_tlp; ?></td>
                     <td>
-                    <a href="<?= base_url(); ?>agen/terima_paketkurir/<?= $key->no_resi ?>/" class="btn btn-success btn-xs" onclick="return confirm('Anda Yakin ?');"><i class="fa fa-check"></i> Konfirmasi</a>
+                    <a href="<?= base_url(); ?>agen/terima_paket_kurir/<?= $key->no_resi ?>/" class="btn btn-success btn-xs" onclick="return confirm('Anda Yakin ?');"><i class="fa fa-check"></i> Konfirmasi</a>
                     </td>
                     <td>
                     <?= $key->status_transaksi; ?>

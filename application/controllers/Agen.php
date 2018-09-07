@@ -25,18 +25,18 @@ class Agen extends CI_Controller {
 		$join = 't_transaksi t JOIN t_user u ON (t.id_user = u.id_user)';
 		$data['data'] = $this->agen_model->get_where($join, 
 			array(
-				
-				'status_transaksi' => 'diterima'
+				'status_transaksi' => 'diterima',
+				'agen_asal' => ''
 				));
 
 		// $data['data'] = $this->kurir_model->get_all('t_transaksi');
 
-		$data['active_paketkurir'] = 'active';
+		$data['active_paket_kurir'] = 'active';
 		$data['header'] = 'Manage Paket';
 		$this->template->agen('agen/paket_kurir', $data);
 	}
 
-	public function terima_paket_kurir()//fitur dari dp
+	public function terima_paket_kurir()
 	{
 		$this->cek_login();
 
@@ -58,7 +58,7 @@ class Agen extends CI_Controller {
 		redirect('agen/paket_kurir/');
 	}
 
-	public function terima_banyakdarikurir()//blm fix
+	public function multi_terima_paket_kurir()//blm fix
 	{
 		$this->cek_login();
 
@@ -98,9 +98,6 @@ class Agen extends CI_Controller {
 				'dp_jemput' => 'belum',
 				'agen_asal' => $this->session->userdata('id_agen')
 				));
-		
-		$data['droppoint'] = $this->agen_model->get_where('t_dp',['id_dp'=>$this->session->userdata('id_dp')])->row();
-
 
 		$data['active_list_paket_kurir'] = 'active';
 		$data['header'] = 'Manage Paket Diterima';
@@ -155,17 +152,34 @@ class Agen extends CI_Controller {
 	{
 		$this->cek_login();
 
-		$join = 't_transaksiagen ta JOIN t_transaksiagendetail tad ON (ta.id_transaksiagen = tad.id_transaksiagen)';
-		$data['data'] = $this->agen_model->get_where($join, 
-			array(
-				'id_agen' => $this->session->userdata('id_agen'),
-				));
+		$data['data'] = $this->agen_model->get_where('t_transaksiagen', array('id_agen' => $this->session->userdata('id_agen')));
 
 		// $data['data'] = $this->kurir_model->get_all('t_transaksi');
 
 		$data['active_list_jemput_paket'] = 'active';
 		$data['header'] = 'Manage List Jemput Paket';
 		$this->template->agen('agen/list_jemput_paket', $data);
+	}
+
+	public function detail_penjemputan()
+	{
+		$this->cek_login();
+
+		$tabel = 't_transaksiagen ta 
+				JOIN t_transaksiagendetail tad 
+					ON (ta.id_transaksiagen = tad.id_transaksiagen)
+				JOIN t_transaksi t 
+					ON (tad.no_resi = t.no_resi)';
+
+		$id_transaksiagen['ta.id_transaksiagen'] = $this->uri->segment(3);
+
+		$data['data'] = $this->agen_model->get_where($tabel, $id_transaksiagen);
+
+		// $data['data'] = $this->kurir_model->get_all('t_transaksi');
+
+		$data['active_list_jemput_paket'] = 'active';
+		$data['header'] = 'Detail List Penjemputan';
+		$this->template->agen('agen/detail_penjemputan', $data);
 	}
 
 	public function paket_dp() //fitur dari kurir

@@ -11,12 +11,18 @@
         <div class="col-xs-12">
           <div class="box box-primary">
             <!-- /.box-header -->
-            <form method="post" action="<?php echo site_url('agen/minta_jemput_paket'); ?>">
+            <form method="post" action="<?php echo site_url('droppoint/multi_kirim_paket_agen'); ?>">
             <div class="box-header with-border">
                 <div style="float:left">
-                  <input class="btn btn-primary" type="submit" name="submit" value="Jemput">
+                  <input class="btn btn-primary" type="submit" name="submit" value="Kirim">
 
-                  <input type="hidden" name="id_dp" value="<?= $this->session->userdata('droppoint'); ?>">
+                  <label>Drop Point Tujuan :</label>
+                  <select name="dp_tujuan" required> 
+                      <option value="" disabled selected>--Pilih Droppoint--</option>
+                      <?php foreach ($droppoint->result() as $dp): ?>
+                      <option value="<?= $dp->id_dp; ?>"><?= $dp->username; ?></option>
+                      <?php endforeach ?>
+                  </select>
                 </div>
             </div>
             <div class="box-body table-responsive">
@@ -30,7 +36,8 @@
                     <th style="text-align: center">Penerima</th>
                     <th style="text-align: center">Kabupaten Tujuan</th>
                     <th style="text-align: center">No Penerima</th>
-                    <th style="text-align: center">Dp Jemput</th>
+                    <th style="text-align: center">Status</th>
+                    <th style="text-align: center" width="5%;">Opsi</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -46,7 +53,17 @@
                     <td style="text-align: center"><?= $key->nama; ?></td>
                     <td style="text-align: center"><?= $key->kabupaten_tujuan; ?></td>
                     <td style="text-align: center"><?= $key->no_tlp; ?></td>
-                    <td style="text-align: center"><?= $key->dp_jemput; ?></td>
+                    <td>
+                    
+                    <?php if ($key->dp_kirim == 'Belum Dikirim'): ?>
+                    <a href="<?= base_url(); ?>droppoint/kirim_paket_agen/<?= $key->no_resi ?>/" class="btn btn-success btn-xs" onclick="return confirm('Anda Yakin ?');"><i class="fa fa-check"></i> Kirim</a>
+                    <?php else: ?>
+                    <a href="" class="btn btn-default btn-xs"><i class="fa fa-check"></i> Dikirim</a>
+                    <?php endif ?>
+                    </td>
+                    <td>
+                    <a href="<?= base_url(); ?>droppoint/manage_paket/<?= $key->no_resi ?>/" class="btn btn-primary btn-xs" onclick="return confirm('Anda Yakin ?');"><i class="fa fa-gear"></i> Detail</a>
+                    </td>
                   </tr>
                   <?php endforeach ?>
                 </  >

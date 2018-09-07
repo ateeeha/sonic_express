@@ -19,7 +19,8 @@
                 <thead>
                   <tr>
                     <th style="text-align: center">#</th>
-                    <th style="text-align: center">No Resi</th>
+                    <th style="text-align: center">Agen Asal</th>
+                    <th style="text-align: center">Dp Asal</th>
                     <th style="text-align: center">Status</th>
                     <th style="text-align: center" width="10%;">Opsi</th>
                   </tr>
@@ -31,7 +32,8 @@
                   ?>
                   <tr>
                     <td style="text-align: center"><?= $i++; ?></td>
-                    <td style="text-align: center"><?= $key->no_resi; ?></td>
+                    <td style="text-align: center"><?= $key->id_agen; ?></td>
+                    <td style="text-align: center"><?= $key->id_dp; ?></td>
                     <td style="text-align: center"><?= $key->status_tagen; ?></td>
                     <td>
                     <a href="<?= base_url(); ?>agen/detail_penjemputan/<?= $key->id_transaksiagen ?>/" class="btn btn-primary btn-xs" onclick="return confirm('Anda Yakin ?');"><i class="fa fa-search"></i> Detail</a>
