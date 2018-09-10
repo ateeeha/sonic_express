@@ -11,22 +11,30 @@
         <div class="col-xs-12">
           <div class="box box-primary">
             <!-- /.box-header -->
-            <form method="post" action="">
+            <form method="post" action="<?php echo site_url('droppoint/multi_kirim_paket_dp'); ?>">
             <div class="box-header with-border">
-                
+                <div style="float:left">
+                  <input class="btn btn-success" type="submit" name="submit" value="Kirim">
+                  <label>Agen Tujuan :</label>
+                  <select name="agen_tujuan" required> 
+                      <option value="" disabled selected>--Pilih Agen--</option>
+                      <?php foreach ($agen->result() as $ag): ?>
+                      <option value="<?= $ag->id_agen; ?>"><?= $ag->username; ?></option>
+                      <?php endforeach ?>
+                  </select>
+                </div>
             </div>
             <div class="box-body table-responsive">
               <table class="table table-bordered table-hover dt-responsive nowrap" id="datatable">
                 <thead>
                   <tr>
+                    <th><input id="check-all" type="checkbox"></th>
                     <th style="text-align: center">#</th>
-                    <th style="text-align: center">ID TRANSAKSI DP</th>
-                    <th style="text-align: center">ASAL</th>
-                    <th style="text-align: center">TUJUAN</th>
-                    <th style="text-align: center">TGL KIRIM</th>
-                    <th style="text-align: center">TGL SAMPAI</th>
-                    <th style="text-align: center">STATUS</th>
-                    <th style="text-align: center" width="10%;">Opsi</th>
+                    <th style="text-align: center">Tujuan</th>
+                    <th style="text-align: center">No Resi</th>
+                    <th style="text-align: center">Tgl Pengirim</th>
+                    <th style="text-align: center">Penerima</th>
+                    <th style="text-align: center">Agen</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -35,16 +43,13 @@
                   foreach ($data->result() as $key) :
                   ?>
                   <tr>
+                    <td><input class="check-item" type="checkbox" name="no_resi[<?= $key->no_resi; ?>]" value="<?= $key->no_resi; ?>"></th> 
                     <td style="text-align: center"><?= $i++; ?></td>
-                    <td style="text-align: center"><?= $key->id_transaksidp; ?></td>
-                    <td style="text-align: center"><?= $key->asal; ?></td>
-                    <td style="text-align: center"><?= $key->tujuan; ?></td>
-                    <td style="text-align: center"><?= $key->tgl_kirim; ?></td>
-                    <td style="text-align: center"><?= $key->tgl_sampai; ?></td>
-                    <td style="text-align: center"><?= $key->status_tdp; ?></td>
-                    <td>
-                    <a href="<?= base_url(); ?>droppoint/detail_paket_dp/<?= $key->id_transaksidp; ?>/" class="btn btn-warning btn-xs" onclick="return confirm('Anda Yakin ?');"><i class="fa fa-check"></i> Detail</a>
-                    </td>
+                    <td style="text-align: center"><?= $key->provinsi_tujuan.', '.$key->kabupaten_tujuan ?></td>
+                    <td style="text-align: center"><?= $key->no_resi; ?></td>
+                    <td style="text-align: center"><?= $key->tgl_pengiriman; ?></td>
+                    <td style="text-align: center"><?= $key->nama; ?></td>
+                    <td style="text-align: center"><?= $key->agen_tujuan; ?></td>
                   </tr>
                   <?php endforeach ?>
                 </  >

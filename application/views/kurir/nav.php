@@ -14,12 +14,12 @@
         </li>
         <li class="<?php if(isset($active_paketuser)){echo $active_paketuser;}?>">
           <a href="<?= base_url(); ?>kurir/paket_user/">
-            <i class="fa fa-cube"></i> <span>PAKET DARI USER</span>
+            <i class="fa fa-cube"></i> <span>PAKET USER</span>
           </a>
         </li>
-        <li class="<?php if(isset($active_paketdp)){echo $active_paketdp;}?>">
-          <a href="<?= base_url(); ?>kurir/paket_dp/">
-            <i class="fa fa-cube"></i> <span>PAKET DARI DROPPOINT</span>
+        <li class="<?php if(isset($active_paket_agen)){echo $active_paket_agen;}?>">
+          <a href="<?= base_url(); ?>kurir/paket_agen/">
+            <i class="fa fa-cube"></i> <span>PAKET AGEN</span>
           </a>
         </li>
        <li class="<?php if(isset($active_dijemput)){echo $active_dijemput;}?>">

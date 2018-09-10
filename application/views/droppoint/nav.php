@@ -34,7 +34,7 @@
         </li>
         <li class="<?php if(isset($active_list_transaksi_dp)){echo $active_list_transaksi_dp;}?>">
           <a href="<?= base_url(); ?>droppoint/list_transaksi_dp/">
-            <i class="fa fa-cube"></i> <span>Transaksi DP</span>
+            <i class="fa fa-cube"></i> <span>RIWAYAT TRANSAKAI DP</span>
           </a>
         </li>
       </ul>

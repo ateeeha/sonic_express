@@ -89,6 +89,52 @@ class Agen extends CI_Controller {
 		redirect('droppoint/paket_kurir/');
 	}
 
+	public function multi_terima_paket_dp()
+	{
+		$this->cek_login();
+		
+		$resi 		= $this->input->post('no_resi');
+
+		if (isset($_POST['submit']))
+		{
+			// $transaksidp = array(
+			// 	'asal' => $this->session->userdata('id_dp'), 
+			// 	'tujuan' => $dp_tujuan,
+			// 	'tgl_kirim' =>  date("Y-m-d"),
+			// 	'tgl_sampai' => '',
+			// 	'status_tdp' => 'proses'
+			// );
+			// $id_transaksidp = $this->dp_model->insert_id('t_transaksidp', $transaksidp);
+
+			foreach ($resi as $res)
+			{ 
+		        
+				$tracking = array(
+					'no_resi' => $res, 
+					'tanggal' => date("Y-m-d"), 
+					'status_tracking' => 'Diterima Agen Kota Tujuan'
+				);
+
+				// $transaksi = array(
+				// 	'agen_tujuan' => $agen_tujuan,
+				// );
+
+				$this->agen_model->insert('t_tracking', $tracking);
+				// $this->dp_model->update('t_transaksi', $transaksi, ['no_resi' => $res]);              
+				
+
+				// $transaksidpdetail = array(
+				// 	'no_resi' => $res, 
+				// 	'id_transaksidp' => $id_transaksidp 
+				// );
+
+				//$this->dp_model->insert('t_transaksidpdetail', $transaksidpdetail);
+    		}
+
+	    }
+		redirect('agen/paket_dp/');
+	}
+
 	public function list_paket_kurir()
 	{
 		$this->cek_login();

@@ -197,21 +197,22 @@ class Droppoint extends CI_Controller {
 	public function list_paket_dp()
 	{
 		$this->cek_login();
-		$tabel = 't_transaksi t JOIN t_user u 
-					ON (t.id_user = u.id_user) 
-				JOIN t_transaksidpdetail tdpdetail 
-					ON (t.no_resi = tdpdetail.no_resi)
-				JOIN t_transaksidp tdp 
-					ON (tdpdetail.id_transaksidp = tdp.id_transaksidp)';
+		// $tabel = 't_transaksi t JOIN t_user u 
+		// 			ON (t.id_user = u.id_user) 
+		// 		JOIN t_transaksidpdetail tdpdetail 
+		// 			ON (t.no_resi = tdpdetail.no_resi)
+		// 		JOIN t_transaksidp tdp 
+		// 			ON (tdpdetail.id_transaksidp = tdp.id_transaksidp)';
 
 		$where = array(
 				// 'kabupaten_tujuan' => $this->session->userdata('kabupaten_dp'),
 				// 'status_transaksi' => 'diterima',
-				'status_tdp' => 'selesai',
-				'tujuan' => $this->session->userdata('id_dp')
+				'dp_tujuan' => $this->session->userdata('id_dp')
 				);
 
-		$data['data'] = $this->dp_model->get_where('t_transaksidp', $where);
+		$data['data'] = $this->dp_model->get_where('t_transaksi', $where);
+
+		$data['agen'] = $this->dp_model->get_where('t_agen',['id_dp'=>$this->session->userdata('id_dp')]);
 
 		// $data['data'] = $this->kurir_model->get_all('t_transaksi');
 
@@ -344,6 +345,53 @@ class Droppoint extends CI_Controller {
 		redirect('droppoint/diterima_darikurir/');
 	}
 
+	public function multi_kirim_paket_dp()
+	{
+		$this->cek_login();
+		
+		$resi 		= $this->input->post('no_resi');
+		$agen_tujuan= $this->input->post('agen_tujuan');
+
+		if (isset($_POST['submit']))
+		{
+			// $transaksidp = array(
+			// 	'asal' => $this->session->userdata('id_dp'), 
+			// 	'tujuan' => $dp_tujuan,
+			// 	'tgl_kirim' =>  date("Y-m-d"),
+			// 	'tgl_sampai' => '',
+			// 	'status_tdp' => 'proses'
+			// );
+			// $id_transaksidp = $this->dp_model->insert_id('t_transaksidp', $transaksidp);
+
+			foreach ($resi as $res)
+			{ 
+		        
+				// $tracking = array(
+				// 	'no_resi' => $res, 
+				// 	'tanggal' => date("Y-m-d"), 
+				// 	'status_tracking' => 'Dikirim ke Agen Kota Tujuan'
+				// );
+
+				$transaksi = array(
+					'agen_tujuan' => $agen_tujuan,
+				);
+
+				// $this->dp_model->insert('t_tracking', $tracking);
+				$this->dp_model->update('t_transaksi', $transaksi, ['no_resi' => $res]);              
+				
+
+				// $transaksidpdetail = array(
+				// 	'no_resi' => $res, 
+				// 	'id_transaksidp' => $id_transaksidp 
+				// );
+
+				//$this->dp_model->insert('t_transaksidpdetail', $transaksidpdetail);
+    		}
+
+	    }
+		redirect('droppoint/list_paket_dp/');
+	}
+
 	public function add_agen()
 	{
 		$this->cek_login();
@@ -453,20 +501,19 @@ class Droppoint extends CI_Controller {
 	public function paket_dp()
 	{
 		$this->cek_login();
-		$tabel = 't_transaksi t JOIN t_user u 
-					ON (t.id_user = u.id_user) 
-				JOIN t_transaksidpdetail tdpdetail 
-					ON (t.no_resi = tdpdetail.no_resi)
-				JOIN t_transaksidp tdp 
-					ON (tdpdetail.id_transaksidp = tdp.id_transaksidp)';
+		// $tabel = 't_transaksi t JOIN t_user u 
+		// 			ON (t.id_user = u.id_user) 
+		// 		JOIN t_transaksidpdetail tdpdetail 
+		// 			ON (t.no_resi = tdpdetail.no_resi)
+		// 		JOIN t_transaksidp tdp 
+		// 			ON (tdpdetail.id_transaksidp = tdp.id_transaksidp)';
 
 		$where = array(
 				// 'status_transaksi' => 'diterima',
-				'status_tdp' => 'proses',
-				'tujuan' => $this->session->userdata('id_dp')
+				'agen_tujuan' => $this->session->userdata('id_agen')
 				);
 
-		$data['data'] = $this->dp_model->get_where('t_transaksidp', $where);
+		$data['data'] = $this->dp_model->get_where('t_transaksi', $where);
 
 		// $data['data'] = $this->kurir_model->get_all('t_transaksi');
 
