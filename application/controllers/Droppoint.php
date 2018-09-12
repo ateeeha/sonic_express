@@ -268,6 +268,32 @@ class Droppoint extends CI_Controller {
 		$this->template->dp('droppoint/list_transaksi_dp', $data);
 	}
 
+	public function list_transaksi_agen()
+	{
+		$this->cek_login();
+		$tabel = 't_transaksi t JOIN t_user u 
+					ON (t.id_user = u.id_user) 
+				JOIN t_transaksidpagendetail tdad 
+					ON (t.no_resi = tdad.no_resi)
+				JOIN t_transaksidpagen tda 
+					ON (tdad.id_transaksidpagen = tda.id_transaksidpagen)';
+
+		$where = array(
+				// 'kabupaten_tujuan' => $this->session->userdata('kabupaten_dp'),
+				// 'status_transaksi' => 'diterima',
+				// 'dp_kirim' => 'Sudah Dikirim',
+				'dp_tujuan' => $this->session->userdata('id_dp')
+				);
+
+		$data['data'] = $this->dp_model->get_where('t_transaksidpagen', $where);
+
+		// $data['data'] = $this->kurir_model->get_all('t_transaksi');
+
+		$data['active_list_transaksi_agen'] = 'active';
+		$data['header'] = 'List Transaksi Agen';
+		$this->template->dp('droppoint/list_transaksi_agen', $data);
+	}
+
 	public function kirim_paket_agen()
 	{
 		$this->cek_login();
@@ -375,38 +401,38 @@ class Droppoint extends CI_Controller {
 
 		if (isset($_POST['submit']))
 		{
-			// $transaksidp = array(
-			// 	'asal' => $this->session->userdata('id_dp'), 
-			// 	'tujuan' => $dp_tujuan,
-			// 	'tgl_kirim' =>  date("Y-m-d"),
-			// 	'tgl_sampai' => '',
-			// 	'status_tdp' => 'proses'
-			// );
-			// $id_transaksidp = $this->dp_model->insert_id('t_transaksidp', $transaksidp);
+			$transaksidpagen = array(
+				'dp_tujuan' => $this->session->userdata('id_dp'), 
+				'agen_tujuan' => $agen_tujuan,
+				'tgl_kirim' =>  date("Y-m-d"),
+				'tgl_sampai' => '',
+				'status_tdpagen' => 'proses'
+			);
+			$id_transaksidpagen = $this->dp_model->insert_id('t_transaksidpagen', $transaksidpagen);
 
 			foreach ($resi as $res)
 			{ 
 		        
-				// $tracking = array(
-				// 	'no_resi' => $res, 
-				// 	'tanggal' => date("Y-m-d"), 
-				// 	'status_tracking' => 'Dikirim ke Agen Kota Tujuan'
-				// );
+				$tracking = array(
+					'no_resi' => $res, 
+					'tanggal' => date("Y-m-d"), 
+					'status_tracking' => 'Dikirim ke Agen Kota Tujuan'
+				);
 
 				$transaksi = array(
 					'agen_tujuan' => $agen_tujuan,
 				);
 
-				// $this->dp_model->insert('t_tracking', $tracking);
+				$this->dp_model->insert('t_tracking', $tracking);
 				$this->dp_model->update('t_transaksi', $transaksi, ['no_resi' => $res]);              
 				
 
-				// $transaksidpdetail = array(
-				// 	'no_resi' => $res, 
-				// 	'id_transaksidp' => $id_transaksidp 
-				// );
+				$transaksidpagendetail = array(
+					'no_resi' => $res, 
+					'id_transaksidpagen' => $id_transaksidpagen 
+				);
 
-				//$this->dp_model->insert('t_transaksidpdetail', $transaksidpdetail);
+				$this->dp_model->insert('t_transaksidpagendetail', $transaksidpagendetail);
     		}
 
 	    }

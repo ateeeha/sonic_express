@@ -93,18 +93,16 @@ class Agen extends CI_Controller {
 	{
 		$this->cek_login();
 		
-		$resi 		= $this->input->post('no_resi');
+		$resi 				= $this->input->post('no_resi');
+		$id_transaksidpagen = $this->input->post('id_transaksidpagen');
 
 		if (isset($_POST['submit']))
 		{
-			// $transaksidp = array(
-			// 	'asal' => $this->session->userdata('id_dp'), 
-			// 	'tujuan' => $dp_tujuan,
-			// 	'tgl_kirim' =>  date("Y-m-d"),
-			// 	'tgl_sampai' => '',
-			// 	'status_tdp' => 'proses'
-			// );
-			// $id_transaksidp = $this->dp_model->insert_id('t_transaksidp', $transaksidp);
+			$transaksidpagen = array(
+				'tgl_sampai' =>  date("Y-m-d"),
+				'status_tdpagen' => 'selesai'
+			);
+			$this->dp_model->update('t_transaksidpagen', $transaksidpagen, ['id_transaksidpagen' => $id_transaksidpagen]);
 
 			foreach ($resi as $res)
 			{ 
@@ -123,12 +121,6 @@ class Agen extends CI_Controller {
 				// $this->dp_model->update('t_transaksi', $transaksi, ['no_resi' => $res]);              
 				
 
-				// $transaksidpdetail = array(
-				// 	'no_resi' => $res, 
-				// 	'id_transaksidp' => $id_transaksidp 
-				// );
-
-				//$this->dp_model->insert('t_transaksidpdetail', $transaksidpdetail);
     		}
 
 	    }
@@ -231,18 +223,46 @@ class Agen extends CI_Controller {
 	public function paket_dp() //fitur dari kurir
 	{
 		$this->cek_login();
-		$join = 't_transaksi t JOIN t_user u ON (t.id_user = u.id_user)';
-		$data['data'] = $this->agen_model->get_where($join, 
-			array(
-				'agen_tujuan' => $this->session->userdata('id_agen'),
-				'status_transaksi' => 'diterima'
-				));
+		$tabel = 't_transaksi t JOIN t_user u 
+					ON (t.id_user = u.id_user) 
+				JOIN t_transaksidpagendetail tdad 
+					ON (t.no_resi = tdad.no_resi)
+				JOIN t_transaksidpagen tda 
+					ON (tdad.id_transaksidpagen = tda.id_transaksidpagen)';
+
+		$where = array(
+				'status_tdpagen' => 'proses',
+				'tda.dp_tujuan' => $this->session->userdata('id_dp')
+				);
+
+		$data['data'] = $this->dp_model->get_where($tabel, $where);
 
 		// $data['data'] = $this->kurir_model->get_all('t_transaksi');
 
-		$data['active_paketdp'] = 'active';
+		$data['active_paket_dp'] = 'active';
 		$data['header'] = 'Manage Paket';
 		$this->template->agen('agen/paket_dp', $data);
+	}
+
+	public function detail_paket_dp() //fitur dari kurir
+	{
+		$this->cek_login();
+		$tabel = 't_transaksi t JOIN t_user u 
+					ON (t.id_user = u.id_user) 
+				JOIN t_transaksidpagendetail tdad 
+					ON (t.no_resi = tdad.no_resi)
+				JOIN t_transaksidpagen tda 
+					ON (tdad.id_transaksidpagen = tda.id_transaksidpagen)';
+
+		$id_transaksidpagen['tda.id_transaksidpagen'] = $this->uri->segment(3);
+
+		$data['data'] = $this->agen_model->get_where($tabel,$id_transaksidpagen);
+
+		// $data['data'] = $this->kurir_model->get_all('t_transaksi');
+
+		$data['active_paket_dp'] = 'active';
+		$data['header'] = 'Manage Paket';
+		$this->template->agen('agen/detail_paket_dp', $data);
 	}
 
 	function cek_login()
