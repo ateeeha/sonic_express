@@ -174,6 +174,27 @@ class Droppoint extends CI_Controller {
 		$this->template->dp('droppoint/detail_penjemputan', $data);
 	}
 
+	public function detail_paket_agen()
+	{
+		$this->cek_login();
+
+		$tabel = 't_transaksiagen ta 
+				JOIN t_transaksiagendetail tad 
+					ON (ta.id_transaksiagen = tad.id_transaksiagen)
+				JOIN t_transaksi t 
+					ON (tad.no_resi = t.no_resi)';
+
+		$id_transaksiagen['ta.id_transaksiagen'] = $this->uri->segment(3);
+
+		$data['data'] = $this->dp_model->get_where($tabel, $id_transaksiagen);
+
+		// $data['data'] = $this->kurir_model->get_all('t_transaksi');
+
+		$data['active_paket_agen'] = 'active';
+		$data['header'] = 'Detail Paket Agen';
+		$this->template->dp('droppoint/detail_paket_agen', $data);
+	}
+
 	public function list_paket_agen()
 	{
 		$this->cek_login();
@@ -342,7 +363,7 @@ class Droppoint extends CI_Controller {
     		}
 
 	    }
-		redirect('droppoint/diterima_darikurir/');
+		redirect('droppoint/list_paket_agen/');
 	}
 
 	public function multi_kirim_paket_dp()
@@ -501,19 +522,19 @@ class Droppoint extends CI_Controller {
 	public function paket_dp()
 	{
 		$this->cek_login();
-		// $tabel = 't_transaksi t JOIN t_user u 
-		// 			ON (t.id_user = u.id_user) 
-		// 		JOIN t_transaksidpdetail tdpdetail 
-		// 			ON (t.no_resi = tdpdetail.no_resi)
-		// 		JOIN t_transaksidp tdp 
-		// 			ON (tdpdetail.id_transaksidp = tdp.id_transaksidp)';
+		$tabel = 't_transaksi t JOIN t_user u 
+					ON (t.id_user = u.id_user) 
+				JOIN t_transaksidpdetail tdpdetail 
+					ON (t.no_resi = tdpdetail.no_resi)
+				JOIN t_transaksidp tdp 
+					ON (tdpdetail.id_transaksidp = tdp.id_transaksidp)';
 
 		$where = array(
-				// 'status_transaksi' => 'diterima',
-				'agen_tujuan' => $this->session->userdata('id_agen')
+				'status_tdp' => 'proses',
+				'dp_tujuan' => $this->session->userdata('id_dp')
 				);
 
-		$data['data'] = $this->dp_model->get_where('t_transaksi', $where);
+		$data['data'] = $this->dp_model->get_where($tabel, $where);
 
 		// $data['data'] = $this->kurir_model->get_all('t_transaksi');
 

@@ -26,7 +26,6 @@
                     <th style="text-align: center">TGL KIRIM</th>
                     <th style="text-align: center">TGL SAMPAI</th>
                     <th style="text-align: center">STATUS</th>
-                    <th style="text-align: center" width="10%;">Opsi</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -42,9 +41,6 @@
                     <td style="text-align: center"><?= $key->tgl_kirim; ?></td>
                     <td style="text-align: center"><?= $key->tgl_sampai; ?></td>
                     <td style="text-align: center"><?= $key->status_tdp; ?></td>
-                    <td>
-                    <a href="<?= base_url(); ?>droppoint/detail_paketdp/<?= $key->id_transaksidp; ?>/" class="btn btn-warning btn-xs" onclick="return confirm('Anda Yakin ?');"><i class="fa fa-check"></i> Detail</a>
-                    </td>
                   </tr>
                   <?php endforeach ?>
                 </  >

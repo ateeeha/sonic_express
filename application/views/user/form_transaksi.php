@@ -28,7 +28,7 @@
                } ?>               
             </div>
             <!-- /.box-header -->
-            <form class="form-horizontal" action="<?php echo site_url('user/transaksi_simpan'); ?>" method="post" enctype="multipart/form-data">
+            <form class="form-horizontal" action="<?php echo site_url('user/simpan_transaksi'); ?>" method="post" enctype="multipart/form-data">
               <div class="box-body">                              
 
                 <div class="form-group">

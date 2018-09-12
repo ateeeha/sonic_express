@@ -145,7 +145,7 @@ class User extends CI_Controller {
 		$this->template->user('user/form_transaksi', $data);
 	}
 
-	function transaksi_simpan()
+	function simpan_transaksi()
 	{
 		if ($this->input->post('submit', TRUE) == 'Submit')
 		{
