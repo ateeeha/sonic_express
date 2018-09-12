@@ -548,19 +548,21 @@ class Droppoint extends CI_Controller {
 	public function paket_dp()
 	{
 		$this->cek_login();
-		$tabel = 't_transaksi t JOIN t_user u 
-					ON (t.id_user = u.id_user) 
-				JOIN t_transaksidpdetail tdpdetail 
-					ON (t.no_resi = tdpdetail.no_resi)
-				JOIN t_transaksidp tdp 
-					ON (tdpdetail.id_transaksidp = tdp.id_transaksidp)';
+		// $tabel = 't_transaksi t JOIN t_user u 
+		// 			ON (t.id_user = u.id_user) 
+		// 		JOIN t_transaksidpdetail tdpdetail 
+		// 			ON (t.no_resi = tdpdetail.no_resi)
+		// 		JOIN t_transaksidp tdp 
+		// 			ON (tdpdetail.id_transaksidp = tdp.id_transaksidp)';
+		// $tabel = 't_transaksidp tdp JOIN t_transaksidpdetail tdpdetail
+		// 			ON (tdp.id_transaksidp = tdpdetail.id_transaksidp)';
 
 		$where = array(
 				'status_tdp' => 'proses',
-				'dp_tujuan' => $this->session->userdata('id_dp')
+				'tujuan' => $this->session->userdata('id_dp')
 				);
 
-		$data['data'] = $this->dp_model->get_where($tabel, $where);
+		$data['data'] = $this->dp_model->get_where('t_transaksidp', $where);
 
 		// $data['data'] = $this->kurir_model->get_all('t_transaksi');
 
@@ -648,7 +650,7 @@ class Droppoint extends CI_Controller {
 		redirect('droppoint/paket_dp/');
 	}	
 
-	public function terima_banyakdaridp()
+	public function multi_terima_paket_dp()
 	{
 		$this->cek_login();
 

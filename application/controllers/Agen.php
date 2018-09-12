@@ -223,6 +223,30 @@ class Agen extends CI_Controller {
 	public function paket_dp() //fitur dari kurir
 	{
 		$this->cek_login();
+		// $tabel = 't_transaksi t JOIN t_user u 
+		// 			ON (t.id_user = u.id_user) 
+		// 		JOIN t_transaksidpagendetail tdad 
+		// 			ON (t.no_resi = tdad.no_resi)
+		// 		JOIN t_transaksidpagen tda 
+		// 			ON (tdad.id_transaksidpagen = tda.id_transaksidpagen)';
+
+		$where = array(
+				'status_tdpagen' => 'proses',
+				'agen_tujuan' => $this->session->userdata('id_agen')
+				);
+
+		$data['data'] = $this->dp_model->get_where('t_transaksidpagen', $where);
+
+		// $data['data'] = $this->kurir_model->get_all('t_transaksi');
+
+		$data['active_paket_dp'] = 'active';
+		$data['header'] = 'Manage Paket';
+		$this->template->agen('agen/paket_dp', $data);
+	}
+
+	public function list_paket_dp() //fitur dari kurir
+	{
+		$this->cek_login();
 		$tabel = 't_transaksi t JOIN t_user u 
 					ON (t.id_user = u.id_user) 
 				JOIN t_transaksidpagendetail tdad 
@@ -231,17 +255,17 @@ class Agen extends CI_Controller {
 					ON (tdad.id_transaksidpagen = tda.id_transaksidpagen)';
 
 		$where = array(
-				'status_tdpagen' => 'proses',
-				'tda.dp_tujuan' => $this->session->userdata('id_dp')
+				'status_tdpagen' => 'selesai',
+				'tda.agen_tujuan' => $this->session->userdata('id_agen')
 				);
 
-		$data['data'] = $this->dp_model->get_where($tabel, $where);
+		$data['data'] = $this->agen_model->get_where($tabel,$where);
 
 		// $data['data'] = $this->kurir_model->get_all('t_transaksi');
 
-		$data['active_paket_dp'] = 'active';
+		$data['active_list_paket_dp'] = 'active';
 		$data['header'] = 'Manage Paket';
-		$this->template->agen('agen/paket_dp', $data);
+		$this->template->agen('agen/list_paket_dp', $data);
 	}
 
 	public function detail_paket_dp() //fitur dari kurir

@@ -11,11 +11,11 @@
         <div class="col-xs-12">
           <div class="box box-primary">
             <!-- /.box-header -->
-            <form method="post" action="<?php echo site_url('droppoint/multi_terima_paket_dp'); ?>">
+            <form method="post" action="">
             <div class="box-header with-border">
                 <div style="float:left">
                   <input class="btn btn-success" type="submit" name="submit" value="Konfirmasi">
-                  <input type="hidden" name="id_transaksidp" value="<?= $this->uri->segment('3');  ?>">
+                 <!--  <input type="hidden" name="id_transaksidpagen" value="<?= $this->uri->segment('3');  ?>"> -->
                 </div>
             </div>
             <div class="box-body table-responsive">
@@ -24,9 +24,12 @@
                   <tr>
                     <th><input id="check-all" type="checkbox"></th>
                     <th style="text-align: center">#</th>
-                    <th style="text-align: center">ID TRANSAKSI DP DETAIL</th>
-                    <th style="text-align: center">ID TRANSAKSI DP</th>
-                    <th style="text-align: center">NO RESI</th>
+                    <th style="text-align: center">Tujuan</th>
+                    <th style="text-align: center">No Resi</th>
+                    <th style="text-align: center">Tgl Pengirim</th>
+                    <th style="text-align: center">Penerima</th>
+                    <th style="text-align: center">Agen</th>
+                    <th style="text-align: center">Kurir</th>
                     <th style="text-align: center">Status</th>
                   </tr>
                 </thead>
@@ -36,12 +39,15 @@
                   foreach ($data->result() as $key) :
                   ?>
                   <tr>
-                    <th><input class="check-item" type="checkbox" name="no_resi[<?= $key->no_resi; ?>]" value="<?= $key->no_resi; ?>"></th> 
+                    <td><input class="check-item" type="checkbox" name="no_resi[<?= $key->no_resi; ?>]" value="<?= $key->no_resi; ?>"></th> 
                     <td style="text-align: center"><?= $i++; ?></td>
-                    <td style="text-align: center"><?= $key->id_transaksidpdetail; ?></td>
-                    <td style="text-align: center"><?= $key->id_transaksidp; ?></td>
+                    <td style="text-align: center"><?= $key->provinsi_tujuan.', '.$key->kabupaten_tujuan ?></td>
                     <td style="text-align: center"><?= $key->no_resi; ?></td>
-                    <td style="text-align: center"><?= $key->status_tdp; ?></td>
+                    <td style="text-align: center"><?= $key->tgl_pengiriman; ?></td>
+                    <td style="text-align: center"><?= $key->nama; ?></td>
+                    <td style="text-align: center"><?= $key->agen_tujuan; ?></td>
+                    <td style="text-align: center"><?= $key->kurir_pengantar; ?></td>
+                    <td style="text-align: center"><?= $key->status_tdpagen; ?></td>
                   </tr>
                   <?php endforeach ?>
                 </  >
