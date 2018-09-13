@@ -165,11 +165,37 @@ class Kurir extends CI_Controller {
 				'status_transaksi' => 'diterima'
 				));
 
-		// $data['data'] = $this->kurir_model->get_all('t_transaksi');
+		$provinsi = array('provinsi' => $this->session->userdata('provinsi_kurir') );
+
+		$data['agen'] = $this->kurir_model->get_where('t_agen',$provinsi);
 
 		$data['active_diterima'] = 'active';
 		$data['header'] = 'Manage Transaksi';
 		$this->template->kurir('kurir/paket_diterima', $data);
+	}
+
+	public function multi_kirim_paket_ke_agen()
+	{
+		$this->cek_login();
+		
+		$resi 		= $this->input->post('no_resi');
+		$agen_asal	= $this->input->post('agen_asal');
+
+		if (isset($_POST['submit']))
+		{
+
+			foreach ($resi as $res)
+			{ 
+
+				$transaksi = array(
+					'agen_asal' => $agen_asal,
+				);
+
+				$this->kurir_model->update('t_transaksi', $transaksi, ['no_resi' => $res]);              
+    		}
+
+	    }
+		redirect('kurir/paket_diterima/');
 	}
 
 	public function paket_diantar()

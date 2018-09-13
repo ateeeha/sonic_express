@@ -43,7 +43,7 @@
                     <td style="text-align: center"><?= $key->status_tdpagen; ?></td>
                   </tr>
                   <?php endforeach ?>
-                </  >
+                </tbody>
               </table>
                 </div>
               </form>

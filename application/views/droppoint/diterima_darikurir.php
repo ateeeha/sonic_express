@@ -70,7 +70,7 @@
                     </td>
                   </tr>
                   <?php endforeach ?>
-                </  >
+                </tbody>
               </table>
                 </div>
               </form>

@@ -41,7 +41,7 @@
                     <td style="text-align: center"><?= $key->status_transaksi; ?></td>
                   </tr>
                   <?php endforeach ?>
-                </  >
+                </tbody>
               </table>
                 </div>
               <div class="box-footer with-border">

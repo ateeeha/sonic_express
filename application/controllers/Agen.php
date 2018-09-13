@@ -26,7 +26,7 @@ class Agen extends CI_Controller {
 		$data['data'] = $this->agen_model->get_where($join, 
 			array(
 				'status_transaksi' => 'diterima',
-				'agen_asal' => ''
+				'agen_asal' => $this->session->userdata('id_agen')
 				));
 
 		// $data['data'] = $this->kurir_model->get_all('t_transaksi');
@@ -58,7 +58,7 @@ class Agen extends CI_Controller {
 		redirect('agen/paket_kurir/');
 	}
 
-	public function multi_terima_paket_kurir()//blm fix
+	public function multi_terima_paket_kurir()
 	{
 		$this->cek_login();
 
@@ -70,23 +70,17 @@ class Agen extends CI_Controller {
 			foreach ($resi as $res)
 			{ 
 		        
-				$data = array(
+				$tracking = array(
 					'no_resi' => $res, 
 					'tanggal' => date("Y-m-d"), 
-					'status_tracking' => 'Diterima Drop Point Kota Asal'
+					'status_tracking' => 'Diterima Agen Kota Asal'
 				);
-
-				$this->dp_model->insert('t_tracking', $data);
-				$this->dp_model->update(
-					't_transaksi', 
-					['dp_asal' => $this->session->userdata('id_dp')],
-					['no_resi' => $res]
-					);              
+				$this->dp_model->insert('t_tracking', $tracking);
     		}
 
 	    }
 			
-		redirect('droppoint/paket_kurir/');
+		redirect('agen/paket_kurir/');
 	}
 
 	public function multi_terima_paket_dp()

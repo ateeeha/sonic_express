@@ -49,7 +49,7 @@
                     <td style="text-align: center"><?= $key->dp_jemput; ?></td>
                   </tr>
                   <?php endforeach ?>
-                </  >
+                </tbody>
               </table>
                 </div>
               </form>

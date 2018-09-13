@@ -46,7 +46,7 @@
                     <td style="text-align: center"><?= $key->agen_tujuan; ?></td>
                   </tr>
                   <?php endforeach ?>
-                </  >
+                </tbody>
               </table>
                 </div>
               </form>

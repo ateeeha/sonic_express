@@ -11,7 +11,7 @@
         <div class="col-xs-12">
           <div class="box box-primary">
             <!-- /.box-header -->
-            <form method="post" action="<?php echo site_url('droppoint/multi_terima_paket_kurir'); ?>">
+            <form method="post" action="<?php echo site_url('agen/multi_terima_paket_kurir'); ?>">
             <div class="box-header with-border">
                 <div style="float:left">
                   <input class="btn btn-success" type="submit" name="submit" value="Konfirmasi">
@@ -54,7 +54,7 @@
                     </td>
                   </tr>
                   <?php endforeach ?>
-                </  >
+                </tbody>
               </table>
                 </div>
                 </form>

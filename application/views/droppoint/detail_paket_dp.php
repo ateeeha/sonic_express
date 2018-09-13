@@ -44,7 +44,7 @@
                     <td style="text-align: center"><?= $key->status_tdp; ?></td>
                   </tr>
                   <?php endforeach ?>
-                </  >
+                </tbody>
               </table>
                 </div>
               </form>

@@ -46,7 +46,7 @@
                     </td>
                   </tr>
                   <?php endforeach ?>
-                </  >
+                </tbody>
               </table>
                 </div>
             <!-- /.box-body -->

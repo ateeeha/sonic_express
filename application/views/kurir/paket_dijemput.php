@@ -47,7 +47,7 @@
                     </td>
                   </tr>
                   <?php endforeach ?>
-                </  >
+                </tbody>
               </table>
                 </div>
               <div class="box-footer with-border">
