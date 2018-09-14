@@ -19,6 +19,111 @@ class Agen extends CI_Controller {
 		$this->template->agen('agen/home', $data);
 	}
 
+	public function kurir()
+	{
+		$this->cek_login();
+
+		$id_agen['id_agen'] = $this->session->userdata('id_agen');
+		$data['data'] = $this->agen_model->get_where('t_kurir', $id_agen);
+
+		$data['active_kurir'] = 'active';
+		$data['header'] = 'Manage Kurir';
+		$this->template->agen('agen/manage_kurir', $data);
+	}
+
+	public function add_kurir()
+	{
+		$this->cek_login();
+
+		if ($this->input->post('submit', TRUE) == 'Submit')
+		{
+			//validasi
+			$this->form_validation->set_rules('id_agen','Id Agen','required');
+			$this->form_validation->set_rules('username','Username','required');
+			$this->form_validation->set_rules('email','Email','required|valid_email');
+			$this->form_validation->set_rules('provinsi','Provinsi','required');
+			$this->form_validation->set_rules('kabupaten','Kabupaten','required');
+			$this->form_validation->set_rules('pass1','Password','required');
+			$this->form_validation->set_rules('pass2','Ketik Ulang Password','required|matches[pass1]');
+
+			if ($this->form_validation->run() == TRUE)
+			{
+				$data = array(
+				'id_agen' => $this->input->post('id_agen', TRUE), 
+				'username' => $this->input->post('username', TRUE), 
+				'email' => $this->input->post('email', TRUE), 
+				'provinsi' => $this->input->post('provinsi', TRUE), 
+					'kabupaten' => $this->input->post('kabupaten', TRUE),
+				'password' => password_hash($this->input->post('pass1', TRUE), PASSWORD_DEFAULT, ['cost' => 10]),
+				'status_kurir' => 1
+				);
+
+				$this->agen_model->insert('t_kurir', $data);
+				
+				redirect('agen/kurir/');
+			} 
+		}
+		$data['provinsi'] = $this->agen_model->get_all('t_provinsi');
+		$data['id_agen'] = $this->session->userdata('id_agen');
+
+		$data['active_kurir'] = 'active';
+		$data['header'] = 'Add Kurir';	
+		$this->template->agen('agen/add_kurir', $data);
+	}
+
+	public function edit_kurir()
+	{
+		$this->cek_login();
+
+		$id_kurir = $this->uri->segment(3);
+
+		if ($this->input->post('submit') == 'Submit') 
+		{
+			$this->form_validation->set_rules('username', 'Username', "required");
+			$this->form_validation->set_rules('email', 'Email', "required|valid_email");
+			$this->form_validation->set_rules('provinsi','Provinsi','required');
+			$this->form_validation->set_rules('kabupaten','Kabupaten','required');
+			$this->form_validation->set_rules('status_kurir', 'Status Kurir', "required|numeric");
+
+			if ($this->form_validation->run() == TRUE)
+			{
+				
+				$data = array(
+					'username' => $this->input->post('username', TRUE),
+					'email' => $this->input->post('email', TRUE),
+					'provinsi' => $this->input->post('provinsi', TRUE), 
+					'kabupaten' => $this->input->post('kabupaten', TRUE),
+					'status_kurir' => $this->input->post('status_kurir', TRUE)
+				);
+				
+				$this->agen_model->update('t_kurir', $data, array('id_kurir' => $id_kurir));
+				$this->session->set_flashdata('success','Data berhasil disimpan !');
+
+				redirect('agen/kurir');
+				
+			}
+		}
+
+		$kurir = $this->agen_model->get_where('t_kurir', array('id_kurir' => $id_kurir));
+
+		foreach ($kurir->result() as $key) {
+			
+			$data['id_kurir'] = $key->id_kurir;
+			$data['username'] = $key->username;
+			$data['email'] = $key->email;
+			$data['provinsi'] = $key->provinsi;
+			$data['kabupaten'] = $key->kabupaten;
+			$data['status_kurir'] = $key->status_kurir;
+
+		}
+		$data['data'] = $this->agen_model->get_all('t_provinsi');
+
+		$data['active_kurir'] = 'active';
+		$data['header'] = 'Manage Kurir';
+
+		$this->template->agen('agen/edit_kurir', $data);
+	}
+
 	public function paket_kurir() //fitur dari dp
 	{
 		$this->cek_login();
@@ -75,7 +180,7 @@ class Agen extends CI_Controller {
 					'tanggal' => date("Y-m-d"), 
 					'status_tracking' => 'Diterima Agen Kota Asal'
 				);
-				$this->dp_model->insert('t_tracking', $tracking);
+				$this->agen_model->insert('t_tracking', $tracking);
     		}
 
 	    }
@@ -96,7 +201,7 @@ class Agen extends CI_Controller {
 				'tgl_sampai' =>  date("Y-m-d"),
 				'status_tdpagen' => 'selesai'
 			);
-			$this->dp_model->update('t_transaksidpagen', $transaksidpagen, ['id_transaksidpagen' => $id_transaksidpagen]);
+			$this->agen_model->update('t_transaksidpagen', $transaksidpagen, ['id_transaksidpagen' => $id_transaksidpagen]);
 
 			foreach ($resi as $res)
 			{ 
@@ -112,7 +217,7 @@ class Agen extends CI_Controller {
 				// );
 
 				$this->agen_model->insert('t_tracking', $tracking);
-				// $this->dp_model->update('t_transaksi', $transaksi, ['no_resi' => $res]);              
+				// $this->agen_model->update('t_transaksi', $transaksi, ['no_resi' => $res]);              
 				
 
     		}
@@ -229,7 +334,7 @@ class Agen extends CI_Controller {
 				'agen_tujuan' => $this->session->userdata('id_agen')
 				);
 
-		$data['data'] = $this->dp_model->get_where('t_transaksidpagen', $where);
+		$data['data'] = $this->agen_model->get_where('t_transaksidpagen', $where);
 
 		// $data['data'] = $this->kurir_model->get_all('t_transaksi');
 

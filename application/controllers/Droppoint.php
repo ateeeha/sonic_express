@@ -23,7 +23,8 @@ class Droppoint extends CI_Controller {
 	{
 		$this->cek_login();
 
-		$data['data'] = $this->dp_model->get_all('t_agen');
+		$id_dp['id_dp'] = $this->session->userdata('id_dp'); 
+		$data['data'] = $this->dp_model->get_where('t_agen', $id_dp);
 
 		$data['active_agen'] = 'active';
 		$data['header'] = 'Manage Agen';
@@ -474,8 +475,8 @@ class Droppoint extends CI_Controller {
 		$data['provinsi'] = $this->dp_model->get_all('t_provinsi');
 		$data['id_dp'] = $this->session->userdata('id_dp');
 
-		$data['active_kurir'] = 'active';
-		$data['header'] = 'Add Kurir';	
+		$data['active_agen'] = 'active';
+		$data['header'] = 'Add Agen';	
 		$this->template->dp('droppoint/add_agen', $data);
 	}
 

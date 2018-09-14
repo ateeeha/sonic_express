@@ -7,6 +7,11 @@
             <i class="fa fa-cube"></i> <span>HOME</span>
           </a>
         </li>
+        <li class="<?php if(isset($active_kurir)){echo $active_kurir;}?>">
+          <a href="<?= base_url(); ?>agen/kurir/">
+            <i class="fa fa-cube"></i> <span>MANAGE KURIR</span>
+          </a>
+        </li>
        <li class="<?php if(isset($active_paket_kurir)){echo $active_paket_kurir;}?>">
           <a href="<?= base_url(); ?>agen/paket_kurir/">
             <i class="fa fa-cube"></i> <span>PAKET KURIR</span>

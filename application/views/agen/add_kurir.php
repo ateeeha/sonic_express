@@ -2,7 +2,7 @@
       <h1><?= $header ?></h1>
       <ol class="breadcrumb">
         <li><a href=""><i class="fa fa-home"></i> Dashboard</a></li>
-        <li><a href="">Manage Agen</a></li>
+        <li><a href="">Manage Kurir</a></li>
         <li class="active"><?= $header ?></li>
       </ol>
     </section>
@@ -37,9 +37,9 @@
               <div class="box-body">
 
                 <div class="form-group">
-                  <label class="col-md-2 col-sm-2 col-xs-12 control-label">ID Drop Point</label>
+                  <label class="col-md-2 col-sm-2 col-xs-12 control-label">ID Agen</label>
                   <div class="col-md-7 col-sm-6 col-xs-12">
-                    <input type="text" readonly class="form-control col-md-7 col-xs-12" name="id_dp" value="<?= $id_dp; ?>">
+                    <input type="text" readonly class="form-control col-md-7 col-xs-12" name="id_agen" value="<?= $id_agen; ?>">
                   </div>
                 </div>
 
