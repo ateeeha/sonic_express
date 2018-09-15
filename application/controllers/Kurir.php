@@ -264,16 +264,21 @@ class Kurir extends CI_Controller {
 		$this->cek_login();
 
 		$no_resi = $this->uri->segment(3);
-		$status = 'Diterima';
 
-		$data = array(
+		$tracking = array(
 			'no_resi' => $no_resi, 
 			'tanggal' => date("Y-m-d"), 
 			'status_tracking' => 'Diterima Kurir'
 		);
 
-		$this->kurir_model->insert('t_tracking', $data);
-		$this->kurir_model->update('t_transaksi', ['status_transaksi' => $status], ['no_resi' => $this->uri->segment(3)]);
+		$transaksi = array(
+			'status_transaksi' => 'Diterima', 
+			'agen_asal' => $this->session->userdata('agen_kurir')
+		);
+
+
+		$this->kurir_model->insert('t_tracking', $tracking);
+		$this->kurir_model->update('t_transaksi', $transaksi, ['no_resi' => $this->uri->segment(3)]);
 
 		redirect('kurir/paket_dijemput/');
 

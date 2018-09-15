@@ -161,6 +161,7 @@ class Login extends CI_Controller {
 						'email_kurir' => $data->email, 
 						'kabupaten_kurir' => $data->kabupaten, 
 						'provinsi_kurir' => $data->provinsi, 
+						'agen_kurir' => $data->id_agen, 
 						'login_kurir' => TRUE
 					);
 
