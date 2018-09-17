@@ -31,7 +31,8 @@ class Kurir extends CI_Controller {
 
 		// $data['data'] = $this->kurir_model->get_all('t_transaksi');
 
-		$data['active_paketuser'] = 'active';
+		$data['active_menu_user'] = 'active';
+		$data['active_paket_user'] = 'active';
 		$data['header'] = 'Manage Paket';
 		$this->template->kurir('kurir/paket_menunggu', $data);
 	}
@@ -49,6 +50,7 @@ class Kurir extends CI_Controller {
 
 		// $data['data'] = $this->kurir_model->get_all('t_transaksi');
 
+		$data['active_menu_agen'] = 'active';
 		$data['active_paket_agen'] = 'active';
 		$data['header'] = 'Manage Paket Agen';
 		$this->template->kurir('kurir/paket_agen', $data);
@@ -67,6 +69,7 @@ class Kurir extends CI_Controller {
 
 		// $data['data'] = $this->kurir_model->get_all('t_transaksi');
 
+		$data['active_menu_user'] = 'active';
 		$data['active_dijemput'] = 'active';
 		$data['header'] = 'Manage Transaksi';
 		$this->template->kurir('kurir/paket_dijemput', $data);
@@ -82,10 +85,9 @@ class Kurir extends CI_Controller {
 				'status_transaksi' => 'diterima'
 				));
 
-		$provinsi = array('provinsi' => $this->session->userdata('provinsi_kurir') );
+		$data['id_agen'] = $this->session->userdata('agen_kurir');
 
-		$data['agen'] = $this->kurir_model->get_where('t_agen',$provinsi);
-
+		$data['active_menu_user'] = 'active';
 		$data['active_diterima'] = 'active';
 		$data['header'] = 'Manage Transaksi';
 		$this->template->kurir('kurir/paket_diterima', $data);
@@ -128,6 +130,7 @@ class Kurir extends CI_Controller {
 
 		// $data['data'] = $this->kurir_model->get_all('t_transaksi');
 
+		$data['active_menu_agen'] = 'active';
 		$data['active_diantar'] = 'active';
 		$data['header'] = 'Manage Transaksi';
 		$this->template->kurir('kurir/paket_diantar', $data);
@@ -146,6 +149,7 @@ class Kurir extends CI_Controller {
 
 		// $data['data'] = $this->kurir_model->get_all('t_transaksi');
 
+		$data['active_menu_agen'] = 'active';
 		$data['active_selesai'] = 'active';
 		$data['header'] = 'Manage Transaksi';
 		$this->template->kurir('kurir/paket_selesai', $data);

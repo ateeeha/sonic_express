@@ -304,7 +304,7 @@ class Agen extends CI_Controller {
 		$this->template->agen('agen/edit_kurir', $data);
 	}
 
-	public function paket_kurir() //fitur dari dp
+	public function paket_kurir() 
 	{
 		$this->cek_login();
 		$join = 't_transaksi t JOIN t_user u ON (t.id_user = u.id_user)';
@@ -316,6 +316,7 @@ class Agen extends CI_Controller {
 
 		// $data['data'] = $this->kurir_model->get_all('t_transaksi');
 
+		$data['active_menu_kurir'] = 'active';
 		$data['active_paket_kurir'] = 'active';
 		$data['header'] = 'Manage Paket';
 		$this->template->agen('agen/paket_kurir', $data);
@@ -416,6 +417,7 @@ class Agen extends CI_Controller {
 				'agen_asal' => $this->session->userdata('id_agen')
 				));
 
+		$data['active_menu_kurir'] = 'active';
 		$data['active_list_paket_kurir'] = 'active';
 		$data['header'] = 'Manage Paket Diterima';
 		$this->template->agen('agen/list_paket_kurir', $data);
@@ -473,6 +475,7 @@ class Agen extends CI_Controller {
 
 		// $data['data'] = $this->kurir_model->get_all('t_transaksi');
 
+		$data['active_menu_kurir'] = 'active';
 		$data['active_list_jemput_paket'] = 'active';
 		$data['header'] = 'Manage List Jemput Paket';
 		$this->template->agen('agen/list_jemput_paket', $data);
@@ -511,13 +514,14 @@ class Agen extends CI_Controller {
 
 		$where = array(
 				'status_tdpagen' => 'proses',
-				'agen_tujuan' => $this->session->userdata('id_agen')
+				'tujuan' => $this->session->userdata('id_agen')
 				);
 
 		$data['data'] = $this->agen_model->get_where('t_transaksidpagen', $where);
 
 		// $data['data'] = $this->kurir_model->get_all('t_transaksi');
 
+		$data['active_menu_dp'] = 'active';
 		$data['active_paket_dp'] = 'active';
 		$data['header'] = 'Manage Paket';
 		$this->template->agen('agen/paket_dp', $data);
@@ -535,13 +539,14 @@ class Agen extends CI_Controller {
 
 		$where = array(
 				'status_tdpagen' => 'selesai',
-				'tda.agen_tujuan' => $this->session->userdata('id_agen')
+				'tujuan' => $this->session->userdata('id_agen')
 				);
 
 		$data['data'] = $this->agen_model->get_where($tabel,$where);
 
 		// $data['data'] = $this->kurir_model->get_all('t_transaksi');
 
+		$data['active_menu_dp'] = 'active';
 		$data['active_list_paket_dp'] = 'active';
 		$data['header'] = 'Manage Paket';
 		$this->template->agen('agen/list_paket_dp', $data);

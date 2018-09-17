@@ -7,36 +7,44 @@
             <i class="fa fa-cube"></i> <span>Home</span>
           </a>
         </li>
-        <li class="<?php if(isset($active_paketuser)){echo $active_paketuser;}?>">
-          <a href="<?= base_url(); ?>kurir/paket_user/">
-            <i class="fa fa-cube"></i> <span>PAKET USER</span>
+        <!-- ============Paket user============= -->
+        <li class="treeview <?php if(isset($active_menu_user)){echo $active_menu_user;}?>">
+          <a href="#">
+            <i class="fa fa-cubes"></i> <span>PAKET USER</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li class="<?php if(isset($active_paket_user)){echo $active_paket_user;}?>"><a href="<?= base_url(); ?>kurir/paket_user/"><i class="fa fa-cube"></i> Paket</a></li>
+            <li class="<?php if(isset($active_dijemput)){echo $active_dijemput;}?>"><a href="<?= base_url(); ?>kurir/paket_dijemput/"><i class="fa fa-truck"></i> Jemput</a></li>
+            <li class="<?php if(isset($active_diterima)){echo $active_diterima;}?>">
+              <a href="<?= base_url(); ?>kurir/paket_diterima/">
+            <i class="fa fa-list"></i> <span>List</span>
           </a>
         </li>
-        <li class="<?php if(isset($active_paket_agen)){echo $active_paket_agen;}?>">
-          <a href="<?= base_url(); ?>kurir/paket_agen/">
-            <i class="fa fa-cube"></i> <span>PAKET AGEN</span>
+          </ul>
+        </li>
+        <!-- ===========End Paket User============== -->
+        <!-- ============Paket Agen============= -->
+        <li class="treeview <?php if(isset($active_menu_agen)){echo $active_menu_agen;}?>">
+          <a href="#">
+            <i class="fa fa-cubes"></i> <span>PAKET AGEN</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li class="<?php if(isset($active_paket_agen)){echo $active_paket_agen;}?>"><a href="<?= base_url(); ?>kurir/paket_agen/"><i class="fa fa-cube"></i> Paket</a></li>
+            <li class="<?php if(isset($active_diantar)){echo $active_diantar;}?>"><a href="<?= base_url(); ?>kurir/paket_diantar/"><i class="fa fa-truck"></i> Antar</a></li>
+            <li class="<?php if(isset($active_selesai)){echo $active_selesai;}?>">
+              <a href="<?= base_url(); ?>kurir/paket_selesai/">
+            <i class="fa fa-history"></i> <span>Riwayat</span>
           </a>
         </li>
-       <li class="<?php if(isset($active_dijemput)){echo $active_dijemput;}?>">
-          <a href="<?= base_url(); ?>kurir/paket_dijemput/">
-            <i class="fa fa-money"></i> <span>PAKET DIJEMPUT</span>
-          </a>
+          </ul>
         </li>
-        <li class="<?php if(isset($active_diterima)){echo $active_diterima;}?>">
-          <a href="<?= base_url(); ?>kurir/paket_diterima/">
-            <i class="fa fa-money"></i> <span>PAKET DITERIMA</span>
-          </a>
-        </li>
-        <li class="<?php if(isset($active_diantar)){echo $active_diantar;}?>">
-          <a href="<?= base_url(); ?>kurir/paket_diantar/">
-            <i class="fa fa-money"></i> <span>PAKET DIANTAR</span>
-          </a>
-        </li>
-        <li class="<?php if(isset($active_selesai)){echo $active_selesai;}?>">
-          <a href="<?= base_url(); ?>kurir/paket_selesai/">
-            <i class="fa fa-money"></i> <span>SELESAI</span>
-          </a>
-        </li>
+        <!-- ===========End Paket Agen============== -->
       </ul>
       
     </section>

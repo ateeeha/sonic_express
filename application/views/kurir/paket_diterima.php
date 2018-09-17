@@ -16,13 +16,8 @@
                 <div style="float:left">
                   <input class="btn btn-success" type="submit" name="submit" value="Submit">
 
-                  <label>Agen Asal :</label>
-                  <select name="agen_asal" required> 
-                      <option value="" disabled selected>--Pilih Agen--</option>
-                      <?php foreach ($agen->result() as $ag): ?>
-                      <option value="<?= $ag->id_agen; ?>"><?= $ag->username; ?></option>
-                      <?php endforeach ?>
-                  </select>
+                  <label>Id Agen Asal :</label>
+                  <input name="agen_asal" value="<?= $id_agen; ?>">
                 </div>
             </div>
             <div class="box-body table-responsive">

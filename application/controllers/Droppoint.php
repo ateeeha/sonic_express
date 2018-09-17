@@ -43,8 +43,8 @@ class Droppoint extends CI_Controller {
 
 		// $data['data'] = $this->kurir_model->get_all('t_transaksi');
 
+		$data['active_menu_agen'] = 'active';
 		$data['active_paket_agen'] = 'active';
-		$data['active_paket'] = 'active';
 		$data['header'] = 'Paket agen';
 		$this->template->dp('droppoint/paket_agen', $data);
 	}
@@ -212,7 +212,7 @@ class Droppoint extends CI_Controller {
 
 		$data['droppoint'] = $this->dp_model->get_all('t_dp');
 
-		$data['active_paket_agen'] = 'active';
+		$data['active_menu_agen'] = 'active';
 		$data['active_list_paket_agen'] = 'active';
 		$data['header'] = 'List Paket agen';
 		$this->template->dp('droppoint/list_paket_agen', $data);
@@ -240,6 +240,7 @@ class Droppoint extends CI_Controller {
 
 		// $data['data'] = $this->kurir_model->get_all('t_transaksi');
 
+		$data['active_menu_dp'] = 'active';
 		$data['active_list_paket_dp'] = 'active';
 		$data['header'] = 'Manage Paket';
 		$this->template->dp('droppoint/list_paket_dp', $data);
@@ -266,6 +267,7 @@ class Droppoint extends CI_Controller {
 
 		// $data['data'] = $this->kurir_model->get_all('t_transaksi');
 
+		$data['active_menu_dp'] = 'active';
 		$data['active_list_transaksi_dp'] = 'active';
 		$data['header'] = 'List Transaksi DP';
 		$this->template->dp('droppoint/list_transaksi_dp', $data);
@@ -570,6 +572,7 @@ class Droppoint extends CI_Controller {
 
 		// $data['data'] = $this->kurir_model->get_all('t_transaksi');
 
+		$data['active_menu_dp'] = 'active';
 		$data['active_paket_dp'] = 'active';
 		$data['header'] = 'Manage Paket';
 		$this->template->dp('droppoint/paket_dp', $data);
