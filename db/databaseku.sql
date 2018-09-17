@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: 14 Sep 2018 pada 10.31
+-- Generation Time: 17 Sep 2018 pada 14.43
 -- Versi Server: 5.6.20
 -- PHP Version: 5.5.15
 
@@ -90,7 +90,7 @@ CREATE TABLE IF NOT EXISTS `t_dp` (
   `kabupaten` varchar(35) NOT NULL,
   `password` varchar(255) NOT NULL,
   `status_dp` enum('1','2') NOT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
 
 --
 -- Dumping data untuk tabel `t_dp`
@@ -615,7 +615,7 @@ CREATE TABLE IF NOT EXISTS `t_kurir` (
   `status_kurir` enum('1','2') NOT NULL,
   `provinsi` varchar(35) NOT NULL,
   `kabupaten` varchar(35) NOT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=12 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
 
 --
 -- Dumping data untuk tabel `t_kurir`
@@ -746,9 +746,18 @@ INSERT INTO `t_provinsi` (`id_provinsi`, `nama_provinsi`) VALUES
 CREATE TABLE IF NOT EXISTS `t_tracking` (
 `id_tracking` bigint(20) NOT NULL,
   `no_resi` varchar(255) NOT NULL,
-  `tanggal` date NOT NULL,
+  `tanggal` datetime NOT NULL,
   `status_tracking` enum('Dijemput Kurir','Diterima Kurir','Diterima Agen Kota Asal','Diproses Agen Kota Asal','Diterima Drop Point Kota Asal','Dikirim ke Drop Point Kota Tujuan','Diterima Drop Point Kota Tujuan','Diantar Kurir Ke Alamat Tujuan','Diterima Agen Kota Tujuan','Diantar Kurir Ke Alamat Tujuan','Paket Diterima','Dikirim ke Agen Kota Tujuan') NOT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=134 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+
+--
+-- Dumping data untuk tabel `t_tracking`
+--
+
+INSERT INTO `t_tracking` (`id_tracking`, `no_resi`, `tanggal`, `status_tracking`) VALUES
+(1, 'RES15092018836062', '2018-09-15 00:00:00', 'Dijemput Kurir'),
+(2, 'RES15092018836062', '2018-09-15 00:00:00', 'Diterima Kurir'),
+(3, 'RES15092018836062', '2018-09-15 00:00:00', 'Diterima Agen Kota Asal');
 
 -- --------------------------------------------------------
 
@@ -782,7 +791,14 @@ CREATE TABLE IF NOT EXISTS `t_transaksi` (
   `status_transaksi` enum('Menunggu','Dijemput','Diterima','Ditolak','Selesai') NOT NULL,
   `dp_kirim` enum('Belum Dikirim','Sudah Dikirim') NOT NULL,
   `dp_jemput` enum('belum','proses','selesai') NOT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=23 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+
+--
+-- Dumping data untuk tabel `t_transaksi`
+--
+
+INSERT INTO `t_transaksi` (`id_transaksi`, `id_user`, `kurir_penjemput`, `kurir_pengantar`, `agen_asal`, `agen_tujuan`, `dp_asal`, `dp_tujuan`, `tgl_pengiriman`, `no_resi`, `berat`, `panjang`, `lebar`, `tinggi`, `ongkir`, `total_biaya`, `nama`, `provinsi_tujuan`, `kabupaten_tujuan`, `alamat`, `kode_pos`, `no_tlp`, `status_transaksi`, `dp_kirim`, `dp_jemput`) VALUES
+(1, 2, 2, 0, 2, 0, 0, 0, '2018-09-15', 'RES15092018836062', 20, 20, 20, 20, 8000, 160000, 'penerima bantul', 'DI Yogyakarta', 'Bantul', 'bantul tujuan', 55283, '08995413121', 'Diterima', 'Belum Dikirim', 'belum');
 
 -- --------------------------------------------------------
 
@@ -795,7 +811,7 @@ CREATE TABLE IF NOT EXISTS `t_transaksiagen` (
   `id_dp` bigint(20) NOT NULL,
   `id_agen` bigint(20) NOT NULL,
   `status_tagen` enum('baru','proses','selesai') NOT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9 ;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -807,7 +823,7 @@ CREATE TABLE IF NOT EXISTS `t_transaksiagendetail` (
 `id_transaksiagendetail` bigint(20) NOT NULL,
   `no_resi` varchar(255) NOT NULL,
   `id_transaksiagen` bigint(20) NOT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -822,7 +838,7 @@ CREATE TABLE IF NOT EXISTS `t_transaksidp` (
   `tgl_kirim` date NOT NULL,
   `tgl_sampai` date NOT NULL,
   `status_tdp` enum('baru','proses','selesai') NOT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=13 ;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -837,7 +853,7 @@ CREATE TABLE IF NOT EXISTS `t_transaksidpagen` (
   `tgl_kirim` date NOT NULL,
   `tgl_sampai` date NOT NULL,
   `status_tdpagen` enum('baru','proses','selesai') NOT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -849,7 +865,7 @@ CREATE TABLE IF NOT EXISTS `t_transaksidpagendetail` (
 `id_transaksidetaildpagen` bigint(20) NOT NULL,
   `no_resi` varchar(255) NOT NULL,
   `id_transaksidpagen` bigint(20) NOT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -861,7 +877,7 @@ CREATE TABLE IF NOT EXISTS `t_transaksidpdetail` (
 `id_transaksidpdetail` bigint(20) NOT NULL,
   `no_resi` varchar(255) NOT NULL,
   `id_transaksidp` bigint(20) NOT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -877,14 +893,14 @@ CREATE TABLE IF NOT EXISTS `t_user` (
   `status_user` enum('1','2') NOT NULL,
   `provinsi` varchar(35) NOT NULL,
   `kabupaten` varchar(35) NOT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=10 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
 
 --
 -- Dumping data untuk tabel `t_user`
 --
 
 INSERT INTO `t_user` (`id_user`, `username`, `email`, `password`, `status_user`, `provinsi`, `kabupaten`) VALUES
-(1, 'User Bantul', 'u_bantul@gmail.com', '$2y$10$a3BBnM31xGvr7E81asQBY.V8KosNm9giM3WchPF1iw4LNKM.J5Fca', '1', 'DI Yogyakarta', 'Bantul'),
+(1, 'User Bantul', 'u_bantul@gmail.com', '$2y$10$a3BBnM31xGvr7E81asQBY.V8KosNm9giM3WchPF1iw4LNKM.J5Fca', '2', 'DI Yogyakarta', 'Bantul'),
 (2, 'User Yogyakarta', 'u_yogyakarta@gmail.com', '$2y$10$a3BBnM31xGvr7E81asQBY.V8KosNm9giM3WchPF1iw4LNKM.J5Fca', '1', 'DI Yogyakarta', 'Yogyakarta'),
 (3, 'User Sleman', 'u_sleman@gmail.com', '$2y$10$a3BBnM31xGvr7E81asQBY.V8KosNm9giM3WchPF1iw4LNKM.J5Fca', '1', 'DI Yogyakarta', 'Sleman'),
 (4, 'User Jakarta Pusat', 'u_jakarta_pusat@gmail.com', '$2y$10$Ojn3bpD436MONFEYjoHOw.eUdMRdkbuJWJ/u4DrfwPftCQOGkOC3C', '1', 'DKI Jakarta', 'Jakarta Pusat'),
@@ -1009,7 +1025,7 @@ MODIFY `id_agen` bigint(20) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=7;
 -- AUTO_INCREMENT for table `t_dp`
 --
 ALTER TABLE `t_dp`
-MODIFY `id_dp` bigint(20) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
+MODIFY `id_dp` bigint(20) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `t_kota`
 --
@@ -1019,7 +1035,7 @@ MODIFY `id_kota` bigint(20) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=502;
 -- AUTO_INCREMENT for table `t_kurir`
 --
 ALTER TABLE `t_kurir`
-MODIFY `id_kurir` bigint(20) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=12;
+MODIFY `id_kurir` bigint(20) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT for table `t_ongkir`
 --
@@ -1029,47 +1045,47 @@ MODIFY `id_ongkir` bigint(20) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=35;
 -- AUTO_INCREMENT for table `t_tracking`
 --
 ALTER TABLE `t_tracking`
-MODIFY `id_tracking` bigint(20) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=134;
+MODIFY `id_tracking` bigint(20) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `t_transaksi`
 --
 ALTER TABLE `t_transaksi`
-MODIFY `id_transaksi` bigint(20) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=23;
+MODIFY `id_transaksi` bigint(20) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `t_transaksiagen`
 --
 ALTER TABLE `t_transaksiagen`
-MODIFY `id_transaksiagen` bigint(20) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=9;
+MODIFY `id_transaksiagen` bigint(20) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `t_transaksiagendetail`
 --
 ALTER TABLE `t_transaksiagendetail`
-MODIFY `id_transaksiagendetail` bigint(20) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=8;
+MODIFY `id_transaksiagendetail` bigint(20) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `t_transaksidp`
 --
 ALTER TABLE `t_transaksidp`
-MODIFY `id_transaksidp` bigint(20) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=13;
+MODIFY `id_transaksidp` bigint(20) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `t_transaksidpagen`
 --
 ALTER TABLE `t_transaksidpagen`
-MODIFY `id_transaksidpagen` bigint(20) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=6;
+MODIFY `id_transaksidpagen` bigint(20) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `t_transaksidpagendetail`
 --
 ALTER TABLE `t_transaksidpagendetail`
-MODIFY `id_transaksidetaildpagen` bigint(20) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=6;
+MODIFY `id_transaksidetaildpagen` bigint(20) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `t_transaksidpdetail`
 --
 ALTER TABLE `t_transaksidpdetail`
-MODIFY `id_transaksidpdetail` bigint(20) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=8;
+MODIFY `id_transaksidpdetail` bigint(20) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `t_user`
 --
 ALTER TABLE `t_user`
-MODIFY `id_user` bigint(20) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=10;
+MODIFY `id_user` bigint(20) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=7;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
