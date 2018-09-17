@@ -7,6 +7,16 @@
             <i class="fa fa-cube"></i> <span>HOME</span>
           </a>
         </li>
+        <li class="<?php if(isset($active_transaksi)){echo $active_transaksi;}?>">
+          <a href="<?= base_url(); ?>agen/transaksi/">
+            <i class="fa fa-cube"></i> <span>INPUT TRANSAKSI</span>
+          </a>
+        </li>
+        <li class="<?php if(isset($active_user)){echo $active_user;}?>">
+          <a href="<?= base_url(); ?>agen/user/">
+            <i class="fa fa-cube"></i> <span>MANAGE USER</span>
+          </a>
+        </li>
         <li class="<?php if(isset($active_kurir)){echo $active_kurir;}?>">
           <a href="<?= base_url(); ?>agen/kurir/">
             <i class="fa fa-cube"></i> <span>MANAGE KURIR</span>

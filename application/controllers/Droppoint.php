@@ -15,7 +15,7 @@ class Droppoint extends CI_Controller {
 		$this->cek_login();
 
 		$data['active_home'] = 'active';
-		$data['header'] = 'Dashboard';
+		$data['header'] = 'Home';
 		$this->template->dp('droppoint/home', $data);
 	}
 
@@ -44,6 +44,7 @@ class Droppoint extends CI_Controller {
 		// $data['data'] = $this->kurir_model->get_all('t_transaksi');
 
 		$data['active_paket_agen'] = 'active';
+		$data['active_paket'] = 'active';
 		$data['header'] = 'Paket agen';
 		$this->template->dp('droppoint/paket_agen', $data);
 	}
@@ -211,6 +212,7 @@ class Droppoint extends CI_Controller {
 
 		$data['droppoint'] = $this->dp_model->get_all('t_dp');
 
+		$data['active_paket_agen'] = 'active';
 		$data['active_list_paket_agen'] = 'active';
 		$data['header'] = 'List Paket agen';
 		$this->template->dp('droppoint/list_paket_agen', $data);
@@ -283,13 +285,14 @@ class Droppoint extends CI_Controller {
 				// 'kabupaten_tujuan' => $this->session->userdata('kabupaten_dp'),
 				// 'status_transaksi' => 'diterima',
 				// 'dp_kirim' => 'Sudah Dikirim',
-				'dp_tujuan' => $this->session->userdata('id_dp')
+				'tujuan' => $this->session->userdata('id_dp')
 				);
 
 		$data['data'] = $this->dp_model->get_where('t_transaksidpagen', $where);
 
 		// $data['data'] = $this->kurir_model->get_all('t_transaksi');
 
+		$data['active_paket_agen'] = 'active';
 		$data['active_list_transaksi_agen'] = 'active';
 		$data['header'] = 'List Transaksi Agen';
 		$this->template->dp('droppoint/list_transaksi_agen', $data);

@@ -2,14 +2,9 @@
       <!-- sidebar menu: : style can be found in sidebar.less -->
        
       <ul class="sidebar-menu" data-widget="tree">
-        <li class="<?php if(isset($active_user)){echo $active_user;}?>">
+        <li class="<?php if(isset($active_home)){echo $active_home;}?>">
           <a href="<?= base_url(); ?>kurir/">
-            <i class="fa fa-cube"></i> <span>MANAGE USER</span>
-          </a>
-        </li>
-        <li class="<?php if(isset($active_transaksi)){echo $active_transaksi;}?>">
-          <a href="<?= base_url(); ?>kurir/transaksi/">
-            <i class="fa fa-cube"></i> <span>INPUT TRANSAKSI</span>
+            <i class="fa fa-cube"></i> <span>Home</span>
           </a>
         </li>
         <li class="<?php if(isset($active_paketuser)){echo $active_paketuser;}?>">

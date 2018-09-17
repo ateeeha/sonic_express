@@ -13,6 +13,15 @@ class Admin extends CI_Controller {
 	public function index()
 	{
 		$this->cek_login();
+		$data['active_home'] = 'active';
+		$data['header'] = 'Home';
+
+		$this->template->admin('admin/home', $data);
+	}
+
+	public function admin()
+	{
+		$this->cek_login();
 		if ($this->session->userdata('level')=='admin')
 		{
 			redirect('admin/droppoint/');
