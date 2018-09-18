@@ -132,17 +132,60 @@
 
    $(".kecamatan_tujuan").change(function(){
       $( ".ongkir_detail" ).html("<td colspan='4' style='text-align:center'>Menunggu...<td/>");
+      var berat = $('#berat').val();
+      var panjang = $('#panjang').val();
+      var lebar = $('#lebar').val();
+      var tinggi = $('#tinggi').val();
       var kecamatan = $(this).val();
       var kabupaten = $(".kota_tujuan").val();
-      $.get( "<?php echo site_url('user/getongkir');?>", { kec:kecamatan, kab:kabupaten }, function( data ) {
+      $.get( "<?php echo site_url('user/getongkir');?>", 
+        { 
+          kec:kecamatan, 
+          kab:kabupaten,  
+          berat:berat,  
+          panjang:panjang,  
+          lebar:lebar,  
+          tinggi:tinggi  
+        }, function( data ) {
         $( ".ongkir_detail" ).html( data );
-        $( ".ongkir_pilih" ).val( data );
+         $( "#total_biaya" ).val("");
+        // $( ".ongkir_pilih" ).val( data );
       }); 
     });
 
-   $(".kota_tujuan, .provinsi_tujuan").change(function(){
+    $("#berat, #panjang, #lebar, #tinggi").keyup(function(){
       $( ".ongkir_detail" ).html("<td colspan='4' style='text-align:center'>Menunggu...<td/>");
+      var berat = $('#berat').val();
+      var panjang = $('#panjang').val();
+      var lebar = $('#lebar').val();
+      var tinggi = $('#tinggi').val();
+      var kecamatan = $('.kecamatan_tujuan').val();
+      var kabupaten = $(".kota_tujuan").val();
+      $.get( "<?php echo site_url('user/getongkir');?>", 
+        { 
+          kec:kecamatan, 
+          kab:kabupaten,  
+          berat:berat,  
+          panjang:panjang,  
+          lebar:lebar,  
+          tinggi:tinggi  
+        }, function( data ) {
+        $( ".ongkir_detail" ).html( data );
+         $( "#total_biaya" ).val("");
+        // $( ".ongkir_pilih" ).val( data );
+      }); 
     });
+
+   $(".kota_tujuan, .provinsi_tujuan, .kecamatan_tujuan").change(function(){
+      $( ".ongkir_detail" ).html("<td colspan='4' style='text-align:center'>Menunggu...<td/>");
+      $( "#total_biaya" ).val("");
+    });
+
+   function get_totalbiaya(total_biaya){
+
+      // alert(ongkir);
+      $("#total_biaya").val(total_biaya);
+    };
 
   $(document).ready(function(){
       $('#datatable').DataTable();

@@ -253,6 +253,11 @@ class User extends CI_Controller {
 	{
 		$this->cek_login();
 
+		$berat = $this->input->get('berat');
+		$p = $this->input->get('panjang');
+		$l = $this->input->get('lebar');
+		$t = $this->input->get('tinggi');
+
 		$kab = $this->input->get('kab');		
 		$kec = $this->input->get('kec');		
 
@@ -263,23 +268,44 @@ class User extends CI_Controller {
 				);
 
 		$getongkir = $this->user_model->get_where('t_ongkir', $ongkir);
-		if ($getongkir->num_rows() > 0){
-
-			foreach($getongkir->result() as $go){
-			echo "<tr>";
-			echo "<td style='text-align:center'><input value='$go->harga' name='ongkir' type='radio'></input></td>";
-			echo "<td style='text-align:center'>$go->jenis_layanan</input></td>";
-			echo "<td style='text-align:center'>$go->harga</input></td>";
-			echo "<td style='text-align:center'>$go->estimasi</td>";
-			echo "</tr>";
-			}
+		if ($berat == 0 or '') {
+			echo "<td colspan='4' style='text-align:center'>Inputkan Berat!</td>";
 		}else{
+			if ($getongkir->num_rows() > 0){
 
-			echo "<td colspan='4' style='text-align:center'>Data Belum Tersedia!</td>";
+				foreach($getongkir->result() as $go){
+
+				$ongkir = $go->harga;
+
+				if (($p * $l * $t) < 18000) {
+
+					$total_biaya = $berat * $ongkir;
+
+				}else if (($p * $l * $t) >= 18000) {
+
+					$berat = $p * $l * $t / 6000;
+
+					$total_biaya = $berat * $ongkir;
+				}
+
+				echo "<tr>";
+				echo "<td style='text-align:center'>
+						<input onclick='get_totalbiaya($total_biaya)' name='ongkir' class='ongkir' type='radio'>
+						</td>";
+				echo "<td style='text-align:center'>$go->jenis_layanan</td>";
+				echo "<td style='text-align:center'>$total_biaya</td>";
+				echo "<td style='text-align:center'>$go->estimasi</td>";
+				echo "</tr>";
+				}
+			}else{
+
+				echo "<td colspan='4' style='text-align:center'>Data Belum Tersedia!</td>";
+			}
 		}
+
+		
 		
 	}
-
 
 	function cek_login()
 	{ 

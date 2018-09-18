@@ -13,29 +13,25 @@
                       <div class="col-xs-3">
                         <label>Berat *</label>
                         <div class="input-group">
-                          <input required type="number" min="1" class="form-control">
-                          <span class="input-group-addon">kg</span>
+                          <input id="berat" required type="number" min="1" class="form-control" placeholder="kg">
                         </div>
                       </div>
                       <div class="col-xs-3">
                         <label>Panjang</label>
                         <div class="input-group">
-                        <input type="number" min="0" class="form-control">
-                        <span class="input-group-addon">cm</span>
+                        <input id="panjang" type="number" min="0" class="form-control" placeholder="cm">
                         </div>
                       </div>
                       <div class="col-xs-3">
                         <label>Lebar</label>
                         <div class="input-group">
-                        <input type="number" min="0" class="form-control">
-                        <span class="input-group-addon">cm</span>
+                        <input id="lebar" type="number" min="0" class="form-control" placeholder="cm">
                         </div>
                       </div>
                       <div class="col-xs-3">
                         <label>Tinggi</label>
                         <div class="input-group">
-                        <input type="number" min="0" class="form-control">
-                        <span class="input-group-addon">cm</span>
+                        <input id="tinggi" type="number" min="0" class="form-control" placeholder="cm">
                         </div>
                       </div>
                     </div>
@@ -62,7 +58,7 @@
                     </select>
                   </div>
                   <div class="form-group">
-                    <table id="ongkir" class="table table-bordered table-hover dt-responsive nowrap">
+                    <table class="table table-bordered table-hover dt-responsive nowrap">
                     <thead>
                       <tr>
                         <th style="text-align: center" width="5%">#</th>
@@ -80,7 +76,7 @@
                   <div class="form-group has-success">
                     <div class="input-group">
                       <span class="input-group-addon">Total Harga</span>
-                      <input type="text" class="form-control">
+                      <input id="total_biaya" name="total_biaya" type="text" class="form-control">
                       <span class="input-group-addon">.00</span>
                     </div>
                   </div>
