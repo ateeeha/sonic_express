@@ -6,7 +6,9 @@
         <div class="col-xs-12">
           <div class="box box-primary">
   
-            
+            <?php
+              echo "The time is " . date("Y-m-d H:i:s");
+            ?>
           </div>
         </div>
       </div>

@@ -141,8 +141,8 @@ class User extends CI_Controller {
 		$data['data'] = $this->user_model->get_all('t_provinsi');
 
 		$data['active_transaksi'] = 'active';
-		$data['header'] = 'Transaksi';
-		$this->template->user('user/form_transaksi', $data);
+		// $data['header'] = 'Transaksi';
+		$this->template->user('user/beta_transaksi', $data);
 	}
 
 	function simpan_transaksi()
@@ -225,7 +225,7 @@ class User extends CI_Controller {
 		$this->template->user('user/list_transaksi', $data);
 	}
 
-	public function getcity()
+	public function getkota()
 	{
 		$pro = $this->input->get('sts');
 		$getprovinsiid = $this->user_model->get_where('t_provinsi',array('nama_provinsi'=> $pro))->row();
@@ -237,15 +237,29 @@ class User extends CI_Controller {
 		}
 	}
 
+	public function getkecamatan()
+	{
+		$kota = $this->input->get('sts');
+		$getkotaid = $this->user_model->get_where('t_kota',array('nama_kota'=> $kota))->row();
+		$getkecamatan = $this->user_model->get_where('t_kecamatan',array('id_kota'=> $getkotaid->id_kota))->result();
+
+		echo "<option value=''>--Pilih Kecamatan--</option>";
+		foreach($getkecamatan as $gk){
+			echo "<option value='$gk->nama_kecamatan'>$gk->nama_kecamatan</option>";
+		}
+	}
+
 	public function getongkir()
 	{
 		$this->cek_login();
 
 		$kab = $this->input->get('kab');		
+		$kec = $this->input->get('kec');		
 
 		$ongkir = array(
 				'origin' => $this->session->userdata('kabupaten_user'),
-				'kota' => $kab
+				'kota' => $kab,
+				'kecamatan' => $kec
 				);
 
 		$getongkir = $this->user_model->get_where('t_ongkir', $ongkir);
@@ -254,7 +268,6 @@ class User extends CI_Controller {
 			foreach($getongkir->result() as $go){
 			echo "<tr>";
 			echo "<td style='text-align:center'><input value='$go->harga' name='ongkir' type='radio'></input></td>";
-			echo "<td style='text-align:center'>$go->kecamatan</input></td>";
 			echo "<td style='text-align:center'>$go->jenis_layanan</input></td>";
 			echo "<td style='text-align:center'>$go->harga</input></td>";
 			echo "<td style='text-align:center'>$go->estimasi</td>";
@@ -262,7 +275,7 @@ class User extends CI_Controller {
 			}
 		}else{
 
-			echo "<td colspan='5' style='text-align:center'>Data Belum Tersedia!</td>";
+			echo "<td colspan='4' style='text-align:center'>Data Belum Tersedia!</td>";
 		}
 		
 	}

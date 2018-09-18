@@ -443,7 +443,7 @@ class Agen extends CI_Controller {
 			{ 		        
 				$tracking = array(
 					'no_resi' => $res, 
-					'tanggal' => date("Y-m-d"), 
+					'tanggal' => date("Y-m-d H:i:s"), 
 					'status_tracking' => 'Diproses Agen Kota Asal'
 				);
 

@@ -101,7 +101,7 @@
   $(".province").change(function(){
       $( ".city" ).html("<option>Loading...</option>");
       var data = $(this).val();
-      $.get( "<?php echo site_url('user/getcity');?>", { sts: data }, function( data ) {
+      $.get( "<?php echo site_url('user/getkota');?>", { sts: data }, function( data ) {
         $( ".city" ).html( data );
       });
   });
@@ -109,26 +109,39 @@
   $(".province_asal").change(function(){
       $( ".city_asal" ).html("<option>Loading...</option>");
       var data = $(this).val();
-      $.get( "<?php echo site_url('user/getcity');?>", { sts: data }, function( data ) {
+      $.get( "<?php echo site_url('user/getkota');?>", { sts: data }, function( data ) {
         $( ".city_asal" ).html( data );
       });
     });
 
-   $(".province_tujuan").change(function(){
-      $( ".city_tujuan" ).html("<option>Loading...</option>");
+   $(".provinsi_tujuan").change(function(){
+      $( ".kota_tujuan" ).html("<option>Loading...</option>");
       var data = $(this).val();
-      $.get( "<?php echo site_url('user/getcity');?>", { sts: data }, function( data ) {
-        $( ".city_tujuan" ).html( data );
+      $.get( "<?php echo site_url('user/getkota');?>", { sts: data }, function( data ) {
+        $( ".kota_tujuan" ).html( data );
       });
     });
 
-   $(".city_tujuan").change(function(){
-      $( ".ongkir_detail" ).html("<td colspan='5' style='text-align:center'>loading...<td/>");
+   $(".kota_tujuan").change(function(){
+      $( ".kecamatan_tujuan" ).html("<option>Loading...</option>");
       var data = $(this).val();
-      $.get( "<?php echo site_url('user/getongkir');?>", { kab: data }, function( data ) {
+      $.get( "<?php echo site_url('user/getkecamatan');?>", { sts: data }, function( data ) {
+        $( ".kecamatan_tujuan" ).html( data );
+      });
+    });
+
+   $(".kecamatan_tujuan").change(function(){
+      $( ".ongkir_detail" ).html("<td colspan='4' style='text-align:center'>Menunggu...<td/>");
+      var kecamatan = $(this).val();
+      var kabupaten = $(".kota_tujuan").val();
+      $.get( "<?php echo site_url('user/getongkir');?>", { kec:kecamatan, kab:kabupaten }, function( data ) {
         $( ".ongkir_detail" ).html( data );
         $( ".ongkir_pilih" ).val( data );
-      });
+      }); 
+    });
+
+   $(".kota_tujuan, .provinsi_tujuan").change(function(){
+      $( ".ongkir_detail" ).html("<td colspan='4' style='text-align:center'>Menunggu...<td/>");
     });
 
   $(document).ready(function(){
