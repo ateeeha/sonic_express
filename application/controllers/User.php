@@ -137,7 +137,6 @@ class User extends CI_Controller {
 	{
 		$this->cek_login();
 
-		
 		$data['data'] = $this->user_model->get_all('t_provinsi');
 
 		$data['active_transaksi'] = 'active';
@@ -150,61 +149,51 @@ class User extends CI_Controller {
 		if ($this->input->post('submit', TRUE) == 'Submit')
 		{
 			//validasi
-			$this->form_validation->set_rules('nama','Nama','required');
 			$this->form_validation->set_rules('berat','Berat','required|numeric');
+			$this->form_validation->set_rules('panjang','Panjang','numeric');
+			$this->form_validation->set_rules('lebar','Lebar','numeric');
+			$this->form_validation->set_rules('tinggi','Tinggi','numeric');
 			$this->form_validation->set_rules('provinsi_tujuan','Provinsi','required');
 			$this->form_validation->set_rules('kabupaten_tujuan','Kabupaten','required');
+			$this->form_validation->set_rules('kecamatan_tujuan','Kecamatan','required');
+			$this->form_validation->set_rules('jenis_layanan','Jenis Layanan','required');
+			$this->form_validation->set_rules('total_biaya','Total Harga','required');
+			$this->form_validation->set_rules('nama','Nama','required');
 			$this->form_validation->set_rules('alamat','Alamat','required');
 			$this->form_validation->set_rules('kode_pos','Kode Pos','required|numeric');
 			$this->form_validation->set_rules('no_tlp','Nomor Telepon','required|numeric');
 
 			if ($this->form_validation->run() == TRUE)
 			{
-				$ongkir = $this->input->post('ongkir');
-				$berat = $this->input->post('berat');
-				$p = $this->input->post('panjang');
-				$l= $this->input->post('lebar');
-				$t = $this->input->post('tinggi');
-
-				if (($p * $l * $t) < 18000) {
-
-					$total_biaya = $berat * $ongkir;
-
-				}else if (($p * $l * $t) >= 18000) {
-
-					$berat = $p * $l * $t / 6000;
-
-					$total_biaya = $berat * $ongkir;
-				}
-
 				$data = array(
-				'id_user' => $this->session->userdata('id_user'), 
-				'tgl_pengiriman' => date("Y-m-d"), 
-				'no_resi' => 'RES'.date("dmYgis").$this->session->userdata('id_user'), 
+					'id_user' => $this->session->userdata('id_user'), 
+					'tgl_pengiriman' => date("Y-m-d"), 
+					'no_resi' => 'RES'.date("dmYgis").$this->session->userdata('id_user'), 
 
-				'berat' => $this->input->post('berat'),
-				'panjang' => $this->input->post('panjang'),
-				'lebar' => $this->input->post('lebar'),
-				'tinggi' => $this->input->post('tinggi'),
-				'ongkir' => $this->input->post('ongkir'),
-				'total_biaya' => $total_biaya,
+					'berat' => $this->input->post('berat'),
+					'panjang' => $this->input->post('panjang'),
+					'lebar' => $this->input->post('lebar'),
+					'tinggi' => $this->input->post('tinggi'),
+					'provinsi_tujuan' => $this->input->post('provinsi_tujuan'), 
+					'kabupaten_tujuan' => $this->input->post('kabupaten_tujuan'), 
+					'kecamatan_tujuan' => $this->input->post('kecamatan_tujuan'), 
+					'jenis_layanan' => $this->input->post('jenis_layanan'),
+					'total_biaya' => $this->input->post('total_biaya'),
 
-				'nama' => $this->input->post('nama'), 
-				'provinsi_tujuan' => $this->input->post('provinsi_tujuan'), 
-				'kabupaten_tujuan' => $this->input->post('kabupaten_tujuan'), 
-				'alamat' => $this->input->post('alamat'), 
-				'kode_pos' => $this->input->post('kode_pos'), 
-				'no_tlp' => $this->input->post('no_tlp'), 
-				'status_transaksi' => 'Menunggu',
-				'dp_kirim' => 'Belum Dikirim'
+					'nama' => $this->input->post('nama'), 
+					'alamat' => $this->input->post('alamat'), 
+					'kode_pos' => $this->input->post('kode_pos'), 
+					'no_tlp' => $this->input->post('no_tlp'), 
+					'status_transaksi' => 'Menunggu',
+					'dp_kirim' => 'Belum Dikirim'
 				);
 
 				$this->user_model->insert('t_transaksi', $data);
-				$this->session->set_flashdata('success','Data berhasil Disimpan !');
+				$this->session->set_flashdata('success','Transaksi berhasil diproses !');
 			
 			}else{
 
-				$this->session->set_flashdata('alert','Data Gagal disimpan !');
+				$this->session->set_flashdata('alert','Transaksi gagal diproses !');
 			} 
 		}
 		redirect('user/transaksi/');
@@ -254,6 +243,8 @@ class User extends CI_Controller {
 		$this->cek_login();
 
 		$berat = $this->input->get('berat');
+
+		$b = ($berat / 1000);
 		$p = $this->input->get('panjang');
 		$l = $this->input->get('lebar');
 		$t = $this->input->get('tinggi');
@@ -269,42 +260,58 @@ class User extends CI_Controller {
 
 		$getongkir = $this->user_model->get_where('t_ongkir', $ongkir);
 		if ($berat == 0 or '') {
+
 			echo "<td colspan='4' style='text-align:center'>Inputkan Berat!</td>";
+
 		}else{
-			if ($getongkir->num_rows() > 0){
 
-				foreach($getongkir->result() as $go){
+			if ($kec == '') {
+			
+				echo "<td colspan='4' style='text-align:center'>Menunggu...</td>";
 
-				$ongkir = $go->harga;
-
-				if (($p * $l * $t) < 18000) {
-
-					$total_biaya = $berat * $ongkir;
-
-				}else if (($p * $l * $t) >= 18000) {
-
-					$berat = $p * $l * $t / 6000;
-
-					$total_biaya = $berat * $ongkir;
-				}
-
-				echo "<tr>";
-				echo "<td style='text-align:center'>
-						<input onclick='get_totalbiaya($total_biaya)' name='ongkir' class='ongkir' type='radio'>
-						</td>";
-				echo "<td style='text-align:center'>$go->jenis_layanan</td>";
-				echo "<td style='text-align:center'>$total_biaya</td>";
-				echo "<td style='text-align:center'>$go->estimasi</td>";
-				echo "</tr>";
-				}
 			}else{
 
-				echo "<td colspan='4' style='text-align:center'>Data Belum Tersedia!</td>";
+				if ($getongkir->num_rows() > 0){
+
+					foreach($getongkir->result() as $go){
+
+						$ongkir = $go->harga;
+
+						if ($b < 1) {
+
+							$total_biaya = $ongkir;
+
+						}else{
+
+							if (($p * $l * $t) < 18000) {
+
+								$total_biaya = $b * $ongkir;
+
+							}else if (($p * $l * $t) >= 18000) {
+
+								$b = $p * $l * $t / 6000;
+
+								$total_biaya = $b * $ongkir;
+							}
+
+						}
+
+						echo "<tr>";
+						echo "<td style='text-align:center'>
+								<input required onclick='get_totalbiaya($total_biaya)' value='$go->jenis_layanan' name='jenis_layanan' class='ongkir' type='radio'>
+								</td>";
+						echo "<td style='text-align:center'>$go->jenis_layanan</td>";
+						echo "<td style='text-align:center'>$go->harga</td>";
+						echo "<td style='text-align:center'>$go->estimasi</td>";
+						echo "</tr>";
+
+					}
+				}else{
+
+					echo "<td colspan='4' style='text-align:center'>Data Belum Tersedia!</td>";
+				}
 			}
 		}
-
-		
-		
 	}
 
 	function cek_login()

@@ -190,7 +190,7 @@
   $(document).ready(function(){
       $('#datatable').DataTable();
   });
-  $('.alert-message').alert().delay(3000).slideUp('slow');
+  $('.alert-message').alert().delay(20000).slideUp('slow');
 </script>
 </body>
 </html>

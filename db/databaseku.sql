@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: 17 Sep 2018 pada 14.43
+-- Generation Time: 19 Sep 2018 pada 11.49
 -- Versi Server: 5.6.20
 -- PHP Version: 5.5.15
 
@@ -99,6 +99,35 @@ CREATE TABLE IF NOT EXISTS `t_dp` (
 INSERT INTO `t_dp` (`id_dp`, `username`, `email`, `provinsi`, `kabupaten`, `password`, `status_dp`) VALUES
 (1, 'DP JAKARTA', 'dp_jakarta@gmail.com', 'DKI Jakarta', 'Jakarta Pusat', '$2y$10$a3BBnM31xGvr7E81asQBY.V8KosNm9giM3WchPF1iw4LNKM.J5Fca', '2'),
 (2, 'DP DIY', 'dp_diy@gmail.com', 'DI Yogyakarta', 'Yogyakarta', '$2y$10$a3BBnM31xGvr7E81asQBY.V8KosNm9giM3WchPF1iw4LNKM.J5Fca', '2');
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `t_kecamatan`
+--
+
+CREATE TABLE IF NOT EXISTS `t_kecamatan` (
+`id_kecamatan` bigint(20) NOT NULL,
+  `id_kota` bigint(20) NOT NULL,
+  `nama_kecamatan` varchar(200) NOT NULL
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=12 ;
+
+--
+-- Dumping data untuk tabel `t_kecamatan`
+--
+
+INSERT INTO `t_kecamatan` (`id_kecamatan`, `id_kota`, `nama_kecamatan`) VALUES
+(1, 35, 'Bambanglipuro'),
+(2, 35, 'Banguntapan'),
+(3, 35, 'Bantul'),
+(4, 35, 'Dlingo'),
+(5, 35, 'Imogiri'),
+(6, 39, 'Danurejan'),
+(7, 39, 'Gedongtengen'),
+(8, 39, 'Gondokusuman'),
+(9, 39, 'Gondomanan'),
+(10, 39, 'Jetis'),
+(11, 35, 'Jetis');
 
 -- --------------------------------------------------------
 
@@ -780,25 +809,31 @@ CREATE TABLE IF NOT EXISTS `t_transaksi` (
   `panjang` int(11) NOT NULL,
   `lebar` int(11) NOT NULL,
   `tinggi` int(11) NOT NULL,
-  `ongkir` int(11) NOT NULL,
+  `jenis_layanan` varchar(35) NOT NULL,
   `total_biaya` int(11) NOT NULL,
   `nama` varchar(35) NOT NULL,
   `provinsi_tujuan` varchar(35) NOT NULL,
   `kabupaten_tujuan` varchar(35) NOT NULL,
+  `kecamatan_tujuan` varchar(35) NOT NULL,
   `alamat` varchar(255) NOT NULL,
   `kode_pos` int(5) NOT NULL,
   `no_tlp` varchar(35) NOT NULL,
   `status_transaksi` enum('Menunggu','Dijemput','Diterima','Ditolak','Selesai') NOT NULL,
   `dp_kirim` enum('Belum Dikirim','Sudah Dikirim') NOT NULL,
   `dp_jemput` enum('belum','proses','selesai') NOT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
 
 --
 -- Dumping data untuk tabel `t_transaksi`
 --
 
-INSERT INTO `t_transaksi` (`id_transaksi`, `id_user`, `kurir_penjemput`, `kurir_pengantar`, `agen_asal`, `agen_tujuan`, `dp_asal`, `dp_tujuan`, `tgl_pengiriman`, `no_resi`, `berat`, `panjang`, `lebar`, `tinggi`, `ongkir`, `total_biaya`, `nama`, `provinsi_tujuan`, `kabupaten_tujuan`, `alamat`, `kode_pos`, `no_tlp`, `status_transaksi`, `dp_kirim`, `dp_jemput`) VALUES
-(1, 2, 2, 0, 2, 0, 0, 0, '2018-09-15', 'RES15092018836062', 20, 20, 20, 20, 8000, 160000, 'penerima bantul', 'DI Yogyakarta', 'Bantul', 'bantul tujuan', 55283, '08995413121', 'Diterima', 'Belum Dikirim', 'belum');
+INSERT INTO `t_transaksi` (`id_transaksi`, `id_user`, `kurir_penjemput`, `kurir_pengantar`, `agen_asal`, `agen_tujuan`, `dp_asal`, `dp_tujuan`, `tgl_pengiriman`, `no_resi`, `berat`, `panjang`, `lebar`, `tinggi`, `jenis_layanan`, `total_biaya`, `nama`, `provinsi_tujuan`, `kabupaten_tujuan`, `kecamatan_tujuan`, `alamat`, `kode_pos`, `no_tlp`, `status_transaksi`, `dp_kirim`, `dp_jemput`) VALUES
+(1, 2, 2, 0, 2, 0, 0, 0, '2018-09-15', 'RES15092018836062', 20, 20, 20, 20, '8000', 160000, 'penerima bantul', 'DI Yogyakarta', 'Bantul', '', 'bantul tujuan', 55283, '08995413121', 'Diterima', 'Belum Dikirim', 'belum'),
+(2, 2, 0, 0, 0, 0, 0, 0, '2018-09-19', 'RES19092018922502', 1, 40, 30, 30, 'REG', 48000, 'Arfian', 'DI Yogyakarta', 'Bantul', 'Banguntapan', 'Banguntapan, Bantul', 55283, '08995413121', 'Menunggu', 'Belum Dikirim', 'belum'),
+(3, 2, 0, 0, 0, 0, 0, 0, '2018-09-19', 'RES19092018929512', 20, 0, 0, 0, 'REG', 160000, 'Wahyu', 'DI Yogyakarta', 'Bantul', 'Jetis', 'Desa Jetis', 55283, '08995413121', 'Menunggu', 'Belum Dikirim', 'belum'),
+(4, 2, 0, 0, 0, 0, 0, 0, '2018-09-19', 'RES190920181045032', 2000, 0, 0, 0, 'REG', 16000, 'Sri Lestari', 'DI Yogyakarta', 'Bantul', 'Banguntapan', 'Banguntapan ', 55283, '08995413121', 'Menunggu', 'Belum Dikirim', 'belum'),
+(5, 2, 0, 0, 0, 0, 0, 0, '2018-09-19', 'RES190920181119332', 20, 0, 0, 0, 'REG', 160, 'Wahyu', 'DI Yogyakarta', 'Bantul', 'Banguntapan', 'dzfsdf', 55283, '0899541311', 'Menunggu', 'Belum Dikirim', 'belum'),
+(6, 2, 0, 0, 0, 0, 0, 0, '2018-09-19', 'RES190920181124572', 20, 0, 0, 0, 'REG', 80, 'asdasd', 'DI Yogyakarta', 'Yogyakarta', 'Gondomanan', 'asdasd', 55283, '0899541311', 'Menunggu', 'Belum Dikirim', 'belum');
 
 -- --------------------------------------------------------
 
@@ -930,6 +965,12 @@ ALTER TABLE `t_dp`
  ADD PRIMARY KEY (`id_dp`);
 
 --
+-- Indexes for table `t_kecamatan`
+--
+ALTER TABLE `t_kecamatan`
+ ADD PRIMARY KEY (`id_kecamatan`);
+
+--
 -- Indexes for table `t_kota`
 --
 ALTER TABLE `t_kota`
@@ -1027,6 +1068,11 @@ MODIFY `id_agen` bigint(20) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=7;
 ALTER TABLE `t_dp`
 MODIFY `id_dp` bigint(20) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
 --
+-- AUTO_INCREMENT for table `t_kecamatan`
+--
+ALTER TABLE `t_kecamatan`
+MODIFY `id_kecamatan` bigint(20) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=12;
+--
 -- AUTO_INCREMENT for table `t_kota`
 --
 ALTER TABLE `t_kota`
@@ -1050,7 +1096,7 @@ MODIFY `id_tracking` bigint(20) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
 -- AUTO_INCREMENT for table `t_transaksi`
 --
 ALTER TABLE `t_transaksi`
-MODIFY `id_transaksi` bigint(20) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
+MODIFY `id_transaksi` bigint(20) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT for table `t_transaksiagen`
 --

@@ -7,7 +7,7 @@
       <div class="row">
         <div class="col-xs-12">
           <div class="box box-primary">
-          <div class="box-header with-border">      
+            <div class="box-header with-border">      
             <?php if(validation_errors())
                {
                  echo "<div class='alert alert-warning alert-message'>";
