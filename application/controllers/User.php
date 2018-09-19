@@ -98,7 +98,7 @@ class User extends CI_Controller {
 		
 		$data['active_cekongkir'] = 'active';
 		$data['header'] = 'Cek Ongkir';
-		$this->template->user('user/form_cekongkir', $data);
+		$this->template->user('user/beta_cekongkir', $data);
 	}
 
 	public function cek_resi()
@@ -220,7 +220,7 @@ class User extends CI_Controller {
 		$getprovinsiid = $this->user_model->get_where('t_provinsi',array('nama_provinsi'=> $pro))->row();
 		$getcity = $this->user_model->get_where('t_kota',array('id_provinsi'=> $getprovinsiid->id_provinsi))->result();
 
-		echo "<option value=''>--Pilih Kabupaten--</option>";
+		echo "<option value=''>-- Pilih Kabupaten --</option>";
 		foreach($getcity as $gc){
 			echo "<option value='$gc->nama_kota'>$gc->nama_kota</option>";
 		}
@@ -232,13 +232,13 @@ class User extends CI_Controller {
 		$getkotaid = $this->user_model->get_where('t_kota',array('nama_kota'=> $kota))->row();
 		$getkecamatan = $this->user_model->get_where('t_kecamatan',array('id_kota'=> $getkotaid->id_kota))->result();
 
-		echo "<option value=''>--Pilih Kecamatan--</option>";
+		echo "<option value=''>-- Pilih Kecamatan --</option>";
 		foreach($getkecamatan as $gk){
 			echo "<option value='$gk->nama_kecamatan'>$gk->nama_kecamatan</option>";
 		}
 	}
 
-	public function getongkir()
+	public function gettarif()
 	{
 		$this->cek_login();
 

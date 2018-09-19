@@ -8,7 +8,9 @@
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <!-- Bootstrap 3.3.7-->
   <link rel="stylesheet" href="<?php echo base_url(); ?>assets/user/css/bootstrap.min.css">
-  <!-- Font Awesome -->
+  <!-- Jquery UI-->
+  <link rel="stylesheet" href="<?php echo base_url(); ?>assets/user/css/jquery-ui.min.css">
+    <!-- Font Awesome -->
   <link rel="stylesheet" href="<?php echo base_url(); ?>assets/font-awesome/css/font-awesome.min.css">
   <!-- Data Tables -->
   <link rel="stylesheet" href="<?php echo base_url(); ?>assets/user/css/dataTables.bootstrap.min.css">
@@ -18,7 +20,37 @@
   <!-- AdminLTE Skins. Choose a skin from the css/skins
        folder instead of downloading all of them to reduce the load. -->
   <link rel="stylesheet" href="<?php echo base_url(); ?>assets/user/css/skin-black-light.min.css">
-
+<script type="text/javascript">
+  $( function() {
+        var availableTags = [
+          "ActionScript",
+          "AppleScript",
+          "Asp",
+          "BASIC",
+          "C",
+          "C++",
+          "Clojure",
+          "COBOL",
+          "ColdFusion",
+          "Erlang",
+          "Fortran",
+          "Groovy",
+          "Haskell",
+          "Java",
+          "JavaScript",
+          "Lisp",
+          "Perl",
+          "PHP",
+          "Python",
+          "Ruby",
+          "Scala",
+          "Scheme"
+        ];
+        $( "#origin" ).autocomplete({
+          source: availableTags
+        });
+      } );
+</script>
 
 </head>
 <body class="hold-transition skin-black-light sidebar-mini">
@@ -83,6 +115,7 @@
 
 <!-- jQuery 3 -->
 <script src="<?php echo base_url(); ?>assets/user/js/jquery.min.js"></script>
+<script src="<?php echo base_url(); ?>assets/user/js/jquery-ui.min.js"></script>
 <!-- Bootstrap 3.3.7 -->
 <script src="<?php echo base_url(); ?>assets/user/js/bootstrap.min.js"></script>
 <!-- Data Tables -->
@@ -97,6 +130,35 @@
 <script src="<?php echo base_url(); ?>assets/user/js/jquery.slimscroll.min.js"></script>
 <!-- ckeditor -->
 <script type="text/javascript">
+     $( function() {
+        var availableTags = [
+          "ActionScript",
+          "AppleScript",
+          "Asp",
+          "BASIC",
+          "C",
+          "C++",
+          "Clojure",
+          "COBOL",
+          "ColdFusion",
+          "Erlang",
+          "Fortran",
+          "Groovy",
+          "Haskell",
+          "Java",
+          "JavaScript",
+          "Lisp",
+          "Perl",
+          "PHP",
+          "Python",
+          "Ruby",
+          "Scala",
+          "Scheme"
+        ];
+        $( "#origin" ).autocomplete({
+          source: availableTags
+        });
+      } );
 
   $(".province").change(function(){
       $( ".city" ).html("<option>Loading...</option>");
@@ -106,19 +168,35 @@
       });
   });
 
-  $(".province_asal").change(function(){
-      $( ".city_asal" ).html("<option>Loading...</option>");
+  $(".cek_provinsi_asal").change(function(){
+      $( ".cek_kota_asal" ).html("<option>Loading...</option>");
       var data = $(this).val();
       $.get( "<?php echo site_url('user/getkota');?>", { sts: data }, function( data ) {
-        $( ".city_asal" ).html( data );
+        $( ".cek_kota_asal" ).html( data );
       });
     });
 
+  $(".cek_provinsi_tujuan").change(function(){
+      $( ".cek_kota_tujuan" ).html("<option>Loading...</option>");
+      var data = $(this).val();
+      $.get( "<?php echo site_url('user/getkota');?>", { sts: data }, function( data ) {
+        $( ".cek_kota_tujuan" ).html( data );
+      });
+    });
+  $(".cek_kota_tujuan").change(function(){
+      $( ".cek_kecamatan_tujuan" ).html("<option>Loading...</option>");
+      var data = $(this).val();
+      $.get( "<?php echo site_url('user/getkecamatan');?>", { sts: data }, function( data ) {
+        $( ".cek_kecamatan_tujuan" ).html( data );
+      });
+    });
+// ==========
    $(".provinsi_tujuan").change(function(){
       $( ".kota_tujuan" ).html("<option>Loading...</option>");
       var data = $(this).val();
       $.get( "<?php echo site_url('user/getkota');?>", { sts: data }, function( data ) {
         $( ".kota_tujuan" ).html( data );
+        $( "#kecamatan_tujuan" ).html("<option>-- Menunggu --</option>");
       });
     });
 
@@ -138,7 +216,7 @@
       var tinggi = $('#tinggi').val();
       var kecamatan = $(this).val();
       var kabupaten = $(".kota_tujuan").val();
-      $.get( "<?php echo site_url('user/getongkir');?>", 
+      $.get( "<?php echo site_url('user/gettarif');?>", 
         { 
           kec:kecamatan, 
           kab:kabupaten,  
@@ -161,7 +239,7 @@
       var tinggi = $('#tinggi').val();
       var kecamatan = $('.kecamatan_tujuan').val();
       var kabupaten = $(".kota_tujuan").val();
-      $.get( "<?php echo site_url('user/getongkir');?>", 
+      $.get( "<?php echo site_url('user/gettarif');?>", 
         { 
           kec:kecamatan, 
           kab:kabupaten,  

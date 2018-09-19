@@ -31,27 +31,19 @@
                     <div class="row">
                       <div class="col-xs-3">
                         <label>Berat (gram) *</label>
-                        <div class="input-group">
                           <input name="berat" id="berat" required type="number" min="1" class="form-control" placeholder="gram">
-                        </div>
                       </div>
                       <div class="col-xs-3">
                         <label style="color: #ccc">Panjang (cm)</label>
-                        <div class="input-group">
                         <input name="panjang" id="panjang" type="number" min="0" class="form-control" placeholder="cm">
-                        </div>
                       </div>
                       <div class="col-xs-3">
                         <label style="color: #ccc">Lebar (cm)</label>
-                        <div class="input-group">
                         <input name="lebar" id="lebar" type="number" min="0" class="form-control" placeholder="cm">
-                        </div>
                       </div>
                       <div class="col-xs-3">
                         <label style="color: #ccc">Tinggi (cm)</label>
-                        <div class="input-group">
                         <input name="tinggi" id="tinggi" type="number" min="0" class="form-control" placeholder="cm">
-                        </div>
                       </div>
                     </div>
                   </div>
@@ -67,13 +59,13 @@
                   <div class="form-group">
                     <label>Kabupaten/Kota *</label>
                     <select class="form-control kota_tujuan" name="kabupaten_tujuan" required id="kabupaten_tujuan">
-                      <option value="">-- Pilih Kabupaten --</option>
+                      <option value="">-- Menunggu --</option>
                     </select>
                   </div>
                   <div class="form-group">
                     <label>Kecamatan *</label>
                     <select class="form-control kecamatan_tujuan" name="kecamatan_tujuan" required id="kecamatan_tujuan">
-                      <option value="">-- Pilih Kecamatan --</option>
+                      <option value="">-- Menunggu --</option>
                     </select>
                   </div>
                   <div class="form-group">
@@ -94,7 +86,7 @@
                   <hr>
                   <div class="form-group has-success">
                     <div class="input-group">
-                      <span class="input-group-addon">Total Harga (Rp)</span>
+                      <span class="input-group-addon">Total Biaya (Rp)</span>
                       <input readonly id="total_biaya" name="total_biaya" type="text" style="text-align: right" class="form-control">
                       <span class="input-group-addon">.00</span>
                     </div>
