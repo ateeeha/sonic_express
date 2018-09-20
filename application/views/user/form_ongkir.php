@@ -188,12 +188,11 @@
                   </tr>
                 </thead>
                 <tbody>
-                <?php if ($ongkir->num_rows() > 0): ?>
+                <?php if ($ongkir->num_rows() > 0)
+                { 
+                  $i = 1;
+                 foreach ($ongkir->result() as $og ){
 
-                <?php
-                $i = 1;
-                 foreach ($ongkir->result() as $og ): ?>
-                  <?php 
                     $biaya = $og->harga;
                     $b = ($berat / 1000);
                     if ($b < 1) {
@@ -204,7 +203,16 @@
 
                       if (($panjang * $lebar * $tinggi) < 18000) {
 
-                        $total_biaya = $b * $biaya;
+                        $x = $b * $biaya;
+
+                        $ratusan = substr($x, -3);
+                        if($ratusan<500){
+                          $total_biaya = $x - $ratusan;
+                        }
+                        else{
+                          $total_biaya = $x + (1000-$ratusan);
+                        }
+                        
 
                       }else if (($panjang * $lebar * $tinggi) >= 18000) {
 
@@ -221,12 +229,12 @@
                     <td style="text-align: right"><?= 'Rp. '.number_format($total_biaya,0,',','.').',-' ?></td>
                     <td style="text-align: center"><?= $og->estimasi; ?> D</td>
                   </tr>
-                <?php endforeach ?>
-                <?php else: ?>
+                <?php } ?>
+                <?php }else{ ?>
                   <tr>
                     <td colspan="5" style="text-align: center">Data Belum Tersedia</td>
                   </tr>
-                <?php endif ?>
+                <?php } ?>
                 </tbody>
               </table>
           </div>

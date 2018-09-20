@@ -113,7 +113,7 @@
                     <label>Nomor Telepon *</label>
                     <input name="no_tlp" required type="number" class="form-control" placeholder="Nomor Telepon Penerima">
                   </div>
-                  <div class="box-footer" align="right">
+                  <div class="box-footer">
                   <button name="submit" value="Submit" type="submit" class="btn btn-primary">Submit</button>
                 </div>
           </div><!--col-md-6-->

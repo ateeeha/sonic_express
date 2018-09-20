@@ -62,7 +62,10 @@ class User extends CI_Controller {
 
 		if ($this->input->post('submit') == 'Submit')
 		{
+			$this->form_validation->set_rules('berat','Berat','required|numeric');
+			$this->form_validation->set_rules('cek_provinsi_asal','Provinsi Asal','required');
 			$this->form_validation->set_rules('cek_kabupaten_asal','Kabupaten Asal','required');
+			$this->form_validation->set_rules('cek_provinsi_tujuan','Provinsi Tujuan','required');
 			$this->form_validation->set_rules('cek_kabupaten_tujuan','Kabupaten Tujuan','required');
 			$this->form_validation->set_rules('cek_kecamatan_tujuan','Kecamatan Tujuan','required');
 
@@ -285,7 +288,15 @@ class User extends CI_Controller {
 
 							if (($p * $l * $t) < 18000) {
 
-								$total_biaya = $b * $ongkir;
+								$x = $b * $ongkir;
+
+		                        $ratusan = substr($x, -3);
+		                        if($ratusan<500){
+		                          $total_biaya = $x - $ratusan;
+		                        }
+		                        else{
+		                          $total_biaya = $x + (1000-$ratusan);
+		                        }
 
 							}else if (($p * $l * $t) >= 18000) {
 
