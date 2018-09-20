@@ -56,49 +56,49 @@ class User extends CI_Controller {
 
 	}
 
-	public function cek_ongkir()
+	public function ongkir()
 	{
 		$this->cek_login();
 
 		if ($this->input->post('submit') == 'Submit')
 		{
-			$this->form_validation->set_rules('kabupaten_asal','kabupaten Asal','required');
-			$this->form_validation->set_rules('kabupaten_tujuan','kabupaten Tujuan','required');
+			$this->form_validation->set_rules('cek_kabupaten_asal','Kabupaten Asal','required');
+			$this->form_validation->set_rules('cek_kabupaten_tujuan','Kabupaten Tujuan','required');
+			$this->form_validation->set_rules('cek_kecamatan_tujuan','Kecamatan Tujuan','required');
 
 				if ($this->form_validation->run() == TRUE)
 				{
-					$ongkir = array(
-						'origin' => $this->input->post('kabupaten_asal', TRUE),
-						'kota' => $this->input->post('kabupaten_tujuan', TRUE),
+					$where = array(
+						'origin' => $this->input->post('cek_kabupaten_asal', TRUE),
+						'kota' => $this->input->post('cek_kabupaten_tujuan', TRUE),
+						'kecamatan' => $this->input->post('cek_kecamatan_tujuan', TRUE)
 					);
 
-					$cek = $this->user_model->get_where('t_ongkir', $ongkir);
+					$data['ongkir'] = $this->user_model->get_where('t_ongkir', $where);
 					
-					$data['cek'] = $cek;
-					// if ($cek->num_rows() > 0) 
-					// {				
-					// 	// foreach ($cek->result() as $key) {
-							
-					// 	// 	$data['id_tracking'] = $key->id_tracking;
-					// 	// 	$data['no_resi'] = $key->no_resi;
-					// 	// 	$data['tanggal'] = $key->tanggal;
-					// 	// 	$data['status'] = $key->status;
-					// 	// }
-
-					// } else {
-					// 	$this->session->set_flashdata('alert', "Kode Resi Tidak Ada !");
-					// }
 				}
-		}else 
-		{
-			$data['cek'] = '';
+					
+		}else{
+			$data['ongkir'] = '';
 		}
-
 		$data['data'] = $this->user_model->get_all('t_provinsi');
-		
-		$data['active_cekongkir'] = 'active';
+
+		$data['berat'] = $this->input->post('berat', TRUE);
+		$data['panjang'] = $this->input->post('panjang', TRUE);
+		$data['lebar'] = $this->input->post('lebar', TRUE);
+		$data['tinggi'] = $this->input->post('tinggi', TRUE);
+
+		$data['prov_asal'] = $this->input->post('cek_provinsi_asal', TRUE);
+		$data['kab_asal'] = $this->input->post('cek_kabupaten_asal', TRUE);
+
+		$data['prov_tujuan'] = $this->input->post('cek_provinsi_tujuan', TRUE);
+		$data['kab_tujuan'] = $this->input->post('cek_kabupaten_tujuan', TRUE);
+		$data['kec_tujuan'] = $this->input->post('cek_kecamatan_tujuan', TRUE);
+
+		$data['active_ongkir'] = 'active';
 		$data['header'] = 'Cek Ongkir';
-		$this->template->user('user/beta_cekongkir', $data);
+		
+		$this->template->user('user/beta_ongkir', $data);
 	}
 
 	public function cek_resi()
@@ -265,9 +265,9 @@ class User extends CI_Controller {
 
 		}else{
 
-			if ($kec == '') {
+			if ($kec == '' or 0) {
 			
-				echo "<td colspan='4' style='text-align:center'>Menunggu...</td>";
+				echo "<td colspan='4' style='text-align:center'><i class='fa fa-refresh fa-spin'></i></td>";
 
 			}else{
 

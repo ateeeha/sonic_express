@@ -1,166 +1,124 @@
-    <section class="content-header">
-      <h1><i class="fa fa-money"> Transaksi</i></h1>
-    </section>
-
-    <section class="content">
-      <!-- /.row -->
-      <div class="row">
-        <div class="col-xs-12">
-          <div class="box box-primary">
-            <div class="box-header with-border">      
-            <?php if(validation_errors())
-               {
+<section class="content">
+  <form method="post" action="<?= site_url('user/simpan_transaksi'); ?>">
+    <div class="box box-primary">
+      <div class="box-body">
+        <div>
+                <?php if(validation_errors())
+                {
                  echo "<div class='alert alert-warning alert-message'>";
                  echo validation_errors();
                  echo "</div>";
-               } ?> 
-            <?php if($this->session->flashdata('success'))
-               {
+                } ?> 
+                <?php if($this->session->flashdata('success'))
+                {
                  echo "<div class='alert alert-success alert-message'>";
                  echo $this->session->flashdata('success');
                  echo "</div>";
-               } ?>  
-            <?php if($this->session->flashdata('alert'))
-               {
+                } ?>  
+                <?php if($this->session->flashdata('alert'))
+                {
                  echo "<div class='alert alert-warning alert-message'>";
                  echo $this->session->flashdata('alert');
                  echo "</div>";
-               } ?>               
-            </div>
-            <!-- /.box-header -->
-            <form class="form-horizontal" action="<?php echo site_url('user/simpan_transaksi'); ?>" method="post" enctype="multipart/form-data">
-              <div class="box-body">                              
-
-                <div class="form-group">
-                  <label class="col-md-2 col-sm-2 col-xs-12 control-label">Provinsi Tujuan</label>
-                  <div class="col-md-4 col-sm-6 col-xs-12">
-                    <select class="province_tujuan" name="provinsi_tujuan" required id="provinsi_tujuan" class="col-md-6">
-                      <option value="">--Pilih Provinsi--</option>
+                } ?>     
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+              <div class="box-header with-border">
+                <h3 class="box-title">Tarif</h3>
+              </div>
+                  <div class="form-group">
+                    <div class="row">
+                      <div class="col-xs-3">
+                        <label>Berat (gram) *</label>
+                          <input name="berat" id="berat" required type="number" min="1" class="form-control" placeholder="gram">
+                      </div>
+                      <div class="col-xs-3">
+                        <label style="color: #ccc">Panjang (cm)</label>
+                        <input name="panjang" id="panjang" type="number" min="0" class="form-control" placeholder="cm">
+                      </div>
+                      <div class="col-xs-3">
+                        <label style="color: #ccc">Lebar (cm)</label>
+                        <input name="lebar" id="lebar" type="number" min="0" class="form-control" placeholder="cm">
+                      </div>
+                      <div class="col-xs-3">
+                        <label style="color: #ccc">Tinggi (cm)</label>
+                        <input name="tinggi" id="tinggi" type="number" min="0" class="form-control" placeholder="cm">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label>Provinsi *</label>
+                    <select class="form-control provinsi_tujuan" name="provinsi_tujuan" required id="provinsi_tujuan">
+                      <option value="">-- Pilih Provinsi --</option>
                       <?php foreach ($data->result() as $key): ?>
                       <option value="<?= $key->nama_provinsi; ?>"><?= $key->nama_provinsi; ?></option>
                       <?php endforeach ?>
                     </select>
                   </div>
-                </div>
-
-                <div class="form-group">
-                  <label class="col-md-2 col-sm-2 col-xs-12 control-label">Kabupaten Tujuan</label>
-                  <div class="col-md-4 col-sm-6 col-xs-12">
-                  <select class="city_tujuan" name="kabupaten_tujuan" required id="kabupaten_tujuan" class="col-md-6">
-                    <option value="">--Pilih Kabupaten--</option>
-                  </select>
-                  </div>
-                </div>
-
-                <div class="form-group">
-                  <label class="col-md-2 col-sm-2 col-xs-12 control-label">Berat</label>
-                  <div class="col-md-3 col-sm-6 col-xs-12">
-                    <input type="number" class="form-control col-md-7 col-xs-12" name="berat" value="">
-                  </div>                  
-                </div>
-
-                <div class="form-group">
-                  <label class="col-md-2 col-sm-2 col-xs-12 control-label">Jenis Kiriman</label>
-                  <div class="col-md-3 col-sm-6">
-                    <select name="jenis_kiriman" class="form-control">
-                        <option value=""disabled selected>Pilih Jenis Kiriman</option>
-                        <option>pilihan1</option>
-                        <option>pilihan2</option>
+                  <div class="form-group">
+                    <label>Kabupaten/Kota *</label>
+                    <select class="form-control kota_tujuan" name="kabupaten_tujuan" required id="kabupaten_tujuan">
+                      <option value="">-- Menunggu --</option>
                     </select>
                   </div>
-                 
-                </div>
-
-                <div class="form-group">
-                  <label class="col-md-2 col-sm-2 col-xs-12 control-label">Panjang</label>
-                  <div class="col-md-3 col-sm-6 col-xs-12">
-                    <input type="number" class="form-control col-md-7 col-xs-12" name="panjang" value="">
-                  </div>                  
-                </div>
-
-                <div class="form-group">
-                  <label class="col-md-2 col-sm-2 col-xs-12 control-label">Lebar</label>
-                  <div class="col-md-3 col-sm-6 col-xs-12">
-                    <input type="number" class="form-control col-md-7 col-xs-12" name="lebar" value="">
+                  <div class="form-group">
+                    <label>Kecamatan *</label>
+                    <select class="form-control kecamatan_tujuan" name="kecamatan_tujuan" required id="kecamatan_tujuan">
+                      <option value="">-- Menunggu --</option>
+                    </select>
                   </div>
-                </div>
-
-                <div class="form-group">
-                  <label class="col-md-2 col-sm-2 col-xs-12 control-label">Tinggi</label>
-                  <div class="col-md-3 col-sm-6 col-xs-12">
-                    <input type="number" class="form-control col-md-7 col-xs-12" name="tinggi" value="">
+                  <div class="form-group">
+                    <table class="table table-bordered table-hover dt-responsive nowrap">
+                    <thead>
+                      <tr style="color: #ccc">
+                        <th style="text-align: center" width="5%">#</th>
+                        <th style="text-align: center">Paket</th>
+                        <th style="text-align: center">Ongkir</th>
+                        <th style="text-align: center">Estimasi</th>
+                      </tr>
+                    </thead>
+                    <tfoot class="ongkir_detail" id="ongkir_detail">
+                    </tfoot>                
+                  </table>
                   </div>
-                </div>
-
-                <div class="form-group">
-                  <label class="col-md-2 col-sm-2 col-xs-12 control-label">Nilai Barang</label>
-                  <div class="col-md-3 col-sm-6 col-xs-12">
-                    <input type="text" class="form-control col-md-7 col-xs-12" name="nilai_barang" value="">
+                  
+                  <hr>
+                  <div class="form-group has-success">
+                    <div class="input-group">
+                      <span class="input-group-addon">Total Biaya (Rp)</span>
+                      <input readonly id="total_biaya" name="total_biaya" type="text" style="text-align: right" class="form-control">
+                      <span class="input-group-addon">.00</span>
+                    </div>
                   </div>
-                </div>
-                <hr>
-              <table id="ongkir" class="table table-bordered table-hover dt-responsive nowrap">
-                <thead>
-                  <tr>
-                  <th style="text-align: center" width="20%">#</th>
-                  <th style="text-align: center" width="20%">Kecamatan</th>
-                  <th style="text-align: center" width="20%">Paket</th>
-                  <th style="text-align: center" width="20%">Harga</th>
-                  <th style="text-align: center" width="20%">Estimasi</th>
-                </tr>
-                </thead>
-                <tfoot class="ongkir_detail" id="ongkir_detail">
-                </tfoot>                
-              </table>
-                <hr>
-                <div class="form-group">              
-                  <label class="col-md-2 col-sm-2 col-xs-12 control-label">Nama Penerima</label>
-                  <div class="col-md-3 col-sm-6 col-xs-12">
-                    <input type="text" class="form-control col-md-7 col-xs-12" name="nama" value="">
-                  </div>                  
-                </div>
-
-                <div class="form-group">
-                  <label class="col-md-2 col-sm-2 col-xs-12 control-label">Alamat</label>
-                  <div class="col-md-3 col-sm-6 col-xs-12">
-                  <textarea class="form-control" name="alamat"></textarea>
-                  </div>
-                </div>
-
-                <div class="form-group">
-                  <label class="col-md-2 col-sm-2 col-xs-12 control-label">Kode Pos</label>
-                  <div class="col-md-3 col-sm-6 col-xs-12">
-                    <input type="text" class="form-control col-md-7 col-xs-12" name="kode_pos" value="">
-                  </div>
-                </div>
-
-                <div class="form-group">
-                  <label class="col-md-2 col-sm-2 col-xs-12 control-label">No Telepon</label>
-                  <div class="col-md-3 col-sm-6 col-xs-12">
-                    <input type="text" class="form-control col-md-7 col-xs-12" name="no_tlp" value="">
-                  </div>
-                </div>
-
-                <div class="form-group">
-                  <label class="col-md-2 col-sm-2 col-xs-12 control-label">Total Harga</label>
-                  <div class="col-md-3 col-sm-6 col-xs-12">
-                    <input type="text" class="form-control col-md-7 col-xs-12" name="total_harga" value="">
-                  </div>
-                </div>
-
-                <div class="form-group">
-                  <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-2" align="right">
-                    <button type="submit" class="btn btn-success" name="submit" value="Submit"><i class="fa fa-save "></i> Proses</button>                   
-                  </div>
-                </div>
-
+          </div><!--col-md-6-->
+          <div class="col-md-6">
+              <div class="box-header with-border">
+                <h3 class="box-title">Penerima</h3>
               </div>
-            </form>
-            <div class="box-footer with-border">
-              </div>
-          </div>
-          <!-- /.box -->
-        </div>
-      </div>
-    </section>
-        <!--/.col (right) -->
+                  <div class="form-group">
+                    <label>Nama *</label>
+                    <input name="nama" type="text" class="form-control" placeholder="Nama Lengkap Penerima">
+                  </div>
+                  <div class="form-group">
+                    <label>Alamat *</label>
+                    <p style="color: #ccc">Dusun, Desa RT/RW</p>
+                    <textarea name="alamat" required class="form-control"  style="resize:vertical" rows="3" placeholder="Alamat Penerima; contoh: Jrakah, Kaliurang RT06/RW02"></textarea>
+                  </div>
+                  <div class="form-group">
+                    <label>Kode Pos *</label>
+                    <input name="kode_pos" required type="number" class="form-control" placeholder="Kode Pos Penerima">
+                  </div>
+                  <div class="form-group">
+                    <label>Nomor Telepon *</label>
+                    <input name="no_tlp" required type="number" class="form-control" placeholder="Nomor Telepon Penerima">
+                  </div>
+                  <div class="box-footer" align="right">
+                  <button name="submit" value="Submit" type="submit" class="btn btn-primary">Submit</button>
+                </div>
+          </div><!--col-md-6-->
+        </div><!--row-->
+      </div><!--body-->
+    </div><!--primary-->
+  </form>
+</section>

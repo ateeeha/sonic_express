@@ -20,37 +20,6 @@
   <!-- AdminLTE Skins. Choose a skin from the css/skins
        folder instead of downloading all of them to reduce the load. -->
   <link rel="stylesheet" href="<?php echo base_url(); ?>assets/user/css/skin-black-light.min.css">
-<script type="text/javascript">
-  $( function() {
-        var availableTags = [
-          "ActionScript",
-          "AppleScript",
-          "Asp",
-          "BASIC",
-          "C",
-          "C++",
-          "Clojure",
-          "COBOL",
-          "ColdFusion",
-          "Erlang",
-          "Fortran",
-          "Groovy",
-          "Haskell",
-          "Java",
-          "JavaScript",
-          "Lisp",
-          "Perl",
-          "PHP",
-          "Python",
-          "Ruby",
-          "Scala",
-          "Scheme"
-        ];
-        $( "#origin" ).autocomplete({
-          source: availableTags
-        });
-      } );
-</script>
 
 </head>
 <body class="hold-transition skin-black-light sidebar-mini">
@@ -130,38 +99,61 @@
 <script src="<?php echo base_url(); ?>assets/user/js/jquery.slimscroll.min.js"></script>
 <!-- ckeditor -->
 <script type="text/javascript">
-     $( function() {
-        var availableTags = [
-          "ActionScript",
-          "AppleScript",
-          "Asp",
-          "BASIC",
-          "C",
-          "C++",
-          "Clojure",
-          "COBOL",
-          "ColdFusion",
-          "Erlang",
-          "Fortran",
-          "Groovy",
-          "Haskell",
-          "Java",
-          "JavaScript",
-          "Lisp",
-          "Perl",
-          "PHP",
-          "Python",
-          "Ruby",
-          "Scala",
-          "Scheme"
-        ];
-        $( "#origin" ).autocomplete({
-          source: availableTags
-        });
-      } );
+     // $( function() {
+     //    var availableTags = [
+     //      "ActionScript",
+     //      "AppleScript",
+     //      "Asp",
+     //      "BASIC",
+     //      "C",
+     //      "C++",
+     //      "Clojure",
+     //      "COBOL",
+     //      "ColdFusion",
+     //      "Erlang",
+     //      "Fortran",
+     //      "Groovy",
+     //      "Haskell",
+     //      "Java",
+     //      "JavaScript",
+     //      "Lisp",
+     //      "Perl",
+     //      "PHP",
+     //      "Python",
+     //      "Ruby",
+     //      "Scala",
+     //      "Scheme"
+     //    ];
+     //    $( "#origin" ).autocomplete({
+     //      source: availableTags
+     //    });
+     //  } );
+    //  $(".cek_ongkir").click(function(){
+    //   $( ".cek_ongkir_detail" ).html("<td colspan='4' style='text-align:center'><i class='fa fa-refresh fa-spin'></i><td/>");
+    //   var berat = $('#berat').val();
+    //   var panjang = $('#panjang').val();
+    //   var lebar = $('#lebar').val();
+    //   var tinggi = $('#tinggi').val();
+    //   var kecamatan = $('.kecamatan_tujuan').val();
+    //   var kabupaten = $(".kota_tujuan").val();
+    //   $.get( "<?php echo site_url('user/gettarif');?>", 
+    //     { 
+    //       kec:kecamatan, 
+    //       kab:kabupaten,  
+    //       berat:berat,  
+    //       panjang:panjang,  
+    //       lebar:lebar,  
+    //       tinggi:tinggi  
+    //     }, function( data ) {
+    //     $( ".ongkir_detail" ).html( data );
+    //      $( "#total_biaya" ).val("");
+    //     $( ".ongkir_pilih" ).val( data );
+    //   }); 
+    // });
+
 
   $(".province").change(function(){
-      $( ".city" ).html("<option>Loading...</option>");
+      $( ".city" ).html("<option>-- Menunggu --</option>");
       var data = $(this).val();
       $.get( "<?php echo site_url('user/getkota');?>", { sts: data }, function( data ) {
         $( ".city" ).html( data );
@@ -169,7 +161,7 @@
   });
 
   $(".cek_provinsi_asal").change(function(){
-      $( ".cek_kota_asal" ).html("<option>Loading...</option>");
+      $( ".cek_kota_asal" ).html("<option>-- Menunggu --</option>");
       var data = $(this).val();
       $.get( "<?php echo site_url('user/getkota');?>", { sts: data }, function( data ) {
         $( ".cek_kota_asal" ).html( data );
@@ -177,14 +169,15 @@
     });
 
   $(".cek_provinsi_tujuan").change(function(){
-      $( ".cek_kota_tujuan" ).html("<option>Loading...</option>");
+      $( ".cek_kota_tujuan" ).html("<option>-- Menunggu --</option>");
       var data = $(this).val();
       $.get( "<?php echo site_url('user/getkota');?>", { sts: data }, function( data ) {
         $( ".cek_kota_tujuan" ).html( data );
+        $( ".cek_kecamatan_tujuan" ).html("<option>-- Menunggu --</option>");
       });
     });
   $(".cek_kota_tujuan").change(function(){
-      $( ".cek_kecamatan_tujuan" ).html("<option>Loading...</option>");
+      $( ".cek_kecamatan_tujuan" ).html("<option>-- Menunggu --</option>");
       var data = $(this).val();
       $.get( "<?php echo site_url('user/getkecamatan');?>", { sts: data }, function( data ) {
         $( ".cek_kecamatan_tujuan" ).html( data );
@@ -192,24 +185,28 @@
     });
 // ==========
    $(".provinsi_tujuan").change(function(){
-      $( ".kota_tujuan" ).html("<option>Loading...</option>");
+      $( ".kota_tujuan" ).html("<option>-- Menunggu --</option>");
       var data = $(this).val();
       $.get( "<?php echo site_url('user/getkota');?>", { sts: data }, function( data ) {
         $( ".kota_tujuan" ).html( data );
         $( "#kecamatan_tujuan" ).html("<option>-- Menunggu --</option>");
+        $( "#total_biaya" ).val("");
+        $( ".ongkir_detail" ).html("<td colspan='4' style='text-align:center'><i class='fa fa-refresh fa-spin'></i><td/>");
       });
     });
 
    $(".kota_tujuan").change(function(){
-      $( ".kecamatan_tujuan" ).html("<option>Loading...</option>");
+      $( ".kecamatan_tujuan" ).html("<option>-- Menunggu --</option>");
       var data = $(this).val();
       $.get( "<?php echo site_url('user/getkecamatan');?>", { sts: data }, function( data ) {
         $( ".kecamatan_tujuan" ).html( data );
+        $( "#total_biaya" ).val("");
+        $( ".ongkir_detail" ).html("<td colspan='4' style='text-align:center'><i class='fa fa-refresh fa-spin'></i><td/>");
       });
     });
 
    $(".kecamatan_tujuan").change(function(){
-      $( ".ongkir_detail" ).html("<td colspan='4' style='text-align:center'>Menunggu...<td/>");
+      $( ".ongkir_detail" ).html("<td colspan='4' style='text-align:center'><i class='fa fa-refresh fa-spin'></i><td/>");
       var berat = $('#berat').val();
       var panjang = $('#panjang').val();
       var lebar = $('#lebar').val();
@@ -232,7 +229,7 @@
     });
 
     $("#berat, #panjang, #lebar, #tinggi").keyup(function(){
-      $( ".ongkir_detail" ).html("<td colspan='4' style='text-align:center'>Menunggu...<td/>");
+      $( ".ongkir_detail" ).html("<td colspan='4' style='text-align:center'><i class='fa fa-refresh fa-spin'></i><td/>");
       var berat = $('#berat').val();
       var panjang = $('#panjang').val();
       var lebar = $('#lebar').val();
@@ -254,11 +251,6 @@
       }); 
     });
 
-   $(".kota_tujuan, .provinsi_tujuan, .kecamatan_tujuan").change(function(){
-      $( ".ongkir_detail" ).html("<td colspan='4' style='text-align:center'>Menunggu...<td/>");
-      $( "#total_biaya" ).val("");
-    });
-
    function get_totalbiaya(total_biaya){
 
       // alert(ongkir);
@@ -271,4 +263,7 @@
   $('.alert-message').alert().delay(20000).slideUp('slow');
 </script>
 </body>
-</html>
+</html>       
+<!-- <div class="overlay">
+              <i class="fa fa-refresh fa-spin"></i>
+            </div> -->

@@ -2,8 +2,8 @@
       <!-- sidebar menu: : style can be found in sidebar.less -->
        
       <ul class="sidebar-menu" data-widget="tree">
-        <li class="<?php if(isset($active_cekongkir)){echo $active_cekongkir;}?>">
-          <a href="<?= base_url(); ?>user/cek_ongkir/">
+        <li class="<?php if(isset($active_ongkir)){echo $active_ongkir;}?>">
+          <a href="<?= base_url(); ?>user/ongkir/">
             <i class="fa fa-money"></i> <span>CEK ONGKIR</span>
           </a>
         </li>
