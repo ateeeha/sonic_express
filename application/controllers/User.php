@@ -98,7 +98,7 @@ class User extends CI_Controller {
 		$data['active_ongkir'] = 'active';
 		$data['header'] = 'Cek Ongkir';
 		
-		$this->template->user('user/beta_ongkir', $data);
+		$this->template->user('user/form_ongkir', $data);
 	}
 
 	public function cek_resi()
@@ -141,7 +141,7 @@ class User extends CI_Controller {
 
 		$data['active_transaksi'] = 'active';
 		// $data['header'] = 'Transaksi';
-		$this->template->user('user/beta_transaksi', $data);
+		$this->template->user('user/form_transaksi', $data);
 	}
 
 	function simpan_transaksi()
