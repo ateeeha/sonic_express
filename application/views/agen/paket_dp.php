@@ -37,8 +37,8 @@
                   <tr>
                     <td style="text-align: center"><?= $i++; ?></td>
                     <td style="text-align: center"><?= $key->id_transaksidpagen; ?></td>
-                    <td style="text-align: center"><?= $key->dp_tujuan; ?></td>
-                    <td style="text-align: center"><?= $key->agen_tujuan; ?></td>
+                    <td style="text-align: center"><?= $key->asal; ?></td>
+                    <td style="text-align: center"><?= $key->tujuan; ?></td>
                     <td style="text-align: center"><?= $key->tgl_kirim; ?></td>
                     <td style="text-align: center"><?= $key->tgl_sampai; ?></td>
                     <td style="text-align: center"><?= $key->status_tdpagen; ?></td>

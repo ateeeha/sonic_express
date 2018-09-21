@@ -60,6 +60,7 @@ class Droppoint extends CI_Controller {
 
 		// $data['data'] = $this->kurir_model->get_all('t_transaksi');
 
+		$data['active_menu_agen'] = 'active';
 		$data['active_list_penjemputan'] = 'active';
 		$data['header'] = 'List Penjemputan';
 		$this->template->dp('droppoint/list_penjemputan', $data);
@@ -294,7 +295,7 @@ class Droppoint extends CI_Controller {
 
 		// $data['data'] = $this->kurir_model->get_all('t_transaksi');
 
-		$data['active_paket_agen'] = 'active';
+		$data['active_menu_agen'] = 'active';
 		$data['active_list_transaksi_agen'] = 'active';
 		$data['header'] = 'List Transaksi Agen';
 		$this->template->dp('droppoint/list_transaksi_agen', $data);
@@ -408,8 +409,8 @@ class Droppoint extends CI_Controller {
 		if (isset($_POST['submit']))
 		{
 			$transaksidpagen = array(
-				'dp_tujuan' => $this->session->userdata('id_dp'), 
-				'agen_tujuan' => $agen_tujuan,
+				'asal' => $this->session->userdata('id_dp'), 
+				'tujuan' => $agen_tujuan,
 				'tgl_kirim' =>  date("Y-m-d"),
 				'tgl_sampai' => '',
 				'status_tdpagen' => 'proses'

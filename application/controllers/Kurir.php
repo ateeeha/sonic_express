@@ -85,7 +85,7 @@ class Kurir extends CI_Controller {
 				'status_transaksi' => 'diterima'
 				));
 
-		$data['id_agen'] = $this->session->userdata('agen_kurir');
+		// $data['id_agen'] = $this->session->userdata('agen_kurir');
 
 		$data['active_menu_user'] = 'active';
 		$data['active_diterima'] = 'active';
@@ -164,16 +164,15 @@ class Kurir extends CI_Controller {
 
 		$data = array(
 			'no_resi' => $no_resi, 
-			'tanggal' => date("Y-m-d"), 
+			'tanggal' => date("Y-m-d H:i:s"), 
 			'status_tracking' => 'Dijemput Kurir'
+		);
+		$transaksi = array(
+			'kurir_penjemput' => $this->session->userdata('id_kurir'),
 		);
 
 		$this->kurir_model->insert('t_tracking', $data);
-		$this->kurir_model->update(
-			't_transaksi', 
-			['kurir_penjemput' => $this->session->userdata('id_kurir')],
-			['no_resi' => $this->uri->segment(3)]
-			);
+		$this->kurir_model->update('t_transaksi', $transaksi, ['no_resi' => $this->uri->segment(3)] );
 		$this->kurir_model->update('t_transaksi', ['status_transaksi' => $status], ['no_resi' => $this->uri->segment(3)]);
 
 		redirect('kurir/paket_user/');
@@ -188,15 +187,15 @@ class Kurir extends CI_Controller {
 
 		$tracking = array(
 			'no_resi' => $no_resi, 
-			'tanggal' => date("Y-m-d"), 
+			'tanggal' => date("Y-m-d H:i:s"), 
 			'status_tracking' => 'Diterima Kurir'
 		);
 
 		$transaksi = array(
 			'status_transaksi' => 'Diterima', 
-			'agen_asal' => $this->session->userdata('agen_kurir')
+			'agen_asal' => $this->session->userdata('agen_kurir'),
+			'status_kurir' => 'Proses'
 		);
-
 
 		$this->kurir_model->insert('t_tracking', $tracking);
 		$this->kurir_model->update('t_transaksi', $transaksi, ['no_resi' => $this->uri->segment(3)]);
@@ -213,7 +212,7 @@ class Kurir extends CI_Controller {
 
 		$data = array(
 			'no_resi' => $no_resi, 
-			'tanggal' => date("Y-m-d"), 
+			'tanggal' => date("Y-m-d H:i:s"), 
 			'status_tracking' => 'Diantar Kurir ke Alamat Tujuan'
 		);
 
@@ -236,7 +235,7 @@ class Kurir extends CI_Controller {
 		$status = 'selesai';
 		$data = array(
 			'no_resi' => $no_resi, 
-			'tanggal' => date("Y-m-d"), 
+			'tanggal' => date("Y-m-d H:i:s"), 
 			'status_tracking' => 'Paket Diterima'
 		);
 

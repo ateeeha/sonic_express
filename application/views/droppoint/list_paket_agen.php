@@ -12,19 +12,21 @@
           <div class="box box-primary">
             <!-- /.box-header -->
             <form method="post" action="<?php echo site_url('droppoint/multi_kirim_paket_agen'); ?>">
-            <div class="box-header with-border">
-                <div style="float:left">
-                  <input class="btn btn-primary" type="submit" name="submit" value="Kirim">
-
-                  <label>Drop Point Tujuan :</label>
-                  <select name="dp_tujuan" required> 
+                <div class="row">
+                <div class="col-xs-12 col-sm-6 col-md-3">
+                <div class="input-group margin">
+                  <div class="input-group-btn">
+                    <input class="btn btn-primary" type="submit" name="submit" value="Kirim">
+                  </div>
+                    <select class="form-control" name="dp_tujuan" required> 
                       <option value="" disabled selected>--Pilih Droppoint--</option>
                       <?php foreach ($droppoint->result() as $dp): ?>
                       <option value="<?= $dp->id_dp; ?>"><?= $dp->username; ?></option>
                       <?php endforeach ?>
                   </select>
                 </div>
-            </div>
+                </div>
+                </div>
             <div class="box-body table-responsive">
               <table class="table table-bordered table-hover dt-responsive nowrap" id="datatable">
                 <thead>

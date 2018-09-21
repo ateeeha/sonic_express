@@ -311,7 +311,8 @@ class Agen extends CI_Controller {
 		$data['data'] = $this->agen_model->get_where($join, 
 			array(
 				'status_transaksi' => 'diterima',
-				'agen_asal' => $this->session->userdata('id_agen')
+				'agen_asal' => $this->session->userdata('id_agen'),
+				'status_kurir' => 'Proses'
 				));
 
 		// $data['data'] = $this->kurir_model->get_all('t_transaksi');
@@ -337,7 +338,7 @@ class Agen extends CI_Controller {
 		$this->agen_model->insert('t_tracking', $data);
 		$this->agen_model->update(
 			't_transaksi', 
-			['agen_asal' => $this->session->userdata('id_agen')],
+			['status_kurir' => 'Selesai'],
 			['no_resi' => $this->uri->segment(3)]
 			);
 
@@ -362,6 +363,11 @@ class Agen extends CI_Controller {
 					'status_tracking' => 'Diterima Agen Kota Asal'
 				);
 				$this->agen_model->insert('t_tracking', $tracking);
+
+				$this->agen_model->update(
+					't_transaksi', 
+					['status_kurir' => 'Selesai'], 
+					['no_resi' => $res] );
     		}
 
 	    }
@@ -414,7 +420,8 @@ class Agen extends CI_Controller {
 		$data['data'] = $this->agen_model->get_where($join, 
 			array(
 				'dp_jemput' => 'belum',
-				'agen_asal' => $this->session->userdata('id_agen')
+				'agen_asal' => $this->session->userdata('id_agen'),
+				'status_kurir' => 'Selesai'
 				));
 
 		$data['active_menu_kurir'] = 'active';

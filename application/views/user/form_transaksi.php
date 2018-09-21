@@ -25,7 +25,7 @@
         <div class="row">
           <div class="col-md-6">
               <div class="box-header with-border">
-                <h3 class="box-title">Tarif</h3>
+                <h3 class="box-title">Tarif & Tujuan</h3>
               </div>
                   <div class="form-group">
                     <div class="row">

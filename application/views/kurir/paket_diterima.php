@@ -11,20 +11,20 @@
         <div class="col-xs-12">
           <div class="box box-primary">
             <!-- /.box-header -->
-            <form method="post" action="<?= site_url('kurir/multi_kirim_paket_ke_agen'); ?>">
+            <form method="post" action="">
             <div class="box-header with-border">
-                <div style="float:left">
+                <!-- <div style="float:left">
                   <input class="btn btn-success" type="submit" name="submit" value="Submit">
 
                   <label>Id Agen Asal :</label>
-                  <input name="agen_asal" value="<?= $id_agen; ?>">
-                </div>
+                  <input name="agen_asal" value="">
+                </div> -->
             </div>
             <div class="box-body table-responsive">
               <table class="table table-bordered table-hover dt-responsive nowrap" id="datatable">
                 <thead>
                   <tr>
-                    <th><input id="check-all" type="checkbox"></th>
+                    <!-- <th><input id="check-all" type="checkbox"></th> -->
                     <th style="text-align: center">#</th>
                     <th style="text-align: center">ID User</th>
                     <th style="text-align: center">Tanggal</th>
@@ -33,7 +33,7 @@
                     <th style="text-align: center">Kode Pos</th>
                     <th style="text-align: center">No Penerima</th>
                     <th style="text-align: center">Agen Asal</th>
-                    <th style="text-align: center" width="10%;">Opsi</th>
+                    <th style="text-align: center" width="10%;">Status</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -42,7 +42,7 @@
                   foreach ($data->result() as $key) :
                   ?>
                   <tr>
-                    <td><input class="check-item" type="checkbox" name="no_resi[<?= $key->no_resi; ?>]" value="<?= $key->no_resi; ?>"></th> 
+                    <!-- <td><input class="check-item" type="checkbox" name="no_resi[<?= $key->no_resi; ?>]" value="<?= $key->no_resi; ?>"></th>  -->
                     <td style="text-align: center"><?= $i++; ?></td>
                     <td style="text-align: center"><?= $key->id_user; ?></td>
                     <td style="text-align: center"><?= $key->tgl_pengiriman; ?></td>
@@ -52,10 +52,10 @@
                     <td style="text-align: center"><?= $key->no_tlp; ?></td>
                     <td style="text-align: center"><?= $key->agen_asal; ?></td>
                     <td>
-                    <a href="" class="btn btn-default btn-xs" onclick="return confirm('Anda Yakin ?');"><i class="fa fa-check"></i> Diterima</a>
+                    <a class="btn btn-default btn-xs"><i class="fa fa-check"></i> <?= $key->status_kurir; ?></a>
                     </td>
                     <td>
-                    <?= $key->status_transaksi; ?>
+                    
                     </td>
                   </tr>
                   <?php endforeach ?>

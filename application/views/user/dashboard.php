@@ -95,9 +95,6 @@
 <script src="<?php echo base_url(); ?>assets/user/js/fastclick.js"></script>
 <!-- AdminLTE App -->
 <script src="<?php echo base_url(); ?>assets/user/js/adminlte.min.js"></script>
-<!-- SlimScroll -->
-<script src="<?php echo base_url(); ?>assets/user/js/jquery.slimscroll.min.js"></script>
-<!-- ckeditor -->
 <script type="text/javascript">
      // $( function() {
      //    var availableTags = [
@@ -264,6 +261,3 @@
 </script>
 </body>
 </html>       
-<!-- <div class="overlay">
-              <i class="fa fa-refresh fa-spin"></i>
-            </div> -->
