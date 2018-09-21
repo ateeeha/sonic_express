@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: 19 Sep 2018 pada 11.49
+-- Generation Time: 21 Sep 2018 pada 10.18
 -- Versi Server: 5.6.20
 -- PHP Version: 5.5.15
 
@@ -110,7 +110,7 @@ CREATE TABLE IF NOT EXISTS `t_kecamatan` (
 `id_kecamatan` bigint(20) NOT NULL,
   `id_kota` bigint(20) NOT NULL,
   `nama_kecamatan` varchar(200) NOT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=12 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=36 ;
 
 --
 -- Dumping data untuk tabel `t_kecamatan`
@@ -127,7 +127,31 @@ INSERT INTO `t_kecamatan` (`id_kecamatan`, `id_kota`, `nama_kecamatan`) VALUES
 (8, 39, 'Gondokusuman'),
 (9, 39, 'Gondomanan'),
 (10, 39, 'Jetis'),
-(11, 35, 'Jetis');
+(11, 35, 'Jetis'),
+(12, 40, 'Cengkareng'),
+(13, 40, 'Grogol'),
+(14, 40, 'Kalideres'),
+(15, 40, 'Kebon Jeruk'),
+(16, 40, 'Kembangan'),
+(17, 40, 'Palmerah'),
+(18, 40, 'Tamansari'),
+(19, 40, 'Tambora'),
+(20, 44, 'Cilincing'),
+(21, 44, 'Jakarta Utara'),
+(22, 44, 'Kelapa Gading'),
+(23, 44, 'Koja'),
+(24, 44, 'Pademangan'),
+(25, 44, 'Penjaringan'),
+(26, 44, 'Tanjung Priok'),
+(27, 41, 'Cempaka Putih'),
+(28, 41, 'Gambir'),
+(29, 41, 'Jakarta Pusat'),
+(30, 41, 'Johar Baru'),
+(31, 41, 'Kemayoran'),
+(32, 41, 'Menteng'),
+(33, 41, 'Sawah Besar'),
+(34, 41, 'Senen'),
+(35, 41, 'Tanah Abang');
 
 -- --------------------------------------------------------
 
@@ -673,7 +697,7 @@ CREATE TABLE IF NOT EXISTS `t_ongkir` (
   `estimasi` varchar(255) NOT NULL,
   `berat` varchar(35) NOT NULL,
   `origin` varchar(255) NOT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=35 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=104 ;
 
 --
 -- Dumping data untuk tabel `t_ongkir`
@@ -713,7 +737,75 @@ INSERT INTO `t_ongkir` (`id_ongkir`, `kota`, `kecamatan`, `jenis_layanan`, `harg
 (31, 'Yogyakarta', 'Gondomanan', 'REG', '4000', '1 - 2', '1', 'Yogyakarta'),
 (32, 'Bantul', 'Imogiri', 'REG', '8000', '1 - 2', '1', 'Yogyakarta'),
 (33, 'Bantul', 'Jetis', 'REG', '8000', '1 - 2', '1', 'Yogyakarta'),
-(34, 'Yogyakarta', 'Jetis', 'REG', '4000', '1 - 2', '1', 'Yogyakarta');
+(34, 'Yogyakarta', 'Jetis', 'REG', '4000', '1 - 2', '1', 'Yogyakarta'),
+(35, 'Jakarta Pusat', 'Cempaka Putih', 'REG', '5000', '2 - 4', '1', 'Jakarta Pusat'),
+(36, 'Jakarta Pusat', 'Gambir', 'REG', '4000', '2 - 3', '1', 'Jakarta Pusat'),
+(37, 'Jakarta Pusat', 'Jakarta Pusat', 'REG', '8000', '2 - 3', '1', 'Jakarta Pusat'),
+(38, 'Jakarta Pusat', 'Johar Baru', 'REG', '7000', '1 - 3', '1', 'Jakarta Pusat'),
+(39, 'Jakarta Pusat', 'Kemayoran', 'REG', '5000', '1 - 4', '1', 'Jakarta Pusat'),
+(40, 'Jakarta Pusat', 'Menteng', 'REG', '5000', '1 - 2', '1', 'Jakarta Pusat'),
+(41, 'Jakarta Pusat', 'Sawah Besar', 'REG', '4000', '1 - 2', '1', 'Jakarta Pusat'),
+(42, 'Jakarta Pusat', 'Senen', 'REG', '5000', '1 - 2', '1', 'Jakarta Pusat'),
+(43, 'Jakarta Pusat', 'Tanah Abang', 'REG', '10000', '1 - 3', '1', 'Jakarta Pusat'),
+(44, 'Jakarta Barat', 'Cengkareng', 'REG', '5000', '1 -3', '1', 'Jakarta Barat'),
+(45, 'Jakarta Barat', 'Grogol', 'REG', '4000', '1 -3', '1', 'Jakarta Barat'),
+(47, 'Jakarta Barat', 'Kalideres', 'REG', '7000', '1 -3', '1', 'Jakarta Barat'),
+(48, 'Jakarta Barat', 'Kebon Jeruk', 'REG', '5000', '1 -3', '1', 'Jakarta Barat'),
+(49, 'Jakarta Barat', 'Kembangan', 'REG', '5000', '1 -3', '1', 'Jakarta Barat'),
+(50, 'Jakarta Barat', 'Palmerah', 'REG', '4000', '1 -3', '1', 'Jakarta Barat'),
+(51, 'Jakarta Barat', 'Tamansari', 'REG', '5000', '1 -3', '1', 'Jakarta Barat'),
+(52, 'Jakarta Barat', 'Tambora', 'REG', '10000', '1 -3', '1', 'Jakarta Barat'),
+(53, 'Jakarta Utara', 'Cilincing', 'REG', '5000', '1 -3', '1', 'Jakarta Utara'),
+(54, 'Jakarta Utara', 'Jakarta Utara', 'REG', '4000', '1 -3', '1', 'Jakarta Utara'),
+(55, 'Jakarta Utara', 'Kelapa Gading', 'REG', '7000', '1 -3', '1', 'Jakarta Utara'),
+(56, 'Jakarta Utara', 'Koja', 'REG', '5000', '1 -3', '1', 'Jakarta Utara'),
+(57, 'Jakarta Utara', 'Pademangan', 'REG', '5000', '1 -3', '1', 'Jakarta Utara'),
+(58, 'Jakarta Utara', 'Penjaringan', 'REG', '4000', '1 -3', '1', 'Jakarta Utara'),
+(59, 'Jakarta Utara', 'Tanjung Priok', 'REG', '5000', '1 -3', '1', 'Jakarta Utara'),
+(60, 'Jakarta Barat', 'Cengkareng', 'REG', '5000', '1 -3', '1', 'Yogyakarta'),
+(61, 'Jakarta Barat', 'Grogol', 'REG', '4000', '1 -3', '1', 'Yogyakarta'),
+(62, 'Jakarta Barat', 'Kalideres', 'REG', '7000', '1 -3', '1', 'Yogyakarta'),
+(63, 'Jakarta Barat', 'Kebon Jeruk', 'REG', '5000', '1 -3', '1', 'Yogyakarta'),
+(64, 'Jakarta Barat', 'Kembangan', 'REG', '5000', '1 -3', '1', 'Yogyakarta'),
+(65, 'Jakarta Barat', 'Palmerah', 'REG', '4000', '1 -3', '1', 'Yogyakarta'),
+(66, 'Jakarta Barat', 'Tamansari', 'REG', '5000', '1 -3', '1', 'Yogyakarta'),
+(67, 'Jakarta Barat', 'Tambora', 'REG', '10000', '1 -3', '1', 'Yogyakarta'),
+(68, 'Jakarta Utara', 'Cilincing', 'REG', '5000', '1 -3', '1', 'Yogyakarta'),
+(69, 'Jakarta Utara', 'Jakarta Utara', 'REG', '4000', '1 -3', '1', 'Yogyakarta'),
+(70, 'Jakarta Utara', 'Kelapa Gading', 'REG', '7000', '1 -3', '1', 'Yogyakarta'),
+(71, 'Jakarta Utara', 'Koja', 'REG', '5000', '1 -3', '1', 'Yogyakarta'),
+(72, 'Jakarta Utara', 'Pademangan', 'REG', '5000', '1 -3', '1', 'Yogyakarta'),
+(73, 'Jakarta Utara', 'Penjaringan', 'REG', '4000', '1 -3', '1', 'Yogyakarta'),
+(74, 'Jakarta Utara', 'Tanjung Priok', 'REG', '5000', '1 -3', '1', 'Yogyakarta'),
+(75, 'Jakarta Pusat', 'Cempaka Putih', 'REG', '5000', '1 - 2', '1', 'Yogyakarta'),
+(76, 'Jakarta Pusat', 'Gambir', 'REG', '4000', '1 - 2', '1', 'Yogyakarta'),
+(77, 'Jakarta Pusat', 'Jakarta Pusat', 'REG', '8000', '1 - 2', '1', 'Yogyakarta'),
+(78, 'Jakarta Pusat', 'Johar Baru', 'REG', '7000', '1 - 2', '1', 'Yogyakarta'),
+(79, 'Jakarta Pusat', 'Kemayoran', 'REG', '5000', '1 - 2', '1', 'Yogyakarta'),
+(80, 'Jakarta Pusat', 'Menteng', 'REG', '5000', '1 - 2', '1', 'Yogyakarta'),
+(81, 'Jakarta Pusat', 'Sawah Besar', 'REG', '4000', '1 - 2', '1', 'Yogyakarta'),
+(82, 'Jakarta Pusat', 'Senen', 'REG', '5000', '1 - 2', '1', 'Yogyakarta'),
+(83, 'Jakarta Pusat', 'Tanah Abang', 'REG', '10000', '1 - 2', '1', 'Yogyakarta'),
+(84, 'Bantul', 'Bambanglipuro', 'REG', '8000', '4 - 5', '1', 'Jakarta Pusat'),
+(85, 'Bantul', 'Banguntapan', 'REG', '8000', '4 - 5', '1', 'Jakarta Pusat'),
+(86, 'Bantul', 'Bantul', 'REG', '4000', '4 - 5', '1', 'Jakarta Pusat'),
+(87, 'Sleman', 'Berbah', 'REG', '8000', '5 - 6', '1', 'Jakarta Pusat'),
+(88, 'Sleman', 'Cangkringan', 'REG', '8000', '4 - 5', '1', 'Jakarta Pusat'),
+(89, 'Yogyakarta', 'Danurejan', 'REG', '4000', '4 - 5', '1', 'Jakarta Pusat'),
+(90, 'Sleman', 'Depok', 'REG', '8000', '4 - 5', '1', 'Jakarta Pusat'),
+(91, 'Bantul', 'Dlingo', 'REG', '8000', '5 - 6', '1', 'Jakarta Pusat'),
+(92, 'Kulon Progo', 'Galur', 'REG', '8000', '4 - 5', '1', 'Jakarta Pusat'),
+(93, 'Sleman', 'Gamping', 'REG', '8000', '4 - 5', '1', 'Jakarta Pusat'),
+(94, 'Gunung Kidul', 'Gedangsari', 'REG', '8000', '4 - 5', '1', 'Jakarta Pusat'),
+(95, 'Yogyakarta', 'Gedongtengen', 'REG', '4000', '5 - 6', '1', 'Jakarta Pusat'),
+(96, 'Kulon Progo', 'Girimulyo', 'REG', '8000', '4 - 5', '1', 'Jakarta Pusat'),
+(97, 'Gunung Kidul', 'Girisubo', 'REG', '8000', '4 - 5', '1', 'Jakarta Pusat'),
+(98, 'Sleman', 'Godean', 'REG', '8000', '4 - 5', '1', 'Jakarta Pusat'),
+(99, 'Yogyakarta', 'Gondokusuman', 'REG', '4000', '5 - 6', '1', 'Jakarta Pusat'),
+(100, 'Yogyakarta', 'Gondomanan', 'REG', '4000', '4 - 5', '1', 'Jakarta Pusat'),
+(101, 'Bantul', 'Imogiri', 'REG', '8000', '4 - 5', '1', 'Jakarta Pusat'),
+(102, 'Bantul', 'Jetis', 'REG', '8000', '4 - 5', '1', 'Jakarta Pusat'),
+(103, 'Yogyakarta', 'Jetis', 'REG', '4000', '5 - 6', '1', 'Jakarta Pusat');
 
 -- --------------------------------------------------------
 
@@ -1071,7 +1163,7 @@ MODIFY `id_dp` bigint(20) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
 -- AUTO_INCREMENT for table `t_kecamatan`
 --
 ALTER TABLE `t_kecamatan`
-MODIFY `id_kecamatan` bigint(20) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=12;
+MODIFY `id_kecamatan` bigint(20) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=36;
 --
 -- AUTO_INCREMENT for table `t_kota`
 --
@@ -1086,7 +1178,7 @@ MODIFY `id_kurir` bigint(20) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=7;
 -- AUTO_INCREMENT for table `t_ongkir`
 --
 ALTER TABLE `t_ongkir`
-MODIFY `id_ongkir` bigint(20) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=35;
+MODIFY `id_ongkir` bigint(20) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=104;
 --
 -- AUTO_INCREMENT for table `t_tracking`
 --

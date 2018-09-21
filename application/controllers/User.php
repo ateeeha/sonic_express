@@ -14,46 +14,9 @@ class User extends CI_Controller {
 	{
 		$this->cek_login();
 
-		if ($this->input->post('submit') == 'Submit')
-		{
-			$this->form_validation->set_rules('kabupaten_asal','kabupaten Asal','required');
-			$this->form_validation->set_rules('kabupaten_tujuan','kabupaten Tujuan','required');
-
-				if ($this->form_validation->run() == TRUE)
-				{
-					$ongkir = array(
-						'origin' => $this->input->post('kabupaten_asal', TRUE),
-						'kota' => $this->input->post('kabupaten_tujuan', TRUE),
-					);
-
-					$cek = $this->user_model->get_where('t_ongkir', $ongkir);
-					
-					$data['cek'] = $cek;
-					// if ($cek->num_rows() > 0) 
-					// {				
-					// 	// foreach ($cek->result() as $key) {
-							
-					// 	// 	$data['id_tracking'] = $key->id_tracking;
-					// 	// 	$data['no_resi'] = $key->no_resi;
-					// 	// 	$data['tanggal'] = $key->tanggal;
-					// 	// 	$data['status'] = $key->status;
-					// 	// }
-
-					// } else {
-					// 	$this->session->set_flashdata('alert', "Kode Resi Tidak Ada !");
-					// }
-				}
-		}else 
-		{
-			$data['cek'] = '';
-		}
-
-		$data['data'] = $this->user_model->get_all('t_provinsi');
-		
-		$data['active_cekongkir'] = 'active';
-		$data['header'] = 'Cek Ongkir';
-		$this->template->user('user/form_cekongkir', $data);
-
+		$data['active_home'] = 'active';
+		$data['header'] = 'Home';
+		$this->template->user('user/home', $data);
 	}
 
 	public function ongkir()
