@@ -129,7 +129,7 @@
                           $getkotatujuan = $this->db->get();
                         ?>
                         <?php foreach ($getkotatujuan->result() as $kotatujuan): ?>
-                          <?php if ($kotatujuan->nama_provinsi == $kab_tujuan) { ?>
+                          <?php if ($kotatujuan->nama_kota == $kab_tujuan) { ?>
                           <option value="<?= $kotatujuan->nama_kota; ?>" selected><?= $kotatujuan->nama_kota; ?></option>
                           <?php }else{ ?>
                           <option value="<?= $kotatujuan->nama_kota; ?>"><?= $kotatujuan->nama_kota; ?></option>
