@@ -23,6 +23,8 @@ class Agen extends CI_Controller {
 	{
 		$this->cek_login();
 
+		$data['data'] = $this->agen_model->get_all('t_provinsi');
+
 		$data['active_transaksi'] = 'active';
 		$data['header'] = 'Transaksi';
 		$this->template->agen('agen/form_transaksi', $data);
@@ -578,6 +580,135 @@ class Agen extends CI_Controller {
 		$data['active_paket_dp'] = 'active';
 		$data['header'] = 'Manage Paket';
 		$this->template->agen('agen/detail_paket_dp', $data);
+	}
+
+	public function getkota()
+	{
+		$pro = $this->input->get('sts');
+		$getprovinsiid = $this->agen_model->get_where('t_provinsi',array('nama_provinsi'=> $pro))->row();
+		$getcity = $this->agen_model->get_where('t_kota',array('id_provinsi'=> $getprovinsiid->id_provinsi))->result();
+
+		echo "<option value=''>-- Pilih Kabupaten --</option>";
+		foreach($getcity as $gc){
+			echo "<option value='$gc->nama_kota'>$gc->nama_kota</option>";
+		}
+	}
+
+	public function getkecamatan()
+	{
+		$kota = $this->input->get('sts');
+		$getkotaid = $this->agen_model->get_where('t_kota',array('nama_kota'=> $kota))->row();
+		$getkecamatan = $this->agen_model->get_where('t_kecamatan',array('id_kota'=> $getkotaid->id_kota))->result();
+
+		echo "<option value=''>-- Pilih Kecamatan --</option>";
+		foreach($getkecamatan as $gk){
+			echo "<option value='$gk->nama_kecamatan'>$gk->nama_kecamatan</option>";
+		}
+	}
+
+	public function getorigin()
+	{
+		$email = $this->input->get('email');
+		
+		$getorigin = $this->agen_model->get_where('t_user',array('email'=> $email));
+		
+		if ($getorigin->num_rows() > 0){
+
+			$user = $getorigin->row();
+			echo $user->username.'|'.$user->alamat.'|'.$user->kabupaten;
+		}else{
+			echo "tidak ada";
+		}
+		
+	}
+
+	public function gettarif()
+	{
+		$this->cek_login();
+
+		
+		$berat = $this->input->get('berat');
+
+		$b = ($berat / 1000);
+		$p = $this->input->get('panjang');
+		$l = $this->input->get('lebar');
+		$t = $this->input->get('tinggi');
+
+		$origin = $this->input->get('origin');		
+		$kab = $this->input->get('kab');		
+		$kec = $this->input->get('kec');		
+		
+
+
+		$ongkir = array(
+				'origin' => $origin,
+				'kota' => $kab,
+				'kecamatan' => $kec
+				);
+
+		$getongkir = $this->agen_model->get_where('t_ongkir', $ongkir);
+		if ($berat == 0 or '') {
+
+			echo "<td colspan='4' style='text-align:center'>Masukkan Berat !</td>";
+
+		}else{
+
+			if ($kec == '' or 0) {
+			
+				echo "<td colspan='4' style='text-align:center'><i class='fa fa-refresh fa-spin'></i></td>";
+
+			}else{
+
+				if ($getongkir->num_rows() > 0){
+
+					foreach($getongkir->result() as $go){
+
+						$ongkir = $go->harga;
+
+						if ($b < 1) {
+
+							$total_biaya = $ongkir;
+
+						}else{
+
+							if (($p * $l * $t) < 18000) {
+
+								$x = $b * $ongkir;
+
+		                        $ratusan = substr($x, -3);
+		                        if($ratusan<500){
+		                          $total_biaya = $x - $ratusan;
+		                        }
+		                        else{
+		                          $total_biaya = $x + (1000-$ratusan);
+		                        }
+
+							}else if (($p * $l * $t) >= 18000) {
+
+								$b = $p * $l * $t / 6000;
+
+								$total_biaya = $b * $ongkir;
+							}
+
+						}
+
+						echo "<tr>";
+						echo "<td style='text-align:center'>
+								<input required onclick='get_totalbiaya($total_biaya)' value='$go->jenis_layanan' name='jenis_layanan' class='ongkir' type='radio'>
+								</td>";
+						echo "<td style='text-align:center'>$go->jenis_layanan</td>";
+						echo "<td style='text-align:center'>$go->harga</td>";
+						echo "<td style='text-align:center'>$go->estimasi</td>";
+						echo "</tr>";
+
+					}
+				}else{
+
+					echo "<td colspan='4' style='text-align:center'>Data Belum Tersedia!</td>";
+				}
+			}
+		}
+		
 	}
 
 	function cek_login()

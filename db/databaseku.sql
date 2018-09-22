@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: 21 Sep 2018 pada 10.18
+-- Generation Time: 22 Sep 2018 pada 14.09
 -- Versi Server: 5.6.20
 -- PHP Version: 5.5.15
 
@@ -869,7 +869,7 @@ CREATE TABLE IF NOT EXISTS `t_tracking` (
   `no_resi` varchar(255) NOT NULL,
   `tanggal` datetime NOT NULL,
   `status_tracking` enum('Dijemput Kurir','Diterima Kurir','Diterima Agen Kota Asal','Diproses Agen Kota Asal','Diterima Drop Point Kota Asal','Dikirim ke Drop Point Kota Tujuan','Diterima Drop Point Kota Tujuan','Diantar Kurir Ke Alamat Tujuan','Diterima Agen Kota Tujuan','Diantar Kurir Ke Alamat Tujuan','Paket Diterima','Dikirim ke Agen Kota Tujuan') NOT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=18 ;
 
 --
 -- Dumping data untuk tabel `t_tracking`
@@ -878,7 +878,20 @@ CREATE TABLE IF NOT EXISTS `t_tracking` (
 INSERT INTO `t_tracking` (`id_tracking`, `no_resi`, `tanggal`, `status_tracking`) VALUES
 (1, 'RES15092018836062', '2018-09-15 00:00:00', 'Dijemput Kurir'),
 (2, 'RES15092018836062', '2018-09-15 00:00:00', 'Diterima Kurir'),
-(3, 'RES15092018836062', '2018-09-15 00:00:00', 'Diterima Agen Kota Asal');
+(3, 'RES15092018836062', '2018-09-15 00:00:00', 'Diterima Agen Kota Asal'),
+(5, 'RES210920181027002', '2018-09-21 10:40:01', 'Dijemput Kurir'),
+(6, 'RES210920181027002', '2018-09-21 10:41:27', 'Diterima Kurir'),
+(7, 'RES210920181027002', '2018-09-21 11:15:20', 'Dijemput Kurir'),
+(8, 'RES210920181027002', '2018-09-21 11:15:43', 'Diterima Kurir'),
+(9, 'RES210920181027002', '2018-09-21 00:00:00', 'Diterima Agen Kota Asal'),
+(10, 'RES210920181027002', '2018-09-21 11:25:12', 'Diproses Agen Kota Asal'),
+(11, 'RES210920181027002', '2018-09-21 00:00:00', 'Diterima Drop Point Kota Asal'),
+(12, 'RES210920181027002', '2018-09-21 00:00:00', 'Dikirim ke Drop Point Kota Tujuan'),
+(13, 'RES210920181027002', '2018-09-21 00:00:00', 'Diterima Drop Point Kota Tujuan'),
+(14, 'RES210920181027002', '2018-09-21 00:00:00', 'Dikirim ke Agen Kota Tujuan'),
+(15, 'RES210920181027002', '2018-09-21 00:00:00', 'Diterima Agen Kota Tujuan'),
+(16, 'RES210920181027002', '2018-09-21 11:50:12', 'Diantar Kurir Ke Alamat Tujuan'),
+(17, 'RES210920181027002', '2018-09-21 11:50:22', 'Paket Diterima');
 
 -- --------------------------------------------------------
 
@@ -911,21 +924,22 @@ CREATE TABLE IF NOT EXISTS `t_transaksi` (
   `kode_pos` int(5) NOT NULL,
   `no_tlp` varchar(35) NOT NULL,
   `status_transaksi` enum('Menunggu','Dijemput','Diterima','Ditolak','Selesai') NOT NULL,
+  `status_kurir` enum('Belum','Proses','Selesai') NOT NULL,
   `dp_kirim` enum('Belum Dikirim','Sudah Dikirim') NOT NULL,
   `dp_jemput` enum('belum','proses','selesai') NOT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
 
 --
 -- Dumping data untuk tabel `t_transaksi`
 --
 
-INSERT INTO `t_transaksi` (`id_transaksi`, `id_user`, `kurir_penjemput`, `kurir_pengantar`, `agen_asal`, `agen_tujuan`, `dp_asal`, `dp_tujuan`, `tgl_pengiriman`, `no_resi`, `berat`, `panjang`, `lebar`, `tinggi`, `jenis_layanan`, `total_biaya`, `nama`, `provinsi_tujuan`, `kabupaten_tujuan`, `kecamatan_tujuan`, `alamat`, `kode_pos`, `no_tlp`, `status_transaksi`, `dp_kirim`, `dp_jemput`) VALUES
-(1, 2, 2, 0, 2, 0, 0, 0, '2018-09-15', 'RES15092018836062', 20, 20, 20, 20, '8000', 160000, 'penerima bantul', 'DI Yogyakarta', 'Bantul', '', 'bantul tujuan', 55283, '08995413121', 'Diterima', 'Belum Dikirim', 'belum'),
-(2, 2, 0, 0, 0, 0, 0, 0, '2018-09-19', 'RES19092018922502', 1, 40, 30, 30, 'REG', 48000, 'Arfian', 'DI Yogyakarta', 'Bantul', 'Banguntapan', 'Banguntapan, Bantul', 55283, '08995413121', 'Menunggu', 'Belum Dikirim', 'belum'),
-(3, 2, 0, 0, 0, 0, 0, 0, '2018-09-19', 'RES19092018929512', 20, 0, 0, 0, 'REG', 160000, 'Wahyu', 'DI Yogyakarta', 'Bantul', 'Jetis', 'Desa Jetis', 55283, '08995413121', 'Menunggu', 'Belum Dikirim', 'belum'),
-(4, 2, 0, 0, 0, 0, 0, 0, '2018-09-19', 'RES190920181045032', 2000, 0, 0, 0, 'REG', 16000, 'Sri Lestari', 'DI Yogyakarta', 'Bantul', 'Banguntapan', 'Banguntapan ', 55283, '08995413121', 'Menunggu', 'Belum Dikirim', 'belum'),
-(5, 2, 0, 0, 0, 0, 0, 0, '2018-09-19', 'RES190920181119332', 20, 0, 0, 0, 'REG', 160, 'Wahyu', 'DI Yogyakarta', 'Bantul', 'Banguntapan', 'dzfsdf', 55283, '0899541311', 'Menunggu', 'Belum Dikirim', 'belum'),
-(6, 2, 0, 0, 0, 0, 0, 0, '2018-09-19', 'RES190920181124572', 20, 0, 0, 0, 'REG', 80, 'asdasd', 'DI Yogyakarta', 'Yogyakarta', 'Gondomanan', 'asdasd', 55283, '0899541311', 'Menunggu', 'Belum Dikirim', 'belum');
+INSERT INTO `t_transaksi` (`id_transaksi`, `id_user`, `kurir_penjemput`, `kurir_pengantar`, `agen_asal`, `agen_tujuan`, `dp_asal`, `dp_tujuan`, `tgl_pengiriman`, `no_resi`, `berat`, `panjang`, `lebar`, `tinggi`, `jenis_layanan`, `total_biaya`, `nama`, `provinsi_tujuan`, `kabupaten_tujuan`, `kecamatan_tujuan`, `alamat`, `kode_pos`, `no_tlp`, `status_transaksi`, `status_kurir`, `dp_kirim`, `dp_jemput`) VALUES
+(2, 2, 0, 0, 0, 0, 0, 0, '2018-09-19', 'RES19092018922502', 1, 40, 30, 30, 'REG', 48000, 'Arfian', 'DI Yogyakarta', 'Bantul', 'Banguntapan', 'Banguntapan, Bantul', 55283, '08995413121', 'Menunggu', 'Belum', 'Belum Dikirim', 'belum'),
+(3, 2, 0, 0, 0, 0, 0, 0, '2018-09-19', 'RES19092018929512', 20, 0, 0, 0, 'REG', 160000, 'Wahyu', 'DI Yogyakarta', 'Bantul', 'Jetis', 'Desa Jetis', 55283, '08995413121', 'Menunggu', 'Belum', 'Belum Dikirim', 'belum'),
+(4, 2, 0, 0, 0, 0, 0, 0, '2018-09-19', 'RES190920181045032', 2000, 0, 0, 0, 'REG', 16000, 'Sri Lestari', 'DI Yogyakarta', 'Bantul', 'Banguntapan', 'Banguntapan ', 55283, '08995413121', 'Menunggu', 'Belum', 'Belum Dikirim', 'belum'),
+(5, 2, 0, 0, 0, 0, 0, 0, '2018-09-19', 'RES190920181119332', 20, 0, 0, 0, 'REG', 160, 'Wahyu', 'DI Yogyakarta', 'Bantul', 'Banguntapan', 'dzfsdf', 55283, '0899541311', 'Menunggu', 'Belum', 'Belum Dikirim', 'belum'),
+(6, 2, 0, 0, 0, 0, 0, 0, '2018-09-19', 'RES190920181124572', 20, 0, 0, 0, 'REG', 80, 'asdasd', 'DI Yogyakarta', 'Yogyakarta', 'Gondomanan', 'asdasd', 55283, '0899541311', 'Menunggu', 'Belum', 'Belum Dikirim', 'belum'),
+(7, 2, 2, 4, 2, 4, 2, 1, '2018-09-21', 'RES210920181027002', 2000, 0, 0, 0, 'REG', 10000, 'Nila', 'DKI Jakarta', 'Jakarta Pusat', 'Menteng', 'Menteng RT6, RW2', 55283, '0899541311', 'Selesai', 'Selesai', 'Sudah Dikirim', 'selesai');
 
 -- --------------------------------------------------------
 
@@ -938,7 +952,14 @@ CREATE TABLE IF NOT EXISTS `t_transaksiagen` (
   `id_dp` bigint(20) NOT NULL,
   `id_agen` bigint(20) NOT NULL,
   `status_tagen` enum('baru','proses','selesai') NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+
+--
+-- Dumping data untuk tabel `t_transaksiagen`
+--
+
+INSERT INTO `t_transaksiagen` (`id_transaksiagen`, `id_dp`, `id_agen`, `status_tagen`) VALUES
+(1, 2, 2, 'selesai');
 
 -- --------------------------------------------------------
 
@@ -950,7 +971,14 @@ CREATE TABLE IF NOT EXISTS `t_transaksiagendetail` (
 `id_transaksiagendetail` bigint(20) NOT NULL,
   `no_resi` varchar(255) NOT NULL,
   `id_transaksiagen` bigint(20) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+
+--
+-- Dumping data untuk tabel `t_transaksiagendetail`
+--
+
+INSERT INTO `t_transaksiagendetail` (`id_transaksiagendetail`, `no_resi`, `id_transaksiagen`) VALUES
+(1, 'RES210920181027002', 1);
 
 -- --------------------------------------------------------
 
@@ -965,7 +993,15 @@ CREATE TABLE IF NOT EXISTS `t_transaksidp` (
   `tgl_kirim` date NOT NULL,
   `tgl_sampai` date NOT NULL,
   `status_tdp` enum('baru','proses','selesai') NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+
+--
+-- Dumping data untuk tabel `t_transaksidp`
+--
+
+INSERT INTO `t_transaksidp` (`id_transaksidp`, `asal`, `tujuan`, `tgl_kirim`, `tgl_sampai`, `status_tdp`) VALUES
+(1, 2, 1, '2018-09-21', '2018-09-21', 'selesai'),
+(2, 1, 1, '2018-09-21', '0000-00-00', 'proses');
 
 -- --------------------------------------------------------
 
@@ -980,7 +1016,14 @@ CREATE TABLE IF NOT EXISTS `t_transaksidpagen` (
   `tgl_kirim` date NOT NULL,
   `tgl_sampai` date NOT NULL,
   `status_tdpagen` enum('baru','proses','selesai') NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+
+--
+-- Dumping data untuk tabel `t_transaksidpagen`
+--
+
+INSERT INTO `t_transaksidpagen` (`id_transaksidpagen`, `asal`, `tujuan`, `tgl_kirim`, `tgl_sampai`, `status_tdpagen`) VALUES
+(1, 1, 4, '2018-09-21', '2018-09-21', 'selesai');
 
 -- --------------------------------------------------------
 
@@ -992,7 +1035,14 @@ CREATE TABLE IF NOT EXISTS `t_transaksidpagendetail` (
 `id_transaksidetaildpagen` bigint(20) NOT NULL,
   `no_resi` varchar(255) NOT NULL,
   `id_transaksidpagen` bigint(20) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+
+--
+-- Dumping data untuk tabel `t_transaksidpagendetail`
+--
+
+INSERT INTO `t_transaksidpagendetail` (`id_transaksidetaildpagen`, `no_resi`, `id_transaksidpagen`) VALUES
+(1, 'RES210920181027002', 1);
 
 -- --------------------------------------------------------
 
@@ -1004,7 +1054,14 @@ CREATE TABLE IF NOT EXISTS `t_transaksidpdetail` (
 `id_transaksidpdetail` bigint(20) NOT NULL,
   `no_resi` varchar(255) NOT NULL,
   `id_transaksidp` bigint(20) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+
+--
+-- Dumping data untuk tabel `t_transaksidpdetail`
+--
+
+INSERT INTO `t_transaksidpdetail` (`id_transaksidpdetail`, `no_resi`, `id_transaksidp`) VALUES
+(1, 'RES210920181027002', 1);
 
 -- --------------------------------------------------------
 
@@ -1019,20 +1076,21 @@ CREATE TABLE IF NOT EXISTS `t_user` (
   `password` varchar(255) NOT NULL,
   `status_user` enum('1','2') NOT NULL,
   `provinsi` varchar(35) NOT NULL,
-  `kabupaten` varchar(35) NOT NULL
+  `kabupaten` varchar(35) NOT NULL,
+  `alamat` text NOT NULL
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
 
 --
 -- Dumping data untuk tabel `t_user`
 --
 
-INSERT INTO `t_user` (`id_user`, `username`, `email`, `password`, `status_user`, `provinsi`, `kabupaten`) VALUES
-(1, 'User Bantul', 'u_bantul@gmail.com', '$2y$10$a3BBnM31xGvr7E81asQBY.V8KosNm9giM3WchPF1iw4LNKM.J5Fca', '2', 'DI Yogyakarta', 'Bantul'),
-(2, 'User Yogyakarta', 'u_yogyakarta@gmail.com', '$2y$10$a3BBnM31xGvr7E81asQBY.V8KosNm9giM3WchPF1iw4LNKM.J5Fca', '1', 'DI Yogyakarta', 'Yogyakarta'),
-(3, 'User Sleman', 'u_sleman@gmail.com', '$2y$10$a3BBnM31xGvr7E81asQBY.V8KosNm9giM3WchPF1iw4LNKM.J5Fca', '1', 'DI Yogyakarta', 'Sleman'),
-(4, 'User Jakarta Pusat', 'u_jakarta_pusat@gmail.com', '$2y$10$Ojn3bpD436MONFEYjoHOw.eUdMRdkbuJWJ/u4DrfwPftCQOGkOC3C', '1', 'DKI Jakarta', 'Jakarta Pusat'),
-(5, 'User Jakarta Barat', 'u_jakarta_barat@gmail.com', '$2y$10$O9/m9naZotDtwlB7mcj4g.qj/9HTsMsl.YxK8SIc8xHUUTrOrsoMi', '1', 'DKI Jakarta', 'Jakarta Barat'),
-(6, 'User Jakarta Utara', 'u_jakarta_utara@gmail.com', '$2y$10$yF/Ydv6RQ5r2jW4nioCNYuavJCVP0tGAvRdtbJjEUTJfBLwPvRkmO', '1', 'DKI Jakarta', 'Jakarta Utara');
+INSERT INTO `t_user` (`id_user`, `username`, `email`, `password`, `status_user`, `provinsi`, `kabupaten`, `alamat`) VALUES
+(1, 'User Bantul', 'u_bantul@gmail.com', '$2y$10$a3BBnM31xGvr7E81asQBY.V8KosNm9giM3WchPF1iw4LNKM.J5Fca', '2', 'DI Yogyakarta', 'Bantul', ''),
+(2, 'User Yogyakarta', 'u_yogyakarta@gmail.com', '$2y$10$a3BBnM31xGvr7E81asQBY.V8KosNm9giM3WchPF1iw4LNKM.J5Fca', '1', 'DI Yogyakarta', 'Yogyakarta', 'jalan pemuda no 1'),
+(3, 'User Sleman', 'u_sleman@gmail.com', '$2y$10$a3BBnM31xGvr7E81asQBY.V8KosNm9giM3WchPF1iw4LNKM.J5Fca', '1', 'DI Yogyakarta', 'Sleman', ''),
+(4, 'User Jakarta Pusat', 'u_jakarta_pusat@gmail.com', '$2y$10$Ojn3bpD436MONFEYjoHOw.eUdMRdkbuJWJ/u4DrfwPftCQOGkOC3C', '1', 'DKI Jakarta', 'Jakarta Pusat', ''),
+(5, 'User Jakarta Barat', 'u_jakarta_barat@gmail.com', '$2y$10$O9/m9naZotDtwlB7mcj4g.qj/9HTsMsl.YxK8SIc8xHUUTrOrsoMi', '1', 'DKI Jakarta', 'Jakarta Barat', ''),
+(6, 'User Jakarta Utara', 'u_jakarta_utara@gmail.com', '$2y$10$yF/Ydv6RQ5r2jW4nioCNYuavJCVP0tGAvRdtbJjEUTJfBLwPvRkmO', '1', 'DKI Jakarta', 'Jakarta Utara', '');
 
 --
 -- Indexes for dumped tables
@@ -1183,42 +1241,42 @@ MODIFY `id_ongkir` bigint(20) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=104;
 -- AUTO_INCREMENT for table `t_tracking`
 --
 ALTER TABLE `t_tracking`
-MODIFY `id_tracking` bigint(20) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
+MODIFY `id_tracking` bigint(20) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=18;
 --
 -- AUTO_INCREMENT for table `t_transaksi`
 --
 ALTER TABLE `t_transaksi`
-MODIFY `id_transaksi` bigint(20) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=7;
+MODIFY `id_transaksi` bigint(20) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=8;
 --
 -- AUTO_INCREMENT for table `t_transaksiagen`
 --
 ALTER TABLE `t_transaksiagen`
-MODIFY `id_transaksiagen` bigint(20) NOT NULL AUTO_INCREMENT;
+MODIFY `id_transaksiagen` bigint(20) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `t_transaksiagendetail`
 --
 ALTER TABLE `t_transaksiagendetail`
-MODIFY `id_transaksiagendetail` bigint(20) NOT NULL AUTO_INCREMENT;
+MODIFY `id_transaksiagendetail` bigint(20) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `t_transaksidp`
 --
 ALTER TABLE `t_transaksidp`
-MODIFY `id_transaksidp` bigint(20) NOT NULL AUTO_INCREMENT;
+MODIFY `id_transaksidp` bigint(20) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `t_transaksidpagen`
 --
 ALTER TABLE `t_transaksidpagen`
-MODIFY `id_transaksidpagen` bigint(20) NOT NULL AUTO_INCREMENT;
+MODIFY `id_transaksidpagen` bigint(20) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `t_transaksidpagendetail`
 --
 ALTER TABLE `t_transaksidpagendetail`
-MODIFY `id_transaksidetaildpagen` bigint(20) NOT NULL AUTO_INCREMENT;
+MODIFY `id_transaksidetaildpagen` bigint(20) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `t_transaksidpdetail`
 --
 ALTER TABLE `t_transaksidpdetail`
-MODIFY `id_transaksidpdetail` bigint(20) NOT NULL AUTO_INCREMENT;
+MODIFY `id_transaksidpdetail` bigint(20) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `t_user`
 --

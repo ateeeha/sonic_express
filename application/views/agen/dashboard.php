@@ -118,14 +118,125 @@
       }
   });
   
-  $(".province").change(function(){
-      $( ".city" ).html("<option>Loading...</option>");
+  // ==========
+   $(".provinsi_tujuan").change(function(){
+      $( ".kota_tujuan" ).html("<option>-- Menunggu --</option>");
       var data = $(this).val();
-      $.get( "<?php echo site_url('admin/getcity');?>", { sts: data }, function( data ) {
-        $( ".city" ).html( data );
+      $.get( "<?php echo site_url('agen/getkota');?>", { sts: data }, function( data ) {
+        $( ".kota_tujuan" ).html( data );
+        $( "#kecamatan_tujuan" ).html("<option>-- Menunggu --</option>");
+        $( "#total_biaya" ).val("");
+        $( ".ongkir_detail" ).html("<td colspan='4' style='text-align:center'><i class='fa fa-refresh fa-spin'></i><td/>");
       });
     });
-  
+
+   $(".kota_tujuan").change(function(){
+      $( ".kecamatan_tujuan" ).html("<option>-- Menunggu --</option>");
+      var data = $(this).val();
+      $.get( "<?php echo site_url('agen/getkecamatan');?>", { sts: data }, function( data ) {
+        $( ".kecamatan_tujuan" ).html( data );
+        $( "#total_biaya" ).val("");
+        $( ".ongkir_detail" ).html("<td colspan='4' style='text-align:center'><i class='fa fa-refresh fa-spin'></i><td/>");
+      });
+    });
+
+   $(".kecamatan_tujuan").change(function(){
+      $( ".ongkir_detail" ).html("<td colspan='4' style='text-align:center'><i class='fa fa-refresh fa-spin'></i><td/>");
+      var origin = $('#origin').val();
+      var berat = $('#berat').val();
+      var panjang = $('#panjang').val();
+      var lebar = $('#lebar').val();
+      var tinggi = $('#tinggi').val();
+      var kecamatan = $(this).val();
+      var kabupaten = $(".kota_tujuan").val();
+      $.get( "<?php echo site_url('agen/gettarif');?>", 
+        { 
+          origin:origin, 
+          kec:kecamatan, 
+          kab:kabupaten,  
+          berat:berat,  
+          panjang:panjang,  
+          lebar:lebar,  
+          tinggi:tinggi  
+        }, function( data ) {
+        $( ".ongkir_detail" ).html( data );
+         $( "#total_biaya" ).val("");
+        // $( ".ongkir_pilih" ).val( data );
+      }); 
+    });
+
+    $("#berat, #panjang, #lebar, #tinggi").keyup(function(){
+      $( ".ongkir_detail" ).html("<td colspan='4' style='text-align:center'><i class='fa fa-refresh fa-spin'></i><td/>");
+      var origin = $('#origin').val();
+      var berat = $('#berat').val();
+      var panjang = $('#panjang').val();
+      var lebar = $('#lebar').val();
+      var tinggi = $('#tinggi').val();
+      var kecamatan = $('.kecamatan_tujuan').val();
+      var kabupaten = $(".kota_tujuan").val();
+      $.get( "<?php echo site_url('agen/gettarif');?>", 
+        { 
+          origin:origin, 
+          kec:kecamatan, 
+          kab:kabupaten,  
+          berat:berat,  
+          panjang:panjang,  
+          lebar:lebar,  
+          tinggi:tinggi  
+        }, function( data ) {
+        $( ".ongkir_detail" ).html( data );
+         $( "#total_biaya" ).val("");
+        // $( ".ongkir_pilih" ).val( data );
+      }); 
+    });
+
+    $("#email").keyup(function(){
+      $("#labelnama").html("Nama * <i class='fa fa-refresh fa-spin'>");
+      $("#labelalamat").html("Alamat * <i class='fa fa-refresh fa-spin'>");
+      $("#labelorigin").html("Origin * <i class='fa fa-refresh fa-cross'>");
+
+      var email = $('#email').val();
+      $.get( "<?php echo site_url('agen/getorigin');?>", 
+        { 
+          email:email 
+
+        }, 
+
+        function( data ) {
+          if(data === 'tidak ada'){
+            
+            $("#labelnama").html("Nama * <i class='fa fa-times'>");
+            $("#labelalamat").html("Alamat * <i class='fa fa-times'>");
+            $("#labelorigin").html("Origin * <i class='fa fa-times'>");
+
+            $( "#nama" ).val( '' );
+            $( "#alamat" ).val( '' );
+            $( "#origin" ).val( '' );
+            $("#total_biaya").val( '' );
+            $( ".ongkir_detail" ).html("<td colspan='4' style='text-align:center'><i class='fa fa-refresh fa-spin'></i><td/>");
+
+
+
+          }else{
+            var result = data.split('|');
+            $( "#nama" ).val( result[0] );
+            $( "#alamat" ).val( result[1] );
+            $( "#origin" ).val( result[2] );
+
+            $("#labelnama").html("Nama * <i class='fa fa-check'>");
+            $("#labelalamat").html("Alamat * <i class='fa fa-check'>");
+            $("#labelorigin").html("Origin * <i class='fa fa-check'>");
+
+          }
+      }); 
+    });
+
+
+   function get_totalbiaya(total_biaya){
+
+      // alert(ongkir);
+      $("#total_biaya").val(total_biaya);
+    };
   $('.alert-message').alert().delay(3000).slideUp('slow');
 </script>
 </body>
