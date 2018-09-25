@@ -75,21 +75,14 @@ class User extends CI_Controller {
 		{
 			$no_resi = $this->input->post('no_resi', TRUE);
 
-			$cek = $this->user_model->get_where('t_tracking', array('no_resi' => $no_resi));
-			$data['cek'] = $cek;
-			// if ($cek->num_rows() > 0) 
-			// {				
-			// 	// foreach ($cek->result() as $key) {
-					
-			// 	// 	$data['id_tracking'] = $key->id_tracking;
-			// 	// 	$data['no_resi'] = $key->no_resi;
-			// 	// 	$data['tanggal'] = $key->tanggal;
-			// 	// 	$data['status'] = $key->status;
-			// 	// }
-
-			// } else {
-			// 	$this->session->set_flashdata('alert', "Kode Resi Tidak Ada !");
-			// }
+			$cek = $this->user_model->get_where_desc('t_tracking', ['no_resi' => $no_resi], 'id_tracking');
+			if ($cek->num_rows() > 0) 
+			{				
+				$data['cek'] = $cek;
+			} else {
+				$data['cek'] = '';
+				$this->session->set_flashdata('alert-resi', "Kode Resi Tidak Ada !");
+			}
 		}else {
 			$data['cek'] = '';
 		}

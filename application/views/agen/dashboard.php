@@ -191,9 +191,9 @@
     });
 
     $("#email").keyup(function(){
-      $("#labelnama").html("Nama * <i class='fa fa-refresh fa-spin'>");
-      $("#labelalamat").html("Alamat * <i class='fa fa-refresh fa-spin'>");
-      $("#labelorigin").html("Origin * <i class='fa fa-refresh fa-cross'>");
+      $("#labelnama").html("Nama <i class='fa fa-spinner fa-spin'>");
+      $("#labelalamat").html("Alamat <i class='fa fa-spinner fa-spin'>");
+      $("#labelorigin").html("Origin <i class='fa fa-spinner fa-spin'>");
 
       var email = $('#email').val();
       $.get( "<?php echo site_url('agen/getorigin');?>", 
@@ -201,32 +201,34 @@
           email:email 
 
         }, 
-
         function( data ) {
           if(data === 'tidak ada'){
             
-            $("#labelnama").html("Nama * <i class='fa fa-times'>");
-            $("#labelalamat").html("Alamat * <i class='fa fa-times'>");
-            $("#labelorigin").html("Origin * <i class='fa fa-times'>");
+            $("#labelnama").html("Nama <i class='fa fa-times-circle text-red'>");
+            $("#labelalamat").html("Alamat <i class='fa fa-times-circle text-red'>");
+            $("#labelorigin").html("Origin <i class='fa fa-times-circle text-red'>");
 
             $( "#nama" ).val( '' );
             $( "#alamat" ).val( '' );
             $( "#origin" ).val( '' );
+            $( "#id_user" ).val( '' );
             $("#total_biaya").val( '' );
-            $( ".ongkir_detail" ).html("<td colspan='4' style='text-align:center'><i class='fa fa-refresh fa-spin'></i><td/>");
+            
+            $( "#berat" ).val("");
 
-
-
+            $( ".ongkir_detail" ).html("");
           }else{
             var result = data.split('|');
             $( "#nama" ).val( result[0] );
             $( "#alamat" ).val( result[1] );
             $( "#origin" ).val( result[2] );
+            $( "#id_user" ).val( result[3] );
 
-            $("#labelnama").html("Nama * <i class='fa fa-check'>");
-            $("#labelalamat").html("Alamat * <i class='fa fa-check'>");
-            $("#labelorigin").html("Origin * <i class='fa fa-check'>");
+            $("#labelnama").html("Nama <i class='fa fa-check-circle text-green'>");
+            $("#labelalamat").html("Alamat <i class='fa fa-check-circle text-green'>");
+            $("#labelorigin").html("Origin <i class='fa fa-check-circle text-green'>");
 
+            $( "#berat" ).val("");
           }
       }); 
     });

@@ -29,6 +29,15 @@ class User_model extends CI_Model {
 		return $this->db->get();
 	}
 
+	function get_where_desc($table = null, $where = null, $order = null)
+	{
+		$this->db->from($table);
+		$this->db->where($where);
+		$this->db->order_by($order,'DESC');
+
+		return $this->db->get();
+	}
+
 	function select_all($select, $table)
 	{
 		

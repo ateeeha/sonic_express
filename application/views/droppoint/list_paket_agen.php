@@ -23,7 +23,7 @@
                       <?php foreach ($droppoint->result() as $dp): ?>
                       <option value="<?= $dp->id_dp; ?>"><?= $dp->username; ?></option>
                       <?php endforeach ?>
-                  </select>
+                    </select>
                 </div>
                 </div>
                 </div>

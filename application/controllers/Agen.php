@@ -30,76 +30,65 @@ class Agen extends CI_Controller {
 		$this->template->agen('agen/form_transaksi', $data);
 	}
 
-	function transaksi_simpan() //belum fix
+	function simpan_transaksi()
 	{
 		if ($this->input->post('submit', TRUE) == 'Submit')
 		{
 			//validasi
-			$this->form_validation->set_rules('nama','Nama','required');
+			$this->form_validation->set_rules('id_user','Id User','required|numeric');
 			$this->form_validation->set_rules('berat','Berat','required|numeric');
+			$this->form_validation->set_rules('panjang','Panjang','numeric');
+			$this->form_validation->set_rules('lebar','Lebar','numeric');
+			$this->form_validation->set_rules('tinggi','Tinggi','numeric');
 			$this->form_validation->set_rules('provinsi_tujuan','Provinsi','required');
 			$this->form_validation->set_rules('kabupaten_tujuan','Kabupaten','required');
+			$this->form_validation->set_rules('kecamatan_tujuan','Kecamatan','required');
+			$this->form_validation->set_rules('jenis_layanan','Jenis Layanan','required');
+			$this->form_validation->set_rules('total_biaya','Total Harga','required');
+			$this->form_validation->set_rules('nama','Nama','required');
 			$this->form_validation->set_rules('alamat','Alamat','required');
 			$this->form_validation->set_rules('kode_pos','Kode Pos','required|numeric');
 			$this->form_validation->set_rules('no_tlp','Nomor Telepon','required|numeric');
-			$this->form_validation->set_rules('email','Email','required|valid_email');
-
 
 			if ($this->form_validation->run() == TRUE)
 			{
-				$email = $this->input->post('email', TRUE);
-				$cek = $this->kurir_model->get_where('t_user', array('email' => $email));
 
-				if ($cek->num_rows() > 0)
-				{
-					$user = $cek->row();
-
-					$ongkir = $this->input->post('ongkir');
-					$berat = $this->input->post('berat');
-					$p = $this->input->post('panjang');
-					$l= $this->input->post('lebar');
-					$t = $this->input->post('tinggi');
-
-					if (($p * $l * $t) < 18000) {
-
-						$total_biaya = $berat * $ongkir;
-
-					}else if (($p * $l * $t) >= 18000) {
-
-						$berat = $p * $l * $t / 6000;
-
-						$total_biaya = $berat * $ongkir;
-					}
-				
-					$data = array(
+				$data = array(
+					'agen_asal' => $this->session->userdata('id_agen'),
+					
+					'id_user' => $this->input->post('id_user'),
 					'tgl_pengiriman' => date("Y-m-d"), 
-					'id_user' => $user->id_user, 
-					'no_resi' => 'RES'.date("dmYgis").$user->id_user, 
+					'no_resi' => 'RES'.date("dmYgis").$this->input->post('id_user'), 
 
 					'berat' => $this->input->post('berat'),
 					'panjang' => $this->input->post('panjang'),
 					'lebar' => $this->input->post('lebar'),
 					'tinggi' => $this->input->post('tinggi'),
-					'ongkir' => $this->input->post('ongkir'),
-					'total_biaya' => $total_biaya,
+					'provinsi_tujuan' => $this->input->post('provinsi_tujuan'), 
+					'kabupaten_tujuan' => $this->input->post('kabupaten_tujuan'), 
+					'kecamatan_tujuan' => $this->input->post('kecamatan_tujuan'), 
+					'jenis_layanan' => $this->input->post('jenis_layanan'),
+					'total_biaya' => $this->input->post('total_biaya'),
 
-					'nama' => $this->input->post('nama', TRUE), 
-					'alamat' => $this->input->post('alamat', TRUE), 
-					'kode_pos' => $this->input->post('kode_pos', TRUE), 
-					'no_tlp' => $this->input->post('no_tlp', TRUE), 
-					'kurir_penjemput' => $this->session->userdata('id_kurir'),
-					'status_transaksi' => 'Diterima'
-					);
+					'nama' => $this->input->post('nama'), 
+					'alamat' => $this->input->post('alamat'), 
+					'kode_pos' => $this->input->post('kode_pos'), 
+					'no_tlp' => $this->input->post('no_tlp'), 
+					
+					'status_transaksi' => 'Diterima',
+					'status_kurir' => 'Selesai',
+					'dp_kirim' => 'Belum Dikirim'
+				);
 
-					$this->kurir_model->insert('t_transaksi', $data);
-					$this->session->set_flashdata('success','Data berhasil disimpan !');
-				}else{
-					$this->session->set_flashdata('alert','email tidak terdaftar !');
-				}
+				$this->agen_model->insert('t_transaksi', $data);
+				$this->session->set_flashdata('success','Transaksi berhasil diproses !');
 			
+			}else{
+
+				$this->session->set_flashdata('alert','Transaksi gagal diproses !');
 			} 
 		}
-		redirect('kurir/transaksi/');
+		redirect('agen/transaksi/');
 	}
 
 	public function user()
@@ -615,7 +604,7 @@ class Agen extends CI_Controller {
 		if ($getorigin->num_rows() > 0){
 
 			$user = $getorigin->row();
-			echo $user->username.'|'.$user->alamat.'|'.$user->kabupaten;
+			echo $user->username.'|'.$user->alamat.'|'.$user->kabupaten.'|'.$user->id_user;
 		}else{
 			echo "tidak ada";
 		}

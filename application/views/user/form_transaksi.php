@@ -70,17 +70,17 @@
                   </div>
                   <div class="form-group">
                     <table class="table table-bordered table-hover dt-responsive nowrap">
-                    <thead>
-                      <tr style="color: #ccc">
-                        <th style="text-align: center" width="5%">#</th>
-                        <th style="text-align: center">Paket</th>
-                        <th style="text-align: center">Ongkir</th>
-                        <th style="text-align: center">Estimasi</th>
-                      </tr>
-                    </thead>
-                    <tfoot class="ongkir_detail" id="ongkir_detail">
-                    </tfoot>                
-                  </table>
+                      <thead>
+                        <tr style="color: #ccc">
+                          <th style="text-align: center" width="5%">#</th>
+                          <th style="text-align: center">Paket</th>
+                          <th style="text-align: center">Ongkir</th>
+                          <th style="text-align: center">Estimasi</th>
+                        </tr>
+                      </thead>
+                      <tbody class="ongkir_detail" id="ongkir_detail">
+                      </tbody>                
+                    </table>
                   </div>
                   
                   <hr>

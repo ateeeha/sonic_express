@@ -31,7 +31,7 @@
                     <div class="row">
                     <div class="col-md-6">
                     <label>Email *</label>
-                    <input id="email" name="email" type="email" class="form-control" placeholder="Email User">
+                    <input required id="email" name="email" type="email" class="form-control" placeholder="Email User">
                     </div>
                     <div class="col-md-6">
                     <label id="labelnama">Nama *</label>
@@ -52,20 +52,23 @@
                     </div>
                   </div>
                   <div class="form-group">
+                    <input id="id_user" name="id_user" type="hidden" class="form-control">
+                  </div>
+                  <div class="form-group">
                     <div class="row">
-                      <div class="col-xs-3">
+                      <div class="col-xs-6 col-md-3">
                         <label>Berat (gram) *</label>
                           <input name="berat" id="berat" required type="number" min="1" class="form-control" placeholder="gram">
                       </div>
-                      <div class="col-xs-3">
+                      <div class="col-xs-6 col-md-3">
                         <label style="color: #ccc">Panjang (cm)</label>
                         <input name="panjang" id="panjang" type="number" min="0" class="form-control" placeholder="cm">
                       </div>
-                      <div class="col-xs-3">
+                      <div class="col-xs-6 col-md-3">
                         <label style="color: #ccc">Lebar (cm)</label>
                         <input name="lebar" id="lebar" type="number" min="0" class="form-control" placeholder="cm">
                       </div>
-                      <div class="col-xs-3">
+                      <div class="col-xs-6 col-md-3">
                         <label style="color: #ccc">Tinggi (cm)</label>
                         <input name="tinggi" id="tinggi" type="number" min="0" class="form-control" placeholder="cm">
                       </div>
@@ -122,7 +125,7 @@
               </div>
                   <div class="form-group">
                     <label>Nama *</label>
-                    <input name="nama" type="text" class="form-control" placeholder="Nama Lengkap Penerima">
+                    <input required name="nama" type="text" class="form-control" placeholder="Nama Lengkap Penerima">
                   </div>
                   <div class="form-group">
                     <label>Alamat *</label>
