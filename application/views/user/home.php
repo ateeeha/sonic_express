@@ -6,7 +6,7 @@
         <div class="col-xs-12">
           <div class="box box-primary">
   
-            
+            <?php echo substr(1000.98, -3); ?>
           </div>
         </div>
       </div>

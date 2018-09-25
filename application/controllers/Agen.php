@@ -618,10 +618,21 @@ class Agen extends CI_Controller {
 		
 		$berat = $this->input->get('berat');
 
-		$b = ($berat / 1000);
+		if ($berat > 0) {
+			$b = $berat / 1000;
+		}elseif($berat == '' or $berat <= 0){
+			$b = 0;
+		}
+
 		$p = $this->input->get('panjang');
 		$l = $this->input->get('lebar');
 		$t = $this->input->get('tinggi');
+
+		if ($p == '' or $p <= 0 || $l == '' or $l <= 0 || $t == '' or $t <= 0) {
+			$p = 0;
+			$l = 0;
+			$t = 0;
+		}
 
 		$origin = $this->input->get('origin');		
 		$kab = $this->input->get('kab');		

@@ -190,7 +190,15 @@
                 <tbody>
                 <?php if ($ongkir->num_rows() > 0)
                 { 
+                  //kondisi (p / l / t) jika tidak diisi.
+                  if ($panjang == '' or $panjang <= 0 || $lebar == '' or $lebar <= 0 || $tinggi == '' or $tinggi <= 0) {
+                    $panjang = 0;
+                    $lebar = 0;
+                    $tinggi = 0;
+                  }
+
                   $i = 1;
+
                  foreach ($ongkir->result() as $og ){
 
                     $biaya = $og->harga;
@@ -216,9 +224,31 @@
 
                       }else if (($panjang * $lebar * $tinggi) >= 18000) {
 
-                        $b = $panjang * $lebar * $tinggi / 6000;
+                        $volume = $panjang * $lebar * $tinggi / 6000;
 
-                        $total_biaya = $b * $biaya;
+                        if ($volume > $b) {
+                          $x = $volume * $biaya;
+
+                          $ratusan = substr($x, -3);
+                          
+                          if($ratusan<500){
+                            $total_biaya = $x - $ratusan;
+                          }
+                          else{
+                            $total_biaya = $x + (1000-$ratusan);
+                          }
+                        }else {
+                          $x = $b * $biaya;
+
+                          $ratusan = substr($x, -3);
+                          if($ratusan < 500){
+                            $total_biaya = $x - $ratusan;
+                          }
+                          else{
+                            $total_biaya = $x + (1000-$ratusan);
+                          }
+                        }
+
                       }
                     } 
                   ?>

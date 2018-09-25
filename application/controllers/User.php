@@ -203,10 +203,22 @@ class User extends CI_Controller {
 
 		$berat = $this->input->get('berat');
 
-		$b = ($berat / 1000);
+		if ($berat > 0) {
+			$b = $berat / 1000;
+		}elseif($berat == '' or $berat <= 0){
+			$b = 0;
+		}
+
 		$p = $this->input->get('panjang');
 		$l = $this->input->get('lebar');
 		$t = $this->input->get('tinggi');
+		
+		if ($p == '' or $p <= 0 || $l == '' or $l <= 0 || $t == '' or $t <= 0) {
+			$p = 0;
+			$l = 0;
+			$t = 0;
+		}
+
 
 		$kab = $this->input->get('kab');		
 		$kec = $this->input->get('kec');		
@@ -218,7 +230,7 @@ class User extends CI_Controller {
 				);
 
 		$getongkir = $this->user_model->get_where('t_ongkir', $ongkir);
-		if ($berat == 0 or '') {
+		if ($berat == '' or 0) {
 
 			echo "<td colspan='4' style='text-align:center'>Inputkan Berat!</td>";
 
@@ -236,18 +248,18 @@ class User extends CI_Controller {
 
 						$ongkir = $go->harga;
 
-						if ($b < 1) {
+						if ($b <= 1) {
 
 							$total_biaya = $ongkir;
 
-						}else{
+						}elseif($b > 1) {
 
 							if (($p * $l * $t) < 18000) {
 
 								$x = $b * $ongkir;
 
 		                        $ratusan = substr($x, -3);
-		                        if($ratusan<500){
+		                        if($ratusan < 500){
 		                          $total_biaya = $x - $ratusan;
 		                        }
 		                        else{
@@ -256,9 +268,31 @@ class User extends CI_Controller {
 
 							}else if (($p * $l * $t) >= 18000) {
 
-								$b = $p * $l * $t / 6000;
+								$volume = $p * $l * $t / 6000;
 
-								$total_biaya = $b * $ongkir;
+								if ($volume > $b) {
+									$x = $volume * $ongkir;
+
+									$ratusan = substr($x, -3);
+                          
+			                        if($ratusan<500){
+			                          $total_biaya = $x - $ratusan;
+			                        }
+			                        else{
+			                          $total_biaya = $x + (1000-$ratusan);
+			                        }
+								}else {
+									$x = $b * $ongkir;
+
+			                        $ratusan = substr($x, -3);
+			                        
+			                        if($ratusan < 500){
+			                          $total_biaya = $x - $ratusan;
+			                        }
+			                        else{
+			                          $total_biaya = $x + (1000-$ratusan);
+			                        }
+								}
 							}
 
 						}
