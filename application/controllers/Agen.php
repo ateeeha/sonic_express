@@ -77,7 +77,7 @@ class Agen extends CI_Controller {
 					
 					'status_transaksi' => 'Diterima',
 					'status_kurir' => 'Selesai',
-					'dp_kirim' => 'Belum Dikirim'
+					'status_dp' => 'Baru'
 				);
 
 				$this->agen_model->insert('t_transaksi', $data);

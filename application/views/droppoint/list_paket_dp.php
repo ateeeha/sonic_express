@@ -4,7 +4,6 @@
         <li><a href="<?= base_url(); ?>admin/"><i class="fa fa-home"></i> Dashboard</a></li>
       </ol>
     </section>
-
     <section class="content">
       <!-- /.row -->
       <div class="row">
@@ -19,7 +18,7 @@
                       <input class="btn btn-primary" type="submit" name="submit" value="Kirim">
                     </div>
                       <select class="form-control" name="agen_tujuan" required> 
-                        <option value="" disabled selected>--Pilih Droppoint--</option>
+                        <option value="" disabled selected>-- Pilih Agen --</option>
                         <?php foreach ($agen->result() as $ag): ?>
                         <option value="<?= $ag->id_agen; ?>"><?= $ag->username; ?></option>
                         <?php endforeach ?>
@@ -35,9 +34,9 @@
                     <th style="text-align: center">#</th>
                     <th style="text-align: center">Tujuan</th>
                     <th style="text-align: center">No Resi</th>
-                    <th style="text-align: center">Tgl Pengirim</th>
+                    <th style="text-align: center">Tgl Transaksi</th>
                     <th style="text-align: center">Penerima</th>
-                    <th style="text-align: center">Agen</th>
+                    <th style="text-align: center">Agen Tujuan</th>
                   </tr>
                 </thead>
                 <tbody>

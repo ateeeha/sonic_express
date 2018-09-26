@@ -11,11 +11,11 @@
         <div class="col-xs-12">
           <div class="box box-primary">
             <!-- /.box-header -->
-            <form method="post" action="<?php echo site_url('droppoint/multi_terima_paket_dp'); ?>">
+            <form method="post" action="<?= site_url('droppoint/multi_terima_paket_dp'); ?>">
             <div class="box-header with-border">
                 <div style="float:left">
                   <input class="btn btn-success" type="submit" name="submit" value="Konfirmasi">
-                  <input type="hidden" name="id_transaksidp" value="<?= $this->uri->segment('3');  ?>">
+                  <input type="hidden" name="id_dp_dp" value="<?= $this->uri->segment('3');  ?>">
                 </div>
             </div>
             <div class="box-body table-responsive">
@@ -24,8 +24,9 @@
                   <tr>
                     <th><input id="check-all" type="checkbox"></th>
                     <th style="text-align: center">#</th>
-                    <th style="text-align: center">ID TRANSAKSI DP DETAIL</th>
-                    <th style="text-align: center">ID TRANSAKSI DP</th>
+                    <th style="text-align: center">ID USER</th>
+                    <th style="text-align: center">id_dp_dp_detail</th>
+                    <th style="text-align: center">id_dp_dp</th>
                     <th style="text-align: center">NO RESI</th>
                     <th style="text-align: center">Status</th>
                   </tr>
@@ -38,10 +39,11 @@
                   <tr>
                     <th><input class="check-item" type="checkbox" name="no_resi[<?= $key->no_resi; ?>]" value="<?= $key->no_resi; ?>"></th> 
                     <td style="text-align: center"><?= $i++; ?></td>
-                    <td style="text-align: center"><?= $key->id_transaksidpdetail; ?></td>
-                    <td style="text-align: center"><?= $key->id_transaksidp; ?></td>
+                    <td style="text-align: center"><?= $key->id_user; ?></td>
+                    <td style="text-align: center"><?= $key->id_dp_dp_detail; ?></td>
+                    <td style="text-align: center"><?= $key->id_dp_dp; ?></td>
                     <td style="text-align: center"><?= $key->no_resi; ?></td>
-                    <td style="text-align: center"><?= $key->status_tdp; ?></td>
+                    <td style="text-align: center"><?= $key->status_dp; ?></td>
                   </tr>
                   <?php endforeach ?>
                 </tbody>

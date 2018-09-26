@@ -144,7 +144,7 @@ class User extends CI_Controller {
 					'kode_pos' => $this->input->post('kode_pos'), 
 					'no_tlp' => $this->input->post('no_tlp'), 
 					'status_transaksi' => 'Menunggu',
-					'dp_kirim' => 'Belum Dikirim'
+					'status_dp' => 'Baru'
 				);
 
 				$this->user_model->insert('t_transaksi', $data);

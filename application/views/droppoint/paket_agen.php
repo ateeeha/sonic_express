@@ -42,7 +42,8 @@
                         <th><input id="check-all" type="checkbox"></th>
                         <th style="text-align: center">#</th>
                         <th style="text-align: center">Id Agen</th>
-                        <th style="text-align: center">No Resi</th>
+                        <th style="text-align: center">Tgl Kirim</th>
+                        <th style="text-align: center">Tgl tgl_sampai</th>
                         <th style="text-align: center">Status</th>
                         <th style="text-align: center" width="20%;">Opsi</th>
                       </tr>
@@ -53,15 +54,16 @@
                       foreach ($data->result() as $key) :
                       ?>
                       <tr>
-                        <th><input required class="check-item" type="checkbox" name="no_resi[<?= $key->no_resi; ?>]" value="<?= $key->no_resi; ?>"></th> 
+                        <th><input class="check-item" type="checkbox" name="id_agen_dp[<?= $key->id_agen_dp; ?>]" value="<?= $key->id_agen_dp; ?>"></th> 
                         <td style="text-align: center"><?= $i++; ?></td>
                         <td style="text-align: center"><?= $key->id_agen; ?></td>
-                        <td style="text-align: center"><?= $key->no_resi; ?></td>
+                        <td style="text-align: center"><?= $key->tgl_kirim; ?></td>
+                        <td style="text-align: center"><?= $key->tgl_sampai; ?></td>
                         <td style="text-align: center"><?= $key->status_agen_dp; ?></td>
                         <td style="text-align: center">
                         <a href="<?= base_url(); ?>droppoint/detail_paket_agen/<?= $key->id_agen_dp ?>/" class="btn btn-primary btn-xs" onclick="return confirm('Anda Yakin ?');"><i class="fa fa-search"></i> Detail</a>
 
-                        <a href="<?= base_url(); ?>droppoint/proses_penjemputan/<?= $key->no_resi ?>/" class="btn btn-success btn-xs" onclick="return confirm('Anda Yakin ?');"><i class="fa fa-check"></i> Proses</a>
+                        <a href="<?= base_url(); ?>droppoint/proses_penjemputan/<?= $key->id_agen_dp ?>/" class="btn btn-success btn-xs" onclick="return confirm('Anda Yakin ?');"><i class="fa fa-check"></i> Proses</a>
                         </td>
                       </tr>
                       <?php endforeach ?>
