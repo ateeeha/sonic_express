@@ -57,7 +57,7 @@ class Agen extends CI_Controller {
 					'agen_asal' => $this->session->userdata('id_agen'),
 					
 					'id_user' => $this->input->post('id_user'),
-					'tgl_pengiriman' => date("Y-m-d"), 
+					'tgl_pengiriman' => date("Y-m-d H:i:s"), 
 					'no_resi' => 'RES'.date("dmYgis").$this->input->post('id_user'), 
 
 					'berat' => $this->input->post('berat'),
@@ -322,7 +322,7 @@ class Agen extends CI_Controller {
 
 		$data = array(
 			'no_resi' => $no_resi, 
-			'tanggal' => date("Y-m-d"), 
+			'tanggal' => date("Y-m-d H:i:s"), 
 			'status_tracking' => 'Diterima Agen Kota Asal'
 		);
 
@@ -350,7 +350,7 @@ class Agen extends CI_Controller {
 		        
 				$tracking = array(
 					'no_resi' => $res, 
-					'tanggal' => date("Y-m-d"), 
+					'tanggal' => date("Y-m-d H:i:s"), 
 					'status_tracking' => 'Diterima Agen Kota Asal'
 				);
 				$this->agen_model->insert('t_tracking', $tracking);
@@ -376,7 +376,7 @@ class Agen extends CI_Controller {
 		if (isset($_POST['submit']))
 		{
 			$transaksidpagen = array(
-				'tgl_sampai' =>  date("Y-m-d"),
+				'tgl_sampai' =>  date("Y-m-d H:i:s"),
 				'status_tdpagen' => 'selesai'
 			);
 			$this->agen_model->update('t_transaksidpagen', $transaksidpagen, ['id_transaksidpagen' => $id_transaksidpagen]);
@@ -386,7 +386,7 @@ class Agen extends CI_Controller {
 		        
 				$tracking = array(
 					'no_resi' => $res, 
-					'tanggal' => date("Y-m-d"), 
+					'tanggal' => date("Y-m-d H:i:s"), 
 					'status_tracking' => 'Diterima Agen Kota Tujuan'
 				);
 
@@ -421,44 +421,54 @@ class Agen extends CI_Controller {
 		$this->template->agen('agen/list_paket_kurir', $data);
 	}
 
-	public function minta_jemput_paket()//belum fix
+	public function minta_jemput_paket()
 	{
 		$this->cek_login();
 		
 		$resi 	= $this->input->post('no_resi');
 		$id_dp	= $this->input->post('id_dp');
 
-		if (isset($_POST['submit']))
+		if ($this->input->post('submit') == 'Jemput') 
 		{
-			$transaksiagen = array(
-				'id_dp' => $id_dp,
-				'id_agen' => $this->session->userdata('id_agen'),
-				'status_tagen' => 'baru'
-			);
-			$id_transaksiagen = $this->agen_model->insert_id('t_transaksiagen', $transaksiagen);
+			$this->form_validation->set_rules('id_dp', 'Droppoint', "required");
+			// $this->form_validation->set_rules('no_resi', 'Paket', "required");
 
-			foreach ($resi as $res)
-			{ 		        
-				$tracking = array(
-					'no_resi' => $res, 
-					'tanggal' => date("Y-m-d H:i:s"), 
-					'status_tracking' => 'Diproses Agen Kota Asal'
+			if ($this->form_validation->run() == TRUE)
+			{
+				$agen_dp = array(
+					'id_dp' => $id_dp,
+					'id_agen' => $this->session->userdata('id_agen'),
+					'tgl_kirim' => date("Y-m-d H:i:s"), 
+					'status_agen_dp' => 'baru'
 				);
+				$id_agen_dp = $this->agen_model->insert_id('t_agen_dp', $agen_dp);
 
-				$transaksi = array(
-					'dp_jemput' => 'proses' 
-				);
+				foreach ($resi as $res)
+				{ 		        
+					$tracking = array(
+						'no_resi' => $res, 
+						'tanggal' => date("Y-m-d H:i:s"), 
+						'status_tracking' => 'Diproses Agen Kota Asal'
+					);
 
-				$this->agen_model->update('t_transaksi', $transaksi, ['no_resi' => $res]);
+					$transaksi = array(
+						'dp_jemput' => 'proses' 
+					);
 
-				$this->agen_model->insert('t_tracking', $tracking);				
+					$this->agen_model->update('t_transaksi', $transaksi, ['no_resi' => $res]);
 
-				$transaksiagendetail = array(
-					'no_resi' => $res, 
-					'id_transaksiagen' => $id_transaksiagen 
-				);
+					$this->agen_model->insert('t_tracking', $tracking);				
 
-				$this->agen_model->insert('t_transaksiagendetail', $transaksiagendetail);
+					$agen_dp_detail = array(
+						'no_resi' => $res, 
+						'id_agen_dp' => $id_agen_dp 
+					);
+
+					$this->agen_model->insert('t_agen_dp_detail', $agen_dp_detail);
+	    		}
+				$this->session->set_flashdata('success','Permintaan Penjemputan Berhasil !');
+    		}else{
+				$this->session->set_flashdata('alert','Permintaan Penjemputan Gagal !');
     		}
 
 	    }
@@ -469,7 +479,7 @@ class Agen extends CI_Controller {
 	{
 		$this->cek_login();
 
-		$data['data'] = $this->agen_model->get_where('t_transaksiagen', array('id_agen' => $this->session->userdata('id_agen')));
+		$data['data'] = $this->agen_model->get_where('t_agen_dp', array('id_agen' => $this->session->userdata('id_agen')));
 
 		// $data['data'] = $this->kurir_model->get_all('t_transaksi');
 
@@ -483,18 +493,18 @@ class Agen extends CI_Controller {
 	{
 		$this->cek_login();
 
-		$tabel = 't_transaksiagen ta 
-				JOIN t_transaksiagendetail tad 
-					ON (ta.id_transaksiagen = tad.id_transaksiagen)
+		$tabel = 't_agen_dp tad 
+				JOIN t_agen_dp_detail tadd 
+					ON (tad.id_agen_dp = tadd.id_agen_dp)
 				JOIN t_transaksi t 
-					ON (tad.no_resi = t.no_resi)';
+					ON (tadd.no_resi = t.no_resi)';
 
-		$id_transaksiagen['ta.id_transaksiagen'] = $this->uri->segment(3);
+		$id_agen_dp['tad.id_agen_dp'] = $this->uri->segment(3);
 
-		$data['data'] = $this->agen_model->get_where($tabel, $id_transaksiagen);
+		$data['data'] = $this->agen_model->get_where($tabel, $id_agen_dp);
 
 		// $data['data'] = $this->kurir_model->get_all('t_transaksi');
-
+		$data['active_menu_kurir'] = 'active';
 		$data['active_list_jemput_paket'] = 'active';
 		$data['header'] = 'Detail List Penjemputan';
 		$this->template->agen('agen/detail_penjemputan', $data);

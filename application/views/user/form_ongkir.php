@@ -214,7 +214,7 @@
                         $x = $b * $biaya;
 
                         $ratusan = substr($x, -3);
-                        if($ratusan<500){
+                        if($ratusan < 500){
                           $total_biaya = $x - $ratusan;
                         }
                         else{
@@ -230,7 +230,7 @@
                           $x = $volume * $biaya;
 
                           $ratusan = substr($x, -3);
-                          
+
                           if($ratusan<500){
                             $total_biaya = $x - $ratusan;
                           }

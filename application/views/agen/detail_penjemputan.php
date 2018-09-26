@@ -11,7 +11,7 @@
         <div class="col-xs-12">
           <div class="box box-primary">
             <!-- /.box-header -->
-            <form method="post" action="<?php echo site_url('droppoint/multi_proses_penjemputan'); ?>">
+            <form method="post">
             <div class="box-header with-border">
             </div>
             <div class="box-body table-responsive">
@@ -33,10 +33,7 @@
                     <td style="text-align: center"><?= $i++; ?></td>
                     <td style="text-align: center"><?= $key->id_agen; ?></td>
                     <td style="text-align: center"><?= $key->no_resi; ?></td>
-                    <td style="text-align: center"><?= $key->status_tagen; ?></td>
-                    
-                    <td>
-                    </td>
+                    <td style="text-align: center"><?= $key->status_agen_dp; ?></td>
                   </tr>
                   <?php endforeach ?>
                 </tbody>

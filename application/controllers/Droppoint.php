@@ -34,13 +34,13 @@ class Droppoint extends CI_Controller {
 	public function paket_agen()
 	{
 		$this->cek_login();
-		$join = 't_transaksiagen ta JOIN t_transaksiagendetail tad ON (ta.id_transaksiagen = tad.id_transaksiagen)';
+		$join = 't_agen_dp ta JOIN t_agen_dp_detail tad ON (ta.id_agen_dp = tad.id_agen_dp)';
 		$data['data'] = $this->dp_model->get_where($join, 
 			array(
-				'status_tagen' => 'baru',
+				'status_agen_dp' => 'baru',
 				'id_dp' => $this->session->userdata('id_dp'),
 				));
-
+ 
 		// $data['data'] = $this->kurir_model->get_all('t_transaksi');
 
 		$data['active_menu_agen'] = 'active';
@@ -52,10 +52,10 @@ class Droppoint extends CI_Controller {
 	public function list_penjemputan()
 	{
 		$this->cek_login();
-		$data['data'] = $this->dp_model->get_where('t_transaksiagen', 
+		$data['data'] = $this->dp_model->get_where('t_agen_dp', 
 			array(
 				'id_dp' => $this->session->userdata('id_dp'),
-				'status_tagen' => 'proses'
+				'status_agen_dp' => 'proses'
 				));
 
 		// $data['data'] = $this->kurir_model->get_all('t_transaksi');
@@ -72,11 +72,11 @@ class Droppoint extends CI_Controller {
 
 		$no_resi = $this->uri->segment(3);
 
-		$tabel = 't_transaksiagen ta JOIN t_transaksiagendetail tad ON (ta.id_transaksiagen = tad.id_transaksiagen)';
+		$tabel = 't_agen_dp tad JOIN t_agen_dp_detail tadd ON (tad.id_agen_dp = tadd.id_agen_dp)';
 
 		$this->dp_model->update(
 			$tabel, 
-			['status_tagen' => 'proses'],
+			['status_agen_dp' => 'proses'],
 			['no_resi' => $this->uri->segment(3)]
 			);
 
@@ -89,35 +89,21 @@ class Droppoint extends CI_Controller {
 
 		$resi = $this->input->post('no_resi');
 
-		$tabel = 't_transaksiagen ta JOIN t_transaksiagendetail tad ON (ta.id_transaksiagen = tad.id_transaksiagen)';
+		$tabel = 't_agen_dp tad JOIN t_agen_dp_detail tadd ON (tad.id_agen_dp = tadd.id_agen_dp)';
 
-		if (isset($_POST['submit']))
+		if ($this->input->post('submit') == 'Proses') 
 		{
-
 			foreach ($resi as $res)
 			{ 
 		        
 		        $this->dp_model->update($tabel, 
-					['status_tagen' => 'proses'],
+					['status_agen_dp' => 'proses'],
 					['no_resi' => $res]
 				);
 
-				// $data = array(
-				// 	'no_resi' => $res, 
-				// 	'tanggal' => date("Y-m-d"), 
-				// 	'status_tracking' => 'Diterima Drop Point Kota Asal'
-				// );
-
-				// $this->dp_model->insert('t_tracking', $data);
-				// $this->dp_model->update(
-				// 	't_transaksi', 
-				// 	['dp_asal' => $this->session->userdata('id_dp')],
-				// 	['no_resi' => $res]
-				// 	);              
-    		}
-
+			}
+			$this->session->set_flashdata('success','Berhasil Diproses !');
 	    }
-			
 		redirect('droppoint/paket_agen/');
 	}
 
@@ -126,25 +112,30 @@ class Droppoint extends CI_Controller {
 		$this->cek_login();
 
 		$resi = $this->input->post('no_resi');
-		$id_transaksiagen['id_transaksiagen'] = $this->input->post('id_transaksiagen');
+		$id_agen_dp['id_agen_dp'] = $this->input->post('id_agen_dp');
 
-		if (isset($_POST['submit']))
+		if ($this->input->post('submit') == 'Konfirmasi')
 		{
 			
-			$this->dp_model->update('t_transaksiagen', ['status_tagen' => 'selesai'], $id_transaksiagen); 
+			$agen_dp = array(
+				'tgl_sampai' => date("Y-m-d H:i:s"), 
+				'status_agen_dp' => 'selesai'
+			);
+
+			$this->dp_model->update('t_agen_dp', $agen_dp, $id_agen_dp); 
 
 			foreach ($resi as $res)
 			{ 
 		        
 				$tracking = array(
 					'no_resi' => $res, 
-					'tanggal' => date("Y-m-d"), 
+					'tanggal' => date("Y-m-d H:i:s"), 
 					'status_tracking' => 'Diterima Drop Point Kota Asal'
 				);
 
 				$transaksi = array(
 					'dp_asal' => $this->session->userdata('id_dp'),
-					'dp_jemput' => selesai 
+					'dp_jemput' => 'selesai' 
 				);
 
 				$this->dp_model->insert('t_tracking', $tracking);
@@ -153,25 +144,25 @@ class Droppoint extends CI_Controller {
 
 	    }
 			
-		redirect('droppoint/detail_penjemputan/'.$id_transaksiagen.'/');
+		redirect('droppoint/list_penjemputan/');
 	}
 
 	public function detail_penjemputan()
 	{
 		$this->cek_login();
 
-		$tabel = 't_transaksiagen ta 
-				JOIN t_transaksiagendetail tad 
-					ON (ta.id_transaksiagen = tad.id_transaksiagen)
+		$tabel = 't_agen_dp tad 
+				JOIN t_agen_dp_detail tadd 
+					ON (tad.id_agen_dp = tadd.id_agen_dp)
 				JOIN t_transaksi t 
-					ON (tad.no_resi = t.no_resi)';
+					ON (tadd.no_resi = t.no_resi)';
 
-		$id_transaksiagen['ta.id_transaksiagen'] = $this->uri->segment(3);
+		$id_agen_dp['tad.id_agen_dp'] = $this->uri->segment(3);
 
-		$data['data'] = $this->dp_model->get_where($tabel, $id_transaksiagen);
+		$data['data'] = $this->dp_model->get_where($tabel, $id_agen_dp);
 
 		// $data['data'] = $this->kurir_model->get_all('t_transaksi');
-
+		$data['active_menu_agen'] = 'active';
 		$data['active_list_penjemputan'] = 'active';
 		$data['header'] = 'Manage List Penjemputan';
 		$this->template->dp('droppoint/detail_penjemputan', $data);
@@ -181,18 +172,18 @@ class Droppoint extends CI_Controller {
 	{
 		$this->cek_login();
 
-		$tabel = 't_transaksiagen ta 
-				JOIN t_transaksiagendetail tad 
-					ON (ta.id_transaksiagen = tad.id_transaksiagen)
+		$tabel = 't_agen_dp tad 
+				JOIN t_agen_dp_detail tadd 
+					ON (tad.id_agen_dp = tadd.id_agen_dp)
 				JOIN t_transaksi t 
-					ON (tad.no_resi = t.no_resi)';
+					ON (tadd.no_resi = t.no_resi)';
 
-		$id_transaksiagen['ta.id_transaksiagen'] = $this->uri->segment(3);
+		$id_agen_dp['tad.id_agen_dp'] = $this->uri->segment(3);
 
-		$data['data'] = $this->dp_model->get_where($tabel, $id_transaksiagen);
+		$data['data'] = $this->dp_model->get_where($tabel, $id_agen_dp);
 
 		// $data['data'] = $this->kurir_model->get_all('t_transaksi');
-
+		$data['active_menu_agen'] = 'active';
 		$data['active_paket_agen'] = 'active';
 		$data['header'] = 'Detail Paket Agen';
 		$this->template->dp('droppoint/detail_paket_agen', $data);
@@ -288,10 +279,10 @@ class Droppoint extends CI_Controller {
 				// 'kabupaten_tujuan' => $this->session->userdata('kabupaten_dp'),
 				// 'status_transaksi' => 'diterima',
 				// 'dp_kirim' => 'Sudah Dikirim',
-				'tujuan' => $this->session->userdata('id_dp')
+				'id_dp' => $this->session->userdata('id_dp')
 				);
 
-		$data['data'] = $this->dp_model->get_where('t_transaksidpagen', $where);
+		$data['data'] = $this->dp_model->get_where('t_agen_dp', $where);
 
 		// $data['data'] = $this->kurir_model->get_all('t_transaksi');
 
@@ -322,14 +313,14 @@ class Droppoint extends CI_Controller {
 
 				$tracking = array(
 					'no_resi' => $no_resi, 
-					'tanggal' => date("Y-m-d"), 
+					'tanggal' => date("Y-m-d H:i:s"), 
 					'status_tracking' => 'Dikirim ke Drop Point Kota Tujuan'
 				);
 
 				$transaksidp = array(
 					'dp_asal' => $this->session->userdata('id_dp'), 
 					'dp_tujuan' => $dp_tujuan,
-					'tgl_kirim' =>  date("Y-m-d"),
+					'tgl_kirim' =>  date("Y-m-d H:i:s"),
 					'tgl_sampai' => ''
 				);
 
@@ -363,7 +354,7 @@ class Droppoint extends CI_Controller {
 			$transaksidp = array(
 				'asal' => $this->session->userdata('id_dp'), 
 				'tujuan' => $dp_tujuan,
-				'tgl_kirim' =>  date("Y-m-d"),
+				'tgl_kirim' =>  date("Y-m-d H:i:s"),
 				'tgl_sampai' => '',
 				'status_tdp' => 'proses'
 			);
@@ -374,7 +365,7 @@ class Droppoint extends CI_Controller {
 		        
 				$tracking = array(
 					'no_resi' => $res, 
-					'tanggal' => date("Y-m-d"), 
+					'tanggal' => date("Y-m-d H:i:s"), 
 					'status_tracking' => 'Dikirim ke Drop Point Kota Tujuan'
 				);
 
@@ -411,7 +402,7 @@ class Droppoint extends CI_Controller {
 			$transaksidpagen = array(
 				'asal' => $this->session->userdata('id_dp'), 
 				'tujuan' => $agen_tujuan,
-				'tgl_kirim' =>  date("Y-m-d"),
+				'tgl_kirim' =>  date("Y-m-d H:i:s"),
 				'tgl_sampai' => '',
 				'status_tdpagen' => 'proses'
 			);
@@ -422,7 +413,7 @@ class Droppoint extends CI_Controller {
 		        
 				$tracking = array(
 					'no_resi' => $res, 
-					'tanggal' => date("Y-m-d"), 
+					'tanggal' => date("Y-m-d H:i:s"), 
 					'status_tracking' => 'Dikirim ke Agen Kota Tujuan'
 				);
 
@@ -644,7 +635,7 @@ class Droppoint extends CI_Controller {
 
 		$data = array(
 			'no_resi' => $no_resi, 
-			'tanggal' => date("Y-m-d"), 
+			'tanggal' => date("Y-m-d H:i:s"), 
 			'status_tracking' => 'Diterima Drop Point Kota Tujuan'
 		);
 
@@ -669,7 +660,7 @@ class Droppoint extends CI_Controller {
 		{
 
 			$transaksidp = array(
-					'tgl_sampai' => date("Y-m-d"),
+					'tgl_sampai' => date("Y-m-d H:i:s"),
 					'status_tdp' => 'selesai'
 			);
 			$this->dp_model->update('t_transaksidp', $transaksidp, ['id_transaksidp' => $id_transaksidp]); 
@@ -679,7 +670,7 @@ class Droppoint extends CI_Controller {
 		        
 				$tracking = array(
 					'no_resi' => $res, 
-					'tanggal' => date("Y-m-d"), 
+					'tanggal' => date("Y-m-d H:i:s"), 
 					'status_tracking' => 'Diterima Drop Point Kota Tujuan'
 				);
 

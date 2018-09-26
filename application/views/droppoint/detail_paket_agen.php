@@ -32,7 +32,7 @@
                   ?>
                   <tr>
                     <td style="text-align: center"><?= $i++; ?></td>
-                    <td style="text-align: center"><?= $key->id_transaksiagen; ?></td>
+                    <td style="text-align: center"><?= $key->id_agen_dp; ?></td>
                     <td style="text-align: center"><?= $key->no_resi; ?></td>
                     <td style="text-align: center"><?= $key->dp_jemput; ?></td>
                   </tr>

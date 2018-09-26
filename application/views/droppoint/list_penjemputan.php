@@ -34,12 +34,9 @@
                     <td style="text-align: center"><?= $i++; ?></td>
                     <td style="text-align: center"><?= $key->id_agen; ?></td>
                     <td style="text-align: center"><?= $key->id_dp; ?></td>
-                    <td style="text-align: center"><?= $key->status_tagen; ?></td>
+                    <td style="text-align: center"><?= $key->status_agen_dp; ?></td>
                     <td>
-                    <a href="<?= base_url(); ?>droppoint/detail_penjemputan/<?= $key->id_transaksiagen ?>/" class="btn btn-primary btn-xs" onclick="return confirm('Anda Yakin ?');"><i class="fa fa-search"></i> Detail</a>
-
-                    </td>
-                    <td>
+                    <a href="<?= base_url(); ?>droppoint/detail_penjemputan/<?= $key->id_agen_dp ?>/" class="btn btn-primary btn-xs" onclick="return confirm('Anda Yakin ?');"><i class="fa fa-search"></i> Detail</a>
                     </td>
                   </tr>
                   <?php endforeach ?>

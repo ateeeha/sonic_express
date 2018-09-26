@@ -21,8 +21,8 @@
                   <tr>
                     <th style="text-align: center">#</th>
                     <th style="text-align: center">ID TRANSAKSI DP</th>
-                    <th style="text-align: center">DP</th>
                     <th style="text-align: center">AGEN</th>
+                    <th style="text-align: center">DP</th>
                     <th style="text-align: center">TGL KIRIM</th>
                     <th style="text-align: center">TGL SAMPAI</th>
                     <th style="text-align: center">STATUS</th>
@@ -35,12 +35,12 @@
                   ?>
                   <tr>
                     <td style="text-align: center"><?= $i++; ?></td>
-                    <td style="text-align: center"><?= $key->id_transaksidpagen; ?></td>
-                    <td style="text-align: center"><?= $key->dp_tujuan; ?></td>
-                    <td style="text-align: center"><?= $key->agen_tujuan; ?></td>
+                    <td style="text-align: center"><?= $key->id_agen_dp; ?></td>
+                    <td style="text-align: center"><?= $key->id_agen; ?></td>
+                    <td style="text-align: center"><?= $key->id_dp; ?></td>
                     <td style="text-align: center"><?= $key->tgl_kirim; ?></td>
                     <td style="text-align: center"><?= $key->tgl_sampai; ?></td>
-                    <td style="text-align: center"><?= $key->status_tdpagen; ?></td>
+                    <td style="text-align: center"><?= $key->status_agen_dp; ?></td>
                   </tr>
                   <?php endforeach ?>
                 </tbody>
