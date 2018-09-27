@@ -225,7 +225,9 @@ class Droppoint extends CI_Controller {
 		$where = array(
 				// 'kabupaten_tujuan' => $this->session->userdata('kabupaten_dp'),
 				// 'status_transaksi' => 'diterima',
-				'dp_tujuan' => $this->session->userdata('id_dp')
+				'dp_tujuan' => $this->session->userdata('id_dp'),
+				'agen_tujuan' => 0
+
 				);
 
 		$data['data'] = $this->dp_model->get_where('t_transaksi', $where);
@@ -261,9 +263,8 @@ class Droppoint extends CI_Controller {
 
 		// $data['data'] = $this->kurir_model->get_all('t_transaksi');
 
-		$data['active_menu_dp'] = 'active';
-		$data['active_list_transaksi_dp'] = 'active';
-		$data['active_list_transaksi_dp_kirim'] = 'active';
+		$data['active_menu_agen'] = 'active';
+		$data['active_list_paket_agen'] = 'active';
 		$data['header'] = 'List Transaksi DP';
 		$this->template->dp('droppoint/list_transaksi_dp_kirim', $data);
 	}
@@ -290,10 +291,27 @@ class Droppoint extends CI_Controller {
 		// $data['data'] = $this->kurir_model->get_all('t_transaksi');
 
 		$data['active_menu_dp'] = 'active';
-		$data['active_list_transaksi_dp'] = 'active';
-		$data['active_list_transaksi_dp_terima'] = 'active';
+		$data['active_paket_dp'] = 'active';
 		$data['header'] = 'List Transaksi DP';
 		$this->template->dp('droppoint/list_transaksi_dp_terima', $data);
+	}
+
+	public function riwayat_dp_agen()
+	{
+		$this->cek_login();
+
+		$where = array(
+				'asal' => $this->session->userdata('id_dp')
+				);
+
+		$data['data'] = $this->dp_model->get_where('t_dp_agen', $where);
+
+		// $data['data'] = $this->kurir_model->get_all('t_transaksi');
+
+		$data['active_menu_dp'] = 'active';
+		$data['active_list_paket_dp'] = 'active';
+		$data['header'] = 'Riwayat Transaksi Agen DP';
+		$this->template->dp('droppoint/riwayat_dp_agen', $data);
 	}
 
 	public function list_transaksi_agen()
@@ -318,8 +336,8 @@ class Droppoint extends CI_Controller {
 		// $data['data'] = $this->kurir_model->get_all('t_transaksi');
 
 		$data['active_menu_agen'] = 'active';
-		$data['active_list_transaksi_agen'] = 'active';
-		$data['header'] = 'List Transaksi Agen';
+		$data['active_list_paket_agen'] = 'active';
+		$data['header'] = 'Riwayat Transaksi Agen DP';
 		$this->template->dp('droppoint/list_transaksi_agen', $data);
 	}
 

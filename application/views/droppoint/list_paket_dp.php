@@ -5,48 +5,51 @@
       </ol>
     </section>
     <section class="content">
-      <!-- <div class="row"> -->
-        <!-- <div class="col-xs-12"> -->
-          <div class="box box-primary">
-          <div class="box-body">
-            <div>             
-               <?php if(validation_errors())
-               {
-                 echo "<div class='alert alert-warning alert-message'>";
-                 echo validation_errors();
-                 echo "</div>";
-               } ?> 
-               <?php if ($this->session->flashdata('alert')) 
-               {
-                 echo "<div class='alert alert-warning alert-message'>";
-                 echo $this->session->flashdata('alert');
-                 echo "</div>";
-               }
-               ?>
-                <?php if ($this->session->flashdata('success')) 
-               {
-                 echo "<div class='alert alert-success alert-message'>";
-                 echo $this->session->flashdata('success');
-                 echo "</div>";
-               }               
-               ?>         
+      <div class="box box-primary">
+        <div class="box-body">
+          <div>             
+             <?php if(validation_errors())
+             {
+               echo "<div class='alert alert-warning alert-message'>";
+               echo validation_errors();
+               echo "</div>";
+             } ?> 
+             <?php if ($this->session->flashdata('alert')) 
+             {
+               echo "<div class='alert alert-warning alert-message'>";
+               echo $this->session->flashdata('alert');
+               echo "</div>";
+             }
+             ?>
+              <?php if ($this->session->flashdata('success')) 
+             {
+               echo "<div class='alert alert-success alert-message'>";
+               echo $this->session->flashdata('success');
+               echo "</div>";
+             }               
+             ?>         
+          </div>
+          <form method="post" action="<?php echo site_url('droppoint/multi_kirim_paket_dp'); ?>">
+          <div class="box-header with-border">
+              <div>
+                <a href="<?= base_url(); ?>droppoint/riwayat_dp_agen/" class="btn btn-default"><i class="fa fa-history"></i> Riwayat Transaksi DP => Agen</a>
+              </div>
             </div>
-            <form method="post" action="<?php echo site_url('droppoint/multi_kirim_paket_dp'); ?>">
-              <div class="row">
-                <div class="col-xs-12 col-sm-6 col-md-3">
-                  <div class="input-group margin">
-                    <div class="input-group-btn">
-                      <input class="btn btn-primary" type="submit" name="submit" value="Kirim">
-                    </div>
-                      <select class="form-control" name="agen_tujuan" required> 
-                        <option value="" disabled selected>-- Pilih Agen --</option>
-                        <?php foreach ($agen->result() as $ag): ?>
-                        <option value="<?= $ag->id_agen; ?>"><?= $ag->username; ?></option>
-                        <?php endforeach ?>
-                    </select>
+            <div class="row">
+              <div class="col-xs-12 col-sm-6 col-md-3">
+                <div class="input-group margin">
+                  <div class="input-group-btn">
+                    <input class="btn btn-primary" type="submit" name="submit" value="Kirim">
                   </div>
+                    <select class="form-control" name="agen_tujuan" required> 
+                      <option value="" disabled selected>-- Pilih Agen --</option>
+                      <?php foreach ($agen->result() as $ag): ?>
+                      <option value="<?= $ag->id_agen; ?>"><?= $ag->username; ?></option>
+                      <?php endforeach ?>
+                  </select>
                 </div>
               </div>
+            </div>
             <div class="box-body table-responsive">
               <table class="table table-bordered table-hover dt-responsive nowrap" id="datatable">
                 <thead>
@@ -79,8 +82,6 @@
               </table>
             </div>
           </form>
-          </div>
         </div>
-        <!-- </div> -->
-      <!-- </div> -->
+      </div>
     </section>

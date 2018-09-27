@@ -6,14 +6,13 @@
     </section>
 
     <section class="content">
-      <!-- /.row -->
-      <div class="row">
-        <div class="col-xs-12">
-          <div class="box box-primary">
-            <!-- /.box-header -->
-            <form method="post" action="">
+      <div class="box box-primary">
+        <div class="box-body">
+          <form method="post">
             <div class="box-header with-border">
-                
+              <div>
+                <a href="<?= base_url(); ?>droppoint/list_transaksi_dp_terima/" class="btn btn-default"><i class="fa fa-history"></i> Riwayat Transaksi DP => DP</a>
+              </div>
             </div>
             <div class="box-body table-responsive">
               <table class="table table-bordered table-hover dt-responsive nowrap" id="datatable">
@@ -47,13 +46,8 @@
                   <?php endforeach ?>
                 </tbody>
               </table>
-                </div>
-              </form>
-              <div class="box-footer with-border">
-              </div>
-          </div>
-          <!-- /.box -->
+            </div>
+          </form>
         </div>
       </div>
     </section>
-        <!--/.col (right) -->

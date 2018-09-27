@@ -24,7 +24,6 @@
             <li class="<?php if(isset($active_paket_agen)){echo $active_paket_agen;}?>"><a href="<?= base_url(); ?>droppoint/paket_agen/"><i class="fa fa-cube"></i> Paket</a></li>
             <li class="<?php if(isset($active_list_penjemputan)){echo $active_list_penjemputan;}?>"><a href="<?= base_url(); ?>droppoint/list_penjemputan/"><i class="fa fa-truck"></i> Penjemputan</a></li>
             <li class="<?php if(isset($active_list_paket_agen)){echo $active_list_paket_agen;}?>"><a href="<?= base_url(); ?>droppoint/list_paket_agen/"><i class="fa fa-list"></i> List</a></li>
-            <li class="<?php if(isset($active_list_transaksi_agen)){echo $active_list_transaksi_agen;}?>"><a href="<?= base_url(); ?>droppoint/list_transaksi_agen/"><i class="fa fa-history"></i> Riwayat</a></li>
           </ul>
         </li>
         <!-- ===========End Paket Agen============== -->
@@ -39,18 +38,6 @@
           <ul class="treeview-menu">
             <li class="<?php if(isset($active_paket_dp)){echo $active_paket_dp;}?>"><a href="<?= base_url(); ?>droppoint/paket_dp/"><i class="fa fa-cube"></i> Paket</a></li>
             <li class="<?php if(isset($active_list_paket_dp)){echo $active_list_paket_dp;}?>"><a href="<?= base_url(); ?>droppoint/list_paket_dp/"><i class="fa fa-list"></i> List</a></li>
-            <li class="treeview <?php if(isset($active_list_transaksi_dp)){echo $active_list_transaksi_dp;}?>">
-              <a href="#"><i class="fa fa-history"></i> Riwayat
-                <span class="pull-right-container">
-                  <i class="fa fa-angle-left pull-right"></i>
-                </span>
-              </a>
-              <ul class="treeview-menu">
-                <li class="<?php if(isset($active_list_transaksi_dp_kirim)){echo $active_list_transaksi_dp_kirim;}?>"><a href="<?= base_url(); ?>droppoint/list_transaksi_dp_kirim/"><i class="fa fa-history"></i> Riwayat Kirim</a></li>
-                <li class="<?php if(isset($active_list_transaksi_dp_terima)){echo $active_list_transaksi_dp_terima;}?>"><a href="<?= base_url(); ?>droppoint/list_transaksi_dp_terima/"><i class="fa fa-history"></i> Riwayat Terima</a></li>
-              </ul>
-            </li>
-
           </ul>
         </li>
         <!-- ===========End Paket Droppoint============== -->

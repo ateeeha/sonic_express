@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 26 Sep 2018 pada 11.16
+-- Waktu pembuatan: 27 Sep 2018 pada 15.53
 -- Versi server: 10.1.35-MariaDB
 -- Versi PHP: 7.2.9
 
@@ -90,7 +90,7 @@ CREATE TABLE `t_agen_dp` (
   `id_agen` bigint(20) NOT NULL,
   `tgl_kirim` datetime NOT NULL,
   `tgl_sampai` datetime NOT NULL,
-  `status_agen_dp` enum('baru','proses','selesai') NOT NULL
+  `status_agen_dp` enum('Baru','Proses','Selesai') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -98,8 +98,12 @@ CREATE TABLE `t_agen_dp` (
 --
 
 INSERT INTO `t_agen_dp` (`id_agen_dp`, `id_dp`, `id_agen`, `tgl_kirim`, `tgl_sampai`, `status_agen_dp`) VALUES
-(1, 2, 2, '0000-00-00 00:00:00', '0000-00-00 00:00:00', 'baru'),
-(2, 2, 2, '0000-00-00 00:00:00', '2018-09-26 11:10:29', 'selesai');
+(1, 2, 2, '0000-00-00 00:00:00', '2018-09-26 15:55:02', 'Selesai'),
+(2, 2, 2, '0000-00-00 00:00:00', '2018-09-26 11:10:29', 'Selesai'),
+(3, 2, 2, '2018-09-26 15:24:14', '2018-09-26 16:05:19', 'Selesai'),
+(4, 2, 2, '2018-09-27 09:22:11', '2018-09-27 09:25:30', 'Selesai'),
+(5, 2, 2, '2018-09-27 12:15:18', '2018-09-27 14:20:14', 'Selesai'),
+(6, 2, 2, '2018-09-27 14:26:06', '2018-09-27 15:16:17', 'Selesai');
 
 -- --------------------------------------------------------
 
@@ -119,7 +123,12 @@ CREATE TABLE `t_agen_dp_detail` (
 
 INSERT INTO `t_agen_dp_detail` (`id_agen_dp_detail`, `no_resi`, `id_agen_dp`) VALUES
 (1, 'RES210920181027002', 1),
-(2, 'RES26092018858192', 2);
+(2, 'RES26092018858192', 2),
+(3, 'RES26092018322192', 3),
+(4, 'RES27092018912542', 4),
+(5, 'RES19092018922502', 5),
+(6, 'RES270920181157252', 5),
+(7, 'RES19092018929512', 6);
 
 -- --------------------------------------------------------
 
@@ -144,6 +153,130 @@ CREATE TABLE `t_dp` (
 INSERT INTO `t_dp` (`id_dp`, `username`, `email`, `provinsi`, `kabupaten`, `password`, `status_dp`) VALUES
 (1, 'DP JAKARTA', 'dp_jakarta@gmail.com', 'DKI Jakarta', 'Jakarta Pusat', '$2y$10$a3BBnM31xGvr7E81asQBY.V8KosNm9giM3WchPF1iw4LNKM.J5Fca', '2'),
 (2, 'DP DIY', 'dp_diy@gmail.com', 'DI Yogyakarta', 'Yogyakarta', '$2y$10$a3BBnM31xGvr7E81asQBY.V8KosNm9giM3WchPF1iw4LNKM.J5Fca', '2');
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `t_dp_agen`
+--
+
+CREATE TABLE `t_dp_agen` (
+  `id_dp_agen` bigint(20) NOT NULL,
+  `asal` bigint(20) NOT NULL,
+  `tujuan` bigint(20) NOT NULL,
+  `tgl_kirim` datetime NOT NULL,
+  `tgl_sampai` datetime NOT NULL,
+  `status_dp_agen` enum('Baru','Proses','Selesai') NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `t_dp_agen`
+--
+
+INSERT INTO `t_dp_agen` (`id_dp_agen`, `asal`, `tujuan`, `tgl_kirim`, `tgl_sampai`, `status_dp_agen`) VALUES
+(1, 1, 4, '2018-09-21 00:00:00', '2018-09-21 00:00:00', 'Selesai'),
+(2, 1, 4, '2018-09-26 00:00:00', '0000-00-00 00:00:00', 'Proses'),
+(3, 1, 4, '2018-09-26 00:00:00', '0000-00-00 00:00:00', 'Proses'),
+(4, 1, 4, '2018-09-27 00:00:00', '0000-00-00 00:00:00', 'Proses'),
+(5, 1, 4, '2018-09-27 00:00:00', '0000-00-00 00:00:00', 'Proses'),
+(6, 1, 4, '2018-09-27 10:24:34', '2018-09-27 10:41:14', 'Selesai'),
+(7, 1, 5, '2018-09-27 10:29:42', '0000-00-00 00:00:00', 'Proses'),
+(8, 1, 4, '2018-09-27 15:37:50', '0000-00-00 00:00:00', 'Proses'),
+(9, 1, 4, '2018-09-27 15:42:25', '0000-00-00 00:00:00', 'Proses');
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `t_dp_agen_detail`
+--
+
+CREATE TABLE `t_dp_agen_detail` (
+  `id_dp_agen_detail` bigint(20) NOT NULL,
+  `no_resi` varchar(255) NOT NULL,
+  `id_dp_agen` bigint(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `t_dp_agen_detail`
+--
+
+INSERT INTO `t_dp_agen_detail` (`id_dp_agen_detail`, `no_resi`, `id_dp_agen`) VALUES
+(1, 'RES210920181027002', 1),
+(2, 'RES26092018858192', 3),
+(3, 'RES210920181027002', 4),
+(4, 'RES26092018858192', 4),
+(5, 'RES26092018322192', 4),
+(6, 'RES27092018912542', 4),
+(7, 'RES210920181027002', 5),
+(8, 'RES26092018858192', 5),
+(9, 'RES26092018322192', 5),
+(10, 'RES27092018912542', 5),
+(11, 'RES210920181027002', 6),
+(12, 'RES26092018858192', 6),
+(13, 'RES26092018322192', 6),
+(14, 'RES27092018912542', 6),
+(15, 'RES210920181027002', 7),
+(16, 'RES26092018858192', 7),
+(17, 'RES26092018322192', 7),
+(18, 'RES27092018912542', 7),
+(19, 'RES210920181027002', 8),
+(20, 'RES26092018858192', 8),
+(21, 'RES26092018322192', 8),
+(22, 'RES27092018912542', 9);
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `t_dp_dp`
+--
+
+CREATE TABLE `t_dp_dp` (
+  `id_dp_dp` bigint(20) NOT NULL,
+  `asal` bigint(20) NOT NULL,
+  `tujuan` bigint(20) NOT NULL,
+  `tgl_kirim` datetime NOT NULL,
+  `tgl_sampai` datetime NOT NULL,
+  `status_dp_dp` enum('baru','proses','selesai') NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `t_dp_dp`
+--
+
+INSERT INTO `t_dp_dp` (`id_dp_dp`, `asal`, `tujuan`, `tgl_kirim`, `tgl_sampai`, `status_dp_dp`) VALUES
+(1, 2, 1, '2018-09-21 00:00:00', '2018-09-21 00:00:00', 'selesai'),
+(2, 1, 1, '2018-09-21 00:00:00', '0000-00-00 00:00:00', 'proses'),
+(3, 2, 0, '2018-09-26 13:43:24', '0000-00-00 00:00:00', 'baru'),
+(4, 2, 0, '2018-09-26 13:45:48', '0000-00-00 00:00:00', 'baru'),
+(5, 2, 1, '2018-09-26 14:18:03', '0000-00-00 00:00:00', 'proses'),
+(6, 2, 1, '2018-09-26 16:08:23', '2018-09-27 10:19:36', 'selesai'),
+(7, 2, 1, '2018-09-27 09:36:21', '2018-09-27 09:42:53', 'selesai'),
+(8, 2, 1, '2018-09-27 15:15:11', '2018-09-27 15:20:56', 'selesai');
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `t_dp_dp_detail`
+--
+
+CREATE TABLE `t_dp_dp_detail` (
+  `id_dp_dp_detail` bigint(20) NOT NULL,
+  `no_resi` varchar(255) NOT NULL,
+  `id_dp_dp` bigint(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `t_dp_dp_detail`
+--
+
+INSERT INTO `t_dp_dp_detail` (`id_dp_dp_detail`, `no_resi`, `id_dp_dp`) VALUES
+(1, 'RES210920181027002', 1),
+(2, 'RES26092018858192', 4),
+(3, 'RES26092018858192', 5),
+(4, 'RES26092018858192', 6),
+(5, 'RES26092018322192', 7),
+(6, 'RES27092018912542', 7),
+(7, 'RES270920181157252', 8);
 
 -- --------------------------------------------------------
 
@@ -944,7 +1077,71 @@ INSERT INTO `t_tracking` (`id_tracking`, `no_resi`, `tanggal`, `status_tracking`
 (22, 'RES26092018858192', '2018-09-26 00:00:00', 'Diterima Drop Point Kota Asal'),
 (23, 'RES26092018858192', '2018-09-26 11:06:41', 'Diterima Drop Point Kota Asal'),
 (24, 'RES26092018858192', '2018-09-26 11:09:00', 'Diterima Drop Point Kota Asal'),
-(25, 'RES26092018858192', '2018-09-26 11:10:29', 'Diterima Drop Point Kota Asal');
+(25, 'RES26092018858192', '2018-09-26 11:10:29', 'Diterima Drop Point Kota Asal'),
+(26, 'RES26092018858192', '2018-09-26 13:45:48', 'Dikirim ke Drop Point Kota Tujuan'),
+(27, 'RES26092018858192', '2018-09-26 14:18:03', 'Dikirim ke Drop Point Kota Tujuan'),
+(28, 'RES26092018858192', '2018-09-26 14:52:58', 'Dikirim ke Agen Kota Tujuan'),
+(29, 'RES26092018322192', '2018-09-26 15:22:44', 'Dijemput Kurir'),
+(30, 'RES26092018322192', '2018-09-26 15:22:52', 'Diterima Kurir'),
+(31, 'RES26092018322192', '2018-09-26 15:23:59', 'Diterima Agen Kota Asal'),
+(32, 'RES26092018322192', '2018-09-26 15:24:14', 'Diproses Agen Kota Asal'),
+(33, 'RES210920181027002', '2018-09-26 15:55:02', 'Diterima Drop Point Kota Asal'),
+(34, 'RES26092018322192', '2018-09-26 16:05:19', 'Diterima Drop Point Kota Asal'),
+(35, 'RES26092018858192', '2018-09-26 16:08:23', 'Dikirim ke Drop Point Kota Tujuan'),
+(36, 'RES27092018912542', '2018-09-27 09:14:55', 'Dijemput Kurir'),
+(37, 'RES27092018912542', '2018-09-27 09:15:29', 'Diterima Kurir'),
+(38, 'RES27092018912542', '2018-09-27 09:19:24', 'Diterima Agen Kota Asal'),
+(39, 'RES27092018912542', '2018-09-27 09:22:11', 'Diproses Agen Kota Asal'),
+(40, 'RES27092018912542', '2018-09-27 09:25:30', 'Diterima Drop Point Kota Asal'),
+(41, 'RES26092018322192', '2018-09-27 09:36:21', 'Dikirim ke Drop Point Kota Tujuan'),
+(42, 'RES27092018912542', '2018-09-27 09:36:21', 'Dikirim ke Drop Point Kota Tujuan'),
+(43, 'RES26092018322192', '2018-09-27 09:42:53', 'Diterima Drop Point Kota Tujuan'),
+(44, 'RES27092018912542', '2018-09-27 09:42:53', 'Diterima Drop Point Kota Tujuan'),
+(45, 'RES210920181027002', '2018-09-27 10:00:37', 'Dikirim ke Agen Kota Tujuan'),
+(46, 'RES26092018858192', '2018-09-27 10:00:37', 'Dikirim ke Agen Kota Tujuan'),
+(47, 'RES26092018322192', '2018-09-27 10:00:37', 'Dikirim ke Agen Kota Tujuan'),
+(48, 'RES27092018912542', '2018-09-27 10:00:37', 'Dikirim ke Agen Kota Tujuan'),
+(49, 'RES26092018858192', '2018-09-27 10:19:36', 'Diterima Drop Point Kota Tujuan'),
+(50, 'RES210920181027002', '2018-09-27 10:22:54', 'Dikirim ke Agen Kota Tujuan'),
+(51, 'RES26092018858192', '2018-09-27 10:22:54', 'Dikirim ke Agen Kota Tujuan'),
+(52, 'RES26092018322192', '2018-09-27 10:22:54', 'Dikirim ke Agen Kota Tujuan'),
+(53, 'RES27092018912542', '2018-09-27 10:22:55', 'Dikirim ke Agen Kota Tujuan'),
+(54, 'RES210920181027002', '2018-09-27 10:24:34', 'Dikirim ke Agen Kota Tujuan'),
+(55, 'RES26092018858192', '2018-09-27 10:24:34', 'Dikirim ke Agen Kota Tujuan'),
+(56, 'RES26092018322192', '2018-09-27 10:24:35', 'Dikirim ke Agen Kota Tujuan'),
+(57, 'RES27092018912542', '2018-09-27 10:24:35', 'Dikirim ke Agen Kota Tujuan'),
+(58, 'RES210920181027002', '2018-09-27 10:29:42', 'Dikirim ke Agen Kota Tujuan'),
+(59, 'RES26092018858192', '2018-09-27 10:29:42', 'Dikirim ke Agen Kota Tujuan'),
+(60, 'RES26092018322192', '2018-09-27 10:29:42', 'Dikirim ke Agen Kota Tujuan'),
+(61, 'RES27092018912542', '2018-09-27 10:29:43', 'Dikirim ke Agen Kota Tujuan'),
+(62, 'RES210920181027002', '2018-09-27 10:41:14', 'Diterima Agen Kota Tujuan'),
+(63, 'RES26092018858192', '2018-09-27 10:41:14', 'Diterima Agen Kota Tujuan'),
+(64, 'RES26092018322192', '2018-09-27 10:41:14', 'Diterima Agen Kota Tujuan'),
+(65, 'RES27092018912542', '2018-09-27 10:41:14', 'Diterima Agen Kota Tujuan'),
+(66, 'RES270920181157252', '2018-09-27 11:58:29', 'Dijemput Kurir'),
+(67, 'RES190920181124572', '2018-09-27 11:58:31', 'Dijemput Kurir'),
+(68, 'RES190920181119332', '2018-09-27 11:58:34', 'Dijemput Kurir'),
+(69, 'RES190920181045032', '2018-09-27 11:58:37', 'Dijemput Kurir'),
+(70, 'RES19092018929512', '2018-09-27 11:58:40', 'Dijemput Kurir'),
+(71, 'RES19092018922502', '2018-09-27 11:58:42', 'Dijemput Kurir'),
+(72, 'RES19092018922502', '2018-09-27 11:58:47', 'Diterima Kurir'),
+(73, 'RES19092018929512', '2018-09-27 11:58:50', 'Diterima Kurir'),
+(74, 'RES270920181157252', '2018-09-27 11:58:53', 'Diterima Kurir'),
+(75, 'RES19092018922502', '2018-09-27 12:06:17', 'Diterima Agen Kota Asal'),
+(76, 'RES270920181157252', '2018-09-27 12:13:57', 'Diterima Agen Kota Asal'),
+(77, 'RES19092018922502', '2018-09-27 12:15:18', 'Diproses Agen Kota Asal'),
+(78, 'RES270920181157252', '2018-09-27 12:15:19', 'Diproses Agen Kota Asal'),
+(79, 'RES19092018929512', '2018-09-27 12:19:55', 'Diterima Agen Kota Asal'),
+(80, 'RES19092018922502', '2018-09-27 14:20:14', 'Diterima Drop Point Kota Asal'),
+(81, 'RES270920181157252', '2018-09-27 14:20:14', 'Diterima Drop Point Kota Asal'),
+(82, 'RES19092018929512', '2018-09-27 14:26:06', 'Diproses Agen Kota Asal'),
+(83, 'RES270920181157252', '2018-09-27 15:15:11', 'Dikirim ke Drop Point Kota Tujuan'),
+(84, 'RES19092018929512', '2018-09-27 15:16:18', 'Diterima Drop Point Kota Asal'),
+(85, 'RES270920181157252', '2018-09-27 15:20:56', 'Diterima Drop Point Kota Tujuan'),
+(86, 'RES210920181027002', '2018-09-27 15:37:50', 'Dikirim ke Agen Kota Tujuan'),
+(87, 'RES26092018858192', '2018-09-27 15:37:51', 'Dikirim ke Agen Kota Tujuan'),
+(88, 'RES26092018322192', '2018-09-27 15:37:51', 'Dikirim ke Agen Kota Tujuan'),
+(89, 'RES27092018912542', '2018-09-27 15:42:25', 'Dikirim ke Agen Kota Tujuan');
 
 -- --------------------------------------------------------
 
@@ -978,7 +1175,7 @@ CREATE TABLE `t_transaksi` (
   `no_tlp` varchar(35) NOT NULL,
   `status_transaksi` enum('Menunggu','Dijemput','Diterima','Ditolak','Selesai') NOT NULL,
   `status_kurir` enum('Belum','Proses','Selesai') NOT NULL,
-  `dp_kirim` enum('Belum Dikirim','Sudah Dikirim') NOT NULL,
+  `status_dp` enum('Baru','Proses','Selesai') NOT NULL,
   `dp_jemput` enum('belum','proses','selesai') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -986,97 +1183,17 @@ CREATE TABLE `t_transaksi` (
 -- Dumping data untuk tabel `t_transaksi`
 --
 
-INSERT INTO `t_transaksi` (`id_transaksi`, `id_user`, `kurir_penjemput`, `kurir_pengantar`, `agen_asal`, `agen_tujuan`, `dp_asal`, `dp_tujuan`, `tgl_pengiriman`, `no_resi`, `berat`, `panjang`, `lebar`, `tinggi`, `jenis_layanan`, `total_biaya`, `nama`, `provinsi_tujuan`, `kabupaten_tujuan`, `kecamatan_tujuan`, `alamat`, `kode_pos`, `no_tlp`, `status_transaksi`, `status_kurir`, `dp_kirim`, `dp_jemput`) VALUES
-(2, 2, 0, 0, 0, 0, 0, 0, '2018-09-19', 'RES19092018922502', 1, 40, 30, 30, 'REG', 48000, 'Arfian', 'DI Yogyakarta', 'Bantul', 'Banguntapan', 'Banguntapan, Bantul', 55283, '08995413121', 'Menunggu', 'Belum', 'Belum Dikirim', 'belum'),
-(3, 2, 0, 0, 0, 0, 0, 0, '2018-09-19', 'RES19092018929512', 20, 0, 0, 0, 'REG', 160000, 'Wahyu', 'DI Yogyakarta', 'Bantul', 'Jetis', 'Desa Jetis', 55283, '08995413121', 'Menunggu', 'Belum', 'Belum Dikirim', 'belum'),
-(4, 2, 0, 0, 0, 0, 0, 0, '2018-09-19', 'RES190920181045032', 2000, 0, 0, 0, 'REG', 16000, 'Sri Lestari', 'DI Yogyakarta', 'Bantul', 'Banguntapan', 'Banguntapan ', 55283, '08995413121', 'Menunggu', 'Belum', 'Belum Dikirim', 'belum'),
-(5, 2, 0, 0, 0, 0, 0, 0, '2018-09-19', 'RES190920181119332', 20, 0, 0, 0, 'REG', 160, 'Wahyu', 'DI Yogyakarta', 'Bantul', 'Banguntapan', 'dzfsdf', 55283, '0899541311', 'Menunggu', 'Belum', 'Belum Dikirim', 'belum'),
-(6, 2, 0, 0, 0, 0, 0, 0, '2018-09-19', 'RES190920181124572', 20, 0, 0, 0, 'REG', 80, 'asdasd', 'DI Yogyakarta', 'Yogyakarta', 'Gondomanan', 'asdasd', 55283, '0899541311', 'Menunggu', 'Belum', 'Belum Dikirim', 'belum'),
-(7, 2, 2, 4, 2, 4, 2, 1, '2018-09-21', 'RES210920181027002', 2000, 0, 0, 0, 'REG', 10000, 'Nila', 'DKI Jakarta', 'Jakarta Pusat', 'Menteng', 'Menteng RT6, RW2', 55283, '0899541311', 'Selesai', 'Selesai', 'Sudah Dikirim', 'selesai'),
-(8, 2, 2, 0, 2, 0, 2, 0, '2018-09-26', 'RES26092018858192', 1001, 0, 0, 0, 'REG', 5000, 'Dono', 'DKI Jakarta', 'Jakarta Pusat', 'Kemayoran', 'Jalan Kemayoran', 12345, '08123456789', 'Diterima', 'Selesai', 'Belum Dikirim', 'selesai');
-
--- --------------------------------------------------------
-
---
--- Struktur dari tabel `t_transaksidp`
---
-
-CREATE TABLE `t_transaksidp` (
-  `id_transaksidp` bigint(20) NOT NULL,
-  `asal` bigint(20) NOT NULL,
-  `tujuan` bigint(20) NOT NULL,
-  `tgl_kirim` date NOT NULL,
-  `tgl_sampai` date NOT NULL,
-  `status_tdp` enum('baru','proses','selesai') NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data untuk tabel `t_transaksidp`
---
-
-INSERT INTO `t_transaksidp` (`id_transaksidp`, `asal`, `tujuan`, `tgl_kirim`, `tgl_sampai`, `status_tdp`) VALUES
-(1, 2, 1, '2018-09-21', '2018-09-21', 'selesai'),
-(2, 1, 1, '2018-09-21', '0000-00-00', 'proses');
-
--- --------------------------------------------------------
-
---
--- Struktur dari tabel `t_transaksidpagen`
---
-
-CREATE TABLE `t_transaksidpagen` (
-  `id_transaksidpagen` bigint(20) NOT NULL,
-  `asal` bigint(20) NOT NULL,
-  `tujuan` bigint(20) NOT NULL,
-  `tgl_kirim` date NOT NULL,
-  `tgl_sampai` date NOT NULL,
-  `status_tdpagen` enum('baru','proses','selesai') NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data untuk tabel `t_transaksidpagen`
---
-
-INSERT INTO `t_transaksidpagen` (`id_transaksidpagen`, `asal`, `tujuan`, `tgl_kirim`, `tgl_sampai`, `status_tdpagen`) VALUES
-(1, 1, 4, '2018-09-21', '2018-09-21', 'selesai');
-
--- --------------------------------------------------------
-
---
--- Struktur dari tabel `t_transaksidpagendetail`
---
-
-CREATE TABLE `t_transaksidpagendetail` (
-  `id_transaksidetaildpagen` bigint(20) NOT NULL,
-  `no_resi` varchar(255) NOT NULL,
-  `id_transaksidpagen` bigint(20) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data untuk tabel `t_transaksidpagendetail`
---
-
-INSERT INTO `t_transaksidpagendetail` (`id_transaksidetaildpagen`, `no_resi`, `id_transaksidpagen`) VALUES
-(1, 'RES210920181027002', 1);
-
--- --------------------------------------------------------
-
---
--- Struktur dari tabel `t_transaksidpdetail`
---
-
-CREATE TABLE `t_transaksidpdetail` (
-  `id_transaksidpdetail` bigint(20) NOT NULL,
-  `no_resi` varchar(255) NOT NULL,
-  `id_transaksidp` bigint(20) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data untuk tabel `t_transaksidpdetail`
---
-
-INSERT INTO `t_transaksidpdetail` (`id_transaksidpdetail`, `no_resi`, `id_transaksidp`) VALUES
-(1, 'RES210920181027002', 1);
+INSERT INTO `t_transaksi` (`id_transaksi`, `id_user`, `kurir_penjemput`, `kurir_pengantar`, `agen_asal`, `agen_tujuan`, `dp_asal`, `dp_tujuan`, `tgl_pengiriman`, `no_resi`, `berat`, `panjang`, `lebar`, `tinggi`, `jenis_layanan`, `total_biaya`, `nama`, `provinsi_tujuan`, `kabupaten_tujuan`, `kecamatan_tujuan`, `alamat`, `kode_pos`, `no_tlp`, `status_transaksi`, `status_kurir`, `status_dp`, `dp_jemput`) VALUES
+(2, 2, 2, 0, 2, 0, 2, 0, '2018-09-19', 'RES19092018922502', 1, 40, 30, 30, 'REG', 48000, 'Arfian', 'DI Yogyakarta', 'Bantul', 'Banguntapan', 'Banguntapan, Bantul', 55283, '08995413121', 'Diterima', 'Selesai', 'Baru', 'selesai'),
+(3, 2, 2, 0, 2, 0, 2, 0, '2018-09-19', 'RES19092018929512', 20, 0, 0, 0, 'REG', 160000, 'Wahyu', 'DI Yogyakarta', 'Bantul', 'Jetis', 'Desa Jetis', 55283, '08995413121', 'Diterima', 'Selesai', 'Baru', 'selesai'),
+(4, 2, 2, 0, 0, 0, 0, 0, '2018-09-19', 'RES190920181045032', 2000, 0, 0, 0, 'REG', 16000, 'Sri Lestari', 'DI Yogyakarta', 'Bantul', 'Banguntapan', 'Banguntapan ', 55283, '08995413121', 'Dijemput', 'Belum', 'Baru', 'belum'),
+(5, 2, 2, 0, 0, 0, 0, 0, '2018-09-19', 'RES190920181119332', 20, 0, 0, 0, 'REG', 160, 'Wahyu', 'DI Yogyakarta', 'Bantul', 'Banguntapan', 'dzfsdf', 55283, '0899541311', 'Dijemput', 'Belum', 'Baru', 'belum'),
+(6, 2, 2, 0, 0, 0, 0, 0, '2018-09-19', 'RES190920181124572', 20, 0, 0, 0, 'REG', 80, 'asdasd', 'DI Yogyakarta', 'Yogyakarta', 'Gondomanan', 'asdasd', 55283, '0899541311', 'Dijemput', 'Belum', 'Baru', 'belum'),
+(7, 2, 2, 4, 2, 4, 2, 1, '2018-09-21', 'RES210920181027002', 2000, 0, 0, 0, 'REG', 10000, 'Nila', 'DKI Jakarta', 'Jakarta Pusat', 'Menteng', 'Menteng RT6, RW2', 55283, '0899541311', 'Selesai', 'Selesai', 'Proses', 'selesai'),
+(8, 2, 2, 0, 2, 4, 2, 1, '2018-09-26', 'RES26092018858192', 1001, 0, 0, 0, 'REG', 5000, 'Dono', 'DKI Jakarta', 'Jakarta Pusat', 'Kemayoran', 'Jalan Kemayoran', 12345, '08123456789', 'Diterima', 'Selesai', 'Proses', 'selesai'),
+(9, 2, 2, 0, 2, 4, 2, 1, '2018-09-26', 'RES26092018322192', 1000, 0, 0, 0, 'REG', 5000, 'Indro', 'DKI Jakarta', 'Jakarta Pusat', 'Menteng', 'Jalan Menteng', 12345, '08912345678', 'Diterima', 'Selesai', 'Proses', 'selesai'),
+(10, 2, 2, 0, 2, 4, 2, 1, '2018-09-27', 'RES27092018912542', 1000, 0, 0, 0, 'REG', 5000, 'Kasino', 'DKI Jakarta', 'Jakarta Pusat', 'Senen', 'Jalan Senen', 12345, '0899651234', 'Diterima', 'Selesai', 'Proses', 'selesai'),
+(11, 2, 2, 0, 2, 0, 2, 1, '2018-09-27', 'RES270920181157252', 1000, 0, 0, 0, 'REG', 5000, 'Marno', 'DKI Jakarta', 'Jakarta Pusat', 'Senen', 'Jalan senen', 12345, '1154547657899', 'Diterima', 'Selesai', 'Proses', 'selesai');
 
 -- --------------------------------------------------------
 
@@ -1142,6 +1259,30 @@ ALTER TABLE `t_dp`
   ADD PRIMARY KEY (`id_dp`);
 
 --
+-- Indeks untuk tabel `t_dp_agen`
+--
+ALTER TABLE `t_dp_agen`
+  ADD PRIMARY KEY (`id_dp_agen`);
+
+--
+-- Indeks untuk tabel `t_dp_agen_detail`
+--
+ALTER TABLE `t_dp_agen_detail`
+  ADD PRIMARY KEY (`id_dp_agen_detail`);
+
+--
+-- Indeks untuk tabel `t_dp_dp`
+--
+ALTER TABLE `t_dp_dp`
+  ADD PRIMARY KEY (`id_dp_dp`);
+
+--
+-- Indeks untuk tabel `t_dp_dp_detail`
+--
+ALTER TABLE `t_dp_dp_detail`
+  ADD PRIMARY KEY (`id_dp_dp_detail`);
+
+--
 -- Indeks untuk tabel `t_kecamatan`
 --
 ALTER TABLE `t_kecamatan`
@@ -1184,30 +1325,6 @@ ALTER TABLE `t_transaksi`
   ADD PRIMARY KEY (`id_transaksi`);
 
 --
--- Indeks untuk tabel `t_transaksidp`
---
-ALTER TABLE `t_transaksidp`
-  ADD PRIMARY KEY (`id_transaksidp`);
-
---
--- Indeks untuk tabel `t_transaksidpagen`
---
-ALTER TABLE `t_transaksidpagen`
-  ADD PRIMARY KEY (`id_transaksidpagen`);
-
---
--- Indeks untuk tabel `t_transaksidpagendetail`
---
-ALTER TABLE `t_transaksidpagendetail`
-  ADD PRIMARY KEY (`id_transaksidetaildpagen`);
-
---
--- Indeks untuk tabel `t_transaksidpdetail`
---
-ALTER TABLE `t_transaksidpdetail`
-  ADD PRIMARY KEY (`id_transaksidpdetail`);
-
---
 -- Indeks untuk tabel `t_user`
 --
 ALTER TABLE `t_user`
@@ -1233,19 +1350,43 @@ ALTER TABLE `t_agen`
 -- AUTO_INCREMENT untuk tabel `t_agen_dp`
 --
 ALTER TABLE `t_agen_dp`
-  MODIFY `id_agen_dp` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_agen_dp` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT untuk tabel `t_agen_dp_detail`
 --
 ALTER TABLE `t_agen_dp_detail`
-  MODIFY `id_agen_dp_detail` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_agen_dp_detail` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT untuk tabel `t_dp`
 --
 ALTER TABLE `t_dp`
   MODIFY `id_dp` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT untuk tabel `t_dp_agen`
+--
+ALTER TABLE `t_dp_agen`
+  MODIFY `id_dp_agen` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
+-- AUTO_INCREMENT untuk tabel `t_dp_agen_detail`
+--
+ALTER TABLE `t_dp_agen_detail`
+  MODIFY `id_dp_agen_detail` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+
+--
+-- AUTO_INCREMENT untuk tabel `t_dp_dp`
+--
+ALTER TABLE `t_dp_dp`
+  MODIFY `id_dp_dp` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
+-- AUTO_INCREMENT untuk tabel `t_dp_dp_detail`
+--
+ALTER TABLE `t_dp_dp_detail`
+  MODIFY `id_dp_dp_detail` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT untuk tabel `t_kecamatan`
@@ -1275,37 +1416,13 @@ ALTER TABLE `t_ongkir`
 -- AUTO_INCREMENT untuk tabel `t_tracking`
 --
 ALTER TABLE `t_tracking`
-  MODIFY `id_tracking` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `id_tracking` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=90;
 
 --
 -- AUTO_INCREMENT untuk tabel `t_transaksi`
 --
 ALTER TABLE `t_transaksi`
-  MODIFY `id_transaksi` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
-
---
--- AUTO_INCREMENT untuk tabel `t_transaksidp`
---
-ALTER TABLE `t_transaksidp`
-  MODIFY `id_transaksidp` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
---
--- AUTO_INCREMENT untuk tabel `t_transaksidpagen`
---
-ALTER TABLE `t_transaksidpagen`
-  MODIFY `id_transaksidpagen` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
---
--- AUTO_INCREMENT untuk tabel `t_transaksidpagendetail`
---
-ALTER TABLE `t_transaksidpagendetail`
-  MODIFY `id_transaksidetaildpagen` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
---
--- AUTO_INCREMENT untuk tabel `t_transaksidpdetail`
---
-ALTER TABLE `t_transaksidpdetail`
-  MODIFY `id_transaksidpdetail` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_transaksi` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT untuk tabel `t_user`

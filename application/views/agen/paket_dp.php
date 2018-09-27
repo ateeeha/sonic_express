@@ -4,16 +4,14 @@
         <li><a href="<?= base_url(); ?>admin/"><i class="fa fa-home"></i> Dashboard</a></li>
       </ol>
     </section>
-
     <section class="content">
-      <!-- /.row -->
-      <div class="row">
-        <div class="col-xs-12">
-          <div class="box box-primary">
-            <!-- /.box-header -->
-            <form method="post" action="">
+      <div class="box box-primary">
+        <div class="box-body">
+          <form method="post" action="">
             <div class="box-header with-border">
-                
+              <div>
+                <a href="<?= base_url(); ?>agen/riwayat_dp_agen/" class="btn btn-default"><i class="fa fa-history"></i> Riwayat Transaksi DP => Agen</a>
+              </div>
             </div>
             <div class="box-body table-responsive">
               <table class="table table-bordered table-hover dt-responsive nowrap" id="datatable">
@@ -49,13 +47,8 @@
                   <?php endforeach ?>
                 </tbody>
               </table>
-                </div>
-              </form>
-              <div class="box-footer with-border">
-              </div>
-          </div>
-          <!-- /.box -->
+            </div>
+          </form>
         </div>
       </div>
     </section>
-        <!--/.col (right) -->

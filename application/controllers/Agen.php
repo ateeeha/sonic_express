@@ -555,18 +555,36 @@ class Agen extends CI_Controller {
 		$this->template->agen('agen/paket_dp', $data);
 	}
 
-	public function list_paket_dp() //fitur dari kurir
+	public function riwayat_dp_agen()
+	{
+		$this->cek_login();
+
+		$where = array(
+				'tujuan' => $this->session->userdata('id_agen')
+				);
+
+		$data['data'] = $this->agen_model->get_where('t_dp_agen', $where);
+
+		// $data['data'] = $this->kurir_model->get_all('t_transaksi');
+
+		$data['active_menu_dp'] = 'active';
+		$data['active_paket_dp'] = 'active';
+		$data['header'] = 'Riwayat Transaksi Agen DP';
+		$this->template->agen('droppoint/riwayat_dp_agen', $data);
+	}
+
+	public function list_paket_dp()
 	{
 		$this->cek_login();
 		$tabel = 't_transaksi t JOIN t_user u 
 					ON (t.id_user = u.id_user) 
-				JOIN t_transaksidpagendetail tdad 
+				JOIN t_dp_agen_detail tdad 
 					ON (t.no_resi = tdad.no_resi)
-				JOIN t_transaksidpagen tda 
-					ON (tdad.id_transaksidpagen = tda.id_transaksidpagen)';
+				JOIN t_dp_agen tda 
+					ON (tdad.id_dp_agen = tda.id_dp_agen)';
 
 		$where = array(
-				'status_tdpagen' => 'selesai',
+				'status_dp_agen' => 'Selesai',
 				'tujuan' => $this->session->userdata('id_agen')
 				);
 
