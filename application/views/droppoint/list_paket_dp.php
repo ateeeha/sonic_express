@@ -5,11 +5,32 @@
       </ol>
     </section>
     <section class="content">
-      <!-- /.row -->
-      <div class="row">
-        <div class="col-xs-12">
+      <!-- <div class="row"> -->
+        <!-- <div class="col-xs-12"> -->
           <div class="box box-primary">
-            <!-- /.box-header -->
+          <div class="box-body">
+            <div>             
+               <?php if(validation_errors())
+               {
+                 echo "<div class='alert alert-warning alert-message'>";
+                 echo validation_errors();
+                 echo "</div>";
+               } ?> 
+               <?php if ($this->session->flashdata('alert')) 
+               {
+                 echo "<div class='alert alert-warning alert-message'>";
+                 echo $this->session->flashdata('alert');
+                 echo "</div>";
+               }
+               ?>
+                <?php if ($this->session->flashdata('success')) 
+               {
+                 echo "<div class='alert alert-success alert-message'>";
+                 echo $this->session->flashdata('success');
+                 echo "</div>";
+               }               
+               ?>         
+            </div>
             <form method="post" action="<?php echo site_url('droppoint/multi_kirim_paket_dp'); ?>">
               <div class="row">
                 <div class="col-xs-12 col-sm-6 col-md-3">
@@ -56,13 +77,10 @@
                   <?php endforeach ?>
                 </tbody>
               </table>
-                </div>
-              </form>
-              <div class="box-footer with-border">
-              </div>
+            </div>
+          </form>
           </div>
-          <!-- /.box -->
         </div>
-      </div>
+        <!-- </div> -->
+      <!-- </div> -->
     </section>
-        <!--/.col (right) -->

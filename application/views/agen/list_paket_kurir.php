@@ -31,10 +31,12 @@
                     } ?>     
                 </div>
                 <div class="box-header with-border">
-                    <div style="float:left">
-                      <input class="btn btn-primary" type="submit" name="submit" value="Jemput">
+                      <button class="btn btn-primary" name="submit" value="Jemput">Minta Jemput</button>
                       <input type="hidden" name="id_dp" value="<?= $this->session->userdata('droppoint'); ?>">
-                    </div>
+                      <a href="<?= base_url(); ?>agen/list_jemput_paket/" class='btn btn-default'>
+                        <i class="fa fa-history"></i> Riwayat Paket Dijemput</a>
+                      <a href="<?= base_url(); ?>agen/riwayat_paket_kurir/" class='btn btn-default'>
+                        <i class="fa fa-history"></i> Riwayat Paket Kurir</a>
                 </div>
                 <div class="box-body table-responsive">
                   <table class="table table-bordered table-hover dt-responsive nowrap" id="datatable">

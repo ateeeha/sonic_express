@@ -240,7 +240,7 @@ class Droppoint extends CI_Controller {
 		$this->template->dp('droppoint/list_paket_dp', $data);
 	}
 
-	public function list_transaksi_dp()
+	public function list_transaksi_dp_kirim()
 	{
 		$this->cek_login();
 		$tabel = 't_transaksi t JOIN t_user u 
@@ -263,8 +263,37 @@ class Droppoint extends CI_Controller {
 
 		$data['active_menu_dp'] = 'active';
 		$data['active_list_transaksi_dp'] = 'active';
+		$data['active_list_transaksi_dp_kirim'] = 'active';
 		$data['header'] = 'List Transaksi DP';
-		$this->template->dp('droppoint/list_transaksi_dp', $data);
+		$this->template->dp('droppoint/list_transaksi_dp_kirim', $data);
+	}
+
+	public function list_transaksi_dp_terima()
+	{
+		$this->cek_login();
+		$tabel = 't_transaksi t JOIN t_user u 
+					ON (t.id_user = u.id_user) 
+				JOIN t_transaksidpdetail tdpdetail 
+					ON (t.no_resi = tdpdetail.no_resi)
+				JOIN t_transaksidp tdp 
+					ON (tdpdetail.id_transaksidp = tdp.id_transaksidp)';
+
+		$where = array(
+				// 'kabupaten_tujuan' => $this->session->userdata('kabupaten_dp'),
+				// 'status_transaksi' => 'diterima',
+				// 'status_dp' => 'Sudah Dikirim',
+				'tujuan' => $this->session->userdata('id_dp')
+				);
+
+		$data['data'] = $this->dp_model->get_where('t_dp_dp', $where);
+
+		// $data['data'] = $this->kurir_model->get_all('t_transaksi');
+
+		$data['active_menu_dp'] = 'active';
+		$data['active_list_transaksi_dp'] = 'active';
+		$data['active_list_transaksi_dp_terima'] = 'active';
+		$data['header'] = 'List Transaksi DP';
+		$this->template->dp('droppoint/list_transaksi_dp_terima', $data);
 	}
 
 	public function list_transaksi_agen()
@@ -402,14 +431,14 @@ class Droppoint extends CI_Controller {
 
 		if (isset($_POST['submit']))
 		{
-			$transaksidpagen = array(
+			$dp_agen = array(
 				'asal' => $this->session->userdata('id_dp'), 
 				'tujuan' => $agen_tujuan,
 				'tgl_kirim' =>  date("Y-m-d H:i:s"),
 				'tgl_sampai' => '',
-				'status_tdpagen' => 'proses'
+				'status_dp_agen' => 'Proses'
 			);
-			$id_transaksidpagen = $this->dp_model->insert_id('t_transaksidpagen', $transaksidpagen);
+			$id_dp_agen = $this->dp_model->insert_id('t_dp_agen', $dp_agen);
 
 			foreach ($resi as $res)
 			{ 
@@ -428,13 +457,14 @@ class Droppoint extends CI_Controller {
 				$this->dp_model->update('t_transaksi', $transaksi, ['no_resi' => $res]);              
 				
 
-				$transaksidpagendetail = array(
+				$dp_agen_detail = array(
 					'no_resi' => $res, 
-					'id_transaksidpagen' => $id_transaksidpagen 
+					'id_dp_agen' => $id_dp_agen 
 				);
 
-				$this->dp_model->insert('t_transaksidpagendetail', $transaksidpagendetail);
+				$this->dp_model->insert('t_dp_agen_detail', $dp_agen_detail);
     		}
+    		$this->session->set_flashdata('success','Berhasil DiKirim !');
 
 	    }
 		redirect('droppoint/list_paket_dp/');
@@ -594,7 +624,7 @@ class Droppoint extends CI_Controller {
 		// $data['data'] = $this->kurir_model->get_all('t_transaksi');
 		$data['active_menu_dp'] = 'active';
 		$data['active_paket_dp'] = 'active';
-		$data['header'] = 'Manage Paket';
+		$data['header'] = 'Detail Paket Dp';
 		$this->template->dp('droppoint/detail_paket_dp', $data);
 	}
 
@@ -667,7 +697,7 @@ class Droppoint extends CI_Controller {
 
 			$dp_dp = array(
 					'tgl_sampai' => date("Y-m-d H:i:s"),
-					'status_tdd' => 'selesai'
+					'status_dp_dp' => 'selesai'
 			);
 			$this->dp_model->update('t_dp_dp', $dp_dp, ['id_dp_dp' => $id_dp_dp]); 
 
@@ -687,7 +717,7 @@ class Droppoint extends CI_Controller {
 		redirect('droppoint/paket_dp/');
 	}
 
-	public function manage_paket()
+	public function detail_paket()
 	{
 		$this->cek_login();
 		$no_resi = $this->uri->segment(3);
@@ -702,10 +732,11 @@ class Droppoint extends CI_Controller {
 		// $data['data'] = $this->dp_model->get_all('t_dp');
 
 		$data['droppoint'] = $this->dp_model->get_all('t_dp');
-
-		$data['active_terimakurir'] = 'active';
-		$data['header'] = 'Manage Paket';
-		$this->template->dp('droppoint/manage_paket', $data);
+		
+		$data['active_menu_agen'] = 'active';
+		$data['active_list_paket_agen'] = 'active';
+		$data['header'] = 'Detail Paket';
+		$this->template->dp('droppoint/detail_paket', $data);
 	}
 
 	function cek_login()

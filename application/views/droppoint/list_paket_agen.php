@@ -70,12 +70,12 @@
                         <td style="text-align: center"><?= $i++; ?></td>
                         <td style="text-align: center"><?= $key->tgl_pengiriman; ?></td>
                         <td style="text-align: center"><?= $key->no_resi; ?></td>
-                        <td style="text-align: center"><?= $key->nama; ?></td>
+                        <td style="text-align: center"><?= $key->nama; ?></td >
                         <td style="text-align: center"><?= $key->kabupaten_tujuan; ?></td>
                         <td style="text-align: center"><?= $key->no_tlp; ?></td>
                         <td style="text-align: center"><?= $key->status_dp; ?></td>
                         <td>
-                        <a href="<?= base_url(); ?>droppoint/manage_paket/<?= $key->no_resi ?>/" class="btn btn-primary btn-xs" onclick="return confirm('Anda Yakin ?');"><i class="fa fa-gear"></i> Detail</a>
+                        <a href="<?= base_url(); ?>droppoint/detail_paket/<?= $key->no_resi ?>/" class="btn btn-primary btn-xs" onclick="return confirm('Anda Yakin ?');"><i class="fa fa-gear"></i> Detail</a>
                         </td>
                       </tr>
                       <?php endforeach ?>

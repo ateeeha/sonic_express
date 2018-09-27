@@ -52,7 +52,11 @@
                     <td style="text-align: center"><?= $key->no_tlp; ?></td>
                     <td style="text-align: center"><?= $key->agen_asal; ?></td>
                     <td>
-                    <a class="btn btn-default btn-xs"><i class="fa fa-check"></i> <?= $key->status_kurir; ?></a>
+                      <?php if ($key->status_kurir == 'Proses'): ?>
+                        <a class="btn btn-warning btn-xs"><i class="fa fa-truck"></i> <?= $key->status_kurir; ?></a>
+                      <?php else: ?>
+                        <a class="btn btn-success btn-xs"><i class="fa fa-check"></i> <?= $key->status_kurir; ?></a>
+                      <?php endif ?>
                     </td>
                     <td>
                     

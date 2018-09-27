@@ -33,11 +33,6 @@
           <ul class="treeview-menu">
             <li class="<?php if(isset($active_paket_kurir)){echo $active_paket_kurir;}?>"><a href="<?= base_url(); ?>agen/paket_kurir/"><i class="fa fa-cube"></i> Paket</a></li>
             <li class="<?php if(isset($active_list_paket_kurir)){echo $active_list_paket_kurir;}?>"><a href="<?= base_url(); ?>agen/list_paket_kurir/"><i class="fa fa-list"></i> List</a></li>
-            <li class="<?php if(isset($active_list_jemput_paket)){echo $active_list_jemput_paket;}?>">
-              <a href="<?= base_url(); ?>agen/list_jemput_paket/">
-            <i class="fa fa-history"></i> <span>Riwayat</span>
-          </a>
-        </li>
           </ul>
         </li>
         <!-- ===========End Paket Kurir============== -->

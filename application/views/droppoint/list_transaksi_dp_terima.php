@@ -20,13 +20,11 @@
                 <thead>
                   <tr>
                     <th style="text-align: center">#</th>
-                    <th style="text-align: center">ID DP</th>
-                    <th style="text-align: center">DP</th>
-                    <th style="text-align: center">AGEN</th>
+                    <th style="text-align: center">DP ASAL</th>
+                    <th style="text-align: center">DP TUJUAN</th>
                     <th style="text-align: center">TGL KIRIM</th>
                     <th style="text-align: center">TGL SAMPAI</th>
                     <th style="text-align: center">STATUS</th>
-                    <th style="text-align: center" width="5%">Opsi</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -36,15 +34,11 @@
                   ?>
                   <tr>
                     <td style="text-align: center"><?= $i++; ?></td>
-                    <td style="text-align: center"><?= $key->id_dp_agen; ?></td>
                     <td style="text-align: center"><?= $key->asal; ?></td>
                     <td style="text-align: center"><?= $key->tujuan; ?></td>
                     <td style="text-align: center"><?= $key->tgl_kirim; ?></td>
                     <td style="text-align: center"><?= $key->tgl_sampai; ?></td>
-                    <td style="text-align: center"><?= $key->status_dp_agen; ?></td>
-                    <td>
-                      <a href="<?= base_url(); ?>agen/detail_paket_dp/<?= $key->id_dp_agen ?>/" class="btn btn-primary btn-xs" onclick="return confirm('Anda Yakin ?');"><i class="fa fa-search"></i> Detail</a>
-                    </td>
+                    <td style="text-align: center"><?= $key->status_dp_dp; ?></td>
                   </tr>
                   <?php endforeach ?>
                 </tbody>
