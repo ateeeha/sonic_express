@@ -1,10 +1,13 @@
     <section class="content-header">
-      <h1><i class="fa fa-money"> Cek Resi</i></h1>
+      <h1><i class="fa fa-truck"> <?= $header ?></i></h1>
+      <ol class="breadcrumb">
+        <li><a href="<?= base_url(); ?>user/"><i class="fa fa-home"></i> Beranda</a></li>
+        <li class="active"><?= $header ?></li>
+      </ol>
     </section>
     <section class="content">
-      <div class="row">
-        <div class="col-xs-12">
-          <div class="box box-primary">
+        <div class="box box-danger">
+          <div class="box-body">
             <form class="form-horizontal" action="" method="post" enctype="multipart/form-data">
               <div class="box-body">
                 <?php 
@@ -15,14 +18,14 @@
                   }
                 ?>
                   <div class="row">
-                  <div class="col-xs-12 col-sm-9 col-md-5">
-                  <div class="input-group margin" >
-                    <input required type="text" class="form-control" name="no_resi" placeholder="Masukkan Nomor Resi">
-                    <div class="input-group-btn">
-                    <button type="submit" class="btn btn-success" name="submit" value="Submit">Cek Resi</button>                   
+                    <div class="col-xs-12 col-sm-9 col-md-5">
+                      <div class="input-group margin" >
+                        <input required type="text" class="form-control" name="no_resi" placeholder="Masukkan Nomor Resi">
+                        <div class="input-group-btn">
+                        <button type="submit" class="btn btn-danger" name="submit" value="Submit">Lacak Pengiriman</button>                   
+                        </div>
+                      </div>
                     </div>
-                  </div>
-                  </div>
                   </div>
                 <?php if ($cek=='') {
                       }
@@ -55,5 +58,4 @@
             </form>
           </div>
         </div>
-      </div>
     </section>

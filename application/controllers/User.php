@@ -62,7 +62,7 @@ class User extends CI_Controller {
 		$data['kec_tujuan'] = $this->input->post('cek_kecamatan_tujuan', TRUE);
 
 		$data['active_ongkir'] = 'active';
-		$data['header'] = 'Cek Ongkir';
+		$data['header'] = 'Cek Tarif';
 		
 		$this->template->user('user/form_ongkir', $data);
 	}
@@ -88,7 +88,7 @@ class User extends CI_Controller {
 		}
 
 		$data['active_cekresi'] = 'active';
-		$data['header'] = 'Cek Resi';
+		$data['header'] = 'Lacak Pengiriman';
 		$this->template->user('user/form_cekresi', $data);
 	}
 
@@ -99,7 +99,7 @@ class User extends CI_Controller {
 		$data['data'] = $this->user_model->get_all('t_provinsi');
 
 		$data['active_transaksi'] = 'active';
-		// $data['header'] = 'Transaksi';
+		$data['header'] = 'Kirim Paket';
 		$this->template->user('user/form_transaksi', $data);
 	}
 
@@ -169,7 +169,7 @@ class User extends CI_Controller {
 				));
 
 		$data['active_list'] = 'active';
-		$data['header'] = 'Manage Transaksi';
+		$data['header'] = 'Riwayat Transaksi';
 		$this->template->user('user/list_transaksi', $data);
 	}
 

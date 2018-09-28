@@ -1,15 +1,12 @@
     <section class="content-header">
-      <h1><i class="fa fa-truck"></i> <?= $header ?></h1>
+      <h1><i class="fa fa-home"></i> <?= $header ?></h1>
+      <ol class="breadcrumb">
+        <li><a href=""><i class="fa fa-home"></i> Beranda</a></li>
+      </ol>
     </section>
     <section class="content">
-      <div class="row">
-        <div class="col-xs-12">
-          <div class="box box-primary">
-  
-            <?php
-              echo "The time is " . date("Y-m-d H:i:s");
-            ?>
-          </div>
+      <div class="box box-primary">
+        <div class="box-body">
         </div>
       </div>
     </section>

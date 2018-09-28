@@ -27,9 +27,9 @@
     <header class="main-header">
 
     <!-- Logo -->
-    <a href="<?= base_url(); ?>admin/" class="logo">
+    <a href="<?= base_url(); ?>user/" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
-      <span class="logo-mini"><b>IA</b></span>
+      <span class="logo-mini"><b>SE</b></span>
       <!-- logo for regular state and mobile devices -->
       <span class="logo-lg"><b><?= ucfirst($this->session->userdata('username_user')); ?></b></span>
     </a>
@@ -43,12 +43,13 @@
       <!-- Navbar Right Menu -->
       <div class="navbar-custom-menu">
         <ul class="nav navbar-nav navbar-center">
-
           <li class="dropdown user user-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <i class="fa fa-gear"></i>
+              <i class="fa fa-gears"></i>
             </a>
             <ul class="dropdown-menu">
+              <li><a href="" class="fa fa-user"> Profil</a></li>
+              <li><a href="" class="fa fa-edit"> Ubah Kata Sandi</a></li>
               <li class="divider"></li>
               <li><a href="<?= base_url(); ?>login/logout_user/" class="fa fa-sign-out"> Keluar</a></li>
             </ul>
@@ -75,7 +76,7 @@
     <div class="pull-right hidden-xs">
       <b><?= date(DATE_RSS,time()); ?></b>
     </div>
-    <strong>Copyright &copy; 2018 <a href="">Anton Hermawan</a>.</strong>
+    <strong>Copyright &copy; 2018 <a href="">Imkom</a>.</strong>
   </footer>
   <!--end footer-->
 
@@ -96,59 +97,6 @@
 <!-- AdminLTE App -->
 <script src="<?php echo base_url(); ?>assets/user/js/adminlte.min.js"></script>
 <script type="text/javascript">
-     // $( function() {
-     //    var availableTags = [
-     //      "ActionScript",
-     //      "AppleScript",
-     //      "Asp",
-     //      "BASIC",
-     //      "C",
-     //      "C++",
-     //      "Clojure",
-     //      "COBOL",
-     //      "ColdFusion",
-     //      "Erlang",
-     //      "Fortran",
-     //      "Groovy",
-     //      "Haskell",
-     //      "Java",
-     //      "JavaScript",
-     //      "Lisp",
-     //      "Perl",
-     //      "PHP",
-     //      "Python",
-     //      "Ruby",
-     //      "Scala",
-     //      "Scheme"
-     //    ];
-     //    $( "#origin" ).autocomplete({
-     //      source: availableTags
-     //    });
-     //  } );
-    //  $(".cek_ongkir").click(function(){
-    //   $( ".cek_ongkir_detail" ).html("<td colspan='4' style='text-align:center'><i class='fa fa-refresh fa-spin'></i><td/>");
-    //   var berat = $('#berat').val();
-    //   var panjang = $('#panjang').val();
-    //   var lebar = $('#lebar').val();
-    //   var tinggi = $('#tinggi').val();
-    //   var kecamatan = $('.kecamatan_tujuan').val();
-    //   var kabupaten = $(".kota_tujuan").val();
-    //   $.get( "<?php echo site_url('user/gettarif');?>", 
-    //     { 
-    //       kec:kecamatan, 
-    //       kab:kabupaten,  
-    //       berat:berat,  
-    //       panjang:panjang,  
-    //       lebar:lebar,  
-    //       tinggi:tinggi  
-    //     }, function( data ) {
-    //     $( ".ongkir_detail" ).html( data );
-    //      $( "#total_biaya" ).val("");
-    //     $( ".ongkir_pilih" ).val( data );
-    //   }); 
-    // });
-
-
   $(".province").change(function(){
       $( ".city" ).html("<option>-- Menunggu --</option>");
       var data = $(this).val();
