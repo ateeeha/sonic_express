@@ -15,7 +15,7 @@ class Agen extends CI_Controller {
 		$this->cek_login();
 
 		$data['active_home'] = 'active';
-		$data['header'] = 'Dashboard';
+		$data['header'] = 'Beranda';
 		$this->template->agen('agen/home', $data);
 	}
 
@@ -98,7 +98,7 @@ class Agen extends CI_Controller {
 		$data['data'] = $this->agen_model->get_all('t_user');
 
 		$data['active_user'] = 'active';
-		$data['header'] = 'Manage User';
+		$data['header'] = 'Manajemen User';
 		$this->template->agen('agen/manage_user', $data);
 	}
 	public function add_user()
@@ -134,7 +134,7 @@ class Agen extends CI_Controller {
 		$data['data'] = $this->agen_model->get_all('t_provinsi');
 
 		$data['active_user'] = 'active';
-		$data['header'] = 'Add User';	
+		$data['header'] = 'Tambah User';	
 		$this->template->agen('agen/add_user', $data);
 	}
 
@@ -198,7 +198,7 @@ class Agen extends CI_Controller {
 		$data['data'] = $this->agen_model->get_where('t_kurir', $id_agen);
 
 		$data['active_kurir'] = 'active';
-		$data['header'] = 'Manage Kurir';
+		$data['header'] = 'Manajemen Kurir';
 		$this->template->agen('agen/manage_kurir', $data);
 	}
 
@@ -238,7 +238,7 @@ class Agen extends CI_Controller {
 		$data['id_agen'] = $this->session->userdata('id_agen');
 
 		$data['active_kurir'] = 'active';
-		$data['header'] = 'Add Kurir';	
+		$data['header'] = 'Tambah Kurir';	
 		$this->template->agen('agen/add_kurir', $data);
 	}
 

@@ -7,7 +7,7 @@
     </section>
     <section class="content">
       <form method="post">
-        <div class="box box-danger">
+        <div class="box box-primary">
           <div class="box-body">
             <div class="box-header with-border">
             <h3 class="box-title">Cek Ongkir</h3>
@@ -172,7 +172,7 @@
                       </div>
                       
                       <div class="box-footer">
-                      <button name="submit" value="Submit" type="submit" class="btn btn-danger cek_ongkir">Cek</button>
+                      <button name="submit" value="Submit" type="submit" class="btn btn-primary cek_ongkir">Cek</button>
                     </div>
               </div><!--col-md-6-->
             </div><!--row-->

@@ -26,7 +26,7 @@
     <header class="main-header">
 
     <!-- Logo -->
-    <a href="<?= base_url(); ?>admin/" class="logo">
+    <a href="<?= base_url(); ?>kurir/" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
       <span class="logo-mini"><b>IA</b></span>
       <!-- logo for regular state and mobile devices -->
@@ -48,6 +48,8 @@
               <i class="fa fa-gear"></i>
             </a>
             <ul class="dropdown-menu">
+              <li><a href="" class="fa fa-user"> Profil</a></li>
+              <li><a href="" class="fa fa-edit"> Ubah Kata Sandi</a></li>
               <li class="divider"></li>
               <li><a href="<?= base_url(); ?>login/logout_kurir/" class="fa fa-sign-out"> Keluar</a></li>
             </ul>
@@ -74,7 +76,7 @@
     <div class="pull-right hidden-xs">
       <b><?= date(DATE_RSS,time()); ?></b>
     </div>
-    <strong>Copyright &copy; 2018 <a href="">Anton Hermawan</a>.</strong>
+    <strong>Copyright &copy; 2018 <a href="">Imkom</a>.</strong>
   </footer>
   <!--end footer-->
 

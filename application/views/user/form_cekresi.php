@@ -6,7 +6,7 @@
       </ol>
     </section>
     <section class="content">
-        <div class="box box-danger">
+        <div class="box box-primary">
           <div class="box-body">
             <form class="form-horizontal" action="" method="post" enctype="multipart/form-data">
               <div class="box-body">
@@ -22,7 +22,7 @@
                       <div class="input-group margin" >
                         <input required type="text" class="form-control" name="no_resi" placeholder="Masukkan Nomor Resi">
                         <div class="input-group-btn">
-                        <button type="submit" class="btn btn-danger" name="submit" value="Submit">Lacak Pengiriman</button>                   
+                        <button type="submit" class="btn btn-primary" name="submit" value="Submit">Lacak</button>                   
                         </div>
                       </div>
                     </div>

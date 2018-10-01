@@ -7,7 +7,7 @@
     </section>
     <section class="content">
       <form method="post" action="<?= site_url('user/simpan_transaksi'); ?>">
-        <div class="box box-danger">
+        <div class="box box-primary">
           <div class="box-body">
             <div>
                 <?php if(validation_errors())
@@ -121,7 +121,7 @@
                         <input name="no_tlp" required type="number" class="form-control" placeholder="Nomor Telepon Penerima">
                       </div>
                       <div class="box-footer">
-                      <button name="submit" value="Submit" type="submit" class="btn btn-danger">Kirim</button>
+                      <button name="submit" value="Submit" type="submit" class="btn btn-primary">Kirim</button>
                     </div>
               </div><!--col-md-6-->
             </div><!--row-->

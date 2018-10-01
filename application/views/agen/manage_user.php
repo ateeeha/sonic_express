@@ -1,22 +1,18 @@
     <section class="content-header">
-      <h1><i class="fa fa-truck"> <?= $header ?></i></h1>
+      <h1><i class="fa fa-users"> <?= $header ?></i></h1>
       <ol class="breadcrumb">
-        <li><a href="<?= base_url(); ?>admin/"><i class="fa fa-home"></i> Dashboard</a></li>
+        <li><a href="<?= base_url(); ?>agen/"><i class="fa fa-home"></i> Beranda</a></li>
+        <li class="active"><?= $header ?></li>
       </ol>
     </section>
-
     <section class="content">
-      <!-- /.row -->
-      <div class="row">
-        <div class="col-xs-12">
-          <div class="box box-primary">
-          <div class="box-header with-border">
-                <div style="float:right">
-                  <a href="<?= base_url(); ?>agen/add_user" class="btn btn-primary"><i class="fa fa-plus"></i> Tambah User</a>            
-                </div>
-                <div class="clearfix"></div>
+      <div class="box box-primary">
+        <div class="box-header with-border">
+          <div class="box-body">
+            <div style="float:right">
+              <a href="<?= base_url(); ?>agen/add_user" class="btn btn-primary"><i class="fa fa-plus"></i> Tambah User</a>       
             </div>
-            <!-- /.box-header -->
+            <div class="clearfix"></div>
             <div class="box-body table-responsive">
               <table class="table table-bordered table-hover dt-responsive nowrap" id="datatable">
                 <thead>
@@ -53,13 +49,8 @@
                   <?php endforeach ?>
                 </tbody>
               </table>
-                </div>
-              <div class="box-footer with-border">
-                <p class="help-text">* Button <label class="label label-primary" style="padding:3px 5px;">Aktif</label> untuk menonaktifkan member, button <label class="label label-danger" style="padding:3px 5px;">Tidak Aktif</label> untuk mengaktifkan member</p>
-              </div>
+            </div>
           </div>
-          <!-- /.box -->
         </div>
       </div>
     </section>
-        <!--/.col (right) -->

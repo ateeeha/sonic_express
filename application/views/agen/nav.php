@@ -4,28 +4,28 @@
       <ul class="sidebar-menu" data-widget="tree">
         <li class="<?php if(isset($active_home)){echo $active_home;}?>">
           <a href="<?= base_url(); ?>agen/">
-            <i class="fa fa-home"></i> <span>HOME</span>
+            <i class="fa fa-home"></i> <span>Beranda</span>
           </a>
         </li>
         <li class="<?php if(isset($active_transaksi)){echo $active_transaksi;}?>">
           <a href="<?= base_url(); ?>agen/transaksi/">
-            <i class="fa fa-edit"></i> <span>TRANSAKSI</span>
+            <i class="fa fa-edit"></i> <span>Transaksi</span>
           </a>
         </li>
         <li class="<?php if(isset($active_user)){echo $active_user;}?>">
           <a href="<?= base_url(); ?>agen/user/">
-            <i class="fa fa-users"></i> <span>MANAGE USER</span>
+            <i class="fa fa-users"></i> <span>Manajemen User</span>
           </a>
         </li>
         <li class="<?php if(isset($active_kurir)){echo $active_kurir;}?>">
           <a href="<?= base_url(); ?>agen/kurir/">
-            <i class="fa fa-users"></i> <span>MANAGE KURIR</span>
+            <i class="fa fa-users"></i> <span>Manajemen Kurir</span>
           </a>
         </li>
         <!-- ============Paket Kurir============= -->
         <li class="treeview <?php if(isset($active_menu_kurir)){echo $active_menu_kurir;}?>">
           <a href="#">
-            <i class="fa fa-cubes"></i> <span>PAKET KURIR</span>
+            <i class="fa fa-cubes"></i> <span>Paket Kurir</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
@@ -39,7 +39,7 @@
         <!-- ============Paket Droppoint============= -->
         <li class="treeview <?php if(isset($active_menu_dp)){echo $active_menu_dp;}?>">
           <a href="#">
-            <i class="fa fa-cubes"></i> <span>PAKET DROPPOINT</span>
+            <i class="fa fa-cubes"></i> <span>Paket Droppoint</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>

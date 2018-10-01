@@ -1,5 +1,5 @@
     <section class="content-header">
-      <h1><i class="fa fa-truck"> <?= $header ?></i></h1>
+      <h1><i class="fa fa-list"> <?= $header ?></i></h1>
       <ol class="breadcrumb">
         <li><a href="<?= base_url(); ?>admin/"><i class="fa fa-home"></i> Dashboard</a></li>
       </ol>
@@ -29,11 +29,15 @@
                 } ?>     
             </div>
             <div class="box-header with-border">
-              <input type="hidden" name="id_dp" value="<?= $this->session->userdata('droppoint'); ?>">
-              <a href="<?= base_url(); ?>agen/list_jemput_paket/" class='btn btn-default'>
-                <i class="fa fa-history"></i> Riwayat Paket Dijemput</a>
-              <a href="<?= base_url(); ?>agen/riwayat_paket_kurir/" class='btn btn-default'>
-                <i class="fa fa-history"></i> Riwayat Paket Kurir</a>
+                <input type="hidden" name="id_dp" value="<?= $this->session->userdata('droppoint'); ?>">
+              <div class="btn-group">
+                <a href="<?= base_url(); ?>agen/list_jemput_paket/" class='btn btn-default'>
+                  <i class="fa fa-history"></i> Riwayat Paket Dijemput</a>
+              </div>
+              <div class="btn-group">
+                <a href="<?= base_url(); ?>agen/riwayat_paket_kurir/" class='btn btn-default'>
+                  <i class="fa fa-history"></i> Riwayat Paket Kurir</a>
+              </div>
             </div>
             <div class="box-body">
               <button class="btn btn-primary" name="submit" value="Jemput">Minta Jemput</button>

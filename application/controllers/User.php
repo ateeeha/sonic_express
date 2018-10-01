@@ -15,7 +15,7 @@ class User extends CI_Controller {
 		$this->cek_login();
 
 		$data['active_home'] = 'active';
-		$data['header'] = 'Home';
+		$data['header'] = 'Beranda';
 		$this->template->user('user/home', $data);
 	}
 

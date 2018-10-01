@@ -1,7 +1,8 @@
     <section class="content-header">
       <h1><i class="fa fa-truck"> <?= $header ?></i></h1>
       <ol class="breadcrumb">
-        <li><a href="<?= base_url(); ?>admin/"><i class="fa fa-home"></i> Dashboard</a></li>
+        <li><a href="<?= base_url(); ?>kurir/"><i class="fa fa-home"></i> Beranda</a></li>
+        <li class="active"><?= $header ?></li>
       </ol>
     </section>
 

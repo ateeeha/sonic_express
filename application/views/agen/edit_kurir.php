@@ -1,9 +1,8 @@
     <section class="content-header">
-      <h1>Edit Kurir</h1>
+      <h1>Ubah Kurir</h1>
     </section>
     <section class="content">
-          <!-- Horizontal Form -->
-          <div class="box box-success">
+          <div class="box box-primary">
             <div class="box-header with-border">                    
               <?php if(validation_errors())
                {
@@ -74,7 +73,7 @@
                 <hr>
                 <div class="form-group">
                   <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-2">
-                    <button type="submit" class="btn btn-success" name="submit" value="Submit"><i class="fa fa-save"></i> Save</button>                 
+                    <button type="submit" class="btn btn-primary" name="submit" value="Submit"><i class="fa fa-save"></i> Save</button>                 
                   </div>
                 </div>
               </div>

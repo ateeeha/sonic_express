@@ -1,5 +1,5 @@
     <section class="content-header">
-      <h1><i class="fa fa-truck"> <?= $header ?></i></h1>
+      <h1><i class="fa fa-cube"> <?= $header ?></i></h1>
       <ol class="breadcrumb">
         <li><a href="<?= base_url(); ?>admin/"><i class="fa fa-home"></i> Dashboard</a></li>
       </ol>
@@ -9,7 +9,7 @@
         <div class="box-body">
           <form method="post" action="">
             <div class="box-header with-border">
-              <div>
+              <div class="btn-group">
                 <a href="<?= base_url(); ?>agen/riwayat_dp_agen/" class="btn btn-default"><i class="fa fa-history"></i> Riwayat Transaksi DP => Agen</a>
               </div>
             </div>

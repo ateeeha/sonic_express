@@ -6,7 +6,7 @@
       </ol>
     </section>
     <section class="content">
-      <div class="box box-danger">
+      <div class="box box-primary">
         <div class="box-body">
           <div class="box-body table-responsive">
             <table class="table table-bordered table-hover dt-responsive nowrap" id="datatable">

@@ -4,13 +4,13 @@
       <ul class="sidebar-menu" data-widget="tree">
         <li class="<?php if(isset($active_home)){echo $active_home;}?>">
           <a href="<?= base_url(); ?>kurir/">
-            <i class="fa fa-cube"></i> <span>Home</span>
+            <i class="fa fa-home"></i> <span>Beranda</span>
           </a>
         </li>
         <!-- ============Paket user============= -->
         <li class="treeview <?php if(isset($active_menu_user)){echo $active_menu_user;}?>">
           <a href="#">
-            <i class="fa fa-cubes"></i> <span>PAKET USER</span>
+            <i class="fa fa-cubes"></i> <span>Paket User</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
@@ -29,7 +29,7 @@
         <!-- ============Paket Agen============= -->
         <li class="treeview <?php if(isset($active_menu_agen)){echo $active_menu_agen;}?>">
           <a href="#">
-            <i class="fa fa-cubes"></i> <span>PAKET AGEN</span>
+            <i class="fa fa-cubes"></i> <span>Paket Agen</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>

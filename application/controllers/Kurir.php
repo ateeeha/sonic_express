@@ -14,7 +14,7 @@ class Kurir extends CI_Controller {
 	{
 		$this->cek_login();
 		$data['active_home'] = 'active';
-		$data['header'] = 'Home';
+		$data['header'] = 'Beranda';
 
 		$this->template->kurir('kurir/home', $data);
 	}
@@ -33,7 +33,7 @@ class Kurir extends CI_Controller {
 
 		$data['active_menu_user'] = 'active';
 		$data['active_paket_user'] = 'active';
-		$data['header'] = 'Manage Paket';
+		$data['header'] = 'Paket User';
 		$this->template->kurir('kurir/paket_menunggu', $data);
 	}
 
@@ -52,7 +52,7 @@ class Kurir extends CI_Controller {
 
 		$data['active_menu_agen'] = 'active';
 		$data['active_paket_agen'] = 'active';
-		$data['header'] = 'Manage Paket Agen';
+		$data['header'] = 'Paket Agen';
 		$this->template->kurir('kurir/paket_agen', $data);
 	}
 
@@ -71,7 +71,7 @@ class Kurir extends CI_Controller {
 
 		$data['active_menu_user'] = 'active';
 		$data['active_dijemput'] = 'active';
-		$data['header'] = 'Manage Transaksi';
+		$data['header'] = 'Jemput Paket';
 		$this->template->kurir('kurir/paket_dijemput', $data);
 	}
 
@@ -89,7 +89,7 @@ class Kurir extends CI_Controller {
 
 		$data['active_menu_user'] = 'active';
 		$data['active_diterima'] = 'active';
-		$data['header'] = 'Manage Transaksi';
+		$data['header'] = 'List Paket';
 		$this->template->kurir('kurir/paket_diterima', $data);
 	}
 
@@ -132,7 +132,7 @@ class Kurir extends CI_Controller {
 
 		$data['active_menu_agen'] = 'active';
 		$data['active_diantar'] = 'active';
-		$data['header'] = 'Manage Transaksi';
+		$data['header'] = 'Antar Paket';
 		$this->template->kurir('kurir/paket_diantar', $data);
 	}
 
@@ -151,7 +151,7 @@ class Kurir extends CI_Controller {
 
 		$data['active_menu_agen'] = 'active';
 		$data['active_selesai'] = 'active';
-		$data['header'] = 'Manage Transaksi';
+		$data['header'] = 'Riwayat';
 		$this->template->kurir('kurir/paket_selesai', $data);
 	}
 

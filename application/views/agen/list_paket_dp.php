@@ -1,5 +1,5 @@
     <section class="content-header">
-      <h1><i class="fa fa-truck"> <?= $header ?></i></h1>
+      <h1><i class="fa fa-list"> <?= $header ?></i></h1>
       <ol class="breadcrumb">
         <li><a href="<?= base_url(); ?>admin/"><i class="fa fa-home"></i> Dashboard</a></li>
       </ol>

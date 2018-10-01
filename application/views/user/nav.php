@@ -4,7 +4,7 @@
       <ul class="sidebar-menu" data-widget="tree">
         <li class="<?php if(isset($active_home)){echo $active_home;}?>">
           <a href="<?= base_url(); ?>user/">
-            <i class="fa fa-home"></i> <span>HOME</span>
+            <i class="fa fa-home"></i> <span>Beranda</span>
           </a>
         </li>
         <li class="<?php if(isset($active_ongkir)){echo $active_ongkir;}?>">
